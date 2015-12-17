@@ -228,6 +228,16 @@ test_param <- function (params, param_vector) {
     options <- c("action_carousel_card_id", "action_carousel_card_name", "action_destination", "action_device", "action_target_id", "action_type", "action_video_type")
   } else if (params == "fields") {
     options <- c("date_start", "date_stop", "account_id", "account_name", "ad_id", "ad_name", "buying_type", "campaign_id", "campaign_name", "adset_id", "adset_name", "action_carousel_card_id", "action_carousel_card_name", "actions", "unique_actions", "total_actions", "total_unique_actions", "action_values", "total_action_value", "impressions", "social_impressions", "social_clicks", "unique_impressions", "unique_social_impressions", "unique_clicks", "unique_social_clicks", "spend", "frequency", "social_spend", "deeplink_clicks", "app_store_clicks", "website_clicks", "cost_per_inline_post_engagement", "inline_link_clicks", "cost_per_inline_link_click", "inline_post_engagement", "call_to_action_clicks", "newsfeed_avg_position", "newsfeed_impressions", "newsfeed_clicks", "reach", "social_reach", "ctr", "unique_ctr", "unique_link_clicks_ctr", "cpm", "cpp", "cost_per_total_action", "cost_per_action_type", "cost_per_unique_click", "cost_per_10_sec_video_view", "cost_per_unique_action_type", "relevance_score", "website_ctr", "video_avg_sec_watched_actions", "video_avg_pct_watched_actions", "video_p25_watched_actions", "video_p50_watched_actions", "video_p75_watched_actions", "video_p95_watched_actions", "video_p100_watched_actions", "video_complete_watched_actions", "video_10_sec_watched_actions", "video_15_sec_watched_actions", "video_30_sec_watched_actions", "estimated_ad_recallers", "estimated_ad_recallers_lower_bound", "estimated_ad_recallers_upper_bound", "estimated_ad_recall_rate", "estimated_ad_recall_rate_lower_bound", "estimated_ad_recall_rate_upper_bound", "cost_per_estimated_ad_recallers", "place_page_name")
+  } else if (params == "action_report_time") {
+    options <- c("impression", "conversion")
+  } else if (params == "breakdowns") {
+    options <- c("age", "country", "gender", "frequency_value", "hourly_stats_aggregated_by_advertiser_time_zone", "hourly_stats_aggregated_by_audience_time_zone", "impression_device", "place_page_id", "placement", "placement_merge_rhc", "product_id", "region")
+  } else if (params == "date_preset") {
+    options <- c("today", "yesterday", "last_3_days", "this_week", "last_week", "last_7_days", "last_14_days", "last_28_days", "last_30_days", "last_90_days", "this_month", "last_month", "this_quarter", "last_3_months", "lifetime")
+  } else if (params == "level") {
+    options <- c("ad", "adset", "campaign", "account") 
+  } else if (params == "time_increment") {
+    options <- c("monthly", "all_days")
   }
   
   for (i in 1:length(param_vector)) {
@@ -239,7 +249,7 @@ test_param <- function (params, param_vector) {
       options_print <- paste(options, sep = ",", collapse = ", ")
       
       # print error
-      stop (paste0("Wrong ", params, "parameter specified '", param_vector_error, "'", " is not valid. All valid values are: ", options_print))
+      stop (paste0("Wrong ", params, " parameter specified '", param_vector_error, "'", " is not valid. All valid values are: ", options_print))
     }
   }
 
