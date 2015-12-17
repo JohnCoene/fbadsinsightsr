@@ -11,10 +11,17 @@
 #' @param date_preset Represents a relative time range. This field is ignored if \code{time_range} or \code{time_ranges} is specified.
 #' @param level Represents the level of result. Must be one of ad, adset, campaign, account.
 #' @param time_increment If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time_range} or \code{date_preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.
-#' @param time_range Not Yet Implemented
+#' @param time_range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}
 #' @param token A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' 
+#' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
+#' it is strongly encouraged to have a look a the latter link.
+#' only the following parameters are not available \code{default_summary}, \code{filtering}, 
+#' \code{summary}, \code{sort} and \code{time_ranges}.
+#' 
 #' @export
+#' 
+#' @seealso \code{\link{fb_authenticate}} 
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 get_account <- function(account_id, fields = "default",
@@ -96,6 +103,13 @@ get_account <- function(account_id, fields = "default",
   }
   
   # date_preset
+  
+  # make date_preset NULL if time_range specified
+  if (length(date_preset) == 1 && length(time_range) >= 1) {
+    date_preset <- NULL
+    warning("date_preset is ignored as time_range is specified")
+  }
+  
   if (length(date_preset) == 1) {
     
     # test
@@ -130,11 +144,30 @@ get_account <- function(account_id, fields = "default",
     stop("Must be used wit heither date_preset OR time_range")
   }
   
+  # time range
+  if(length(time_range) == 2) {
+    
+    date_check <- as.Date(time_range[2], format= "%Y-%m-%d")
+    
+    # further checks
+    if(names(time_range)[1] != "since"){
+      stop("time_range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
+    } else if (class(date_check) == "try-error" || is.na(date_check)){
+      stop("Wrong date format. Must be YYYY-MM-DD")
+    }
+    
+    time_range <- paste0("&since=", time_range[1], "&", "until=", time_range[2])
+    
+  } else if (length(time_range) > 2) {
+    stop("time_range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
+  }
+  
   base_url <- "https://graph.facebook.com/v2.5/"
   
   url <- paste0(base_url, account_id, "/insights?fields=",fields,
                 action_attribution_windows, action_breakdowns,
-                action_report_time, breakdowns, "&access_token=", token)
+                action_report_time, breakdowns, date_preset, level,
+                time_increment, time_range, "&access_token=", token)
   
   return(url)
   

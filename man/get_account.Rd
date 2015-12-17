@@ -28,14 +28,23 @@ get_account(account_id, fields = "default",
 
 \item{time_increment}{If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time_range} or \code{date_preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.}
 
-\item{time_range}{Not Yet Implemented}
+\item{time_range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
 \item{token}{A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \description{
 Get insights on advertising performance on ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
 }
+\details{
+This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
+it is strongly encouraged to have a look a the latter link.
+only the following parameters are not available \code{default_summary}, \code{filtering}, 
+\code{summary}, \code{sort} and \code{time_ranges}.
+}
 \author{
 John Coene <john.coene@cmcm.com>
+}
+\seealso{
+\code{\link{fb_authenticate}}
 }
 
