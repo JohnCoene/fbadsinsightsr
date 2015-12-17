@@ -6,8 +6,8 @@
 \usage{
 get_account(account_id, fields = "default",
   action_attribution_windows = NULL, action_breakdowns = NULL,
-  action_report_time, breakdowns, date_preset, level, time_increment,
-  time_range, token)
+  action_report_time = NULL, breakdowns = NULL, date_preset = NULL,
+  level = NULL, time_increment = NULL, time_range = NULL, token)
 }
 \arguments{
 \item{account_id}{Your ad account id, starting by "act_" and followed by 15 digits, see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -18,15 +18,15 @@ get_account(account_id, fields = "default",
 
 \item{action_breakdowns}{How to break down action results. Supports more than one breakdowns (Optional).}
 
-\item{action_report_time}{Not Yet Implemented}
+\item{action_report_time}{Determines the report time of action stats. For example, if a person saw the ad on Jan 1st but converted on Jan 2nd, when you query the API with \code{action_report_time="impression"}, you will see a conversion on Jan 1st. When you query the API with \code{action_report_time="conversion"}, you will see a conversion on Jan 2nd.}
 
-\item{breakdowns}{Not Yet Implemented}
+\item{breakdowns}{How to break down the result. Does not support more than one breakdown, except \code{c("age", "gender")} and \code{"impression_device", "placement"}. The option \code{impression_device} cannot be used by itself.}
 
-\item{date_preset}{Not Yet Implemented}
+\item{date_preset}{Represents a relative time range. This field is ignored if \code{time_range} or \code{time_ranges} is specified.}
 
-\item{level}{Not Yet Implemented}
+\item{level}{Represents the level of result. Must be one of ad, adset, campaign, account.}
 
-\item{time_increment}{Not Yet Implemented}
+\item{time_increment}{If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time_range} or \code{date_preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.}
 
 \item{time_range}{Not Yet Implemented}
 
