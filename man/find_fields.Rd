@@ -7,7 +7,7 @@
 find_fields()
 }
 \description{
-Prints all valid fields in the console. No input, see usage.
+Returns all valid fields in the console. No input, see usage.
 }
 \author{
 John Coene <john.coene@cmcmc.com>
