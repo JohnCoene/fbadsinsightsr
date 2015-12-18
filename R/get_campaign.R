@@ -1,6 +1,6 @@
 #' get_campaign
 #' 
-#' @description Get insights on advertising performances of an ad campaign. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
+#' @description Get insights on advertising performances of an ad campaign. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/insights/}{documentation} for more information
 #' 
 #' @param campaign_id Your ad campaign id (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{find_fields}} to see all valid fields.

@@ -1,6 +1,6 @@
 #' get_ad
 #' 
-#' @description Get insights on advertising performances of a specific ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
+#' @description Get insights on advertising performances of a specific ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/}{documentation} for more information
 #' 
 #' @param ad_id Your ad id (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{find_fields}} to see all valid fields.
