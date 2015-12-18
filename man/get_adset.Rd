@@ -35,7 +35,7 @@ get_adset(adset_id, fields = "default", action_attribution_windows = NULL,
 \item{token}{A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \description{
-Get insights on advertising performances of an ad set. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
+Get insights on advertising performances of an ad set. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/insights/}{documentation} for more information
 }
 \details{
 This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},

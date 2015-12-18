@@ -1,6 +1,8 @@
 #' find_fields
 #' 
-#' @description Returns all 73 valid \code{fields} which can be used in the get-family functions. No input, see usage.
+#' @description Returns all 73 valid \code{fields} which can be used in the get-family functions. No input, see details for more information.
+#' 
+#' @details fields vary from \code{age} to \code{cpm} for the full list please see the online official \href{https://developers.facebook.com/docs/marketing-api/reference/ads-insights/}{documentation}
 #' 
 #' @seealso \code{\link{get_account}}
 #' 
