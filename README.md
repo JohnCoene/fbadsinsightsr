@@ -4,6 +4,10 @@ Version 1.0 is out!
 
 fbAdsInsightsR is an R pakcage that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
+### Vignette ###
+
+Upon Request; contact any contributors.
+
 ### Development ###
 
 * Pagination - enabling pagination (`next` and `previous`)
