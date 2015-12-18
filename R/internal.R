@@ -1,35 +1,3 @@
-# query_API
-# 
-# @description queries API (GET) see \code{httr::GET}
-# 
-# @param url url to call
-# @param token either from \href{https://developers.facebook.com/tools/explorer/}{Facebook Graph API Explorer} or from \code{fb_authenticate}
-# 
-# @seealso \code{\link{fb_authenticate}}
-#
-# @author John Coene <john.coene@cmcm.com>
-# 
-# @keywords internal
-query_API <- function(url, token){
-  if (class(token)[1]=="config"){
-    url.data <- GET(url, config=token)
-  }
-  if (class(token)[1]=="Token2.0"){
-    url.data <- GET(url, config(token=token))
-  }	
-  if (class(token)[1]=="character"){
-    url.data <- GET(url)
-  }
-  if (class(token)[1]!="character" & class(token)[1]!="config" & class(token)[1]!="Token2.0"){
-    stop("Error in access token. See help for details.")
-  }
-  content <- rjson::fromJSON(rawToChar(url.data$content))
-  if (length(content$error)>0){
-    stop(content$error$message)
-  }	
-  return(content)
-}
-
 # scope_check
 # 
 # @description Checks if scopes matches available facebook permissions, href{https://developers.facebook.com/docs/facebook-login/permissions}{see documentation}
