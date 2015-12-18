@@ -1,29 +1,18 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Version 1.0 is out!
 
-### What is this repository for? ###
+fbAdsInsightsR is an R pakcage that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Development ###
 
-### How do I get set up? ###
+* Pagination - enabling pagination (`next` and `previous`)
+* Data loss fix - Variables parsed (columns) may vary.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Install ###
 
-### Contribution guidelines ###
+`devtools::install_bitbucket("CMAnalytics/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
-* Writing tests
-* Code review
-* Other guidelines
+### Contributors ###
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Admin - John Coene <john.coene@cmcm.com>
