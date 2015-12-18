@@ -36,7 +36,7 @@ get_account(account_id, fields = "default",
 \item{token}{A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \description{
-Get insights on advertising performance on ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
+Get insights on advertising performances of ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
 }
 \details{
 This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},

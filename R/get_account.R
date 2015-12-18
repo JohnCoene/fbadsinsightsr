@@ -1,6 +1,6 @@
 #' get_account
 #' 
-#' @description Get insights on advertising performance on ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
+#' @description Get insights on advertising performances of ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
 #' 
 #' @param account_id Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{find_fields}} to see all valid fields.
