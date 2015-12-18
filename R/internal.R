@@ -268,3 +268,63 @@ check_token <- function(token){
   
   return(token)
 }
+
+# breakdowns
+build_breakdowns <- function(breakdowns) {
+  # breakdowns
+  if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
+    
+    # test
+    test_param("breakdowns", breakdowns)
+    
+    if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
+      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
+    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", "placement")) {
+      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
+    } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
+      stop("impression_device cannot be used on its own")
+    } else if (length(breakdowns) == 1) {
+      breakdowns <- paste0("&breakdowns=", breakdowns)
+    } else {
+      stop("Wrong breakdowns specified. See @param")
+    }
+    
+  } else if (length(breakdowns) >= 3) {
+    stop("Too many breakdowns specified. See @param")
+  }
+  
+  return(breakdowns)
+  
+}
+
+
+# parse_json
+parse_json <- function(root_node, id, json) {
+  list <- json$data
+  
+  if (root_node == "account"){
+    df <- data.frame(type = "account")
+    rownames(df) <- id
+  }
+  
+  
+  
+  for (i in 1:length(list[[1]])) {
+    if(length(list[[1]][[i]]) == 1) {
+      vect <- unlist(list[[1]][i])[1]
+      vect <- as.data.frame(vect)
+      names(vect) <- names(list[[1]][i])
+      df <- cbind.data.frame(df, vect)
+    } else if (length(list[[1]][[i]]) > 1){
+      for (j in 1:length(list[[1]][[i]])){
+        vect <- unlist(list[[1]][[3]][j])[2]
+        vect <- as.data.frame(vect)
+        names(vect) <- unlist(list[[1]][[3]][j])[1]
+        df <- cbind.data.frame(df, vect)
+      }
+    }
+  }
+  
+  return(df)
+}
+                                                                                                                                    
