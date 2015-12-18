@@ -255,7 +255,7 @@ test_param <- function (params, param_vector) {
 
 }
 
-#' check_token
+# check_token
 #  
 check_token <- function(token){
   
