@@ -86,26 +86,7 @@ get_account <- function(account_id, fields = "default",
   }
   
   # breakdowns
-  if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
-    
-    # test
-    test_param("breakdowns", breakdowns)
-    
-    if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
-      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
-    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", "placement")) {
-      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
-    } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
-      stop("impression_device cannot be used on its own")
-    } else if (length(breakdowns) == 1) {
-      breakdowns <- paste0("&breakdowns=", breakdowns)
-    } else {
-      stop("Wrong breakdowns specified. See @param")
-    }
-    
-  } else if (length(breakdowns) >= 3) {
-    stop("Too many breakdowns specified. See @param")
-  }
+  breakdowns <- build_breakdowns(breakdowns = breakdowns)
   
   # date_preset
   
