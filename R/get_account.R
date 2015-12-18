@@ -12,6 +12,7 @@
 #' @param level Represents the level of result. Must be one of ad, adset, campaign, account.
 #' @param time_increment If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time_range} or \code{date_preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.
 #' @param time_range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}
+#' @param paginate Not yet implemented
 #' @param token A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},

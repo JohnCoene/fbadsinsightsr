@@ -31,6 +31,8 @@ get_account(account_id, fields = "default",
 
 \item{time_range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
+\item{paginate}{Not yet implemented}
+
 \item{token}{A valid token as returned by \code{\link{fb_authenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \description{
