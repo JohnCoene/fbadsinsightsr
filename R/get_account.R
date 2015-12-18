@@ -2,14 +2,14 @@
 #' 
 #' @description Get insights on advertising performance on ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information
 #' 
-#' @param account_id Your ad account id, starting by "act_" and followed by 15 digits, see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
-#' @param fields There are in total 73 valid fields for this function. Run \code{\link{find_fields}} to print see all valid fields.
-#' @param action_attribution_windows Determines what is the attribution window for the actions. For example, \code{c("28d_click")} means the API returns all actions that happened 28 days after someone clicked on the ad (Optional).
-#' @param action_breakdowns How to break down action results. Supports more than one breakdowns (Optional).
-#' @param action_report_time Determines the report time of action stats. For example, if a person saw the ad on Jan 1st but converted on Jan 2nd, when you query the API with \code{action_report_time="impression"}, you will see a conversion on Jan 1st. When you query the API with \code{action_report_time="conversion"}, you will see a conversion on Jan 2nd.
-#' @param breakdowns How to break down the result. Does not support more than one breakdown, except \code{c("age", "gender")} and \code{"impression_device", "placement"}. The option \code{impression_device} cannot be used by itself.
-#' @param date_preset Represents a relative time range. This field is ignored if \code{time_range} or \code{time_ranges} is specified.
-#' @param level Represents the level of result. Must be one of ad, adset, campaign, account.
+#' @param account_id Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param fields There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{find_fields}} to see all valid fields.
+#' @param action_attribution_windows Determines what is the attribution window for the actions. For example, \code{c("28d_click")} means the API returns all actions that happened 28 days after someone clicked on the ad (Optional). See details below for valid values.
+#' @param action_breakdowns How to break down action results. Supports more than one breakdowns (Optional). Run \code{\link{find_action_breakdowns}} to see all valid action breakdowns.
+#' @param action_report_time Determines the report time of action stats. For example, if a person saw the ad on Jan 1st but converted on Jan 2nd, when you query the API with \code{action_report_time="impression"}, you will see a conversion on Jan 1st. When you query the API with \code{action_report_time="conversion"}, you will see a conversion on Jan 2nd (Optional).
+#' @param breakdowns How to break down the result. Does not support more than one breakdown, except \code{c("age", "gender")} and \code{"impression_device", "placement"}. The option \code{impression_device} cannot be used by itself (Optional). Run \code{\link{find_breakdowns}} to see all valid breakdowns.
+#' @param date_preset Represents a relative time range (Optional). This field is ignored if \code{time_range} or \code{time_ranges} is specified. Run \code{\link{find_date_preset}} to see all valid presets.
+#' @param level Represents the level of result (Optional). Must be one  of \code{ad}, \code{adset}, \code{campaign}, \code{account}.
 #' @param time_increment If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time_range} or \code{date_preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.
 #' @param time_range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}
 #' @param paginate Not yet implemented
@@ -19,6 +19,16 @@
 #' it is strongly encouraged to have a look a the latter link.
 #' only the following parameters are not available \code{default_summary}, \code{filtering}, 
 #' \code{summary}, \code{sort} and \code{time_ranges}.
+#' 
+#' Valid \code{action_attribution_windows}:
+#' \itemize{
+#' \item 1d_view
+#' \item 7d_view
+#' \item 28d_view
+#' \item 1d_click
+#' \item 7d_click
+#' \item 28d_click
+#' }
 #' 
 #' @export
 #' 
@@ -182,6 +192,7 @@ get_account <- function(account_id, fields = "default",
                json$error$message))
   }
   
+  # parse
   data <- parse_json(json)
   
   return(data)
