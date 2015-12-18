@@ -8,7 +8,8 @@ Maintainer: John Coene <john.coene@cmcm.com>
 Description: Get data on performances of facebook ads through facebook Insights API
 License: MIT
 Imports:
-    rjson
+    rjson,
+    plyr
 Depends:
     httr
 LazyData: TRUE
