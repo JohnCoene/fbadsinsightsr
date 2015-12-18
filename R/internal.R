@@ -299,32 +299,37 @@ build_breakdowns <- function(breakdowns) {
 
 
 # parse_json
-parse_json <- function(root_node, id, json) {
+parse_json <- function(json) {
   list <- json$data
   
-  if (root_node == "account"){
-    df <- data.frame(type = "account")
-    rownames(df) <- id
-  }
+  df <- data.frame()
   
-  
-  
-  for (i in 1:length(list[[1]])) {
-    if(length(list[[1]][[i]]) == 1) {
-      vect <- unlist(list[[1]][i])[1]
-      vect <- as.data.frame(vect)
-      names(vect) <- names(list[[1]][i])
-      df <- cbind.data.frame(df, vect)
-    } else if (length(list[[1]][[i]]) > 1){
-      for (j in 1:length(list[[1]][[i]])){
-        vect <- unlist(list[[1]][[3]][j])[2]
+  # build rows
+  for(k in 1:length(list)){
+    col <- data.frame(row.names = 1)
+    # build columns
+    for (i in 1:length(list[[k]])) {
+      if(length(list[[k]][[i]]) == 1) {
+        vect <- unlist(list[[k]][i])[1]
         vect <- as.data.frame(vect)
-        names(vect) <- unlist(list[[1]][[3]][j])[1]
-        df <- cbind.data.frame(df, vect)
+        names(vect) <- names(list[[k]][i])
+        col <- cbind.data.frame(col, vect)
+      } else if (length(list[[k]][[i]]) > 1){
+        for (j in 1:length(list[[k]][[i]])){
+          vect <- unlist(list[[k]][[3]][j])[2]
+          vect <- as.data.frame(vect)
+          names(vect) <- unlist(list[[k]][[3]][j])[1]
+          col <- cbind.data.frame(col, vect)
+        }
       }
     }
+    
+    # combine
+    df <- plyr::rbind.fill(df, col)
+    col <- NULL
   }
   
   return(df)
 }
+
                                                                                                                                     
