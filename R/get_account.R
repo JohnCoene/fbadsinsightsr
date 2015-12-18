@@ -120,15 +120,24 @@ get_account <- function(account_id, fields = "default",
   #time increment
   if(length(time_increment) == 1) {
     
-    if(is.null(time_range) || is.null(date_preset)) {
-      stop("Must be used with either date_preset OR time_range")
+    if(is.null(time_range) && is.null(date_preset)) {
+      stop("time_increment must be used with either date_preset OR time_range")
     }
     
-    # test
-    test_param("time_increment", time_increment)
-    
-    time_increment <- paste0("&time_increment=", time_increment)
-    
+    # test if interger/numeric or character is passed
+    if(class(time_increment) == "numeric" || class(time_increment) == "interger"){
+      if(time_increment < 1 || time_increment > 90) {
+        stop("If integer is passed to time_increment (number of days) must be between 1 and 90.")
+      } else {
+        time_increment <- paste0("&time_increment=", time_increment)
+      }
+    } else {
+      # test
+      test_param("time_increment", time_increment)
+      
+      time_increment <- paste0("&time_increment=", time_increment)
+    }
+
   } else if (length(time_increment) > 1) {
     stop("time_increment can only hold one of the following values: monthly OR all_days")
   }
@@ -173,7 +182,9 @@ get_account <- function(account_id, fields = "default",
                json$error$message))
   }
   
-  return(json)
+  data <- parse_json(json)
+  
+  return(data)
   
 }
 
