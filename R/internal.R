@@ -255,3 +255,16 @@ test_param <- function (params, param_vector) {
 
 }
 
+#' check_token
+#  
+check_token <- function(token){
+  
+  # check token class
+  if (class(token)[1]=="Token2.0"){
+    token <- oauth$credentials$access_token
+  }	else if (class(token)[1]=="character"){
+    token <- token
+  }
+  
+  return(token)
+}
