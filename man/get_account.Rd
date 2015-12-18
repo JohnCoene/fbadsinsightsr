@@ -7,7 +7,8 @@
 get_account(account_id, fields = "default",
   action_attribution_windows = NULL, action_breakdowns = NULL,
   action_report_time = NULL, breakdowns = NULL, date_preset = NULL,
-  level = NULL, time_increment = NULL, time_range = NULL, token)
+  level = NULL, time_increment = NULL, time_range = NULL,
+  paginate = "next", token)
 }
 \arguments{
 \item{account_id}{Your ad account id, starting by "act_" and followed by 15 digits, see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
