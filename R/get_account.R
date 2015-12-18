@@ -28,7 +28,8 @@ get_account <- function(account_id, fields = "default",
                         action_attribution_windows = NULL,
                         action_breakdowns = NULL, action_report_time = NULL,
                         breakdowns = NULL, date_preset = NULL, level = NULL, 
-                        time_increment = NULL, time_range = NULL, token) {
+                        time_increment = NULL, time_range = NULL, 
+                        paginate = "next", token) {
   
   # check inputs
   if(missing(account_id)){
@@ -43,8 +44,11 @@ get_account <- function(account_id, fields = "default",
   } else {
     if(class(fields) != "character") {
       stop("Fields must be a character vector")
-    } else {
+    } else { 
+      # test if fields correct
       test_param("fields", fields)
+      
+      # create_fields
       fields <- create_fields(fields)
     }
   }
@@ -52,7 +56,7 @@ get_account <- function(account_id, fields = "default",
   # action_attribution_windows
   if (length(action_attribution_windows)) {
     
-    # test
+    # test if correct
     test_param("action_attribution_windows", action_attribution_windows)
     
     # build action_attribution_windows
@@ -132,16 +136,19 @@ get_account <- function(account_id, fields = "default",
   }  
   
   #time increment
-  if (length(time_increment) == 1 && is.null(time_range) == FALSE || is.null(date_preset) == FALSE) {
+  if(length(time_increment) == 1) {
+    
+    if(is.null(time_range) || is.null(date_preset)) {
+      stop("Must be used with either date_preset OR time_range")
+    }
     
     # test
     test_param("time_increment", time_increment)
     
     time_increment <- paste0("&time_increment=", time_increment)
+    
   } else if (length(time_increment) > 1) {
     stop("time_increment can only hold one of the following values: monthly OR all_days")
-  } else if (length(time_increment) == 1 && is.null(time_range) == TRUE || is.null(date_preset) == TRUE) {
-    stop("Must be used wit heither date_preset OR time_range")
   }
   
   # time range
@@ -164,12 +171,27 @@ get_account <- function(account_id, fields = "default",
   
   base_url <- "https://graph.facebook.com/v2.5/"
   
+  # check token verison
+  token <- check_token(token)
+  
   url <- paste0(base_url, account_id, "/insights?fields=",fields,
                 action_attribution_windows, action_breakdowns,
                 action_report_time, breakdowns, date_preset, level,
                 time_increment, time_range, "&access_token=", token)
   
-  return(url)
+  # call api
+  response <- GET(url)
+  
+  # parse to list
+  json <- rjson::fromJSON(rawToChar(response$content))
+  
+  # check if query successful 
+  if(length(json$error$message)){
+    stop(paste("this is likely due to account_id or token. Error Message returned: ",
+               json$error$message))
+  }
+  
+  return(json)
   
 }
 
