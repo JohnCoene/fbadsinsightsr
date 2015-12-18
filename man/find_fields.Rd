@@ -7,9 +7,12 @@
 find_fields()
 }
 \description{
-Returns all valid fields in the console. No input, see usage.
+Returns all 73 valid \code{fields} which can be used in the get-family functions. No input, see usage.
 }
 \author{
 John Coene <john.coene@cmcmc.com>
+}
+\seealso{
+\code{\link{get_account}}
 }
 
