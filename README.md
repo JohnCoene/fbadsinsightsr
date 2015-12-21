@@ -6,7 +6,7 @@ fbAdsInsightsR is an R pakcage that allows fetching data from the [facebook Ads 
 
 ### Vignette ###
 
-Upon Request; contact any contributors.
+Upon Request; contact any of the contributors.
 
 ### Development ###
 
