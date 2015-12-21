@@ -13,14 +13,19 @@ Upon Request; contact any of the contributors.
 * Pagination - enabling pagination (`next` and `previous`)
 * Data loss fix - Variables parsed (columns) may vary.
 * Fetch IDs of adsets, campaigns and accounts
+* Improve documentation and build vignette
 
 ### Versions ###
 
-#### v1.0.3 ####
+#### v1.1.0 - Paginate ####
+
+* Paginate function implemented see `paginate` parameter in GET-family functions (i.e.: `?getAny`).
+
+#### v1.0.3 - Sort ####
 
 find-family function return lists in alpha-numerical order, at the exception of `date_preset`.
 
-#### v1.0.2 ####
+#### v1.0.2 - Nomenclature ####
 
 * Nomenclature changed in order to comply with the [conventions suggested by Haddly Wickham](http://r-pkgs.had.co.nz/style.html).
 * httr switched from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
@@ -29,11 +34,11 @@ Functions names have thus changed from i.e.: `get_account` to `getAccount` while
 
 Removed internal functions that were unused, will not affect package reader.
 
-#### v1.0.1 ####
+#### v1.0.1 - Token Check ####
 
 Fixed Token checking function (internal) - Should not return errors when using token returned by `fb_authneticate`.
 
-#### v1.0.0 ####
+#### v1.0.0 - Release ####
 
 * Initial release
 
