@@ -30,7 +30,7 @@ getAny(id, fields = "default", action.attribution.windows = NULL,
 
 \item{time.range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
-\item{paginate}{Not yet implemented}
+\item{paginate}{When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }

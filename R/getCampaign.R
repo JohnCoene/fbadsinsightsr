@@ -12,7 +12,7 @@
 #' @param level Represents the level of result (Optional). Must be one  of \code{ad}, \code{adset}, \code{campaign}, \code{account}.
 #' @param time.increment If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time.range} or \code{date.preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.
 #' @param time.range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}
-#' @param paginate Not yet implemented
+#' @param paginate When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
@@ -194,6 +194,33 @@ getCampaign <- function(campaign.id, fields = "default",
   
   # parse
   data <- parseJSON(json)
+  
+  # Paginate
+  if(length(paginate)) {
+    
+    # test if value is correct
+    if(paginate != "next" && paginate != "previous" && !is.null(paginate)){
+      stop("paginate can be either 'next', 'previous' or NULL")
+      # double check and fetch URL
+    } else if (paginate == "next" || paginate == "previous" ) {
+      if(paginate == "next" && length(json$paging$`next`)){
+        url <- json$paging$`next`
+      } else {
+        url <- json$paging$previous
+      }
+      
+      # if inpt corrects and url present then loop
+      while (length(url)) {
+        response <- GET(url)
+        json <- rjson::fromJSON(rawToChar(response$content))
+        data <- plyr::rbind.fill(data, parseJSON(json))
+      }
+    }
+    
+    # NULL
+  } else if(is.null(paginate)){
+    # do nothing
+  }
   
   return(data)
   
