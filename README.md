@@ -49,7 +49,7 @@ Fixed Token checking function (internal) - Should not return errors when using t
 
 ### Install ###
 
-`devtools::install_bitbucket("CMAnalytics/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
+`devtools::install_bitbucket("JohnCheeth/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
 ### Contributors ###
 
