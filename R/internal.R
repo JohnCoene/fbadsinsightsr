@@ -158,9 +158,9 @@ buildBreakdowns <- function(breakdowns) {
     testParam("breakdowns", breakdowns)
     
     if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
-      breakdowns <- paste0("&action_breakdowns=", toHTTP(breakdowns))
+      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", "placement")) {
-      breakdowns <- paste0("&action_breakdowns=", toHTTP(breakdowns))
+      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
       stop("impression_device cannot be used on its own")
     } else if (length(breakdowns) == 1) {
