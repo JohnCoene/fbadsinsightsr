@@ -211,7 +211,7 @@ getAny <- function(id, fields = "default",
       
       # if inpt corrects and url present then loop
       while (length(url)) {
-        response <- GET(url)
+        response <- httr::GET(url)
         json <- rjson::fromJSON(rawToChar(response$content))
         data <- plyr::rbind.fill(data, parseJSON(json))
       }
