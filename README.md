@@ -10,7 +10,6 @@ Upon Request; contact any of the contributors.
 
 ### Development ###
 
-* Pagination - enabling pagination (`next` and `previous`)
 * Data loss fix - Variables parsed (columns) may vary.
 * Fetch IDs of adsets, campaigns and accounts
 * Improve documentation and build vignette
