@@ -1,12 +1,12 @@
 Package: fbAdsInsightsR
 Type: Package
 Title: Get data on performances of facebook ads
-Version: 1.0.3
+Version: 1.1.0
 Date: 2015-12-14
 Author: Cheetah Mobile
 Maintainer: John Coene <john.coene@cmcm.com>
 Description: Get data on performances of facebook ads through facebook Insights API
-License: MIT
+License: GPL (>= 2)
 Imports: 
     rjson,
     plyr,
