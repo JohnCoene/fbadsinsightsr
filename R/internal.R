@@ -9,7 +9,7 @@
 # @author John coene \email{john.coene@@cmcm.com}  
 # 
 # @keywords internal
-scope_check <- function(scope) {
+scopeCheck <- function(scope) {
   
   # input check
   
@@ -38,83 +38,8 @@ scope_check <- function(scope) {
   }
 }
 
-# user_data
-# 
-# @description Function used to parse user data gathered from \code{\link{get_user}} function.
-# 
-# @inheritParams parse_data
-# 
-# @seealso \code{\link{get_user}}
-# 
-# @author John coene \email{john.coene@@cmcm.com}
-# 
-# @keywords internal
-user_data <- function(response) {
-  
-  # unlist 
-  df <- as.data.frame(unlist(response$data),
-                      stringsAsFactors = FALSE)
-  
-  # rename
-  names(df) <- c("info")
-  
-  for (i in 1:nrow(df)) {
-    if(df$info[i] == "1") {
-      df$info[i] <- "ACCOUNT_ADMIN"
-    } else if (df$info[i] == "2") {
-      df$info[i] <- "ADMANAGER_READ"
-    } else if (df$info[i] == "3") {
-      df$info[i] <- "ADMANAGER_WRITE"
-    }else if (df$info[i] == "4") {
-      df$info[i] <- "BILLING_READ"
-    } else if (df$info[i] == "5") {
-      df$info[i] <- "ADMANAGER_WRITE"
-    } else if (df$info[i] == "7") {
-      df$info[i] <- "REPORTS"
-    } else if (df$info[i] == "9" | df$info[i] == "10") {
-      df$info[i] <- "OTHER"
-    } else if (df$info[i] == "1001") {
-      df$info[i] <- "Administrator access"
-    } else if (df$info[i] == "1002") {
-      df$info[i] <- "Advertiser (ad manager) access"
-    } else if (df$info[i] == "1003") {
-      df$info[i] <- "Analyst access"
-    } else if (df$info[i] == "1004") {
-      df$info[i] <- "Direct sales access"
-    } 
-  }
-  return(df)
-}
-
-# parse_data
-# 
-# @description parses data 
-# 
-# @param response object of class 'response'
-# 
-# @details Uses methods similar to that used when parsing JSON files. 
-# Tough responses are technically of class \code{list} these lists are originally parsed from JSON responses using \code{rjson} package.
-# Please \code{\link{query_API}} function for more information on the JSON parse.
-# 
-# @seealso \code{\link{query_API}}
-# 
-# @author John coene \email{john.coene@@cmcm.com}
-# 
-# @keywords internal
-parse_data <- function(response){
-  response <- lapply(response$data, function(x) {
-    x[sapply(x, is.null)] <- NA
-    unlist(x)
-  })
-  data <- do.call("rbind", response)
-  
-  data <- as.data.frame(data, stringsAsFactors = FALSE)
-  
-  return (data)
-}
-
 # create_fields
-create_fields <- function(fields = NULL){
+createFields <- function(fields = NULL){
   
   # check input presence
   if(is.null(fields)) {
@@ -141,22 +66,8 @@ create_fields <- function(fields = NULL){
   return(fields)
 }
 
-
-# build url
-build_url <- function(root_node, edge, fields, params, token) {
-  base_url <- "https://graph.facebook.com/v2.5/"
-  
-  fields <- create_fields(fields)
-  params <- create_params(params)
-  
-  url <- paste0(base_url, root_node, "/", edge, "?fields=",fields,
-                params, "access_token=", token)
-  
-  return(url)
-}
-
 # to_libcurl
-to_libcrul <- function(params = NULL){
+toHTTP <- function(params = NULL){
   
   if (length(params) == 0) {
     
@@ -187,22 +98,22 @@ to_libcrul <- function(params = NULL){
 }
 
 
-# test_param
-test_param <- function (params, param_vector) {
+# testParam
+testParam <- function (params, param_vector) {
   
   if (params == "action_attribution_windows") {
     options <- c("1d_view", "7d_view", "28d_view", "1d_click", "7d_click", 
                  "28d_click", "default")
   } else if (params == "action_breakdowns") {
-    options <- find_action_breakdowns()
+    options <- findActionBreakdowns()
   } else if (params == "fields") {
-    options <- find_fields()
+    options <- findFields()
   } else if (params == "action_report_time") {
     options <- c("impression", "conversion")
   } else if (params == "breakdowns") {
-    options <- find_breakdowns()
+    options <- findBreakdowns()
   } else if (params == "date_preset") {
-    options <- find_date_preset()
+    options <- findDatePreset()
   } else if (params == "level") {
     options <- c("ad", "adset", "campaign", "account") 
   } else if (params == "time_increment") {
@@ -226,11 +137,11 @@ test_param <- function (params, param_vector) {
 
 # check_token
 #  
-check_token <- function(token){
+checkToken <- function(token){
   
   # check token class
   if (class(token)[1]=="Token2.0"){
-    token <- oauth$credentials$access_token
+    token <- token$credentials$access_token
   }	else if (class(token)[1]=="character"){
     token <- token
   }
@@ -239,17 +150,17 @@ check_token <- function(token){
 }
 
 # breakdowns
-build_breakdowns <- function(breakdowns) {
+buildBreakdowns <- function(breakdowns) {
   # breakdowns
   if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
     
     # test
-    test_param("breakdowns", breakdowns)
+    testParam("breakdowns", breakdowns)
     
     if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
-      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
+      breakdowns <- paste0("&action_breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", "placement")) {
-      breakdowns <- paste0("&action_breakdowns=", to_libcrul(breakdowns))
+      breakdowns <- paste0("&action_breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
       stop("impression_device cannot be used on its own")
     } else if (length(breakdowns) == 1) {
@@ -268,7 +179,7 @@ build_breakdowns <- function(breakdowns) {
 
 
 # parse_json
-parse_json <- function(json) {
+parseJSON <- function(json) {
   list <- json$data
   
   df <- data.frame()
