@@ -10,6 +10,8 @@
 #' 
 #' @author John Coene <john.coene@@cmcmc.com>
 findFields <- function() {
+  
+  #list
   fields <- c("date_start", "date_stop", "account_id", "account_name", "ad_id",
               "ad_name", "buying_type", "campaign_id", "campaign_name", 
               "adset_id", "adset_name", "action_carousel_card_id", 
@@ -39,5 +41,8 @@ findFields <- function() {
               "estimated_ad_recall_rate_lower_bound", 
               "estimated_ad_recall_rate_upper_bound", 
               "cost_per_estimated_ad_recallers", "place_page_name")
+  
+  # sort
+  fields <- sort(fields)
   return(fields)
 }
