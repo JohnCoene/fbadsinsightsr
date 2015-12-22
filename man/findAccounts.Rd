@@ -22,7 +22,7 @@ Returns data.frame of account IDs.
 \examples{
 \dontrun{
 # get account ids
-act <- findAccounts(id = "me", token = "XXXXXX")
+act <- findAccounts(id = "me", token = "XXXXXXXXXXX")
 
 # get information on account
 info <- findInfo(account.id = act[2,2], token = "XXXXXXXXXXX")
