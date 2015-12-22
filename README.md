@@ -48,9 +48,10 @@ Constantly being updated and improved. Currently the following are available upo
 * Documentation has also greatly been improved, every function comes with @Examples.
 * On a similar note, the manual has been released. Please ask a contributor for a copy.
 
-Bug fixes:
-* token appropriately used in findInfo - should no longer return an error when using `fbAuthenticate`
-* `paginate` argument removed in favour of `n` (see documentation) - should no longer encounter hour-long queries unless desired a *massive* amount of data is requested.
+Bug fixes.
+
+* token appropriately used in findInfo, it should no longer return an error when using that returned by `fbAuthenticate`
+* `paginate` argument removed in favour of `n` (see documentation), it should no longer encounter hour-long queries unless desired a *massive* amount of data is requested.
 
 #### v1.2.0 - parseJSON ####
 
