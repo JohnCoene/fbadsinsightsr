@@ -8,7 +8,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **OAuth**
 
-* `fb_authenticate`
+* `fbAuthenticate`
 
 **GET-family**
 
