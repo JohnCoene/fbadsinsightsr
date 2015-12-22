@@ -44,16 +44,16 @@ needs to be renewed frequently. The alternative is to create an OAuth token usin
  
 \dontrun{
 # run authentication with your app details
-fbOAuth <- fb_authenticate(app.id = "1234567890123456", 
-                           app.secret = "76xx79121xx0130x2x10a08d3e2x80xx", 
-                           scope = "ads_management")
+fbOAuth <- fbAuthenticate(app.id = "1234567890123456", 
+                          app.secret = "76xx79121xx0130x2x10a08d3e2x80xx", 
+                          scope = "ads_management")
 print(fbOAuth)
 <Token>
 <oauth_endpoint>
  authorize: https://www.facebook.com/dialog/oauth
  access:    https://graph.facebook.com/oauth/access_token
 <oauth_app> optional
- key:    1234567890123456
+ key:    123456789012345
  secret: <hidden>
  <credentials> access_token, expires
 ---
