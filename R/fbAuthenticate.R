@@ -10,31 +10,24 @@
 #' 
 #' @details 
 #' There are two different ways of making authenticated requests. One is to obtain
-#' a temporary access token from \url{https://developers.facebook.com/tools/explorer},
-#' which can be used as argument in any of the functions in this package.
-#'
-#' However, this token has a 2-hour lifetime by default and after it expires and thus
-#' needs to be renewed frequently. The second alternative is to create an OAuth token. The 
-#' process to create it is a bit more tedious. It is divided in three steps.
+#' a temporary access token from \url{https://developers.facebook.com/tools/explorer}, 
+#' the other is to use a long-term token provided by this very function. 
 #' 
-#' First, go to \url{https://developers.facebook.com/apps}, register as a developer
+#' Either way you will have to create an app; go to \url{https://developers.facebook.com/apps}, register as a developer
 #' and create a new app. You will also need a verified Facebook account.
-#' After that, click in "Show" under "App Secret" to find your 'App ID' and 'App Secret'.
-#' \enumerate{
 #' 
+#' To get the short-term token:
+#' 
+#' \enumerate{
 #' \item Go to facebook's Graph API Explorer: \url{https://developers.facebook.com/tools/explorer}
-#' \item Select "Graph API Explorer" in the top right corner
+#' \item Select your app in the top right corner (defaults to "Graph API Explorer")
 #' \item Then in the dropdown underneath hit "Get Token" and select "Get User Access Token"
-#' \item In the popup navigate to "Extended Permissions" and select "ads_management" and "ads_read"
+#' \item In the popup navigate to "Extended Permissions" and select "ads_management" and/or "ads_read"
 #' \item Click "Get Access Token" and allow the app in the following popup
 #' \item Copy and Save the token in your R sesssion.
 #' }
-#' 1. Go to facebook's Graph API Explorer: \url{https://developers.facebook.com/tools/explorer}
-#' 2. Select "Graph API Explorer" in the top right corner
-#' 3. Then in the dropdown underneath hit "Get Token" and select "Get User Access Token"
-#' 4. In the popup navigate to "Extended Permissions" and select "ads_management" and "ads_read"
-#' 5. Click "Get Access Token" and allow the app in the following popup
-#' 6. Copy and Save the token in your R sesssion.
+#' However, this token has a 2-hour lifetime by default and thus
+#' needs to be renewed frequently. The alternative is to create an OAuth token using this function and your "App ID" and "App Secret"
 #' 
 #' @examples  
 #' \dontrun{
