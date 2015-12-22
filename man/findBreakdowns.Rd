@@ -14,15 +14,16 @@ Returns all valid \code{breakdwowns} which can be used in the get-family functio
 # get information on account
 info <- findInfo(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
 
-# take random ad.id
+# take random adset.id
 set.seed(123)
 rand_id <- sample(info$adset$id, 1)
 
-# date.preset
+# date.preset - last 7 days
 date <- findDatePreset()[grep("7",  findDatePreset())]
 
 # fetch Adset data broken down by age and gender for the last 7 days
-data <- getAny(id = rand_id, token = "XXXXXXXXXXX", breakdowns = c("age", "gender"), date.preset = date)
+data <- getAny(id = rand_id, token = "XXXXXXXXXXX", 
+               breakdowns = c("age", "gender"), date.preset = date)
 }
 
 }

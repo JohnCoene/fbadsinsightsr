@@ -4,7 +4,16 @@
 #' 
 #' @details fields vary from \code{age} to \code{cpm} for the full list please see the online official \href{https://developers.facebook.com/docs/marketing-api/reference/ads-insights/}{documentation}
 #' 
-#' @seealso \code{\link{getAny}}
+#' @examples 
+#' \dontrun{
+#' # video-related metrics
+#' videos <- findFields()[grep("video", findFields())]
+#' 
+#' # get account data on fields of interest
+#' data <- getAccount(account.id = "act_123456789012345", token = "XXXXXXXXXXXX", fields = videos)
+#' }
+#' 
+#' @seealso \code{\link{getAccount}}
 #' 
 #' @export
 #' 

@@ -35,7 +35,7 @@ getAny(id, fields = "default", action.attribution.windows = NULL,
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \description{
-Get insights on advertising performances of an ad. See \href{https://developers.facebook.com/docs/marketing-api/insights/v2.5}{documentation} for more information
+Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
 }
 \details{
 This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
@@ -52,6 +52,35 @@ Valid \code{action.attribution.windows}:
 \item 7d_click
 \item 28d_click
 }
+
+\code{getAny} may replace any other GET function. Indeed all functions share the same parameters and fields, the data that is returned solely depend on the object id the functions is fed. See examples.
+}
+\examples{
+\dontrun{
+# run authentication with your app details
+fbOAuth <- fbAuthenticate(app.id = "1234567890123456", 
+                          app.secret = "76xx79121xx0130x2x10a08x3e2x80xx", 
+                          scope = "ads_management")
+                          
+# get information on account
+info <- findInfo(account.id = "act_123456789012345", token = fbOAuth)
+
+# get date.preset
+date <- findDatePreset()[grep("quarter", findDatePreset())]
+
+# fetch Ad data
+data <- getAny(id = sample(info$ad$id, 1), token = fbOAuth, date.preset = date)
+
+# fetch Adset data
+data <- getAny(id = sample(info$adsets$id, 1), token = fbOAuth, date.preset = date)
+
+# fetch Campaign data
+data <- getAny(id = sample(info$campaigns$id, 1), token = fbOAuth, date.preset = date)
+
+# fetch Account data
+data <- getAny(id = "act_123456789012345", token = fbOAuth, date.preset = date)
+}
+
 }
 \author{
 John Coene <john.coene@cmcm.com>

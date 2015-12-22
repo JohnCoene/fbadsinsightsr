@@ -54,10 +54,23 @@ Valid \code{action.attribution.windows}:
 \item 28d_click
 }
 }
+\examples{
+\dontrun{
+# run authentication with your app details
+fbOAuth <- fbAuthenticate(app.id = "1234567890123456", 
+                          app.secret = "76xx79121xx0130x2x10a08x3e2x80xx", 
+                          scope = "ads_management")
+
+# fetch Account data broken down by action destinations
+data <- getAccount(account.id = "act_123456789012345", token = fbOAuth, 
+                   action.breakdowns = "action_destination")
+}
+
+}
 \author{
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}}
+\code{\link{fbAuthenticate}} \code{\link{findInfo}}
 }
 

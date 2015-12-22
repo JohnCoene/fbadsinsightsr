@@ -30,9 +30,30 @@
 #' \item 28d_click
 #' }
 #' 
+#' @examples 
+#' \dontrun{
+#' # run authentication with your app details
+#' fbOAuth <- fbAuthenticate(app.id = "1234567890123456", 
+#'                           app.secret = "76xx79121xx0130x2x10a08x3e2x80xx", 
+#'                           scope = "ads_management")
+#'                           
+#' # get information on account
+#' info <- findInfo(account.id = "act_123456789012345", token = fbOAuth)
+#' 
+#' # take random ad.id
+#' set.seed(123)
+#' rand_id <- sample(info$ads$id, 1)
+#' 
+#' # get date.preset
+#' date <- findDatePreset()[grep("quarter", findDatePreset())]
+#' 
+#' # fetch Ad data for this quarter
+#' data <- getAd(ad.id = rand_id, token = fbOAuth, date.preset = date)
+#' }
+#' 
 #' @export
 #' 
-#' @seealso \code{\link{fbAuthenticate}} 
+#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findDatePreset}}, \code{\link{findInfo}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 getAd <- function(ad.id, fields = "default",

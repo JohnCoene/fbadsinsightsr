@@ -39,8 +39,9 @@ str(lst)
 # show names of data.frames within list
 names(lst)
 
-# summary list
-summary <- lst$summary
+# use info for query
+data <- getAdset(adset.id = sample(info$adsets$id, 1), date.preset = "last_week", token = "XXXXX")
+
 }
 
 }
@@ -48,6 +49,6 @@ summary <- lst$summary
 John Coene <john.coene@cmcmc.com>
 }
 \seealso{
-\code{\link{getAny}}
+\code{\link{getAdset}}
 }
 
