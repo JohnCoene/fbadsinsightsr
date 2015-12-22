@@ -21,11 +21,17 @@
 #' @examples 
 #' \dontrun{
 #' lst <- getInfo(account.id = "act_123456789123456", token = "XXXXXX")
-#' }
 #' 
-#' # inspect return
+#' # inspect structure of feedback
 #' str(lst)
+#' 
+#' # show names of data.frames within list
 #' names(lst)
+#' 
+#' # summary list
+#' summary <- lst$summary
+#' }
+#'
 #' @seealso \code{\link{getAny}}
 #' 
 #' @author John Coene <john.coene@@cmcmc.com>

@@ -12,13 +12,15 @@ findInfo(account.id, token)
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 }
 \value{
-return a list of four data.frames.
+Returns a list of four data.frames.
 \itemize{
-\item ads campaign id, adset id, id, name and bid amount of each ad (rows)
-\item adsets id, name and campaign_id of each adset (rows)
-\item campaigns id and name of all campaigns
-\item summary includes all of the above in one neat \code{data.frame} using ads as rows.
+\item ads - campaign id, adset id, id, name and bid amount of each ad (rows)
+\item adsets - id, name and campaign_id of each adset (rows)
+\item campaigns - id and name of all campaigns
+\item summary - includes all of the above in one neat \code{data.frame} using ads as rows.
 }
+
+See list structure (\code{str}) or \code{names}
 }
 \description{
 Fetches the list of campaigns, adsets and ads under a given account.
@@ -30,6 +32,15 @@ One call is made for each object, ads, adsets and campaigns respectively.
 \examples{
 \dontrun{
 lst <- getInfo(account.id = "act_123456789123456", token = "XXXXXX")
+
+# inspect structure of feedback
+str(lst)
+
+# show names of data.frames within list
+names(lst)
+
+# summary list
+summary <- lst$summary
 }
 
 }
