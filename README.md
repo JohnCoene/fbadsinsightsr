@@ -27,7 +27,10 @@ See `?documentation` and examples for more details.
 
 ## Documentation ##
 
-Currently being written given upon request; contact any of the contributors.
+Constantly being updated and improved. Currently the following are available upon request:
+
+* Manual - fbAdsInsightsR.pdf
+* Vignette~ish - examples and broad desciption of package inner workings
 
 ## Development ##
 
