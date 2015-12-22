@@ -8,13 +8,15 @@
 #' @details Essentially consists of three separate API calls thus may take a few seconds; \code{Sys.sleep} of 3 seconds between each query.
 #' One call is made for each object, ads, adsets and campaigns respectively.
 #' 
-#' @return return a list of four data.frames.
+#' @return Returns a list of four data.frames.
 #' \itemize{
-#' \item ads campaign id, adset id, id, name and bid amount of each ad (rows)
-#' \item adsets id, name and campaign_id of each adset (rows)
-#' \item campaigns id and name of all campaigns
-#' \item summary includes all of the above in one neat \code{data.frame} using ads as rows.
+#' \item ads - campaign id, adset id, id, name and bid amount of each ad (rows)
+#' \item adsets - id, name and campaign_id of each adset (rows)
+#' \item campaigns - id and name of all campaigns
+#' \item summary - includes all of the above in one neat \code{data.frame} using ads as rows.
 #' }
+#' 
+#' See list structure (\code{str}) or \code{names}
 #' 
 #' @examples 
 #' \dontrun{
