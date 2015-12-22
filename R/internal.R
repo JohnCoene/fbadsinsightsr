@@ -181,7 +181,7 @@ buildBreakdowns <- function(breakdowns) {
 # parse_json
 parseJSON <- function(json) {
   
-  df <- do.call(plyr::"rbind.fill", lapply(json, as.data.frame))
+  df <- do.call(plyr::"rbind.fill", lapply(json$data, as.data.frame))
   
   return(df)
 }
