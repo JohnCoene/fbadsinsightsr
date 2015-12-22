@@ -1,6 +1,6 @@
 # README #
 
-Current version: **2.0.0**
+Current version: **2.0.1**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
@@ -35,12 +35,16 @@ Constantly being updated and improved. Currently the following are available upo
 ## Development ##
 
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
-* ~~Data loss fix - Variables parsed (columns) may vary.~~
+* ~~Data loss fix - Variables parsed (columns) may vary~~ (v1.2.0)
 * ~~Implement `paginate` argument.~~ (v1.1.0)
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v1.1.1)
 
 
 ## Versions and Patches ##
+
+#### v2.0.1 -  ####
+
+* `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
 
 ### v2.0.0 - Documentation ###
 
