@@ -2,7 +2,23 @@
 #' 
 #' @description Returns all valid \code{breakdwowns} which can be used in the get-family functions.. No input, see usage.
 #' 
-#' @seealso \code{\link{getAny}}
+#' @examples 
+#' \dontrun{
+#' # get information on account
+#' info <- findInfo(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' 
+#' # take random ad.id
+#' set.seed(123)
+#' rand_id <- sample(info$adset$id, 1)
+#' 
+#' # date.preset
+#' date <- findDatePreset()[grep("7",  findDatePreset())]
+#' 
+#' # fetch Adset data broken down by age and gender for the last 7 days
+#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", breakdowns = c("age", "gender"), date.preset = date)
+#' }
+#' 
+#' @seealso \code{\link{getAny}}, \code{\link{findInfo}}, \code{\link{findDatePreset}}
 #' 
 #' @export
 #' 
