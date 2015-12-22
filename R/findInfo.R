@@ -89,7 +89,7 @@ findInfo <- function(account.id, token) {
   
   # rename
   names(data) <- c("campaign_id", "adset_id", "ad_id", "ad_name",
-                   "bid_amount", "adset_name", "campaign_name")
+                   "bid_amount", "bid_type", "adset_name", "campaign_name")
   
   lst$summary <- data
   
