@@ -30,6 +30,6 @@ data <- getAny(id = rand_id, token = "XXXXXXXXXXX", action.breakdowns = carousel
 John Coene <john.coene@cmcmc.com>
 }
 \seealso{
-\code{\link{getAny}}, \code{\link{getInfo}}
+\code{\link{getAny}}, \code{\link{findInfo}}
 }
 

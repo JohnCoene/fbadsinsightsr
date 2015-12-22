@@ -18,7 +18,7 @@
 #' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", action.breakdowns = carousel)
 #' }
 #' 
-#' @seealso \code{\link{getAny}}, \code{\link{getInfo}}
+#' @seealso \code{\link{getAny}}, \code{\link{findInfo}}
 #' 
 #' @export
 #' 
