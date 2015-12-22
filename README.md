@@ -1,8 +1,11 @@
 # README #
 
+![alt text](https://en.wikipedia.org/wiki/Cheetah_Mobile#/media/File:Cheetah_Mobile_Logo.png "Developped by Cheetah Mobile")
+
+
 Current version: **2.0.1**
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5) as well as a few other API calls that facilitate the use of the package.
 
 ## Functions ##
 
@@ -34,7 +37,7 @@ See `?documentation` and examples for more details.
 Constantly being updated and improved. Currently the following are available upon request:
 
 * Manual - fbAdsInsightsR.pdf
-* Vignette~ish - examples and broad desciption of package inner workings
+* Vignette~ish - examples and broad desciption of package inner workings.
 
 ## Development ##
 
@@ -56,19 +59,19 @@ Bug fixes.
 
 ### v2.0.0 - Documentation ###
 
-* `paginate` argument has been changed in the GET-family functions to `n =100`. Indicating the number of results desired rather than using a boolean argument for paging avoids--or rather allows one to control--lengthy queries.
-* Documentation has also greatly been improved, every function comes with @Examples.
+* `paginate` argument has been changed in the GET-family functions to `n = 100`. It indicates the number of results desired rather than using a boolean argument for paging avoids---or rather allows one to control---lengthy queries.
+* Documentation has also greatly been improved, i.e.: every function comes with examples.
 * On a similar note, the manual has been released. Please ask a contributor for a copy.
 
 Bug fixes.
 
-* token appropriately used in findInfo, it should no longer return an error when using that returned by `fbAuthenticate`
-* `paginate` argument removed in favour of `n` (see documentation), it should no longer encounter hour-long queries unless desired a *massive* amount of data is requested.
+* `token` appropriately used in `findInfo`, it should no longer return an error when using that which is returned by `fbAuthenticate`.
+* `paginate` argument removed in favour of `n` (see documentation), it should no longer generate hour-long queries unless a *massive* amount of data is requested.
 
 #### v1.2.0 - parseJSON ####
 
 * ParseJSON fix - now returns all variables whatever the call, still imports `plyr::rbind.fill`
-* Fixed `paginate = "next"` in `getCampaign`, `getAdset`, `getAd` and `getAny`.
+* Fixed `paginate = "next"` in `getCampaign`, `getAdset`, `getAd` and `getAny`. Changed to the more adequate (and mentioned in documentation) `paginate = NULL`
 
 #### v1.1.2 - findInfo ####
 
@@ -106,8 +109,11 @@ Removed internal functions that were unused, will not affect package reader.
 
 ## Install ##
 
+Since access to the repository is restricted you will need your login and password to install the package.
+
 `devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
 ## Contributors ##
 
 * Admin - John Coene <john.coene@cmcm.com>
+* Tester - DongYuNan <dongyunan@conew.com>
