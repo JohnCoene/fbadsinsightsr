@@ -112,6 +112,11 @@ Since access to the repository is restricted you will need your login and passwo
 
 `devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
+## Chip in ##
+
+* We're looking someone well-versed in both R and JSON, the data could definitely be parsed in a better way!
+* Feedback and contributions most welcome.
+
 ## Contributors ##
 
 * Admin - John Coene <john.coene@cmcm.com>
