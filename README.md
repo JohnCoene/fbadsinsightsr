@@ -7,21 +7,25 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 ## Functions ##
 
 **OAuth**
-`fb_authenticate`
+
+* `fb_authenticate`
 
 **GET-family**
-`getAccount`
-`getCampaign`
-`getAdset`
-`getAd`
-`getAny`
+
+* `getAccount`
+* `getCampaign`
+* `getAdset`
+* `getAd`
+* `getAny`
 
 **Find-family**
-`findDatePreset`
-`findActionBreakdowns`
-`findFields`
-`findBreakdowns`
-`findInfo`
+
+* `findDatePreset`
+* `findActionBreakdowns`
+* `findFields`
+* `findBreakdowns`
+* `findInfo`
+* `findAccounts`
 
 See `?documentation` and examples for more details.
 
@@ -45,6 +49,10 @@ Constantly being updated and improved. Currently the following are available upo
 #### v2.0.1 -  ####
 
 * `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
+
+Bug fixes.
+
+* Fixed minor bug amongst GET-family functions where some errors on the inital queries where not caught if the response had little content.
 
 ### v2.0.0 - Documentation ###
 
