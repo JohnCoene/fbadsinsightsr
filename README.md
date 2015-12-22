@@ -1,7 +1,6 @@
+![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
+
 # README #
-
-![alt text](https://en.wikipedia.org/wiki/Cheetah_Mobile#/media/File:Cheetah_Mobile_Logo.png "Developped by Cheetah Mobile")
-
 
 Current version: **2.0.1**
 
