@@ -21,6 +21,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 `findActionBreakdowns`
 `findFields`
 `findBreakdowns`
+`findInfo`
 
 See `?documentation` and examples for more details.
 
