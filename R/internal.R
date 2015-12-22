@@ -180,34 +180,8 @@ buildBreakdowns <- function(breakdowns) {
 
 # parse_json
 parseJSON <- function(json) {
-  list <- json$data
   
-  df <- data.frame()
-  
-  # build rows
-  for(k in 1:length(list)){
-    col <- data.frame(row.names = 1)
-    # build columns
-    for (i in 1:length(list[[k]])) {
-      if(length(list[[k]][[i]]) == 1) {
-        vect <- unlist(list[[k]][i])[1]
-        vect <- as.data.frame(vect)
-        names(vect) <- names(list[[k]][i])
-        col <- cbind.data.frame(col, vect)
-      } else if (length(list[[k]][[i]]) > 1){
-        for (j in 1:length(list[[k]][[i]])){
-          vect <- unlist(list[[k]][[i]][j])[2]
-          vect <- as.data.frame(vect)
-          names(vect) <- unlist(list[[k]][[i]][j])[1]
-          col <- cbind.data.frame(col, vect)
-        }
-      }
-    }
-    
-    # combine
-    df <- plyr::rbind.fill(df, col)
-    col <- NULL
-  }
+  df <- do.call(plyr::"rbind.fill", lapply(json, as.data.frame))
   
   return(df)
 }
