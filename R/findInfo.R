@@ -23,6 +23,9 @@
 #' lst <- getInfo(account.id = "act_123456789123456", token = "XXXXXX")
 #' }
 #' 
+#' # inspect return
+#' str(lst)
+#' names(lst)
 #' @seealso \code{\link{getAny}}
 #' 
 #' @author John Coene <john.coene@@cmcmc.com>
