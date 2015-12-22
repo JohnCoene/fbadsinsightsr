@@ -91,10 +91,9 @@ Bug fixes.
 
 #### v1.0.2 - Nomenclature ####
 
-* Nomenclature changed in order to comply with the [conventions suggested by Haddly Wickham](http://r-pkgs.had.co.nz/style.html).
+* Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html).
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
-
-Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
+* Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from * being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 
 Removed internal functions that were unused, will not affect package reader.
 
