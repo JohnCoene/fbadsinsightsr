@@ -28,11 +28,12 @@
 #' # show names of data.frames within list
 #' names(lst)
 #' 
-#' # summary list
-#' summary <- lst$summary
+#' # use info for query
+#' data <- getAdset(adset.id = sample(info$adsets$id, 1), date.preset = "last_week", token = "XXXXX")
+#' 
 #' }
 #'
-#' @seealso \code{\link{getAny}}
+#' @seealso \code{\link{getAdset}}
 #' 
 #' @author John Coene <john.coene@@cmcmc.com>
 #' 
@@ -45,6 +46,8 @@ findInfo <- function(account.id, token) {
   } else if (missing(token)){
     stop("Missing token")
   }
+  
+  token <- checkToken(token)
   
   # build urls
   ads.url <- paste0("https://graph.facebook.com/v2.5/",
