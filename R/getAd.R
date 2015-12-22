@@ -211,6 +211,8 @@ getAd <- function(ad.id, fields = "default",
   if(length(json$error$message)){
     stop(paste("this is likely due to ad.id or token. Error Message returned: ",
                json$error$message))
+  } else if (length(json$data) == 0) {
+    stop(paste("this is likely due to account.id or token."))
   }
   
   # parse
