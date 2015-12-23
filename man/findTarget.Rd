@@ -12,13 +12,31 @@ findTarget(id, n = 100, token)
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
-
-\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 }
 \value{
 Returns a \code{data.frame} containing targeting sentences as columns.
 }
 \description{
 Retrieves the targeting description of a specific ad or adset.
+}
+\details{
+Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.5}
+}
+\examples{
+\dontrun{
+# get information on account
+info <- findInfo(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+
+# pick random ad.id
+set.seed(123)
+rand_id <- sample(info$ad$id, 1)
+
+# fetch targeting description of random ad
+findTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
+}
+
+}
+\seealso{
+\code{\link{findInfo}}
 }
 

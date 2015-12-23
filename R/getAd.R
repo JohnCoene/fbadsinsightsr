@@ -192,12 +192,11 @@ getAd <- function(ad.id, fields = "default",
     stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
   }
   
-  base_url <- "https://graph.facebook.com/v2.5/"
-  
   # check token verison
   token <- checkToken(token)
   
-  url <- paste0(base_url, ad.id, "/insights?fields=",fields,
+  url <- paste0("https://graph.facebook.com/v2.5/",
+                ad.id, "/insights?fields=",fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, "&access_token=", token)
@@ -219,33 +218,12 @@ getAd <- function(ad.id, fields = "default",
   # parse
   data <- parseJSON(json)
   
-  i <- 1
-  
-  # Paginate
-  while (nrow(data) < n & 
-         !is.null(json$paging$`next`)) {
-    # GET
-    response <- httr::GET(json$paging$`next`)
-    
-    # parse
-    json <- rjson::fromJSON(rawToChar(response$content))
-    
-    # bind
-    data <- plyr::rbind.fill(data, parseJSON(json))
-    
-    # pause between queries if more than 2 to avoid lengthy calls
-    i <- i + 1
-    
-    if(i >= 3) {
-      Sys.sleep(2)
-    }
-  }
+  data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
   # verbose
   if (verbose == TRUE) {
-    print(paste(n, "results requested, API returned", nrow(dat),
-                "from", i, "page(s)"))
-  }
+    cat(paste(n, "results requested, API returned", nrow(data)))
+  } 
   
   return(data)
   

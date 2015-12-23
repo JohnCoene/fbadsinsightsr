@@ -52,27 +52,12 @@ findAccounts <- function(id, token, n = 100) {
   # parse
   data <- parseJSON(json)
   
-  i <- 1
+  data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
-  # Paginate
-  while (nrow(data) < n & 
-         !is.null(json$paging$`next`)) {
-    # GET
-    response <- httr::GET(json$paging$`next`)
-    
-    # parse
-    json <- rjson::fromJSON(rawToChar(response$content))
-    
-    # bind
-    data <- plyr::rbind.fill(data, parseJSON(json))
-    
-    # pause between queries if more than 2 to avoid lengthy calls
-    i <- i + 1
-    
-    if(i >= 3) {
-      Sys.sleep(2)
-    }
-  }
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(data)))
+  } 
   
   return(data)
 }

@@ -186,4 +186,44 @@ parseJSON <- function(json) {
   return(df)
 }
 
-                                                                                                                                    
+
+paginate <- function(json, data, verbose = FALSE, n = 100) {
+  
+  i <- 1
+  
+  # Paginate
+  while (nrow(data) < n & 
+         !is.null(json$paging$`next`)) {
+    # GET
+    response <- httr::GET(json$paging$`next`)
+    
+    # parse
+    json <- rjson::fromJSON(rawToChar(response$content))
+    
+    # bind
+    data <- plyr::rbind.fill(data, parseJSON(json))
+    
+    # verbose
+    if (verbose == TRUE && i == 1) {
+      cat(paste0(n, " results requested", "\n"))
+      cat(paste(nrow(data), "results"), fill = TRUE, labels = paste0("Query #", i, ":"))
+    } else if (verbose == TRUE && i != 1) {
+      cat(paste(nrow(data), "results"), fill = TRUE, labels = paste0("Query #", i, ":"))
+    }
+    
+    # pause between queries if more than 2 pages of data to avoid lengthy calls
+    if(i >= 3) {
+      Sys.sleep(3)
+      
+      # verbose
+      if(verbose == TRUE && i == 3){
+        cat(paste("## 3 seconds pause between queries from now onwards ##", "\n"))
+      }
+    }
+    
+    # iterate
+    i <- i + 1
+  }
+  
+  return(data)
+}
