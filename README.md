@@ -28,6 +28,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `findBreakdowns`
 * `findInfo`
 * `findAccounts`
+* `findTarget`
 
 See `?documentation` and examples for more details.
 
@@ -40,8 +41,8 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
-* Allow collecting data on ads' tageting specs, etc.
-* ~~Add optional feedback on GET-family functions.~~ (v2.)
+* ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
+* ~~Add optional feedback on GET-family functions.~~ (v2.0.2)
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
 * ~~Data loss fix - Variables parsed (columns) may vary~~ (v1.2.0)
 * ~~Implement `paginate` argument.~~ (v1.1.0)
@@ -56,6 +57,7 @@ Constantly being updated and improved. Currently the following are available upo
 #### v2.0.2 - verbose ####
 
 * added `verbose` arguement to GET-family functions. See documentation.
+* added `findTarget` function to retrieve targeting specs of an ad or adset.
 
 #### v2.0.1 - findAccounts ####
 
