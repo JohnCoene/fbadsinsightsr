@@ -52,6 +52,9 @@ findAccounts <- function(id, token, n = 100) {
   # parse
   data <- parseJSON(json)
   
+  # set verbose to FALSE
+  verbose <- FALSE
+  
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
   # verbose

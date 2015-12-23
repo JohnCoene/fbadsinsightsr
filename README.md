@@ -66,6 +66,7 @@ Constantly being updated and improved. Currently the following are available upo
 Bug Fixes.
 
 * `findTarget` now correctly returns targeting specs.
+* `findAccount` is no longer "missing verbose"
 
 #### v2.0.2 - verbose ####
 
