@@ -2,7 +2,7 @@
 
 # README #
 
-Current version: **2.0.2**
+Current version: **2.1.0**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5) as well as a few other API calls that facilitate the use of the package.
 
@@ -41,7 +41,8 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
-* Document to explain workflow that package alows suggests.
+* Document to explain workflow that package suggests.
+* ~~Feedback on functions that query API~~ (v2.1.0)
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
 * ~~Add optional feedback on GET-family functions.~~ (v2.0.2)
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
@@ -54,6 +55,17 @@ Constantly being updated and improved. Currently the following are available upo
 * A HipChat room is also available; ideal to keep up to date with all the developments, issues that may arise and most importantly other contributors. 
 
 ## Versions and Patches ##
+
+#### v2.1.0 - verbose ####
+
+* `paginate` function (`internal.R`) to clean up GET-family functions.
+* `verbose` arguement now also returns details on pagination.
+* Some clean up in both find and GET family functions.
+* Manual Updated.
+
+Bug Fixes.
+
+* `findTarget` now correctly returns targeting specs.
 
 #### v2.0.2 - verbose ####
 
