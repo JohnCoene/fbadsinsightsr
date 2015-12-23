@@ -2,7 +2,7 @@
 #' 
 #' @description Retrieves the targeting description of a specific ad or adset.
 #' 
-#' @param id either a adset ID or an ad ID.
+#' @param id Either a adset ID or an ad ID.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
@@ -62,4 +62,6 @@ findTarget <- function(id, n = 100, token){
       Sys.sleep(2)
     }
   }
+  
+  return(data)
 }
