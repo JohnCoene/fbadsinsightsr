@@ -12,5 +12,4 @@ Imports:
     plyr,
     httr
 LazyData: TRUE
-BuildManual: yes
 RoxygenNote: 5.0.1
