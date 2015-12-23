@@ -40,7 +40,7 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
-* add optional feedback on GET-family functions.
+* ~~Add optional feedback on GET-family functions.~~
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
 * ~~Data loss fix - Variables parsed (columns) may vary~~ (v1.2.0)
 * ~~Implement `paginate` argument.~~ (v1.1.0)
@@ -49,7 +49,11 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Versions and Patches ##
 
-#### v2.0.1 -  ####
+#### v2.0.2 - verbose ####
+
+* added `verbose` arguement to GET-family functions.
+
+#### v2.0.1 - findAccounts ####
 
 * `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
 

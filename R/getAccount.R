@@ -14,6 +14,7 @@
 #' @param time.range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
+#' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -52,7 +53,7 @@ getAccount <- function(account.id, fields = "default",
                         action.breakdowns = NULL, action.report.time = NULL,
                         breakdowns = NULL, date.preset = NULL, level = NULL, 
                         time.increment = NULL, time.range = NULL, 
-                        n = 100, token) {
+                        n = 100, token, verbose = FALSE) {
   
   # check inputs
   if(missing(account.id)){
@@ -229,6 +230,12 @@ getAccount <- function(account.id, fields = "default",
     if(i >= 3) {
       Sys.sleep(2)
     }
+  }
+  
+  # verbose
+  if (verbose == TRUE) {
+    print(paste(n, "results requested, API returned", nrow(dat),
+                "from", i, "page(s)"))
   }
   
   return(data)

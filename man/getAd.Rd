@@ -7,7 +7,7 @@
 getAd(ad.id, fields = "default", action.attribution.windows = NULL,
   action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
   date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, token)
+  time.range = NULL, n = 100, token, verbose = FALSE)
 }
 \arguments{
 \item{ad.id}{The ad id (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -33,6 +33,8 @@ getAd(ad.id, fields = "default", action.attribution.windows = NULL,
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
+
+\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 }
 \description{
 Get insights on advertising performances of an ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/}{documentation} for more information
