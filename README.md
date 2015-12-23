@@ -40,12 +40,16 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
-* ~~Add optional feedback on GET-family functions.~~ (v2.0.2)
+* Allow collecting data on ads' tageting specs, etc.
+* ~~Add optional feedback on GET-family functions.~~ (v2.)
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
 * ~~Data loss fix - Variables parsed (columns) may vary~~ (v1.2.0)
 * ~~Implement `paginate` argument.~~ (v1.1.0)
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v1.1.1)
 
+## Chat Room ##
+
+* A HipChat room is also available; ideal to keep up to date with all the developments, issues that may arise and most importantly other contributors. 
 
 ## Versions and Patches ##
 
