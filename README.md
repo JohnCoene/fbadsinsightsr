@@ -41,6 +41,7 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
+* Document to explain workflow that package alows suggests.
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
 * ~~Add optional feedback on GET-family functions.~~ (v2.0.2)
 * Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
