@@ -56,14 +56,14 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Versions and Patches ##
 
-#### v2.1.1 - verbose ####
+#### v2.1.1 ####
 
 * Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
 
 Bug Fixes.
 * fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
 
-#### v2.1.0 - verbose ####
+#### v2.1.0 ####
 
 * `paginate` function (`internal.R`) to clean up GET-family functions.
 * `verbose` arguement now also returns details on pagination.
@@ -75,12 +75,12 @@ Bug Fixes.
 * `findTarget` now correctly returns targeting specs.
 * `findAccount` is no longer "missing verbose"
 
-#### v2.0.2 - verbose ####
+#### v2.0.2 ####
 
 * added `verbose` arguement to GET-family functions. See documentation.
 * added `findTarget` function to retrieve targeting specs of an ad or adset.
 
-#### v2.0.1 - findAccounts ####
+#### v2.0.1 ####
 
 * `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
 
@@ -88,7 +88,7 @@ Bug fixes.
 
 * Fixed minor bug amongst GET-family functions where some errors on the inital queries where not caught if the response had little content.
 
-### v2.0.0 - Documentation ###
+### v2.0.0 - Paginate ###
 
 * `paginate` argument has been changed in the GET-family functions to `n = 100`. It indicates the number of results desired rather than using a boolean argument for paging avoids---or rather allows one to control---lengthy queries.
 * Documentation has also greatly been improved, i.e.: every function comes with examples.
@@ -99,29 +99,29 @@ Bug fixes.
 * `token` appropriately used in `findInfo`, it should no longer return an error when using that which is returned by `fbAuthenticate`.
 * `paginate` argument removed in favour of `n` (see documentation), it should no longer generate hour-long queries unless a *massive* amount of data is requested.
 
-#### v1.2.0 - parseJSON ####
+#### v1.2.0 ####
 
 * ParseJSON fix - now returns all variables whatever the call, still imports `plyr::rbind.fill`
 * Fixed `paginate = "next"` in `getCampaign`, `getAdset`, `getAd` and `getAny`. Changed to the more adequate (and mentioned in documentation) `paginate = NULL`
 
-#### v1.1.2 - findInfo ####
+#### v1.1.2 ####
 
 * Function renamed for consistency from `getInfo` to `findInfo`.
 
-#### v1.1.1 - getInfo ####
+#### v1.1.1 ####
 
 * Added `getInfo` to retrieve all camapaigns, adset and ads under an account!
 * First draft of documentation available
 
-#### v1.1.0 - Paginate ####
+#### v1.1.0 ####
 
 * Paginate function implemented see `paginate` parameter in GET-family functions (i.e.: `?getAny`).
 
-#### v1.0.3 - Sort ####
+#### v1.0.3 ####
 
 * Find-family function return lists in alpha-numerical order, at the exception of `date_preset`.
 
-#### v1.0.2 - Nomenclature ####
+#### v1.0.2  ####
 
 * Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html).
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
@@ -129,11 +129,11 @@ Bug fixes.
 
 Removed internal functions that were unused, will not affect package reader.
 
-#### v1.0.1 - Token Check ####
+#### v1.0.1 ####
 
 * Fixed Token checking function (internal) - Should not return errors when using token returned by `fb_authneticate`.
 
-### v1.0.0 - Release ###
+### v1.0.0 - Hello World ###
 
 * Initial release
 
