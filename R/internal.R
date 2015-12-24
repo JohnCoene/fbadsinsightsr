@@ -192,7 +192,7 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
   i <- 1
   
   # Paginate
-  while (nrow(data) < n & 
+  while (nrow(data) < n && 
          !is.null(json$paging$`next`)) {
     # GET
     response <- httr::GET(json$paging$`next`)
