@@ -55,9 +55,7 @@ findTarget <- function(id, n = 100, token){
   }
   
   # parse
-  data <- parseJSON(json)
-  
-  data <- paginate(data = data, json = json, verbose = verbose, n = n)
+  data <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
   
   return(data)
 }
