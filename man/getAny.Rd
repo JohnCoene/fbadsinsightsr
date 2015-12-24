@@ -7,7 +7,7 @@
 getAny(id, fields = "default", action.attribution.windows = NULL,
   action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
   date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, token, verbose = FALSE)
+  time.range = NULL, n = 100, token, verbose = FALSE, simplify = FALSE)
 }
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -35,6 +35,8 @@ getAny(id, fields = "default", action.attribution.windows = NULL,
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
+
+\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{FALSE}.}
 }
 \description{
 Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.

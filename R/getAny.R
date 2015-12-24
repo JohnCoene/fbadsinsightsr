@@ -15,6 +15,7 @@
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
+#' @param simplify If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{FALSE}.
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -69,13 +70,26 @@ getAny <- function(id, fields = "default",
                      action.breakdowns = NULL, action.report.time = NULL,
                      breakdowns = NULL, date.preset = NULL, level = NULL, 
                      time.increment = NULL, time.range = NULL, 
-                     n = 100, token, verbose = FALSE) {
+                     n = 100, token, verbose = FALSE,
+                   simplify = FALSE) {
   
   # check inputs
   if(missing(id)){
     stop("Missing id")
   } else if (missing(token)){
     stop("Missing token")
+  }
+  
+  # simplify
+  if(simplify == TRUE && fields != "default"){
+    warning("simplify = TRUE, fields will be ignored")
+  } else if (simplify == TRUE && fields == "default") {
+    
+    # get all fields
+    fields <- findFields()
+    
+    # remove actions-related fields
+    fields <- fields[-c(5,6,22,54)]
   }
   
   # create fields

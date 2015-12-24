@@ -41,7 +41,8 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
-* Clean return of `findTarget`
+* Deal with action-related variables which mess up data returned ~~temporary fix~~ (v2.1.2).
+* Clean return of `findTarget` (minor).
 * Document to explain workflow that package suggests.
 * ~~Feedback on functions that query API~~ (v2.1.0)
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
@@ -56,6 +57,10 @@ Constantly being updated and improved. Currently the following are available upo
 * A HipChat room is also available; ideal to keep up to date with all the developments, issues that may arise and most importantly other contributors. 
 
 ## Versions and Patches ##
+
+#### v2.1.2 ####
+
+* Temporary fix to mess in return from GET-family functions; using `simplify = TRUE` in `getAny` will ignore the fields that cause the issue.
 
 #### v2.1.1 ####
 
