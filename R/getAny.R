@@ -228,6 +228,9 @@ getAny <- function(id, fields = "default",
   
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
+  # simplify
+  data <- simplifyDataframe(data)
+  
   # verbose
   if (verbose == TRUE) {
     cat(paste(n, "results requested, API returned", nrow(data)))

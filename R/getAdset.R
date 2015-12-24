@@ -225,6 +225,9 @@ getAdset <- function(adset.id, fields = "default",
     cat(paste(n, "results requested, API returned", nrow(data)))
   } 
   
+  # simplify
+  data <- simplifyDataframe(data)
+  
   return(data)
   
 }

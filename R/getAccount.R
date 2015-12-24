@@ -216,6 +216,9 @@ getAccount <- function(account.id, fields = "default",
     cat(paste(n, "results requested, API returned", nrow(data)))
   } 
   
+  # simplify
+  data <- simplifyDataframe(data)
+  
   return(data)
   
 }
