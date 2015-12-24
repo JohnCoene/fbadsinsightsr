@@ -78,16 +78,20 @@ fbAuthenticate <- function (app.id, app.secret, scope = "ads_read",
   } else if (packageVersion('httr') > "0.2" & packageVersion('httr') <= "0.6.1"){
     fb_oauth <- httr::oauth2.0_token(facebook, myapp,
                                scope=scope, type = "application/x-www-form-urlencoded", cache=FALSE)	
-    if (httr::GET("https://graph.facebook.com/me", config(token=fb_oauth))$status==200){
+    if (length(names(fb_oauth$credentials)[grep("error", names(fb_oauth$credentials))])){
+      message("Authentication Failed.")
+    }	else {
       message("Authentication successful.")
-    }	
+    }
   } else if (packageVersion('httr') > "0.6.1"){
     Sys.setenv("HTTR_SERVER_PORT" = "1410/")
     fb_oauth <- httr::oauth2.0_token(facebook, myapp,
                                scope=scope, type = "application/x-www-form-urlencoded", cache=FALSE)		
-    if (httr::GET("https://graph.facebook.com/me", config(token=fb_oauth))$status==200){
+    if (length(names(fb_oauth$credentials)[grep("error", names(fb_oauth$credentials))])){
+      message("Authentication Failed.")
+    }	else {
       message("Authentication successful.")
-    }	
+    }
   }
   
   return(fb_oauth)
