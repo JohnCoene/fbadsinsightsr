@@ -82,14 +82,14 @@ getAny <- function(id, fields = "default",
   
   # simplify
   if(simplify == TRUE && fields != "default"){
-    warning("simplify = TRUE, fields will be ignored")
+    warning("simplify = TRUE, arguement fields will be ignored")
   } else if (simplify == TRUE && fields == "default") {
     
     # get all fields
     fields <- findFields()
     
     # remove actions-related fields
-    fields <- fields[-c(5,6,22,54)]
+    fields <- fields[-c(3,4,5,6,22,54)]
   }
   
   # create fields
