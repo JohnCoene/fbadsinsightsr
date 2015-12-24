@@ -56,6 +56,13 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Versions and Patches ##
 
+#### v2.1.1 - verbose ####
+
+* Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
+
+Bug Fixes.
+* fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
+
 #### v2.1.0 - verbose ####
 
 * `paginate` function (`internal.R`) to clean up GET-family functions.
