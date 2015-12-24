@@ -62,6 +62,7 @@ Constantly being updated and improved. Currently the following are available upo
 
 Bug Fixes.
 * fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
+* fixed `findTarget` where `NULL` was returned when few specifications were retrieved.
 
 #### v2.1.0 ####
 
