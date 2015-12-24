@@ -41,6 +41,7 @@ Constantly being updated and improved. Currently the following are available upo
 
 ## Development ##
 
+* Clean return of `findTarget`
 * Document to explain workflow that package suggests.
 * ~~Feedback on functions that query API~~ (v2.1.0)
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
