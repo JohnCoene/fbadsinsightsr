@@ -34,10 +34,9 @@ See `?documentation` and examples for more details.
 
 ## Documentation ##
 
-Constantly being updated and improved. Currently the following are available upon request:
+Constantly being updated and improved. Currently the following are available in its own repository (access NOT restricted). Please folow this link;
 
-* Manual - fbAdsInsightsR.pdf
-* Vignette~ish - examples and broad desciption of package inner workings.
+[https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
 
 ## Development ##
 
