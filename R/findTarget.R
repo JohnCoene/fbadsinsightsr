@@ -59,10 +59,5 @@ findTarget <- function(id, n = 100, token){
   
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(data)))
-  } 
-  
   return(data)
 }
