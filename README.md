@@ -40,6 +40,7 @@ Constantly being updated and improved. Currently the following are available in 
 
 ## Development ##
 
+* Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for v3.0.0. 
 * Deal with action-related variables which mess up data returned ~~temporary fix~~ (v2.1.2).
 * Clean return of `findTarget` (minor).
 * Document to explain workflow that package suggests.
@@ -60,6 +61,10 @@ Constantly being updated and improved. Currently the following are available in 
 #### v2.1.2 ####
 
 * Temporary fix to mess in return from GET-family functions; using `simplify = TRUE` in `getAny` will ignore the fields that cause the issue.
+
+Bug Fixes.
+
+* In GET-family functions added `stop` message when using region as `breakdowns` together with `action_carousel_card_id` and/or `action_carousel_card_name` as fields as it is not allowed by API and returned an error. The latter two fields have also been removed when using `simplify=TRUE` (see `getAny`).
 
 #### v2.1.1 ####
 
@@ -131,7 +136,7 @@ Bug fixes.
 
 * Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html).
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
-* Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from * being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
+* Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 
 Removed internal functions that were unused, will not affect package reader.
 
