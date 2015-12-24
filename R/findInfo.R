@@ -47,6 +47,7 @@ findInfo <- function(account.id, token) {
     stop("Missing token")
   }
   
+  # check token
   token <- checkToken(token)
   
   # build urls
