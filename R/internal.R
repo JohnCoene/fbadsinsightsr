@@ -227,3 +227,47 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
   
   return(data)
 }
+
+
+simplifyDataframe <- function(data){
+  
+  # check input
+  if(class(data) != "data.frame"){
+    stop("data must be data.frame")
+  }
+  
+  # go throug heach column
+  for (i in 1:ncol(data)){
+    # test if name includes
+    test <- names(data)[i][grep("action_type", names(data)[i])]
+    
+    # test value
+    value <- names(data)[i + 1][grep("value", names(data)[i + 1])]
+    
+    # if test positive & "value" found
+    if (length(value)){
+      # remove "action_type.action_type"
+      name <- gsub("action_type.", "", test)
+      
+      # remove numbers
+      name <- gsub(".[1-9]", "", name)
+      
+      # remove 
+      action_type <- data[,i][which(!is.na(data[,i]))]
+      
+      # if action_type is unique re-frame
+      if(length(action_type) == 1){
+        # rename columns
+        names(data)[i + 1] <- paste0(name, "_", action_type)
+        
+        # remove colum
+        data[,i] <- NULL
+      }
+      
+    }
+    test <- NULL
+    value <- NULL
+  }
+  
+  return (data)
+}
