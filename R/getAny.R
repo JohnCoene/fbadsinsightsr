@@ -75,11 +75,11 @@ getAny <- function(id, fields = "default",
   
   # check if region and action_carousel
   for (i in 1:length(fields)) {
-    if(fields[i] == "action_carousel_card_id" &&
-       fields [i] == "action_carousel_card_name" ||
-       breakdowns == "region") {
-      stop("region cannot be used with action_carousel_card_id or action_carousel_card_name")
-      
+    if(breakdowns == "region"){
+      if(fields[i] == "action_carousel_card_id" ||
+         fields [i] == "action_carousel_card_name"){
+        stop("region cannot be used with action_carousel_card_id or action_carousel_card_name")
+      }
     }
   }
   
