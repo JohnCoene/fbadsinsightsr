@@ -40,6 +40,8 @@ Constantly being updated and improved. Currently the following are available in 
 
 ## Development ##
 
+* Enable fetching ad images.
+* Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats]()
 * Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for v3.0.0. 
 * Deal with action-related variables which mess up data returned ~~temporary fix~~ (v2.1.2).
 * Clean return of `findTarget` (minor).
