@@ -7,7 +7,7 @@
 getAd(ad.id, fields = "default", action.attribution.windows = NULL,
   action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
   date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, token, verbose = FALSE)
+  time.range = NULL, n = 100, token, verbose = FALSE, simplify = TRUE)
 }
 \arguments{
 \item{ad.id}{The ad id (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -35,6 +35,8 @@ getAd(ad.id, fields = "default", action.attribution.windows = NULL,
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
+
+\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.}
 }
 \description{
 Get insights on advertising performances of an ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/}{documentation} for more information

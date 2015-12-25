@@ -7,7 +7,7 @@
 getAny(id, fields = "default", action.attribution.windows = NULL,
   action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
   date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, token, verbose = FALSE, simplify = FALSE)
+  time.range = NULL, n = 100, token, verbose = FALSE, simplify = TRUE)
 }
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -36,7 +36,7 @@ getAny(id, fields = "default", action.attribution.windows = NULL,
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 
-\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{FALSE}.}
+\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.}
 }
 \description{
 Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
@@ -73,16 +73,16 @@ info <- findInfo(account.id = "act_123456789012345", token = fbOAuth)
 date <- findDatePreset()[grep("quarter", findDatePreset())]
 
 # fetch Ad data
-data <- getAny(id = sample(info$ad$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(info$ad$id, 1), token = fbOAuth, date.preset = date)
 
 # fetch Adset data
-data <- getAny(id = sample(info$adsets$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(info$adsets$id, 1), token = fbOAuth, date.preset = date)
 
 # fetch Campaign data
-data <- getAny(id = sample(info$campaigns$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(info$campaigns$id, 1), token = fbOAuth, date.preset = date)
 
 # fetch Account data
-data <- getAny(id = "act_123456789012345", token = fbOAuth, date.preset = date)
+dat <- getAny(id = "act_123456789012345", token = fbOAuth, date.preset = date)
 }
 
 }
