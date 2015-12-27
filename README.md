@@ -1,8 +1,8 @@
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
 
-# README #
+# fbAdsInsightsR #
 
-Current version: **2.1.0**
+Current version: **v1.0**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5) as well as a few other API calls that facilitate the use of the package.
 
@@ -38,21 +38,26 @@ Constantly being updated and improved. Currently the following are available in 
 
 [https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
 
+## Install ##
+
+Since access to the repository is restricted you will need your login and password to install the package.
+
+`devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
+
 ## Development ##
 
 * Enable fetching ad images.
-* Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats]()
-* Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for v3.0.0. 
-* Deal with action-related variables which mess up data returned ~~temporary fix~~ (v2.1.2).
+* Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats](https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats)
+* Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for next version 
+* Deal with action-related variables which mess up data returned ~~temporary fix~~ (v1.0).
 * Clean return of `findTarget` (minor).
-* Document to explain workflow that package suggests.
-* ~~Feedback on functions that query API~~ (v2.1.0)
-* ~~Allow collecting data on ads' tageting specs, etc.~~ (v2.0.2)
-* ~~Add optional feedback on GET-family functions.~~ (v2.0.2)
-* Improve documentation, ~~build manual~~ (v2.0.0) and provide thorough examples.
-* ~~Data loss fix - Variables parsed (columns) may vary~~ (v1.2.0)
-* ~~Implement `paginate` argument.~~ (v1.1.0)
-* ~~Fetch IDs of adsets, campaigns and accounts~~ (v1.1.1)
+* ~~Document to explain workflow that package suggests.~~ (see [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)))
+* ~~Allow collecting data on ads' tageting specs, etc.~~ (v0.8)
+* ~~Add optional feedback on GET-family functions.~~ (v0.8)
+* Improve documentation, ~~build manual~~ (v0.7) and provide thorough examples.
+* ~~Data loss fix - Variables parsed (columns) may vary~~ (v0.6)
+* ~~Implement `paginate` argument.~~ (v0.3)
+* ~~Fetch IDs of adsets, campaigns and accounts~~ (v0.4)
 
 ## Chat Room ##
 
@@ -60,101 +65,83 @@ Constantly being updated and improved. Currently the following are available in 
 
 ## Versions and Patches ##
 
-#### v2.1.2 ####
+#### v1.0 ####
 
 * Temporary fix to mess in return from GET-family functions; using `simplify = TRUE` in `getAny` will ignore the fields that cause the issue.
 
-Bug Fixes.
+Bug Fixes:
 
 * In GET-family functions added `stop` message when using region as `breakdowns` together with `action_carousel_card_id` and/or `action_carousel_card_name` as fields as it is not allowed by API and returned an error. The latter two fields have also been removed when using `simplify=TRUE` (see `getAny`).
 
-#### v2.1.1 ####
+#### v0.9 ####
 
 * Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
-
-Bug Fixes.
-* fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
-* fixed `findTarget` where `NULL` was returned when few specifications were retrieved.
-
-#### v2.1.0 ####
-
 * `paginate` function (`internal.R`) to clean up GET-family functions.
 * `verbose` arguement now also returns details on pagination.
 * Some clean up in both find and GET family functions.
 * Manual Updated.
 
-Bug Fixes.
+Bug Fixes:
 
+* fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
+* fixed `findTarget` where `NULL` was returned when few specifications were retrieved.
 * `findTarget` now correctly returns targeting specs.
 * `findAccount` is no longer "missing verbose"
 
-#### v2.0.2 ####
+#### v0.8 ####
 
 * added `verbose` arguement to GET-family functions. See documentation.
 * added `findTarget` function to retrieve targeting specs of an ad or adset.
-
-#### v2.0.1 ####
-
 * `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
 
-Bug fixes.
+Bug fixes:
 
 * Fixed minor bug amongst GET-family functions where some errors on the inital queries where not caught if the response had little content.
 
-### v2.0.0 - Paginate ###
+### v0.7 ###
 
 * `paginate` argument has been changed in the GET-family functions to `n = 100`. It indicates the number of results desired rather than using a boolean argument for paging avoids---or rather allows one to control---lengthy queries.
 * Documentation has also greatly been improved, i.e.: every function comes with examples.
 * On a similar note, the manual has been released. Please ask a contributor for a copy.
 
-Bug fixes.
+Bug fixes:
 
 * `token` appropriately used in `findInfo`, it should no longer return an error when using that which is returned by `fbAuthenticate`.
 * `paginate` argument removed in favour of `n` (see documentation), it should no longer generate hour-long queries unless a *massive* amount of data is requested.
 
-#### v1.2.0 ####
+#### v0.6 ####
 
 * ParseJSON fix - now returns all variables whatever the call, still imports `plyr::rbind.fill`
 * Fixed `paginate = "next"` in `getCampaign`, `getAdset`, `getAd` and `getAny`. Changed to the more adequate (and mentioned in documentation) `paginate = NULL`
 
-#### v1.1.2 ####
+#### v0.5 ####
 
 * Function renamed for consistency from `getInfo` to `findInfo`.
 
-#### v1.1.1 ####
+#### v0.4 ####
 
 * Added `getInfo` to retrieve all camapaigns, adset and ads under an account!
 * First draft of documentation available
 
-#### v1.1.0 ####
+#### v0.3 ####
 
 * Paginate function implemented see `paginate` parameter in GET-family functions (i.e.: `?getAny`).
 
-#### v1.0.3 ####
+#### v0.2 ####
 
 * Find-family function return lists in alpha-numerical order, at the exception of `date_preset`.
-
-#### v1.0.2  ####
-
 * Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html).
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
 * Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 
-Removed internal functions that were unused, will not affect package reader.
+Bug fixes:
 
-#### v1.0.1 ####
-
+* Removed internal functions that were unused, will not affect package reader.
 * Fixed Token checking function (internal) - Should not return errors when using token returned by `fb_authneticate`.
 
-### v1.0.0 - Hello World ###
+### v0.1 ###
 
-* Initial release
-
-## Install ##
-
-Since access to the repository is restricted you will need your login and password to install the package.
-
-`devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
+* Hello World
 
 ## Chip in ##
 
