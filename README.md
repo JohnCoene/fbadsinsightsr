@@ -4,7 +4,7 @@
 
 Current version: **v1.0**
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5) as well as a few other API calls that facilitate the use of the package.
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
 ## Functions ##
 
@@ -30,13 +30,11 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `findAccounts`
 * `findTarget`
 
-See `?documentation` and examples for more details.
+See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
 
 ## Documentation ##
 
-Constantly being updated and improved. Currently the following are available in its own repository (access NOT restricted). Please folow this link;
-
-[https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
+Constantly being updated and improved. Currently the manual and examples are available in its own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
 
 ## Install ##
 
@@ -59,21 +57,17 @@ Since access to the repository is restricted you will need your login and passwo
 * ~~Implement `paginate` argument.~~ (v0.3)
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v0.4)
 
-## Chat Room ##
-
-* A HipChat room is also available; ideal to keep up to date with all the developments, issues that may arise and most importantly other contributors. 
-
 ## Versions and Patches ##
 
-#### v1.0 ####
+### v1.0 ###
 
 * Temporary fix to mess in return from GET-family functions; using `simplify = TRUE` in `getAny` will ignore the fields that cause the issue.
 
 Bug Fixes:
 
-* In GET-family functions added `stop` message when using region as `breakdowns` together with `action_carousel_card_id` and/or `action_carousel_card_name` as fields as it is not allowed by API and returned an error. The latter two fields have also been removed when using `simplify=TRUE` (see `getAny`).
+* In GET-family functions added `stop` message when using region as `breakdowns` together with `action_carousel_card_id` and/or `action_carousel_card_name` as fields as it is not allowed by API and returned an error. The latter two fields have also been removed when using `simplify=TRUE`.
 
-#### v0.9 ####
+### v0.9 ###
 
 * Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
 * `paginate` function (`internal.R`) to clean up GET-family functions.
@@ -83,15 +77,15 @@ Bug Fixes:
 
 Bug Fixes:
 
-* fixed bug in the recently added `findTarget` function where the presence of an argument caused the function to stop - should no longer occur.
-* fixed `findTarget` where `NULL` was returned when few specifications were retrieved.
+* Fixed bug in the recently added `findTarget` function where the presence of an argument broke the function - should no longer occur.
+* Fixed `findTarget` where `NULL` was returned when few specifications were retrieved.
 * `findTarget` now correctly returns targeting specs.
 * `findAccount` is no longer "missing verbose"
 
-#### v0.8 ####
+### v0.8 ###
 
-* added `verbose` arguement to GET-family functions. See documentation.
-* added `findTarget` function to retrieve targeting specs of an ad or adset.
+* Added `verbose` arguement to GET-family functions. See documentation.
+* Added `findTarget` function to retrieve targeting specs of an ad or adset.
 * `findAccounts` function added; retrieves all account IDs accessible by either a business.facebook.com or a user. See updated Manual or ?documentation. 
 
 Bug fixes:
@@ -100,39 +94,38 @@ Bug fixes:
 
 ### v0.7 ###
 
-* `paginate` argument has been changed in the GET-family functions to `n = 100`. It indicates the number of results desired rather than using a boolean argument for paging avoids---or rather allows one to control---lengthy queries.
+* `paginate` argument has been changed in the GET-family functions to `n` and defaults to `100`. `n` indicates the number of results desired (rows) rather the previous boolean argument (`TRUE|FALSE`) avoids&mdash;or rather allows one to control&mdash;lengthy queries.
 * Documentation has also greatly been improved, i.e.: every function comes with examples.
 * On a similar note, the manual has been released. Please ask a contributor for a copy.
 
 Bug fixes:
 
 * `token` appropriately used in `findInfo`, it should no longer return an error when using that which is returned by `fbAuthenticate`.
-* `paginate` argument removed in favour of `n` (see documentation), it should no longer generate hour-long queries unless a *massive* amount of data is requested.
+* `paginate` argument removed in favour of `n` (see documentation), it should no longer generate hour-long queries unless a **massive** amount of data is requested.
 
-#### v0.6 ####
+### v0.6 ###
 
 * ParseJSON fix - now returns all variables whatever the call, still imports `plyr::rbind.fill`
 * Fixed `paginate = "next"` in `getCampaign`, `getAdset`, `getAd` and `getAny`. Changed to the more adequate (and mentioned in documentation) `paginate = NULL`
 
-#### v0.5 ####
+### v0.5 ###
 
 * Function renamed for consistency from `getInfo` to `findInfo`.
 
-#### v0.4 ####
+### v0.4 ###
 
-* Added `getInfo` to retrieve all camapaigns, adset and ads under an account!
-* First draft of documentation available
+* Added `getInfo` to retrieve all campaigns, adset and ads IDs and names under an account!
+* First draft of Examples available
 
-#### v0.3 ####
+### v0.3 ###
 
 * Paginate function implemented see `paginate` parameter in GET-family functions (i.e.: `?getAny`).
 
-#### v0.2 ####
+### v0.2 ###
 
-* Find-family function return lists in alpha-numerical order, at the exception of `date_preset`.
-* Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html).
+* Find-family functions now return vectors in alpha-numerical order, at the exception of `date_preset`.
+* Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html). Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
-* Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 
 Bug fixes:
 
@@ -146,7 +139,11 @@ Bug fixes:
 ## Chip in ##
 
 * We're looking someone well-versed in both R and JSON, the data could definitely be parsed in a better way!
-* Feedback and contributions most welcome.
+* Feedback and contributions most welcome.\
+
+## Chat Room ##
+
+* A HipChat room is also available; ideal to keep up with developments, issues and&mdash;most importantly&mdash;other contributors.
 
 ## Contributors ##
 
