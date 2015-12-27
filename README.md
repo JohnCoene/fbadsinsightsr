@@ -34,7 +34,7 @@ See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) 
 
 ## Documentation ##
 
-Constantly being updated and improved. Currently the manual and examples are available in its own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
+Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
 
 ## Install ##
 
