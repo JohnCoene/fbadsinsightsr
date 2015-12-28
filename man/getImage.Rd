@@ -19,7 +19,7 @@ getImage(id, n = 100, token, verbose = FALSE)
 Returns IDs and URLs of all images contained in object (single row if ad.id is passed as arguement)
 }
 \description{
-Fetches URLs of images wused for an ad, an adset, a campaign or all the images in an account.
+Fetches URL(s) and ID(s) of images used for an ad, an adset, a campaign or all the images in an account.
 }
 \details{
 Call \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.

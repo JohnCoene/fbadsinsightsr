@@ -1,6 +1,6 @@
 #' getImage
 #' 
-#' @description Fetches URLs of images wused for an ad, an adset, a campaign or all the images in an account.
+#' @description Fetches URL(s) and ID(s) of images used for an ad, an adset, a campaign or all the images in an account.
 #' 
 #' @param id The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}. Can be account id, campaign id, adset id or an ad id.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
