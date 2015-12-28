@@ -223,12 +223,11 @@ getAny <- function(id, fields = "default",
     stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
   }
   
-  base_url <- "https://graph.facebook.com/v2.5/"
-  
   # check token verison
   token <- checkToken(token)
   
-  url <- paste0(base_url, id, "/insights?fields=",fields,
+  url <- paste0("https://graph.facebook.com/v2.5/",
+                id, "/insights?fields=",fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, "&access_token=", token)
@@ -250,6 +249,7 @@ getAny <- function(id, fields = "default",
   # parse
   data <- parseJSON(json)
   
+  #paginate
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
   # simplify

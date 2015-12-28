@@ -62,6 +62,8 @@ Since access to the repository is restricted you will need your login and passwo
 ### v1.0 ###
 
 * Temporary fix to mess in return from GET-family functions; using `simplify = TRUE` in `getAny` will ignore the fields that cause the issue.
+* Added `getImage` function to fetch URLs of images used by an ad account, adset, etc.
+* Updated manual
 
 Bug Fixes:
 
