@@ -33,11 +33,11 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
 # get account ids
 act <- findAccounts(id = "me", token = fbOAuth)
 
-# get information on account
-info <- findInfo(account.id = act[2,2], token = token = fbOAuth)
-
 # get all images in ad account
-img_acc <- getImage(id = act, token = fbOAuth)
+img_acc <- getImage(id = act[2,2], token = fbOAuth)
+
+# get campaigns, adsets and ads IDs from account
+info <- findInfo(account.id = act[2,2], token = token = fbOAuth)
 
 # get all images in random campaign
 img_camp <- getImage(id = sample(info$summary$campaign_id, 1), token = fbOAuth)
