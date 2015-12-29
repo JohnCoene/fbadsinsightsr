@@ -83,7 +83,7 @@ findInfo <- function(account.id, token) {
     } else {
       
       # parse
-      lst[[i]] <- parseJSON(json = json)
+      lst[[i]] <- do.call(plyr::"rbind.fill", lapply(json$data, as.data.frame))
       
     }
     
