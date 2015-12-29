@@ -69,6 +69,7 @@ Since access to the repository is restricted you will need your login and passwo
 Bug Fixes:
 
 * In GET-family functions added `stop` message when using region as `breakdowns` together with `action_carousel_card_id` and/or `action_carousel_card_name` as fields as it is not allowed by API and returned an error. The latter two fields have also been removed when using `simplify=TRUE`.
+* Fixed error when querying little data using GET-family function, was caused by `stop` message when no data - has been replaced by `warning`.
 
 ### v0.9 ###
 
