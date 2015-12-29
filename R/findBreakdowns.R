@@ -11,12 +11,9 @@
 #' set.seed(123)
 #' rand_id <- sample(info$adset$id, 1)
 #' 
-#' # date.preset - last 7 days
-#' date <- findDatePreset()[grep("7",  findDatePreset())]
-#' 
-#' # fetch Adset data broken down by age and gender for the last 7 days
+#' # fetch Adset data broken down by age and gender
 #' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", 
-#'                breakdowns = c("age", "gender"), date.preset = date)
+#'                breakdowns = c("age", "gender"))
 #' }
 #' 
 #' @seealso \code{\link{getAny}}, \code{\link{findInfo}}, \code{\link{findDatePreset}}
