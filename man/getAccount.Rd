@@ -8,7 +8,7 @@ getAccount(account.id, fields = "default",
   action.attribution.windows = NULL, action.breakdowns = NULL,
   action.report.time = NULL, breakdowns = NULL, date.preset = NULL,
   level = NULL, time.increment = NULL, time.range = NULL, n = 100,
-  token, verbose = FALSE, simplify = TRUE)
+  token, verbose = FALSE, simplify = FALSE)
 }
 \arguments{
 \item{account.id}{Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -37,7 +37,7 @@ getAccount(account.id, fields = "default",
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 
-\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.}
+\item{simplify}{Deprecated.}
 }
 \description{
 Get insights on advertising performances of ad account. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} for more information

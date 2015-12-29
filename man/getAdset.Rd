@@ -7,7 +7,7 @@
 getAdset(adset.id, fields = "default", action.attribution.windows = NULL,
   action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
   date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, token, verbose = FALSE, simplify = TRUE)
+  time.range = NULL, n = 100, token, verbose = FALSE, simplify = FALSE)
 }
 \arguments{
 \item{adset.id}{The id of the adset you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -36,7 +36,7 @@ getAdset(adset.id, fields = "default", action.attribution.windows = NULL,
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 
-\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.}
+\item{simplify}{Deprecated.}
 }
 \description{
 Get insights on advertising performances of an adset. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/insights/}{documentation} for more information

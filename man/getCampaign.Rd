@@ -37,7 +37,7 @@ getCampaign(campaign.id, fields = "default",
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 
-\item{simplify}{If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.}
+\item{simplify}{Deprecated.}
 }
 \description{
 Get insights on advertising performances of an ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/insights/}{documentation} for more information
