@@ -236,7 +236,7 @@ getCampaign <- function(campaign.id, fields = "default",
     stop(paste("this is likely due to campaign.id or token. Error Message returned: ",
                json$error$message))
   } else if (length(json$data) == 0) {
-    stop(paste("this is likely due to account.id or token."))
+    warning(paste("No data."))
   }
   
   # parse
