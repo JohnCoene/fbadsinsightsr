@@ -15,7 +15,7 @@
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
-#' @param simplify If \code{TRUE} returns a simplified data.frame that ignores some of the variables that currently mess up data.frame (temporary solution). Defaults to \code{TRUE}.
+#' @param simplify Deprecated.
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -83,15 +83,8 @@ getCampaign <- function(campaign.id, fields = "default",
   }
   
   # simplify
-  if(simplify == TRUE && fields != "default"){
-    warning("simplify = TRUE, arguement fields will be ignored")
-  } else if (simplify == TRUE && fields == "default") {
-    
-    # get all fields
-    fields <- findFields()
-    
-    # remove actions-related fields
-    fields <- fields[-c(3,4,5,6,22,54)]
+  if(simplify == TRUE){
+    warning("simplify has been deprecated. see README")
   }
   
   # create fields
@@ -240,7 +233,7 @@ getCampaign <- function(campaign.id, fields = "default",
   }
   
   # parse
-  data <- parseJSON(json)
+  data <- toDF(response)
   
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
@@ -248,9 +241,6 @@ getCampaign <- function(campaign.id, fields = "default",
   if (verbose == TRUE) {
     cat(paste(n, "results requested, API returned", nrow(data)))
   } 
-  
-  # simplify
-  data <- simplifyDataframe(data)
   
   return(data)
   

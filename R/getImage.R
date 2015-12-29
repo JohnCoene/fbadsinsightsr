@@ -70,7 +70,7 @@ getImage <- function(id, n = 100, token, verbose = FALSE){
   }
   
   # parse
-  data <- parseJSON(json)
+  data <- toDF(response)
   
   # paginate
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
