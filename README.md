@@ -2,7 +2,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v1.0**
+Current version: **v1.1**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
@@ -19,6 +19,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `getAdset`
 * `getAd`
 * `getAny`
+* `getImage`
 
 **Find-family**
 
@@ -44,20 +45,27 @@ Since access to the repository is restricted you will need your login and passwo
 
 ## Development ##
 
-* Enable fetching ad images.
+* ~~Enable fetching ad images.~~ (v1.1)
 * Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats](https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats)
 * Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for next version 
-* Deal with action-related variables which mess up data returned ~~temporary fix~~ (v1.0).
+* ~~Deal with action-related variables which mess up data returned~~ (v1.1) ~~temporary fix~~ (v1.0).
 * Clean return of `findTarget` (minor).
 * ~~Document to explain workflow that package suggests.~~ (see [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)))
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v0.8)
 * ~~Add optional feedback on GET-family functions.~~ (v0.8)
-* Improve documentation, ~~build manual~~ (v0.7) and provide thorough examples.
+* ~~Improve documentation~~ (v1.1), ~~build manual~~ (v0.7) and provide thorough examples.
 * ~~Data loss fix - Variables parsed (columns) may vary~~ (v0.6)
 * ~~Implement `paginate` argument.~~ (v0.3)
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v0.4)
 
 ## Versions and Patches ##
+
+### v1.1 ###
+
+* Data parsing fixed at last. Now dataframe returned by GET-family functions properly displays `actions`, `unique_actions`, `cost_per_action_type`, `cost_per_unique_action_type` and `website_ctr` as respective variables (column names) regardless of parameters or fields passed to functions.
+* The latter improved means `simplify` argument has been deprecated.
+* Sleep when `n > 100` in GET-family functions has been reduced from 3 seconds to 0.5 seconds.
+* Overall clean up in `internal.R`
 
 ### v1.0 ###
 
