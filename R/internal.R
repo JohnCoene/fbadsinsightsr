@@ -177,16 +177,6 @@ buildBreakdowns <- function(breakdowns) {
   
 }
 
-
-# parse_json
-parseJSON <- function(json) {
-  
-  df <- do.call(plyr::"rbind.fill", lapply(json$data, as.data.frame))
-  
-  return(df)
-}
-
-
 paginate <- function(json, data, verbose = FALSE, n = 100) {
   
   i <- 1
@@ -197,11 +187,8 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # GET
     response <- httr::GET(json$paging$`next`)
     
-    # parse
-    json <- rjson::fromJSON(rawToChar(response$content))
-    
     # bind
-    data <- plyr::rbind.fill(data, parseJSON(json))
+    data <- plyr::rbind.fill(data, toDF(response))
     
     # verbose
     if (verbose == TRUE && i == 1) {
@@ -213,11 +200,11 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     
     # pause between queries if more than 2 pages of data to avoid lengthy calls
     if(i >= 3) {
-      Sys.sleep(3)
+      Sys.sleep(0.5)
       
       # verbose
       if(verbose == TRUE && i == 3){
-        cat(paste("## 3 seconds pause between queries from now onwards ##", "\n"))
+        cat(paste("## half second pause between queries from now onwards ##", "\n"))
       }
     }
     
@@ -228,46 +215,66 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
   return(data)
 }
 
-
-simplifyDataframe <- function(data){
+toDF <- function(response){
   
-  # check input
-  if(class(data) != "data.frame"){
-    stop("data must be data.frame")
+  # parse json to list
+  json <- rjson::fromJSON(rawToChar(response$content))
+  
+  # extract names
+  names <- names(json$data[[1]])
+  
+  # identify nested lists
+  vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
+                     names)]
+  
+  # loop through vars to remove from json
+  json2 <- json
+  
+  # remove vars from json2
+  for(i in 1:length(vars)){
+    for(j in 1:length(json$data)){
+      json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
+    }
   }
   
-  # go throug heach column
-  for (i in 1:ncol(data)){
-    # test if name includes
-    test <- names(data)[i][grep("action_type", names(data)[i])]
-    
-    # test value
-    value <- names(data)[i + 1][grep("value", names(data)[i + 1])]
-    
-    # if test positive & "value" found
-    if (length(value)){
-      # remove "action_type.action_type"
-      name <- gsub("action_type.", "", test)
-      
-      # remove numbers
-      name <- gsub(".[1-9]", "", name)
-      
-      # remove 
-      action_type <- data[,i][which(!is.na(data[,i]))]
-      
-      # if action_type is unique re-frame
-      if(length(action_type) == 1){
-        # rename columns
-        names(data)[i + 1] <- paste0(name, "_", action_type)
+  # json2 to data.frame
+  base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
+  
+  # declare row_df
+  row_df <- data.frame()
+  
+  # check if vars observed
+  if(length(vars)){
+    # rebuild json
+    for(i in 1:length(vars)){
+      for(j in 1:length(json$data)){
+        lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
         
-        # remove colum
-        data[,i] <- NULL
+        # sublist to dataframe
+        dat <- do.call(plyr::"rbind.fill",
+                       lapply(lst[[1]], as.data.frame))
+        
+        # transpose
+        # name rows
+        rownames(dat) <- dat[,1]
+        
+        # remove first column
+        dat[,1] <- NULL
+        
+        # transpose
+        dat <- as.data.frame(t(dat))
+        
+        # rename
+        names(dat) <- paste0(vars[i], "_", names(dat))
+        
+        # bind
+        row_df <- plyr::rbind.fill(row_df, dat)
       }
       
+      base_df <- cbind.data.frame(base_df, row_df)
+      row_df <- NULL
     }
-    test <- NULL
-    value <- NULL
   }
   
-  return (data)
+  return(base_df)
 }
