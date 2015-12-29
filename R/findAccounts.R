@@ -5,7 +5,8 @@
 #' @param id Your business.facebook.com ID or your user id.
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
-#' 
+#' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
+#'
 #' @details Returns data.frame of account IDs. requires \code{ads_management} permission!
 #' 
 #' @examples 
@@ -22,7 +23,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAccounts <- function(id, token, n = 100) {
+findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   
   # check inputs
   if(missing(id)){
@@ -49,10 +50,7 @@ findAccounts <- function(id, token, n = 100) {
   }
   
   # parse
-  data <- parseJSON(json)
-  
-  # set verbose to FALSE
-  verbose <- FALSE
+  data <- toDF(response)
   
   data <- paginate(data = data, json = json, verbose = verbose, n = n)
   
