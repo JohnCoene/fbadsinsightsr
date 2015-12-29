@@ -6,7 +6,7 @@
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' 
-#' @details Returns data.frame of account IDs.
+#' @details Returns data.frame of account IDs. requires \code{ads_management} permission!
 #' 
 #' @examples 
 #' \dontrun{
@@ -34,8 +34,7 @@ findAccounts <- function(id, token, n = 100) {
   # check token
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/", id, "/adaccounts?fields=",
-                "&access_token=", token)
+  url <- paste0("https://graph.facebook.com/v2.5/", id, "/adaccounts?fields=name%2Cid&access_token=", token)
   
   # call api
   response <- httr::GET(url)
