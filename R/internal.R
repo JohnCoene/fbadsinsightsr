@@ -311,3 +311,24 @@ toDF <- function(response){
   
   return(base_df)
 }
+
+# account status sort
+accountStatus <- function(data) {
+  
+  # build status ref
+  statuses <- data.frame(id = c(1, 2, 3, 7, 9, 100, 101, 102, 201, 202),
+                         status = c("active", "disabled", "unsettled",
+                                    "pending risk review", "in grace period",
+                                    "pending closure", "closed", 
+                                    "pending settlement", "any active",
+                                    "any close"))
+  
+  # merge
+  dat <- merge(data, statuses, by.x = "account_status", 
+               by.y = "id", all.x = TRUE)
+  
+  # remove unwanted columns
+  dat$account_status <- NULL
+  
+  return(dat)
+}
