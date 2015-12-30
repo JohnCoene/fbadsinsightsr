@@ -66,6 +66,12 @@ Since access to the repository is restricted you will need your login and passwo
 * The latter improvement means the `simplify` argument is now irrelevant and has thus been deprecated.
 * Sleep when `n > 100` in GET-family functions and `findInfo` has been reduced from 3 seconds to 0.5 seconds.
 * Overall clean up in `internal.R` speeds up some processes.
+* `n` and `verbose` added to `findAccounts`.
+
+Bug Fixes
+
+* `paginate` (internal funciton) no longer infinitely loops.
+* `toDF` (internal function) properly parse missing data.
 
 ### v1.0 ###
 
