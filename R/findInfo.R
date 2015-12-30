@@ -88,7 +88,7 @@ findInfo <- function(account.id, n = 100, token , verbose = FALSE) {
       lst[[i]] <- toDF(response)
       
       # paginate
-      list[[i]] <- paginate(json, data, verbose = verbose, n = n)
+      lst[[i]] <- paginate(json, data = lst[[i]], verbose = verbose, n = n)
       
     }
     
