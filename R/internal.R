@@ -223,81 +223,90 @@ toDF <- function(response){
   # parse json to list
   json <- rjson::fromJSON(rawToChar(response$content))
   
-  # extract names
-  # find which nested list has largest number of variables
-  lg <- vector()
-  
-  # loop through lists
-  for(i in 1:length(json$data)){
+  # check if data present in JSON
+  if(length(json$data)){
     
-    # get length
-    lg[i] <- length(json$data[[i]])
+    # extract names
+    # find which nested list has largest number of variables
+    lg <- vector()
     
-    # identify longest (that's what she said)
-    j <- which.max(lg)
-  }
-  
-  # use variable names of largest list
-  names <- names(json$data[[j[1]]])
-  
-  # identify nested lists
-  vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
-                     names)]
-  
-  # loop through vars to remove from json
-  json2 <- json
-  
-  # remove vars from json2
-  for(i in 1:length(vars)){
-    for(j in 1:length(json$data)){
-      json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
+    # loop through lists
+    for(i in 1:length(json$data)){
+      
+      # get length
+      lg[i] <- length(json$data[[i]])
+      
+      # identify longest (that's what she said)
+      j <- which.max(lg)
     }
-  }
-  
-  # json2 to data.frame
-  base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
-  
-  # declare row_df
-  row_df <- data.frame()
-  
-  # check if vars observed
-  if(length(vars)){
-    # rebuild json
+    
+    # use variable names of largest list
+    names <- names(json$data[[j[1]]])
+    
+    # identify nested lists
+    vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
+                       names)]
+    
+    # loop through vars to remove from json
+    json2 <- json
+    
+    # remove vars from json2
     for(i in 1:length(vars)){
       for(j in 1:length(json$data)){
-        lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
-        
-        # check if variable has been found
-        if(length(lst)) {
-          # sublist to dataframe
-          dat <- do.call(plyr::"rbind.fill",
-                         lapply(lst[[1]], as.data.frame))
+        json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
+      }
+    }
+    
+    # json2 to data.frame
+    base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
+    
+    # declare row_df
+    row_df <- data.frame()
+    
+    # check if vars observed
+    if(length(vars)){
+      # rebuild json
+      for(i in 1:length(vars)){
+        for(j in 1:length(json$data)){
+          lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
           
-          # transpose
-          # name rows
-          rownames(dat) <- dat[,1]
+          # check if variable has been found
+          if(length(lst)) {
+            # sublist to dataframe
+            dat <- do.call(plyr::"rbind.fill",
+                           lapply(lst[[1]], as.data.frame))
+            
+            # transpose
+            # name rows
+            rownames(dat) <- dat[,1]
+            
+            # remove first column
+            dat[,1] <- NULL
+            
+            # transpose
+            dat <- as.data.frame(t(dat))
+            
+            # rename
+            names(dat) <- paste0(vars[i], "_", names(dat))
+            
+          } else { # if no lst found
+            row_df <- rbind.data.frame(rep(NA, ncol(dat)))
+            names(row_df) <- names(dat)
+          }
           
-          # remove first column
-          dat[,1] <- NULL
-          
-          # transpose
-          dat <- as.data.frame(t(dat))
-          
-          # rename
-          names(dat) <- paste0(vars[i], "_", names(dat))
-          
-        } else { # if no lst found
-          row_df <- rbind.data.frame(rep(NA, ncol(dat)))
-          names(row_df) <- names(dat)
+          # bind
+          row_df <- plyr::rbind.fill(row_df, dat)
         }
         
-        # bind
-        row_df <- plyr::rbind.fill(row_df, dat)
+        base_df <- cbind.data.frame(base_df, row_df)
+        row_df <- NULL
       }
-      
-      base_df <- cbind.data.frame(base_df, row_df)
-      row_df <- NULL
     }
+    
+    
+    # if no data in json
+  } else if (length(json$data) <= 0) {
+    base_df <- NULL
   }
   
   return(base_df)
