@@ -7,7 +7,7 @@
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
 #'
-#' @details Returns data.frame of account IDs. requires \code{ads_management} permission!
+#' @details Returns data.frame of account IDs and status. requires \code{ads_management} permission!
 #' 
 #' @examples 
 #' \dontrun{
@@ -35,7 +35,7 @@ findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   # check token
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/", id, "/adaccounts?fields=name%2Cid&access_token=", token)
+  url <- paste0("https://graph.facebook.com/v2.5/", id, "/adaccounts?fields=name%2Cid%2Caccount_status&access_token=", token)
   
   # call api
   response <- httr::GET(url)
@@ -58,6 +58,9 @@ findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   if (verbose == TRUE) {
     cat(paste(n, "results requested, API returned", nrow(data)))
   } 
+  
+  # identify statuses
+  data <- accountStatus(data)
   
   return(data)
 }

@@ -19,7 +19,7 @@ findAccounts(id, token, n = 100, verbose = FALSE)
 Fetches all accounts under one business ID. All accounts to which the user has access to that is.
 }
 \details{
-Returns data.frame of account IDs. requires \code{ads_management} permission!
+Returns data.frame of account IDs and status. requires \code{ads_management} permission!
 }
 \examples{
 \dontrun{
