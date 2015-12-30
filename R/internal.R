@@ -187,6 +187,9 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # GET
     response <- httr::GET(json$paging$`next`)
     
+    # get json
+    json <- rjson::fromJSON(rawToChar(response$content))
+    
     # bind
     data <- plyr::rbind.fill(data, toDF(response))
     
@@ -221,7 +224,21 @@ toDF <- function(response){
   json <- rjson::fromJSON(rawToChar(response$content))
   
   # extract names
-  names <- names(json$data[[1]])
+  # find which nested list has largest number of variables
+  lg <- vector()
+  
+  # loop through lists
+  for(i in 1:length(json$data)){
+    
+    # get length
+    lg[i] <- length(json$data[[i]])
+    
+    # identify longest (that's what she said)
+    j <- which.max(lg)
+  }
+  
+  # use variable names of largest list
+  names <- names(json$data[[j[1]]])
   
   # identify nested lists
   vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
@@ -250,22 +267,29 @@ toDF <- function(response){
       for(j in 1:length(json$data)){
         lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
         
-        # sublist to dataframe
-        dat <- do.call(plyr::"rbind.fill",
-                       lapply(lst[[1]], as.data.frame))
-        
-        # transpose
-        # name rows
-        rownames(dat) <- dat[,1]
-        
-        # remove first column
-        dat[,1] <- NULL
-        
-        # transpose
-        dat <- as.data.frame(t(dat))
-        
-        # rename
-        names(dat) <- paste0(vars[i], "_", names(dat))
+        # check if variable has been found
+        if(length(lst)) {
+          # sublist to dataframe
+          dat <- do.call(plyr::"rbind.fill",
+                         lapply(lst[[1]], as.data.frame))
+          
+          # transpose
+          # name rows
+          rownames(dat) <- dat[,1]
+          
+          # remove first column
+          dat[,1] <- NULL
+          
+          # transpose
+          dat <- as.data.frame(t(dat))
+          
+          # rename
+          names(dat) <- paste0(vars[i], "_", names(dat))
+          
+        } else { # if no lst found
+          row_df <- rbind.data.frame(rep(NA, ncol(dat)))
+          names(row_df) <- names(dat)
+        }
         
         # bind
         row_df <- plyr::rbind.fill(row_df, dat)
