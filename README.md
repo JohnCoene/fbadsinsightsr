@@ -63,9 +63,9 @@ Since access to the repository is restricted you will need your login and passwo
 ### v1.1 ###
 
 * Data parsing fixed at last. Now dataframe returned by GET-family functions properly displays `actions`, `unique_actions`, `cost_per_action_type`, `cost_per_unique_action_type` and `website_ctr` as respective variables (column names) regardless of parameters or fields passed to functions.
-* The latter improved means `simplify` argument has been deprecated.
-* Sleep when `n > 100` in GET-family functions has been reduced from 3 seconds to 0.5 seconds.
-* Overall clean up in `internal.R`
+* The latter improvement means the `simplify` argument is now irrelevant and has thus been deprecated.
+* Sleep when `n > 100` in GET-family functions and `findInfo` has been reduced from 3 seconds to 0.5 seconds.
+* Overall clean up in `internal.R` speeds up some processes.
 
 ### v1.0 ###
 
