@@ -3,9 +3,11 @@
 #' @description Fetches the list of campaigns, adsets and ads under a given account.
 #' 
 #' @param account.id Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param n Number of results (ads, adset and campaigns respectively) to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
-#' 
-#' @details Essentially consists of three separate API calls thus may take a few seconds; \code{Sys.sleep} of 3 seconds between each query.
+#' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
+#
+#' @details Essentially consists of three separate API calls thus may take a few seconds; \code{Sys.sleep} of 0.5 seconds between each query.
 #' One call is made for each object, ads, adsets and campaigns respectively.
 #' 
 #' @return Returns a list of four data.frames.
@@ -38,7 +40,7 @@
 #' @author John Coene <john.coene@@cmcmc.com>
 #' 
 #' @export
-findInfo <- function(account.id, token) {
+findInfo <- function(account.id, n = 100, token , verbose = FALSE) {
   
   # check inputs
   if(missing(account.id)){
@@ -83,7 +85,10 @@ findInfo <- function(account.id, token) {
     } else {
       
       # parse
-      lst[[i]] <- do.call(plyr::"rbind.fill", lapply(json$data, as.data.frame))
+      lst[[i]] <- toDF(response)
+      
+      # paginate
+      list[[i]] <- paginate(json, data, verbose = verbose, n = n)
       
     }
     
@@ -107,6 +112,11 @@ findInfo <- function(account.id, token) {
                    "bid_amount", "bid_type", "adset_name", "campaign_name")
   
   lst$summary <- data
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(lst$summary)))
+  } 
   
   return (lst)
   
