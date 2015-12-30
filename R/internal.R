@@ -306,7 +306,7 @@ toDF <- function(response){
     
     # if no data in json
   } else if (length(json$data) <= 0) {
-    base_df <- NULL
+    base_df <- data.frame()
   }
   
   return(base_df)
