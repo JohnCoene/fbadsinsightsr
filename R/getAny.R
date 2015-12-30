@@ -238,18 +238,24 @@ getAny <- function(id, fields = "default",
                json$error$message))
   } else if (length(json$data) == 0) {
     warning(paste("No data."))
+    
+    # make empt data.frame
+    data <- data.frame()
+  } else {
+    
+    # parse
+    data <- toDF(response)
+    
+    #paginate
+    data <- paginate(data = data, json = json, verbose = verbose, n = n)
+    
+    # verbose
+    if (verbose == TRUE) {
+      cat(paste(n, "results requested, API returned", nrow(data)))
+    } 
+    
+    
   }
-  
-  # parse
-  data <- toDF(response)
-  
-  #paginate
-  data <- paginate(data = data, json = json, verbose = verbose, n = n)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(data)))
-  } 
   
   return(data)
   
