@@ -204,11 +204,6 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # pause between queries if more than 2 pages of data to avoid lengthy calls
     if(i >= 3) {
       Sys.sleep(0.5)
-      
-      # verbose
-      if(verbose == TRUE && i == 3){
-        cat(paste("## half second pause between queries from now onwards ##", "\n"))
-      }
     }
     
     # iterate
