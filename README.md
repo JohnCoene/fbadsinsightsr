@@ -67,6 +67,7 @@ Since access to the repository is restricted you will need your login and passwo
 * Sleep when `n > 100` in GET-family functions and `findInfo` has been reduced from 3 seconds to 0.5 seconds.
 * Overall clean up in `internal.R` speeds up some processes.
 * `n` and `verbose` added to `findAccounts`.
+* Modified `verbose = TRUE` output to something more sensible.
 
 Bug Fixes
 
