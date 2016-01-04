@@ -25,6 +25,8 @@
 #' 
 #' @seealso \code{\link{findInfo}}
 #' 
+#' @author John Coene <john.coene@@cmcm.com>
+#' 
 #' @export
 findTarget <- function(id, n = 100, token){
   

@@ -50,7 +50,7 @@ data <- getAdset(adset.id = sample(info$adsets$id, 1), date.preset = "last_week"
 
 }
 \author{
-John Coene <john.coene@cmcmc.com>
+John Coene <john.coene@cmcm.com>
 }
 \seealso{
 \code{\link{getAdset}}

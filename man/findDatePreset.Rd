@@ -27,7 +27,7 @@ data <- getAny(id = rand_id, token = "XXXXXXXXXXX", date.preset = date, time.inc
 
 }
 \author{
-John Coene <john.coene@cmcmc.com>
+John Coene <john.coene@cmcm.com>
 }
 \seealso{
 \code{\link{getAny}}

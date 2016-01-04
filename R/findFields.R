@@ -17,7 +17,7 @@
 #' 
 #' @export
 #' 
-#' @author John Coene <john.coene@@cmcmc.com>
+#' @author John Coene <john.coene@@cmcm.com>
 findFields <- function() {
   
   #list

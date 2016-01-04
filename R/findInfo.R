@@ -37,7 +37,7 @@
 #'
 #' @seealso \code{\link{getAdset}}
 #' 
-#' @author John Coene <john.coene@@cmcmc.com>
+#' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
 findInfo <- function(account.id, n = 100, token , verbose = FALSE) {

@@ -36,6 +36,9 @@ findTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 }
 
 }
+\author{
+John Coene <john.coene@cmcm.com>
+}
 \seealso{
 \code{\link{findInfo}}
 }
