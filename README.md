@@ -30,6 +30,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `findInfo`
 * `findAccounts`
 * `findTarget`
+* `findStatus`
 
 See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
 
@@ -68,6 +69,7 @@ Since access to the repository is restricted you will need your login and passwo
 * Overall clean up in `internal.R` speeds up some processes.
 * `n` and `verbose` added to `findAccounts`.
 * Modified `verbose = TRUE` output to something more sensible.
+* `findStatus` function added, returns status of specific campaign, adset or ad.
 
 Bug Fixes
 
