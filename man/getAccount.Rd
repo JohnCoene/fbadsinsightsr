@@ -75,6 +75,6 @@ data <- getAccount(account.id = "act_123456789012345", token = fbOAuth,
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}} \code{\link{findInfo}}
+\code{\link{fbAuthenticate}}
 }
 

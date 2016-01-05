@@ -63,7 +63,7 @@ getCampaign <- function(campaign.id, fields = "default",
                      action.breakdowns = NULL, action.report.time = NULL,
                      breakdowns = NULL, date.preset = NULL, level = NULL, 
                      time.increment = NULL, time.range = NULL, 
-                     n = 100, token, verbose = FALSE, simplify = TRUE) {
+                     n = 100, token, verbose = FALSE, simplify = FALSE) {
   
   # check if region and action_carousel
   for (i in 1:length(fields)) {

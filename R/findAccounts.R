@@ -15,10 +15,10 @@
 #' act <- findAccounts(id = "me", token = "XXXXXXXXXXX")
 #' 
 #' # get information on account
-#' info <- findInfo(account.id = act[2,2], token = "XXXXXXXXXXX")
+#' obj <- findObjects(account.id = act[2,2], token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{findInfo}}
+#' @seealso \code{\link{findObjects}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 

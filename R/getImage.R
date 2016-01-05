@@ -24,7 +24,7 @@
 #' img_acc <- getImage(id = act[2,2], token = fbOAuth)
 #' 
 #' # get campaigns, adsets and ads IDs from account
-#' info <- findInfo(account.id = act[2,2], token = token = fbOAuth)
+#' info <- findObjects(account.id = act[2,2], token = token = fbOAuth)
 #' 
 #' # get all images in random campaign
 #' img_camp <- getImage(id = sample(info$summary$campaign_id, 1), token = fbOAuth)
@@ -38,7 +38,7 @@
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
-#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findAccounts}}, \code{\link{findInfo}}
+#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findAccounts}}, \code{\link{findObjects}}
 #'
 #' @export
 getImage <- function(id, n = 100, token, verbose = FALSE){

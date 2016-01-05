@@ -46,7 +46,7 @@
 #' 
 #' @export
 #' 
-#' @seealso \code{\link{fbAuthenticate}} \code{\link{findInfo}}
+#' @seealso \code{\link{fbAuthenticate}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 getAccount <- function(account.id, fields = "default",

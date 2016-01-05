@@ -40,11 +40,11 @@
 #'                           scope = "ads_management")
 #'                           
 #' # get information on account
-#' info <- findInfo(account.id = "act_123456789012345", token = fbOAuth)
+#' obj <- findObjects(account.id = "act_123456789012345", token = fbOAuth)
 #' 
 #' # take random ad.id
 #' set.seed(123)
-#' rand_id <- sample(info$ads$id, 1)
+#' rand_id <- sample(obj$ads$id, 1)
 #' 
 #' # get date.preset
 #' date <- findDatePreset()[grep("quarter", findDatePreset())]
@@ -55,7 +55,7 @@
 #' 
 #' @export
 #' 
-#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findDatePreset}}, \code{\link{findInfo}}
+#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findDatePreset}}, \code{\link{findObjects}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 getAd <- function(ad.id, fields = "default",
