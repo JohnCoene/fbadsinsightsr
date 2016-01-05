@@ -27,10 +27,13 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `findActionBreakdowns`
 * `findFields`
 * `findBreakdowns`
-* `findInfo`
+* `findObjects` (previously `findInfo`)
 * `findAccounts`
 * `findTarget`
 * `findStatus`
+* `findCampaigns`
+* `findAdsets`
+* `findAds`
 
 See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
 
@@ -48,7 +51,6 @@ Since access to the repository is restricted you will need your login and passwo
 
 * ~~Enable fetching ad images.~~ (v1.1)
 * Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats](https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats)
-* Deprecrate `getAccount`, `getCampaign`, `getAdset` and `getAd` in favour of `getAny`, deprecrate asap, roll out for next version 
 * ~~Deal with action-related variables which mess up data returned~~ (v1.1) ~~temporary fix~~ (v1.0).
 * Clean return of `findTarget` (minor).
 * ~~Document to explain workflow that package suggests.~~ (see [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)))
@@ -70,11 +72,14 @@ Since access to the repository is restricted you will need your login and passwo
 * `n` and `verbose` added to `findAccounts`.
 * Modified `verbose = TRUE` output to something more sensible.
 * `findStatus` function added, returns status of specific campaign, adset or ad.
+* `findCampaigns`, `findAdsets` and `findAds` functions added.
+* `findInfo` now call `findObjects`
 
 Bug Fixes
 
 * `paginate` (internal funciton) no longer infinitely loops.
 * `toDF` (internal function) properly parse missing data.
+* typos corrected (mainly in examples)
 
 ### v1.0 ###
 
