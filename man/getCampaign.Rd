@@ -8,7 +8,7 @@ getCampaign(campaign.id, fields = "default",
   action.attribution.windows = NULL, action.breakdowns = NULL,
   action.report.time = NULL, breakdowns = NULL, date.preset = NULL,
   level = NULL, time.increment = NULL, time.range = NULL, n = 100,
-  token, verbose = FALSE, simplify = TRUE)
+  token, verbose = FALSE, simplify = FALSE)
 }
 \arguments{
 \item{campaign.id}{The id of the campaign you want to retrieve insights about (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
