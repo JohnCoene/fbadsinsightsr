@@ -196,9 +196,11 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # verbose
     if (verbose == TRUE && i == 1) {
       cat(paste0(n, " results requested", "\n"))
-      cat(paste(nrow(data), "results"), fill = TRUE, labels = paste0("Query #", i, ":"))
+      cat(paste(nrow(data), "results"), fill = TRUE, 
+          labels = paste0("Query #", i, ":"))
     } else if (verbose == TRUE && i != 1) {
-      cat(paste(nrow(data), "results"), fill = TRUE, labels = paste0("Query #", i, ":"))
+      cat(paste(nrow(data), "results"), fill = TRUE,
+          labels = paste0("Query #", i, ":"))
     }
     
     # pause between queries if more than 2 pages of data to avoid lengthy calls
@@ -284,13 +286,19 @@ toDF <- function(response){
             # rename
             names(dat) <- paste0(vars[i], "_", names(dat))
             
+            # bind
+            row_df <- plyr::rbind.fill(row_df, dat)
+            
           } else { # if no lst found
-            row_df <- rbind.data.frame(rep(NA, ncol(dat)))
-            names(row_df) <- names(dat)
+            # create NA
+            dat1 <- rbind.data.frame(rep(NA, ncol(dat)))
+            names(dat1) <- names(dat)
+            
+            # bind
+            row_df <- plyr::rbind.fill(row_df, dat1)
           }
           
-          # bind
-          row_df <- plyr::rbind.fill(row_df, dat)
+
         }
         
         base_df <- cbind.data.frame(base_df, row_df)
