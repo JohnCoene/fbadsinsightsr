@@ -291,11 +291,12 @@ toDF <- function(response){
             
           } else { # if no lst found
             # create NA
-            dat1 <- rbind.data.frame(rep(NA, ncol(dat)))
-            names(dat1) <- names(dat)
+            dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
+            names(dat_na) <- names(dat)
             
             # bind
-            row_df <- plyr::rbind.fill(row_df, dat1)
+            row_df <- plyr::rbind.fill(row_df, dat_na)
+            dat_na <- NULL
           }
           
 
