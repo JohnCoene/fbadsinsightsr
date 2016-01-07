@@ -4,17 +4,12 @@
 \alias{getImage}
 \title{getImage}
 \usage{
-getImage(id, token, time.range = NULL, date.preset = NULL, n = 100,
-  verbose = FALSE)
+getImage(account.id, token, n = 100, verbose = FALSE)
 }
 \arguments{
-\item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}. Can be account id, campaign id, adset id or an ad id.}
+\item{account.id}{Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
-
-\item{time.range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
-
-\item{date.preset}{Represents a relative time range (Optional). This field is ignored if \code{time.range} is specified. Run \code{\link{findDatePreset}} to see all valid presets. @param time.range time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
@@ -24,7 +19,7 @@ getImage(id, token, time.range = NULL, date.preset = NULL, n = 100,
 Returns IDs and URLs of all images contained in object (single row if ad.id is passed as arguement)
 }
 \description{
-Fetches URL(s) name(s) and ID(s) of images used for an ad, an adset, a campaign or all the images in an account.
+Fetches URL(s) name(s) and more about images used in an account.
 }
 \details{
 Call \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.
