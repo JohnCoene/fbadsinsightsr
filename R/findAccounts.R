@@ -45,22 +45,30 @@ findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   
   # check if query successful 
   if(length(json$error$message)){
-    stop(paste("this is likely due to account.id or token. Error Message returned: ",
+    stop(paste("this is likely due to id or token. Error Message returned: ",
                json$error$message))
+  } else if (length(json$data) == 0) {
+    warning(paste("No data."))
+    
+    # make empt data.frame
+    dat <- data.frame()
+  } else {
+    
+    # parse
+    dat <- toDF(response)
+    
+    #paginate
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
+    
+    # verbose
+    if (verbose == TRUE) {
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
+    } 
+    
   }
   
-  # parse
-  data <- toDF(response)
-  
-  data <- paginate(data = data, json = json, verbose = verbose, n = n)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(data)))
-  } 
-  
   # identify statuses
-  data <- accountStatus(data)
+  dat <- accountStatus(dat)
   
-  return(data)
+  return(dat)
 }
