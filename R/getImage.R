@@ -53,12 +53,6 @@ getImage <- function(id, token, time.range = NULL,
   } else if (missing(token)){
     stop("Missing token")
   } 
-  # check token verison
-  token <- checkToken(token)
-  
-  url <- paste0("https://graph.facebook.com/v2.5/",
-                id, "/adcreatives?fields=image_url%2Cname&access_token=",
-                token)
   
   # make date.preset NULL if time.range specified
   if (length(date.preset) == 1 && length(time.range) >= 1) {
@@ -93,6 +87,13 @@ getImage <- function(id, token, time.range = NULL,
   } else if (length(time.range) > 2) {
     stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
   }
+  
+  # check token verison
+  token <- checkToken(token)
+  
+  url <- paste0("https://graph.facebook.com/v2.5/",
+                id, time.range, date.preset,"/adcreatives?fields=image_url%2Cname&access_token=",
+                token)
   
   # call api
   response <- httr::GET(url)
