@@ -34,7 +34,7 @@ findCampaigns <- function(account.id, token, n = 100, verbose = FALSE){
   
   # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
-                account.id, "/campaigns?fields=id%2Cname&access_token=",
+                id, "/adcreatives?fields=image_url%2Cname&access_token=",
                 token)
   
   # call api
