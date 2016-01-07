@@ -179,16 +179,24 @@ buildBreakdowns <- function(breakdowns) {
 
 paginate <- function(json, data, verbose = FALSE, n = 100) {
   
+  # initiate i for verbose
   i <- 1
   
+  # initiate number of results n test
+  if (length(json$data)) n_res <- length(json$data)
+  
   # Paginate
-  while (nrow(data) < n && 
+  while (n_res < n && 
          !is.null(json$paging$`next`)) {
+    
     # GET
     response <- httr::GET(json$paging$`next`)
     
     # get json
     json <- rjson::fromJSON(rawToChar(response$content))
+    
+    # iterate n_res
+    if (length(json$data)) n_res <- n_res + length(json$data)
     
     # bind
     data <- plyr::rbind.fill(data, toDF(response))
@@ -196,10 +204,10 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # verbose
     if (verbose == TRUE && i == 1) {
       cat(paste0(n, " results requested", "\n"))
-      cat(paste(nrow(data), "results"), fill = TRUE, 
+      cat(paste(n_res, "results =", nrow(data), "rows"), fill = TRUE, 
           labels = paste0("Query #", i, ":"))
     } else if (verbose == TRUE && i != 1) {
-      cat(paste(nrow(data), "results"), fill = TRUE,
+      cat(paste(n_res, "results =", nrow(data), "rows"), fill = TRUE,
           labels = paste0("Query #", i, ":"))
     }
     
@@ -208,7 +216,7 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
       Sys.sleep(0.5)
     }
     
-    # iterate
+    # iterate i for print
     i <- i + 1
   }
   
