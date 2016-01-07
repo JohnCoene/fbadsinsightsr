@@ -20,6 +20,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `getAd`
 * `getAny`
 * `getImage`
+* `getCreative`
 
 **Find-family**
 
@@ -74,12 +75,14 @@ Since access to the repository is restricted you will need your login and passwo
 * `findStatus` function added, returns status of specific campaign, adset or ad.
 * `findCampaigns`, `findAdsets` and `findAds` functions added.
 * `findInfo` now call `findObjects`
+* `getCreative` added to fetch ad Creatives from ads.
 
 Bug Fixes
 
 * `paginate` (internal funciton) no longer infinitely loops.
 * `toDF` (internal function) properly parse missing data.
 * typos corrected (mainly in examples)
+* Numbr of results correctly returned when `verbose = TRUE`
 
 ### v1.0 ###
 
