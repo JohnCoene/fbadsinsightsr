@@ -92,7 +92,10 @@ getImage <- function(id, token, time.range = NULL,
   token <- checkToken(token)
   
   url <- paste0("https://graph.facebook.com/v2.5/",
-                id, time.range, date.preset,"/adcreatives?fields=image_url%2Cname&access_token=",
+                id, "/adcreatives?fields=",
+                "image_url%2Cname",
+                time.range, date.preset,
+                "&access_token=",
                 token)
   
   # call api
