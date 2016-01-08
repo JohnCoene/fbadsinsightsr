@@ -76,13 +76,18 @@ Since access to the repository is restricted you will need your login and passwo
 * `findCampaigns`, `findAdsets` and `findAds` functions added.
 * `findInfo` now call `findObjects`
 * `getCreative` added to fetch ad Creatives from ads.
+* Arguments of functions appear in correct order in order to ease simple queries.
+* Check for presence of data and `warning` returned now more adequate
+* Overall clean up of GET-family and find-family functions.
 
 Bug Fixes
 
 * `paginate` (internal funciton) no longer infinitely loops.
 * `toDF` (internal function) properly parse missing data.
 * typos corrected (mainly in examples)
-* Numbr of results correctly returned when `verbose = TRUE`
+* Number of results correctly returned when `verbose = TRUE` 
+* fixed `toDF` (internal.R) - GET-family should no longer return errors.
+* `verbose = TRUE` has been fixed where it was not being paste o nnew line when used inside a loop
 
 ### v1.0 ###
 
