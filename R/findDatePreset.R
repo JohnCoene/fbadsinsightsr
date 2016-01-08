@@ -15,7 +15,8 @@
 #' date <- findDatePreset()[9]
 #' 
 #' # fetch Campaign data for the last 30 days broken down by days (rather than aggregate)
-#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", date.preset = date, time.increment = 1)
+#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX",
+#'                 date.preset = date, time.increment = 1)
 #' }
 #' 
 #' @seealso \code{\link{getAny}}
@@ -26,6 +27,10 @@
 findDatePreset <- function() {
   
   #list
-  date_preset <- c("today", "yesterday", "last_3_days", "this_week", "last_week", "last_7_days", "last_14_days", "last_28_days", "last_30_days", "last_90_days", "this_month", "last_month", "this_quarter", "last_3_months", "lifetime")
+  date_preset <- c("today", "yesterday", "last_3_days",
+                   "this_week", "last_week", "last_7_days", 
+                   "last_14_days", "last_28_days", "last_30_days",
+                   "last_90_days", "this_month", "last_month", 
+                   "this_quarter", "last_3_months", "lifetime")
   return(date_preset)
 }
