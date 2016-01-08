@@ -53,15 +53,19 @@ findObjects <- function(account.id, n = 100, token) {
   
   # build urls
   ads.url <- paste0("https://graph.facebook.com/v2.5/",
-                    account.id, "/ads?fields=campaign_id%2Cadset_id%2Cid%2Cname%2Cbid_amount%2Cbid_type&access_token=",
+                    account.id, "/ads?fields=campaign_id%2C", 
+                    "adset_id%2Cid%2Cname%2Cbid_amount%2Cbid_type",
+                    "&access_token=",
                     token)
   
   adset.url <- paste0("https://graph.facebook.com/v2.5/",
-                      account.id, "/adsets?fields=id%2Cname%2Ccampaign_id&access_token=",
+                      account.id, "/adsets?fields=id%2Cname%2C",
+                      "campaign_id&access_token=",
                       token)
   
   camp.url <- paste0("https://graph.facebook.com/v2.5/",
-                     account.id, "/campaigns?fields=id%2Cname&access_token=",
+                     account.id, "/campaigns?fields=id%2Cname",
+                     "&access_token=",
                      token)
   
   # vector of urls to query
@@ -82,7 +86,8 @@ findObjects <- function(account.id, n = 100, token) {
     
     # check if query successful 
     if(length(json$error$message)){
-      stop(paste("this is likely due to account.id or token. Error Message returned: ",
+      stop(paste("this is likely due to account.id or token.",
+                 "Error Message returned: ",
                  json$error$message))
     } else {
       
@@ -117,7 +122,7 @@ findObjects <- function(account.id, n = 100, token) {
   
   # verbose
   if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(lst$summary)))
+    cat(paste(n, "results requested, API returned", nrow(data), "rows", "\n"))
   } 
   
   return (lst)

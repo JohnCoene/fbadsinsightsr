@@ -50,21 +50,22 @@ findAdsets <- function (id, token, n = 100, verbose = FALSE) {
     warning(paste("No data."))
     
     # make empt data.frame
-    data <- data.frame()
+    dat <- data.frame()
   } else {
     
     # parse
-    data <- toDF(response)
+    dat <- toDF(response)
     
     #paginate
-    data <- paginate(data = data, json = json, verbose = verbose, n = n)
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
     
     # verbose
     if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(data)))
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
     } 
     
-    return (data)
   }
+    
+  return (dat)
   
 }
