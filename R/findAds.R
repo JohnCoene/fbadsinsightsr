@@ -33,7 +33,14 @@ findAds <- function (id, token, n = 100, verbose = FALSE) {
   
   # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
-                id, "/adsets?fields=id%2Cname&access_token=",
+                id, "/adsets?fields=id%2Cname",
+                "%2Caccount_id%2Cadset%2Cadset_id",
+                "%2Cadlabels%2Cbid_amount%2Cbid_info",
+                "%2Cbid_type%2Cconfigured_status",
+                "%2Ceffective_status",
+                "%2Ccreated_time%2Ccreative",
+                "%2Cupdated_time%2Ccampaign_id",
+                "&access_token=",
                 token)
   
   # call api
@@ -50,21 +57,22 @@ findAds <- function (id, token, n = 100, verbose = FALSE) {
     warning(paste("No data."))
     
     # make empt data.frame
-    data <- data.frame()
+    dat <- data.frame()
   } else {
     
     # parse
-    data <- toDF(response)
+    dat <- toDF(response)
     
     #paginate
-    data <- paginate(data = data, json = json, verbose = verbose, n = n)
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
     
     # verbose
     if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(data)))
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
     } 
     
-    return (data)
   }
+    
+  return (dat)
   
 }
