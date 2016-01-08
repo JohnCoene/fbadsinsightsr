@@ -27,7 +27,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findTarget <- function(id, n = 100, token){
+findTarget <- function(id, token, n = 100){
   
   # check inputs
   if(missing(id)){
@@ -56,7 +56,7 @@ findTarget <- function(id, n = 100, token){
   }
   
   # parse
-  data <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+  dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
   
-  return(data)
+  return(dat)
 }
