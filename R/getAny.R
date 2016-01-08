@@ -65,13 +65,12 @@
 #' @seealso \code{\link{fbAuthenticate}} 
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
-getAny <- function(id, fields = "default",
+getAny <- function(id, token, fields = "default",
                    action.attribution.windows = NULL,
                    action.breakdowns = NULL, action.report.time = NULL,
                    breakdowns = NULL, date.preset = NULL, level = NULL, 
                    time.increment = NULL, time.range = NULL, 
-                   n = 100, token, verbose = FALSE,
-                   simplify = FALSE) {
+                   n = 100, verbose = FALSE, simplify = FALSE) {
   
   
   # check if region and action_carousel
@@ -79,7 +78,8 @@ getAny <- function(id, fields = "default",
     if(!is.null(breakdowns) && breakdowns == "region"){
       if(fields[i] == "action_carousel_card_id" ||
          fields [i] == "action_carousel_card_name"){
-        stop("region cannot be used with action_carousel_card_id or action_carousel_card_name")
+        stop(paste0("region cannot be used with action_carousel_card_id",
+                    "or action_carousel_card_name"))
       }
     }
   }
@@ -118,7 +118,8 @@ getAny <- function(id, fields = "default",
     testParam("action_attribution_windows", action.attribution.windows)
     
     # build action.attribution.windows
-    action.attribution.windows <- paste0("&action_attribution_windows=", toHTTP(action.attribution.windows))
+    action.attribution.windows <- paste0("&action_attribution_windows=",
+                                         toHTTP(action.attribution.windows))
   }
   
   # action.breakdowns
@@ -128,7 +129,8 @@ getAny <- function(id, fields = "default",
     testParam("action_breakdowns", action.breakdowns)
     
     # build action.breakdowns
-    action.breakdowns <- paste0("&action_breakdowns=", toHTTP(action.breakdowns))
+    action.breakdowns <- paste0("&action_breakdowns=", 
+                                toHTTP(action.breakdowns))
   }
   
   # action.report.time
@@ -139,7 +141,8 @@ getAny <- function(id, fields = "default",
     
     action.report.time <- paste0("&action_report_time=", action.report.time)
   } else if (length(action.report.time) > 1) {
-    stop("action.report.time can only hold one value: impression OR conversion")
+    stop(paste0("action.report.time can only hold one value:", 
+                "impression OR conversion"))
   }
   
   # breakdowns
@@ -240,23 +243,22 @@ getAny <- function(id, fields = "default",
     warning(paste("No data."))
     
     # make empt data.frame
-    data <- data.frame()
+    dat <- data.frame()
   } else {
     
     # parse
-    data <- toDF(response)
+    dat <- toDF(response)
     
     #paginate
-    data <- paginate(data = data, json = json, verbose = verbose, n = n)
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
     
     # verbose
     if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(data)))
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
     } 
-    
     
   }
   
-  return(data)
+  return(dat)
   
 }

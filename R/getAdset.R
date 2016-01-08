@@ -58,12 +58,12 @@
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{findDatePreset}}, \code{\link{findObjects}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
-getAdset <- function(adset.id, fields = "default",
+getAdset <- function(adset.id, token, fields = "default",
                   action.attribution.windows = NULL,
                   action.breakdowns = NULL, action.report.time = NULL,
                   breakdowns = NULL, date.preset = NULL, level = NULL, 
                   time.increment = NULL, time.range = NULL, 
-                  n = 100, token, verbose = FALSE, simplify = FALSE) {
+                  n = 100, verbose = FALSE, simplify = FALSE) {
   
   # check if region and action_carousel
   for (i in 1:length(fields)) {
@@ -225,22 +225,28 @@ getAdset <- function(adset.id, fields = "default",
   
   # check if query successful 
   if(length(json$error$message)){
-    stop(paste("this is likely due to adset.id or token. Error Message returned: ",
+    stop(paste("this is likely due to id or token. Error Message returned: ",
                json$error$message))
   } else if (length(json$data) == 0) {
     warning(paste("No data."))
+    
+    # make empt data.frame
+    dat <- data.frame()
+  } else {
+    
+    # parse
+    dat <- toDF(response)
+    
+    #paginate
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
+    
+    # verbose
+    if (verbose == TRUE) {
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
+    } 
+    
   }
   
-  # parse
-  data <- toDF(response)
-  
-  data <- paginate(data = data, json = json, verbose = verbose, n = n)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(data)))
-  } 
-  
-  return(data)
+  return(dat)
   
 }
