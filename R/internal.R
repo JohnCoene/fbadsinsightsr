@@ -43,7 +43,7 @@ createFields <- function(fields = NULL){
   
   # check input presence
   if(is.null(fields)) {
-    fields <- ""
+    fields <- findFields()
   }
   
   # check input class
