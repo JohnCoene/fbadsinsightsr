@@ -55,7 +55,7 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
                 "%2Cinstagram_actor_id%2Cinstagram_permalink_url",
                 "%2Cinstagram_story_id%2Clink_url%2Cname",
                 "%2Cobject_id%2Cobject_url%2Cobject_story_id",
-                "%2Cobject_story_spec%2Cobject_type",
+                "%2Cobject_type",
                 "%2Cproduct_set_id%2Crun_status%2Ctemplate_url",
                 "%2Cthumbnail_url%2Ctitle%2Curl_tags",
                 "%2Capplink_treatment"
@@ -73,19 +73,24 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
     stop(paste("this is likely due to id or token. Error Message returned: ",
                json$error$message))
   } else if (length(json$data) == 0) {
-    warning(paste("No image"))
+    warning(paste("No creative."))
+    
+    # make empt data.frame
+    dat <- data.frame()
+  } else {
+    
+    # parse
+    dat <- toDF(response)
+    
+    #paginate
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
+    
+    # verbose
+    if (verbose == TRUE) {
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
+    } 
+    
   }
-  
-  # parse
-  dat <- toDF(response)
-  
-  # paginate
-  dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(dat), "rows"))
-  } 
   
   return(dat)
 }

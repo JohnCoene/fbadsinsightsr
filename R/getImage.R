@@ -64,19 +64,24 @@ getImage <- function(account.id, token, n = 100, verbose = FALSE){
     stop(paste("this is likely due to id or token. Error Message returned: ",
                json$error$message))
   } else if (length(json$data) == 0) {
-    warning(paste("No image"))
+    warning(paste("No Image."))
+    
+    # make empt data.frame
+    dat <- data.frame()
+  } else {
+    
+    # parse
+    dat <- toDF(response)
+    
+    #paginate
+    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
+    
+    # verbose
+    if (verbose == TRUE) {
+      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
+    } 
+    
   }
-  
-  # parse
-  dat <- toDF(response)
-  
-  # paginate
-  dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(dat), "rows"))
-  } 
   
   return(dat)
 }
