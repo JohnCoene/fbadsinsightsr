@@ -153,7 +153,7 @@ Bug fixes:
 ### v0.2 ###
 
 * Find-family functions now return vectors in alpha-numerical order, at the exception of `date_preset`.
-* Nomenclature changed in order to comply with the [conventions suggested by Haddley Wickham](http://r-pkgs.had.co.nz/style.html). Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
+* Nomenclature changed in order to comply with the [conventions suggested by Hadley Wickham](http://r-pkgs.had.co.nz/style.html). Functions names have thus changed from i.e.: `get_account` to `getAccount` while their arguements have changed from being underscore_separated to period.separated i.e.: `app_id` changed to `app.id`
 * `httr` moved from `DEPENDS` to `IMPORTS` to make te package more self-contained and avoid errors on install.
 
 Bug fixes:
