@@ -11,8 +11,6 @@
 # @keywords internal
 scopeCheck <- function(scope) {
   
-  # input check
-  
   # define valid scopes
   scopes <- c("public_profile", "user_friends", "email", "user_about_me", 
               "user_actions.books", "user_actions.fitness", 
@@ -33,23 +31,22 @@ scopeCheck <- function(scope) {
     test <- scopes[which(scopes == scope[i])]
     if (length(test) == 0) {
       scope_error <- scope[i]
-      stop (paste0("Wrong scope: ", scope_error, " is not a correct permission. See ?fb_authenticate details"))
+      stop (paste0("Wrong scope: ", scope_error,
+                   " is not a correct permission. See ?fb_authenticate details"))
     }
   }
 }
 
 # create_fields
-createFields <- function(fields = NULL){
+createFields <- function(fields){
   
-  # check input presence
-  if(is.null(fields)) {
-    fields <- findFields()
+  # make NULL if missing
+  if(missing(fields)){
+    fields <- NULL
   }
   
   # check input class
-  if (class(fields) == "character") {
-    
-  } else {
+  if (class(fields) != "character") {
     stop("fields must be character value or vector")
   }
   
@@ -99,7 +96,11 @@ toHTTP <- function(params = NULL){
 
 
 # testParam
-testParam <- function (params, param_vector) {
+testParam <- function (params, param_vector, fct) {
+  
+  if(missing(fct)){
+    fct <- "getAny"
+  }
   
   if (params == "action_attribution_windows") {
     options <- c("1d_view", "7d_view", "28d_view", "1d_click", "7d_click", 
@@ -107,7 +108,7 @@ testParam <- function (params, param_vector) {
   } else if (params == "action_breakdowns") {
     options <- findActionBreakdowns()
   } else if (params == "fields") {
-    options <- findFields()
+    options <- findFields(fct)
   } else if (params == "action_report_time") {
     options <- c("impression", "conversion")
   } else if (params == "breakdowns") {
@@ -129,7 +130,12 @@ testParam <- function (params, param_vector) {
       options_print <- paste(options, sep = ",", collapse = ", ")
       
       # print error
-      stop (paste0("Wrong ", params, " parameter specified '", param_vector_error, "'", " is not valid. All valid values are: ", options_print))
+      stop (paste0("Wrong ", params, " parameter specified '", 
+                   param_vector_error, "'", 
+                   " is not valid. See find-family functions",
+                   " findFields(), findActionBreakdowns(), findBreakdowns()",
+                   " findDatePreset().",
+                   " All valid values are: ", options_print))
     }
   }
 
@@ -159,7 +165,8 @@ buildBreakdowns <- function(breakdowns) {
     
     if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
       breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
-    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", "placement")) {
+    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", 
+                                                          "placement")) {
       breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
       stop("impression_device cannot be used on its own")
