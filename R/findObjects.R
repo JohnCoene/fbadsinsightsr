@@ -39,13 +39,15 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findObjects <- function(account.id, n = 100, token) {
+findObjects <- function(account.id, token, n = 100) {
   
   # check inputs
   if(missing(account.id)){
     stop("Missing account.id")
   } else if (missing(token)){
     stop("Missing token")
+  } else if (length(grep("act_", account.id)) == 0){
+    stop("must be account.id starting with act_")
   }
   
   # check token
