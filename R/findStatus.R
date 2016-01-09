@@ -4,7 +4,8 @@
 #' 
 #' @param id The id of the campaign, adset or ad you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
-#' 
+#' @param fields default (\code{"effective_status"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.
+#'
 #' @details 
 #' \itemize{
 #' \item \code{configured_status}: The configured status of the object (campaign, adset or ad). If object is campaign and this status is \code{PAUSED}, all its active ad sets and ads will be paused and have an effective status \code{CAMPAIGN_PAUSED}.
@@ -28,7 +29,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findStatus <- function(id, token) {
+findStatus <- function(id, token, fields = "effective_status") {
   
   # check inputs
   if(missing(id)){
@@ -42,10 +43,25 @@ findStatus <- function(id, token) {
   # check token verison
   token <- checkToken(token)
   
+  # create fields
+  if(fields[1] == "default") {
+    fields <- findFields("findStatus")
+  } 
+  
+  if(class(fields) != "character") {
+    stop("Fields must be a character vector")
+  } else { 
+    # test if fields correct
+    testParam("fields", fields, "findStatus")
+    
+    # createFields
+    fields <- createFields(fields)
+  }
+  
   # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
-                id, "?fields=effective_status%2Cconfigured_status%2C", 
-                "created_time%2Cname%2Caccount_id",
+                id, "?fields=",
+                fields,
                 "&access_token=", token)
   
   # call api

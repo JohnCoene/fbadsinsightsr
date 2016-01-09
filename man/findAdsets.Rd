@@ -4,12 +4,14 @@
 \alias{findAdsets}
 \title{findAdsets}
 \usage{
-findAdsets(id, token, n = 100, verbose = FALSE)
+findAdsets(id, token, fields = "default", n = 100, verbose = FALSE)
 }
 \arguments{
 \item{id}{Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
+
+\item{fields}{default (\code{"default"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.}
 
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 

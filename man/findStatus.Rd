@@ -4,12 +4,14 @@
 \alias{findStatus}
 \title{findStatus}
 \usage{
-findStatus(id, token)
+findStatus(id, token, fields = "effective_status")
 }
 \arguments{
 \item{id}{The id of the campaign, adset or ad you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
+
+\item{fields}{default (\code{"effective_status"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.}
 }
 \description{
 Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
