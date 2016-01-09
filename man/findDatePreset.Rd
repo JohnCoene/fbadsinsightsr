@@ -22,7 +22,8 @@ rand_id <- sample(info$campaigns$id, 1)
 date <- findDatePreset()[9]
 
 # fetch Campaign data for the last 30 days broken down by days (rather than aggregate)
-data <- getAny(id = rand_id, token = "XXXXXXXXXXX", date.preset = date, time.increment = 1)
+data <- getAny(id = rand_id, token = "XXXXXXXXXXX",
+                date.preset = date, time.increment = 1)
 }
 
 }
