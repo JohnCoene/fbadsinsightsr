@@ -71,6 +71,8 @@ getAccount <- function(account.id, token, fields = "default",
     stop("Missing id")
   } else if (missing(token)){
     stop("Missing token")
+  } else if (length(grep("act_", account.id)) == 0){
+    stop("must be account.id starting with act_")
   }
   
   # simplify

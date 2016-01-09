@@ -72,6 +72,12 @@ getAny <- function(id, token, fields = "default",
                    time.increment = NULL, time.range = NULL, 
                    n = 100, verbose = FALSE, simplify = FALSE) {
   
+  # check inputs
+  if(missing(id)){
+    stop("Missing id")
+  } else if (missing(token)){
+    stop("Missing token")
+  }
   
   # check if region and action_carousel
   for (i in 1:length(fields)) {
@@ -82,13 +88,6 @@ getAny <- function(id, token, fields = "default",
                     "or action_carousel_card_name"))
       }
     }
-  }
-  
-  # check inputs
-  if(missing(id)){
-    stop("Missing id")
-  } else if (missing(token)){
-    stop("Missing token")
   }
   
   # simplify
