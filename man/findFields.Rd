@@ -4,21 +4,37 @@
 \alias{findFields}
 \title{findFields}
 \usage{
-findFields()
+findFields(fct)
+}
+\arguments{
+\item{fct}{Name of the function you need the fields for}
 }
 \description{
-Returns all 73 valid \code{fields} which can be used in the get-family functions. No input, see details for more information.
+Returns all valid \code{fields} which can be used in the get-family functions.
+See details for more information.
 }
 \details{
-fields vary from \code{age} to \code{cpm} for the full list please see the online official \href{https://developers.facebook.com/docs/marketing-api/reference/ads-insights/}{documentation}
+fields vary from \code{age} to \code{cpm}
+Applies to the following functions (\code{fct} argument)
+\itemize{
+\item \code{\link{getAny}}
+\item \code{\link{getAccount}}
+\item \code{\link{getAdset}}
+\item \code{\link{getAd}}
+\item \code{\link{findCampaigns}}
+\item \code{\link{findAdsets}}
+\item \code{\link{findAds}}
+\item \code{\link{findStatus}}
+}
 }
 \examples{
 \dontrun{
 # video-related metrics
-videos <- findFields()[grep("video", findFields())]
+videos <- findFields("getAccount")[grep("video", findFields("getAccount"))]
 
 # get account data on fields of interest
-data <- getAccount(account.id = "act_123456789012345", token = "XXXXXXXXXXXX", fields = videos)
+data <- getAccount(account.id = "act_123456789012345", token = "XXXXXXXXXXXX", 
+fields = videos)
 }
 
 }
