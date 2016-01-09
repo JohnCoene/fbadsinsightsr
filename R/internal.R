@@ -199,14 +199,71 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
     # GET
     response <- httr::GET(json$paging$`next`)
     
-    # get json
+    # parse json to list
     json <- rjson::fromJSON(rawToChar(response$content))
+    
+    # check if data present in JSON
+    if(length(json$data)){
+      
+      # extract names
+      # find which nested list has largest number of variables
+      lg <- vector()
+      
+      # loop through lists
+      for(i in 1:length(json$data)){
+        
+        # get length
+        lg[i] <- length(json$data[[i]])
+        
+        # identify longest (that's what she said)
+        j <- which.max(lg)
+      }
+      
+      # use variable names of largest list
+      names <- names(json$data[[j]])
+    }
+    
+    if(length(names[which(names == "insights")])) {
+      
+      insights_lst <- list()
+      
+      for(i in 1:length(json$data)){
+        
+        # extract insights
+        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+        
+        # remove from initial json
+        json$data[[i]]$insights <- NULL
+      }
+      
+      # name list data for toDF formula
+      insights_json <- list(data = insights_lst)
+      
+      # remove for performances or set to NULL, less likely to cause errors
+      insights_lst <- NULL
+      
+      # toDF json WITHOUT insights
+      base_df <- toDF(json)
+      
+      # toDF INSIGHTS json
+      ins_df <- toDF(insights_json)
+      
+      # rename to distinguish between variables
+      names(ins_df) <- paste0("insights_", names(ins_df))
+      
+      # bind
+      df <- cbind.data.frame(base_df, ins_df)
+    } else {
+      
+      # if no insights then simply run toDF
+      df <- toDF(json)
+    }
     
     # iterate n_res
     if (length(json$data)) n_res <- n_res + length(json$data)
     
     # bind
-    data <- plyr::rbind.fill(data, toDF(response))
+    data <- plyr::rbind.fill(data, df)
     
     # verbose
     if (verbose == TRUE && i == 1) {
@@ -230,10 +287,13 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
   return(data)
 }
 
+
 toDF <- function(response){
   
-  # parse json to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  if (class(response) == "response"){
+    # parse json to list
+    json <- rjson::fromJSON(rawToChar(response$content))
+  } 
   
   # check if data present in JSON
   if(length(json$data)){
@@ -253,7 +313,7 @@ toDF <- function(response){
     }
     
     # use variable names of largest list
-    names <- names(json$data[[j[1]]])
+    names <- names(json$data[[j]])
     
     # identify nested lists
     vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
@@ -264,7 +324,7 @@ toDF <- function(response){
     
     # remove vars from json2
     for(i in 1:length(vars)){
-      for(j in 1:length(json$data)){
+      for(j in 1:length(json2$data)){
         json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
       }
     }
@@ -314,7 +374,7 @@ toDF <- function(response){
             dat_na <- NULL
           }
           
-
+          
         }
         
         base_df <- cbind.data.frame(base_df, row_df)

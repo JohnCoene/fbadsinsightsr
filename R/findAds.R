@@ -24,7 +24,7 @@
 #' 
 #' @export
 findAds <- function (id, token, fields = "default", n = 100,
-                     verbose = FALSE) {
+                     verbose = FALSE, ...) {
   
   # check inputs
   if(missing(id)){
@@ -51,10 +51,24 @@ findAds <- function (id, token, fields = "default", n = 100,
     fields <- createFields(fields)
   }
   
+  args <- unlist(list(...))
+  # create fields
+  if(length(args)) {
+    stop("arguments must be a character vector")
+    # test if fields correct
+    testParam("fields", args, "getAny")
+    
+    # createFields
+    args <- createFields(args)
+  } else {
+    args <- NULL
+  }
+  
   # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/ads?fields=",
                 fields,
+                "insights{", args, "}",
                 "&access_token=",
                 token)
   
@@ -75,8 +89,64 @@ findAds <- function (id, token, fields = "default", n = 100,
     dat <- data.frame()
   } else {
     
-    # parse
-    dat <- toDF(response)
+    # parse json to list
+    json <- rjson::fromJSON(rawToChar(response$content))
+    
+    # check if data present in JSON
+    if(length(json$data)){
+      
+      # extract names
+      # find which nested list has largest number of variables
+      lg <- vector()
+      
+      # loop through lists
+      for(i in 1:length(json$data)){
+        
+        # get length
+        lg[i] <- length(json$data[[i]])
+        
+        # identify longest (that's what she said)
+        j <- which.max(lg)
+      }
+      
+      # use variable names of largest list
+      names <- names(json$data[[j]])
+    }
+    
+    if(length(names[which(names == "insights")])) {
+      
+      insights_lst <- list()
+      
+      for(i in 1:length(json$data)){
+        
+        # extract insights
+        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+        
+        # remove from initial json
+        json$data[[i]]$insights <- NULL
+      }
+      
+      # name list data for toDF formula
+      insights_json <- list(data = insights_lst)
+      
+      # remove for performances or set to NULL, less likely to cause errors
+      insights_lst <- NULL
+      
+      # toDF json WITHOUT insights
+      base_df <- toDF(json)
+      
+      # toDF INSIGHTS json
+      ins_df <- toDF(insights_json)
+      
+      # rename to distinguish between variables
+      names(ins_df) <- paste0("insights_", names(ins_df))
+      
+      # bind
+      df <- cbind.data.frame(base_df, ins_df)
+    } else {
+      df <- toDF(json)
+    }
+    
     
     #paginate
     dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
