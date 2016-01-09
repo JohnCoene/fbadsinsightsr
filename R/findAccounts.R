@@ -35,7 +35,9 @@ findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   # check token
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/", id, "/adaccounts?fields=name%2Cid%2Caccount_status&access_token=", token)
+  url <- paste0("https://graph.facebook.com/v2.5/", 
+                id, "/adaccounts?fields=name%2Cid%2C",
+                "account_status&access_token=", token)
   
   # call api
   response <- httr::GET(url)
