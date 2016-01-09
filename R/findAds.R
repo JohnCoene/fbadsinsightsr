@@ -89,9 +89,6 @@ findAds <- function (id, token, fields = "default", n = 100,
     dat <- data.frame()
   } else {
     
-    # parse json to list
-    json <- rjson::fromJSON(rawToChar(response$content))
-    
     # check if data present in JSON
     if(length(json$data)){
       
@@ -106,11 +103,11 @@ findAds <- function (id, token, fields = "default", n = 100,
         lg[i] <- length(json$data[[i]])
         
         # identify longest (that's what she said)
-        j <- which.max(lg)
+        index <- which.max(lg)
       }
       
       # use variable names of largest list
-      names <- names(json$data[[j]])
+      names <- names(json$data[[index]])
     }
     
     if(length(names[which(names == "insights")])) {
@@ -142,9 +139,9 @@ findAds <- function (id, token, fields = "default", n = 100,
       names(ins_df) <- paste0("insights_", names(ins_df))
       
       # bind
-      df <- cbind.data.frame(base_df, ins_df)
+      dat <- cbind.data.frame(base_df, ins_df)
     } else {
-      df <- toDF(json)
+      dat <- toDF(json)
     }
     
     
