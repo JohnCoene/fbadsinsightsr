@@ -388,6 +388,9 @@ toDF <- function(response){
     base_df <- data.frame()
   }
   
+  # remove JSON
+  json <- NULL
+  
   return(base_df)
 }
 

@@ -7,6 +7,7 @@
 #' @param fields default (\code{"default"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
+#' @param ... additional parameters to pass to insights.
 #' 
 #' @examples 
 #' \dontrun{
@@ -38,7 +39,7 @@ findAds <- function (id, token, fields = "default", n = 100,
   
   # create fields
   if(fields[1] == "default") {
-    fields <- findFields("findAds")
+    fields <- c("creative", "name")
   } 
   
   if(class(fields) != "character") {
@@ -54,7 +55,6 @@ findAds <- function (id, token, fields = "default", n = 100,
   args <- unlist(list(...))
   # create fields
   if(length(args)) {
-    stop("arguments must be a character vector")
     # test if fields correct
     testParam("fields", args, "getAny")
     
@@ -68,7 +68,7 @@ findAds <- function (id, token, fields = "default", n = 100,
   url <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/ads?fields=",
                 fields,
-                "insights{", args, "}",
+                "%2Cinsights{", args, "}",
                 "&access_token=",
                 token)
   
@@ -85,7 +85,7 @@ findAds <- function (id, token, fields = "default", n = 100,
   } else if (length(json$data) == 0) {
     warning(paste("No data."))
     
-    # make empt data.frame
+    # make empty data.frame to return and avoid error
     dat <- data.frame()
   } else {
     
@@ -136,17 +136,14 @@ findAds <- function (id, token, fields = "default", n = 100,
       ins_df <- toDF(insights_json)
       
       # rename to distinguish between variables
-      names(ins_df) <- paste0("insights_", names(ins_df))
+      ins_names <- names(ins_df)
+      names(ins_df) <- paste0("insights_", ins_names)
       
       # bind
       dat <- cbind.data.frame(base_df, ins_df)
     } else {
       dat <- toDF(json)
     }
-    
-    
-    #paginate
-    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
     
     # verbose
     if (verbose == TRUE) {
