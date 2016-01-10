@@ -184,49 +184,38 @@ buildBreakdowns <- function(breakdowns) {
   
 }
 
-paginate <- function(json, data, verbose = FALSE, n = 100) {
+# define method
+paginate <- function(x) UseMethod("paginate")
+
+paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
   
-  # initiate i for verbose
+  # check input
+  if(class(fbData) != "fbAdsData") stop("fbData must be fbAdsData")
+  
+  # initialise
   i <- 1
   
-  # initiate number of results n test
-  if (length(json$data)) n_res <- length(json$data)
+  # extract data
+  dat <- fbData$data
+  url <- fbData$url
   
-  # Paginate
-  while (n_res < n && 
-         !is.null(json$paging$`next`)) {
+  while (n < nrow(dat) && length(url)){
     
-    # GET
-    response <- httr::GET(json$paging$`next`)
+    # fetch
+    response <- httr::GET(url)
     
     # parse json to list
     json <- rjson::fromJSON(rawToChar(response$content))
     
-    # check if data present in JSON
-    if(length(json$data)){
-      
-      # extract names
-      # find which nested list has largest number of variables
-      lg <- vector()
-      
-      # loop through lists
-      for(i in 1:length(json$data)){
-        
-        # get length
-        lg[i] <- length(json$data[[i]])
-        
-        # identify longest (that's what she said)
-        j <- which.max(lg)
-      }
-      
-      # use variable names of largest list
-      names <- names(json$data[[j]])
-    }
+    # get json names to identify if insights were fetched
+    json_vars <- jsonNames(json)
     
-    if(length(names[which(names == "insights")])) {
+    # look for insights
+    ins_test <- json_vars[grep("insights", json_vars)]
+    
+    if(length(ins_test)){
       
-      insights_lst <- list()
-      
+      # extract insights from json and remove from original json
       for(i in 1:length(json$data)){
         
         # extract insights
@@ -237,83 +226,61 @@ paginate <- function(json, data, verbose = FALSE, n = 100) {
       }
       
       # name list data for toDF formula
-      insights_json <- list(data = insights_lst)
+      ins_json <- list(data = insights_lst)
       
-      # remove for performances or set to NULL, less likely to cause errors
+      # remove list to improve performances
       insights_lst <- NULL
       
-      # toDF json WITHOUT insights
-      base_df <- toDF(json)
+      # build base data.frame
+      dat <- toDF(json)
       
-      # toDF INSIGHTS json
-      ins_df <- toDF(insights_json)
-      
-      # rename to distinguish between variables
-      names(ins_df) <- paste0("insights_", names(ins_df))
+      # build insights data.frame
+      ins_dat <- toDF(ins_json)
       
       # bind
-      df <- cbind.data.frame(base_df, ins_df)
-    } else {
+      dat <- cbind.data.frame(dat$data, ins_dat$data)
       
-      # if no insights then simply run toDF
-      df <- toDF(json)
+      # construct class
+      dat <- fbAdsData(data = dat, url = dat)
+      
+    } else if(!length(ins_test)){
+      dat <- toDF(json)
     }
     
-    # iterate n_res
-    if (length(json$data)) n_res <- n_res + length(json$data)
-    
-    # bind
-    data <- plyr::rbind.fill(data, df)
-    
-    # verbose
-    if (verbose == TRUE && i == 1) {
-      cat(paste0(n, " results requested", "\n"))
-      cat(paste(n_res, "results =", nrow(data), "rows"), fill = TRUE, 
-          labels = paste0("Query #", i, ":"))
-    } else if (verbose == TRUE && i != 1) {
-      cat(paste(n_res, "results =", nrow(data), "rows"), fill = TRUE,
-          labels = paste0("Query #", i, ":"))
-    }
-    
-    # pause between queries if more than 2 pages of data to avoid lengthy calls
-    if(i >= 3) {
-      Sys.sleep(0.5)
-    }
-    
-    # iterate i for print
+    # iterate i
     i <- i + 1
   }
   
-  return(data)
+  
+  # verbose
+  if (verbose == TRUE && i == 1) {
+    cat(paste0(n, " results requested", "\n"))
+    cat(paste(n_res, "results =", nrow(fbData$data), "rows"), fill = TRUE, 
+        labels = paste0("Query #", i, ":"))
+  } else if (verbose == TRUE && i != 1) {
+    cat(paste(n_res, "results =", nrow(fbData$data), "rows"), fill = TRUE,
+        labels = paste0("Query #", i, ":"))
+  }
+  
+  return(fbData$data)
 }
 
+parseJSON <- function(x) UseMethod("parseJSON")
 
-toDF <- function(response){
+parseJSON.fbAdsData <- function(fbData){
   
-  if (class(response) == "response"){
-    # parse json to list
-    json <- rjson::fromJSON(rawToChar(response$content))
-  } 
+  # check input
+  if(class(fbData) != "fbAdsData") stop("input must be fbAdsData",
+                                        call. = FALSE)
+  
+  # identify if insights present in obj
+  uri <- fbAds
   
   # check if data present in JSON
   if(length(json$data)){
     
     # extract names
-    # find which nested list has largest number of variables
-    lg <- vector()
-    
-    # loop through lists
-    for(i in 1:length(json$data)){
-      
-      # get length
-      lg[i] <- length(json$data[[i]])
-      
-      # identify longest (that's what she said)
-      j <- which.max(lg)
-    }
-    
-    # use variable names of largest list
-    names <- names(json$data[[j]])
+    names <- jsonNames(json$data)
     
     # identify nested lists
     vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
@@ -384,12 +351,19 @@ toDF <- function(response){
     
     
     # if no data in json
-  } else if (length(json$data) <= 0) {
+  } else if (!length(json$data)) {
     base_df <- data.frame()
   }
   
-  # remove JSON
-  json <- NULL
+  # get next url for fbAdsData class
+  if(length(json$paging$`next`)) {
+    next_url <- json$paging$`next`
+  } else {
+    next_url <- ""
+  }
+  
+  # construct return
+  base_df <- fbAdsData(data = base_df, url = next_url)
   
   return(base_df)
 }
@@ -397,7 +371,7 @@ toDF <- function(response){
 # account status sort
 accountStatus <- function(data) {
   
-  # build status ref
+  # build status reference table for ;ater match
   statuses <- data.frame(id = c(1, 2, 3, 7, 9, 100, 101, 102, 201, 202),
                          status = c("active", "disabled", "unsettled",
                                     "pending risk review", "in grace period",
@@ -413,4 +387,82 @@ accountStatus <- function(data) {
   dat$account_status <- NULL
   
   return(dat)
+}
+
+# constructor
+constructFbAdsData <- function(response){
+  
+  # check inputs
+  if(class(response) != "response") stop("input must be response")
+  
+  # parse to list
+  json <- rjson::fromJSON(rawToChar(response$content))
+  
+  # identify if insights present
+  json_vars <- jsonNames(json = json)
+  
+  if (length(json_vars[grep("insights", json_vars)])){
+    
+    # extract insights from json and remove from original json
+    for(i in 1:length(json$data)){
+      
+      # extract insights
+      insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+      
+      # remove from initial json
+      json$data[[i]]$insights <- NULL
+    }
+    
+    # name list data for toDF formula
+    ins_json <- list(data = insights_lst)
+    
+    # build class object depending on uri
+    if(length(json$paging$`next`)) {
+      # build class object
+      structure(list(data = json, insights = ins_json,
+                     url = json$paging$`next`),
+                class = "fbAdsData")
+    } else {
+      
+      # build
+      structure(list(data = json, insights = ins_json),
+                class = "fbAdsData")
+    }
+    
+  } else {
+    
+    # build class object depending on uri
+    if(length(json$paging$`next`)) {
+      # build class object
+      structure(list(data = json, url = json$paging$`next`),
+                class = "fbAdsData")
+    } else {
+      
+      # build
+      structure(list(data = json), class = "fbAdsData")
+    }
+    
+  }
+
+}
+
+# json names
+jsonNames <- function(json){
+  # find which nested list has largest number of variables
+  lg <- vector()
+  
+  # loop through lists
+  for(i in 1:length(json$data)){
+    
+    # get length
+    lg[i] <- length(json$data[[i]])
+    
+    # identify longest (that's what she said)
+    j <- which.max(lg)
+  }
+  
+  # use variable names of largest list
+  names <- names(json$data[[j]])
+  
+  return(names)
 }
