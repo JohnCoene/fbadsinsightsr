@@ -269,13 +269,6 @@ parseJSON <- function(x) UseMethod("parseJSON")
 
 parseJSON.fbAdsData <- function(fbData){
   
-  # check input
-  if(class(fbData) != "fbAdsData") stop("input must be fbAdsData",
-                                        call. = FALSE)
-  
-  # identify if insights present in obj
-  uri <- fbAds
-  
   # check if data present in JSON
   if(length(json$data)){
     
@@ -447,22 +440,126 @@ constructFbAdsData <- function(response){
 }
 
 # json names
-jsonNames <- function(json){
+sub.ads.dataNames <- function(sub.ads.data){
   # find which nested list has largest number of variables
-  lg <- vector()
+  n.vect <- vector()
   
   # loop through lists
-  for(i in 1:length(json$data)){
+  for(i in 1:length(sub.ads.data$data)){
     
-    # get length
-    lg[i] <- length(json$data[[i]])
+    # get names
+    n.vect[i] <- names(sub.ads.data$data[[i]])
     
-    # identify longest (that's what she said)
-    j <- which.max(lg)
   }
   
   # use variable names of largest list
-  names <- names(json$data[[j]])
+  names <- unique(n.vect)
   
   return(names)
+}
+
+digest <- function(x) UseMethod("digest")
+
+# digest fbAdsData
+digest.fbAdsData <- function(fbAdsData){
+  
+  # initialise k 
+  k = 1
+  
+  while (k <= length(fbAdsData)){
+    
+    # check fields
+    if (names(fbAdsData)[[k]] == "url"){
+      url <- fbAdsData$url
+    } else if (names(fbAdsData)[[k]] == "data" || 
+               names(fbAdsData)[[k]] == "insights"){
+      
+      # check if data present in fbAdsData[[k]]
+      if(length(fbAdsData[[k]]$data)){
+        
+        # extract names
+        names <- jsonNames(fbAdsData[[k]])
+        
+        # identify nested lists
+        vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
+                           names)]
+        
+        # loop through vars to remove from fbAdsData[[k]]
+        fbData2 <- fbAdsData[[k]]
+        
+        # remove vars from fbData2
+        for(i in 1:length(vars)){
+          for(j in 1:length(fbData2$data)){
+            fbData2$data[[j]][which(names(fbData2$data[[j]]) == vars[i])] <- NULL
+          }
+        }
+        
+        # fbData2 to data.frame
+        base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, as.data.frame))
+        
+        # declare row_df
+        row_df <- data.frame()
+        
+        # check if vars observed
+        if(length(vars)){
+          # rebuild fbAdsData[[k]]
+          for(i in 1:length(vars)){
+            for(j in 1:length(fbAdsData[[k]]$data)){
+              lst <- fbAdsData[[k]]$data[[j]][which(names(fbAdsData[[k]]$data[[j]]) == vars[i])]
+              
+              # check if variable has been found
+              if(length(lst)) {
+                # sublist to dataframe
+                dat <- do.call(plyr::"rbind.fill",
+                               lapply(lst[[1]], as.data.frame))
+                
+                # transpose
+                # name rows
+                rownames(dat) <- dat[,1]
+                
+                # remove first column
+                dat[,1] <- NULL
+                
+                # transpose
+                dat <- as.data.frame(t(dat))
+                
+                # rename
+                names(dat) <- paste0(vars[i], "_", names(dat))
+                
+                # bind
+                row_df <- plyr::rbind.fill(row_df, dat)
+                
+              } else { # if no lst found
+                # create NA
+                dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
+                names(dat_na) <- names(dat)
+                
+                # bind
+                row_df <- plyr::rbind.fill(row_df, dat_na)
+                dat_na <- NULL
+              }
+              
+              
+            }
+            
+            base_df <- cbind.data.frame(base_df, row_df)
+            row_df <- NULL
+          }
+        }
+        
+        
+        # if no data in fbData
+      } else if (!length(fbData$data)) {
+        base_df <- data.frame()
+      }
+      
+      # replace list with data.frame
+      fbAdsData[[k]] <- base_df
+      
+    }
+    
+    k <- k + 1
+  }
+  
+  return (fbAdsData)
 }
