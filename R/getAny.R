@@ -250,6 +250,6 @@ getAny <- function(id, token, fields = "default", n = 100,
   } 
 
   
-  return(dat)
+  return(fb_data)
   
 }
