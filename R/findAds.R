@@ -11,21 +11,19 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' adsets <- findAdsets(account.id = "act_123456789123456", token = "XXXXXX")
-#' 
 #' ads <- findAds(account.id = adsets$id[1], token = "XXXXXX")
 #' 
 #' # use info for query
 #' dat <- getAd(ad.id = sample(ads$id, 1), token = "XXXXXX")
 #' }
 #'
-#' @seealso \code{\link{getAd}}, \code{\link{findAdsets}}
+#' @seealso \code{\link{getAd}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAds <- function (id, token, fields = "default", n = 100,
-                     verbose = FALSE, ...) {
+findAds <- function (id, token, fields = "default", ..., n = 100,
+                     verbose = FALSE) {
   
   # check inputs
   if(missing(id)){

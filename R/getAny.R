@@ -15,7 +15,6 @@
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
-#' @param simplify Depreacted. 
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -66,11 +65,20 @@
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 getAny <- function(id, token, fields = "default",
-                   action.attribution.windows = NULL,
-                   action.breakdowns = NULL, action.report.time = NULL,
-                   breakdowns = NULL, date.preset = NULL, level = NULL, 
-                   time.increment = NULL, time.range = NULL, 
-                   n = 100, verbose = FALSE, simplify = FALSE) {
+                   action.attribution.windows, action.breakdowns, 
+                   action.report.time, breakdowns, date.preset, level, 
+                   time.increment, time.range, 
+                   n = 100, verbose = FALSE) {
+  
+  # check arguments
+  if(missing(action.attribution.windows)) action.attribution.windows <- NULL
+  if(missing(action.breakdowns)) action.breakdowns <- NULL
+  if(missing(action.report.time)) action.report.time <- NULL
+  if(missing(breakdowns)) breakdowns <- NULL
+  if(missing(date.preset)) date.preset <- NULL
+  if(missing(level)) level <- NULL
+  if(missing(time.increment)) time.increment <- NULL
+  if(missing(time.range)) time.range <- NULL
   
   # check inputs
   if(missing(id)){
@@ -83,16 +91,11 @@ getAny <- function(id, token, fields = "default",
   for (i in 1:length(fields)) {
     if(!is.null(breakdowns) && breakdowns == "region"){
       if(fields[i] == "action_carousel_card_id" ||
-         fields [i] == "action_carousel_card_name"){
+         fields[i] == "action_carousel_card_name"){
         stop(paste0("region cannot be used with action_carousel_card_id",
                     "or action_carousel_card_name"))
       }
     }
-  }
-  
-  # simplify
-  if(simplify == TRUE){
-    warning("simplify has been deprecated. see README")
   }
   
   # create fields
@@ -222,6 +225,7 @@ getAny <- function(id, token, fields = "default",
   # check token verison
   token <- checkToken(token)
   
+  # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/insights?fields=",fields,
                 action.attribution.windows, action.breakdowns,
@@ -231,32 +235,21 @@ getAny <- function(id, token, fields = "default",
   # call api
   response <- httr::GET(url)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # construct data
+  fb_data <- constructFbAdsData(response)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to id or token. Error Message returned: ",
-               json$error$message))
-  } else if (length(json$data) == 0) {
-    warning(paste("No data."))
-    
-    # make empt data.frame
-    dat <- data.frame()
-  } else {
-    
-    # parse
-    dat <- toDF(response)
-    
-    #paginate
-    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-    
-    # verbose
-    if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
-    } 
-    
-  }
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
+  } 
+
   
   return(dat)
   

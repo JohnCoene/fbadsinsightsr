@@ -32,7 +32,8 @@ scopeCheck <- function(scope) {
     if (length(test) == 0) {
       scope_error <- scope[i]
       stop (paste0("Wrong scope: ", scope_error,
-                   " is not a correct permission. See ?fb_authenticate details"))
+                   " is not a correct permission. See ?fb_authenticate details"),
+            call. = FALSE)
     }
   }
 }
@@ -40,25 +41,13 @@ scopeCheck <- function(scope) {
 # create_fields
 createFields <- function(fields){
   
-  # make NULL if missing
-  if(missing(fields)){
-    fields <- NULL
-  }
-  
   # check input class
   if (class(fields) != "character") {
-    stop("fields must be character value or vector")
-  }
-  
-  # add %2C
-  for (i in 1:length(fields)) {
-    if (i != length(fields)) {
-      fields[i] <- paste0(fields[i], "%2C")
-    } 
+    stop("fields must be character value or vector", call. = FALSE)
   }
   
   # collapse
-  fields <- paste(fields, sep="", collapse = "")
+  fields <- paste0(fields,  collapse = "%2C")
   
   return(fields)
 }
@@ -98,6 +87,7 @@ toHTTP <- function(params = NULL){
 # testParam
 testParam <- function (params, param_vector, fct) {
   
+  # set default
   if(missing(fct)){
     fct <- "getAny"
   }
@@ -127,7 +117,7 @@ testParam <- function (params, param_vector, fct) {
       param_vector_error <- param_vector[i]
       
       # collapse options to print
-      options_print <- paste(options, sep = ",", collapse = ", ")
+      options_print <- paste(options, collapse = ", ")
       
       # print error
       stop (paste0("Wrong ", params, " parameter specified '", 
@@ -135,7 +125,8 @@ testParam <- function (params, param_vector, fct) {
                    " is not valid. See find-family functions",
                    " findFields(), findActionBreakdowns(), findBreakdowns()",
                    " findDatePreset().",
-                   " All valid values are: ", options_print))
+                   " All valid values are: ", options_print),
+            call. = FALSE)
     }
   }
 
@@ -169,11 +160,11 @@ buildBreakdowns <- function(breakdowns) {
                                                           "placement")) {
       breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
     } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
-      stop("impression_device cannot be used on its own")
+      stop("impression_device cannot be used on its own", call. = FALSE)
     } else if (length(breakdowns) == 1) {
       breakdowns <- paste0("&breakdowns=", breakdowns)
     } else {
-      stop("Wrong breakdowns specified. See @param")
+      stop("Wrong breakdowns specified. Run findBreakdowns()", call. = FALSE)
     }
     
   } else if (length(breakdowns) >= 3) {
@@ -184,181 +175,58 @@ buildBreakdowns <- function(breakdowns) {
   
 }
 
-# define method
-paginate <- function(x) UseMethod("paginate")
+# generic
+bindPages <- function(base, page) UseMethod("bindPages")
+
+bindPages.fbAdsData <- function(base, page){
+  
+  # get tables
+  df_names <- names(base)[grep("^data$|^insights$", names(base))]
+  
+  # append
+  for(i in 1:length(df_names)){
+    base[[df_names[i]]] <- rbind.data.frame(base[[df_names[i]]], 
+                             page[[df_names[i]]])
+  }
+  
+  base$url <- page$url
+  
+  return(base)
+}
+
+# generic
+paginate <- function(fbData, verbose, n) UseMethod("paginate")
 
 paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
   
-  # check input
-  if(class(fbData) != "fbAdsData") stop("fbData must be fbAdsData")
-  
-  # initialise
+  # get n
   i <- 1
-  
-  # extract data
-  dat <- fbData$data
-  url <- fbData$url
-  
-  while (n < nrow(dat) && length(url)){
+
+  # loop if url is present and
+  while(nrow(fbData$data) < n && length(fbData$url)){
     
-    # fetch
-    response <- httr::GET(url)
+    # call next page
+    response <- httr::GET(fbData$url)
     
-    # parse json to list
-    json <- rjson::fromJSON(rawToChar(response$content))
+    # construct repsonse
+    fbDataPage <- constructFbAdsData(response)
     
-    # get json names to identify if insights were fetched
-    json_vars <- jsonNames(json)
+    # digest new page
+    fbDataPage <- digest(fbDataPage)
     
-    # look for insights
-    ins_test <- json_vars[grep("insights", json_vars)]
+    # bind
+    fbData <- bindPages(fbData, fbDataPage)
     
-    if(length(ins_test)){
-      
-      # extract insights from json and remove from original json
-      for(i in 1:length(json$data)){
-        
-        # extract insights
-        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
-        
-        # remove from initial json
-        json$data[[i]]$insights <- NULL
-      }
-      
-      # name list data for toDF formula
-      ins_json <- list(data = insights_lst)
-      
-      # remove list to improve performances
-      insights_lst <- NULL
-      
-      # build base data.frame
-      dat <- toDF(json)
-      
-      # build insights data.frame
-      ins_dat <- toDF(ins_json)
-      
-      # bind
-      dat <- cbind.data.frame(dat$data, ins_dat$data)
-      
-      # construct class
-      dat <- fbAdsData(data = dat, url = dat)
-      
-    } else if(!length(ins_test)){
-      dat <- toDF(json)
+    # verbose
+    if(verbose == TRUE){
+      cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
+                 labels = paste0("Query #", i))
     }
     
-    # iterate i
     i <- i + 1
   }
   
-  
-  # verbose
-  if (verbose == TRUE && i == 1) {
-    cat(paste0(n, " results requested", "\n"))
-    cat(paste(n_res, "results =", nrow(fbData$data), "rows"), fill = TRUE, 
-        labels = paste0("Query #", i, ":"))
-  } else if (verbose == TRUE && i != 1) {
-    cat(paste(n_res, "results =", nrow(fbData$data), "rows"), fill = TRUE,
-        labels = paste0("Query #", i, ":"))
-  }
-  
-  return(fbData$data)
-}
-
-parseJSON <- function(x) UseMethod("parseJSON")
-
-parseJSON.fbAdsData <- function(fbData){
-  
-  # check if data present in JSON
-  if(length(json$data)){
-    
-    # extract names
-    names <- jsonNames(json$data)
-    
-    # identify nested lists
-    vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
-                       names)]
-    
-    # loop through vars to remove from json
-    json2 <- json
-    
-    # remove vars from json2
-    for(i in 1:length(vars)){
-      for(j in 1:length(json2$data)){
-        json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
-      }
-    }
-    
-    # json2 to data.frame
-    base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
-    
-    # declare row_df
-    row_df <- data.frame()
-    
-    # check if vars observed
-    if(length(vars)){
-      # rebuild json
-      for(i in 1:length(vars)){
-        for(j in 1:length(json$data)){
-          lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
-          
-          # check if variable has been found
-          if(length(lst)) {
-            # sublist to dataframe
-            dat <- do.call(plyr::"rbind.fill",
-                           lapply(lst[[1]], as.data.frame))
-            
-            # transpose
-            # name rows
-            rownames(dat) <- dat[,1]
-            
-            # remove first column
-            dat[,1] <- NULL
-            
-            # transpose
-            dat <- as.data.frame(t(dat))
-            
-            # rename
-            names(dat) <- paste0(vars[i], "_", names(dat))
-            
-            # bind
-            row_df <- plyr::rbind.fill(row_df, dat)
-            
-          } else { # if no lst found
-            # create NA
-            dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
-            names(dat_na) <- names(dat)
-            
-            # bind
-            row_df <- plyr::rbind.fill(row_df, dat_na)
-            dat_na <- NULL
-          }
-          
-          
-        }
-        
-        base_df <- cbind.data.frame(base_df, row_df)
-        row_df <- NULL
-      }
-    }
-    
-    
-    # if no data in json
-  } else if (!length(json$data)) {
-    base_df <- data.frame()
-  }
-  
-  # get next url for fbAdsData class
-  if(length(json$paging$`next`)) {
-    next_url <- json$paging$`next`
-  } else {
-    next_url <- ""
-  }
-  
-  # construct return
-  base_df <- fbAdsData(data = base_df, url = next_url)
-  
-  return(base_df)
+  return(fbData)
 }
 
 # account status sort
@@ -391,10 +259,27 @@ constructFbAdsData <- function(response){
   # parse to list
   json <- rjson::fromJSON(rawToChar(response$content))
   
+  # check if data has been returned
+  # check if query successful 
+  if(length(json$error$message)){
+    stop(paste("likely due to id or token. Error Message returned by API: ",
+               json$error$message), call. = FALSE)
+  } else if (!length(json$data)) {
+    warning(paste("No data."), call. = FALSE)
+    
+    # make empty object to return and avoid error
+    structure(list(data = list()), class = "fbAdsData")
+  } else if(length(json$data)) {
+    
+  }
+  
   # identify if insights present
-  json_vars <- jsonNames(json = json)
+  json_vars <- subAdsDataNames(sub.ads.data = json)
   
   if (length(json_vars[grep("insights", json_vars)])){
+    
+    # declare list to append in loop
+    insights_lst <- list()
     
     # extract insights from json and remove from original json
     for(i in 1:length(json$data)){
@@ -440,24 +325,25 @@ constructFbAdsData <- function(response){
 }
 
 # json names
-sub.ads.dataNames <- function(sub.ads.data){
+subAdsDataNames <- function(sub.ads.data){
   # find which nested list has largest number of variables
-  n.vect <- vector()
+  n_vect <- vector()
   
   # loop through lists
   for(i in 1:length(sub.ads.data$data)){
     
     # get names
-    n.vect[i] <- names(sub.ads.data$data[[i]])
+    n_vect <- append(n_vect, names(sub.ads.data$data[[i]]))
     
   }
   
   # use variable names of largest list
-  names <- unique(n.vect)
+  names <- unique(n_vect)
   
   return(names)
 }
 
+# generic
 digest <- function(x) UseMethod("digest")
 
 # digest fbAdsData
@@ -478,7 +364,7 @@ digest.fbAdsData <- function(fbAdsData){
       if(length(fbAdsData[[k]]$data)){
         
         # extract names
-        names <- jsonNames(fbAdsData[[k]])
+        names <- subAdsDataNames(fbAdsData[[k]])
         
         # identify nested lists
         vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
@@ -562,4 +448,89 @@ digest.fbAdsData <- function(fbAdsData){
   }
   
   return (fbAdsData)
+}
+
+
+digest.list <- function(json){
+  
+  # check if data present in JSON
+  if(length(json$data)){
+    
+    # extract names
+    names <- sub.ads.dataNames(json$data)
+    
+    # identify nested lists
+    vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
+                       names)]
+    
+    # loop through vars to remove from json
+    json2 <- json
+    
+    # remove vars from json2
+    for(i in 1:length(vars)){
+      for(j in 1:length(json2$data)){
+        json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
+      }
+    }
+    
+    # json2 to data.frame
+    base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
+    
+    # declare row_df
+    row_df <- data.frame()
+    
+    # check if vars observed
+    if(length(vars)){
+      # rebuild json
+      for(i in 1:length(vars)){
+        for(j in 1:length(json$data)){
+          lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
+          
+          # check if variable has been found
+          if(length(lst)) {
+            # sublist to dataframe
+            dat <- do.call(plyr::"rbind.fill",
+                           lapply(lst[[1]], as.data.frame))
+            
+            # transpose
+            # name rows
+            rownames(dat) <- dat[,1]
+            
+            # remove first column
+            dat[,1] <- NULL
+            
+            # transpose
+            dat <- as.data.frame(t(dat))
+            
+            # rename
+            names(dat) <- paste0(vars[i], "_", names(dat))
+            
+            # bind
+            row_df <- plyr::rbind.fill(row_df, dat)
+            
+          } else { # if no lst found
+            # create NA
+            dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
+            names(dat_na) <- names(dat)
+            
+            # bind
+            row_df <- plyr::rbind.fill(row_df, dat_na)
+            dat_na <- NULL
+          }
+          
+          
+        }
+        
+        base_df <- cbind.data.frame(base_df, row_df)
+        row_df <- NULL
+      }
+    }
+    
+    
+    # if no data in json
+  } else if (!length(json$data)) {
+    base_df <- data.frame()
+  }
+  
+  return(base_df)
 }

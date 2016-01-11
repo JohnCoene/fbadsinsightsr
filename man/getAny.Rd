@@ -4,10 +4,9 @@
 \alias{getAny}
 \title{getAny}
 \usage{
-getAny(id, token, fields = "default", action.attribution.windows = NULL,
-  action.breakdowns = NULL, action.report.time = NULL, breakdowns = NULL,
-  date.preset = NULL, level = NULL, time.increment = NULL,
-  time.range = NULL, n = 100, verbose = FALSE, simplify = FALSE)
+getAny(id, token, fields = "default", action.attribution.windows,
+  action.breakdowns, action.report.time, breakdowns, date.preset, level,
+  time.increment, time.range, n = 100, verbose = FALSE)
 }
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -35,8 +34,6 @@ getAny(id, token, fields = "default", action.attribution.windows = NULL,
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
-
-\item{simplify}{Depreacted.}
 }
 \description{
 Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
