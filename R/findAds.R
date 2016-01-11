@@ -62,93 +62,43 @@ findAds <- function (id, token, fields = "default", ..., n = 100,
     args <- NULL
   }
   
-  # build url
-  url <- paste0("https://graph.facebook.com/v2.5/",
-                id, "/ads?fields=",
-                fields,
-                "%2Cinsights{", args, "}",
-                "&access_token=",
-                token)
+  if (length(args)){
+    # build url
+    url <- paste0("https://graph.facebook.com/v2.5/",
+                  id, "/ads?fields=",
+                  fields,
+                  "%2Cinsights{", args, "}",
+                  "&access_token=",
+                  token) 
+  } else {
+    # build url
+    url <- paste0("https://graph.facebook.com/v2.5/",
+                  id, "/ads?fields=",
+                  fields,
+                  "&access_token=",
+                  token)
+  }
   
   # call api
   response <- httr::GET(url)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # call api
+  response <- httr::GET(url)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to id or token. Error Message returned: ",
-               json$error$message))
-  } else if (length(json$data) == 0) {
-    warning(paste("No data."))
-    
-    # make empty data.frame to return and avoid error
-    dat <- data.frame()
-  } else {
-    
-    # check if data present in JSON
-    if(length(json$data)){
-      
-      # extract names
-      # find which nested list has largest number of variables
-      lg <- vector()
-      
-      # loop through lists
-      for(i in 1:length(json$data)){
-        
-        # get length
-        lg[i] <- length(json$data[[i]])
-        
-        # identify longest (that's what she said)
-        index <- which.max(lg)
-      }
-      
-      # use variable names of largest list
-      names <- names(json$data[[index]])
-    }
-    
-    if(length(names[which(names == "insights")])) {
-      
-      insights_lst <- list()
-      
-      for(i in 1:length(json$data)){
-        
-        # extract insights
-        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
-        
-        # remove from initial json
-        json$data[[i]]$insights <- NULL
-      }
-      
-      # name list data for toDF formula
-      insights_json <- list(data = insights_lst)
-      
-      # remove for performances or set to NULL, less likely to cause errors
-      insights_lst <- NULL
-      
-      # toDF json WITHOUT insights
-      base_df <- toDF(json)
-      
-      # toDF INSIGHTS json
-      ins_df <- toDF(insights_json)
-      
-      # rename to distinguish between variables
-      ins_names <- names(ins_df)
-      names(ins_df) <- paste0("insights_", ins_names)
-      
-      # bind
-      dat <- cbind.data.frame(base_df, ins_df)
-    } else {
-      dat <- toDF(json)
-    }
-    
-    # verbose
-    if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
-    } 
-    
-  }
+  # construct data
+  fb_data <- constructFbAdsData(response)
+  
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
+  } 
     
   return (dat)
   
