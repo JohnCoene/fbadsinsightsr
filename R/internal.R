@@ -185,7 +185,7 @@ bindPages.fbAdsData <- function(base, page){
   
   # append
   for(i in 1:length(df_names)){
-    base[[df_names[i]]] <- rbind.data.frame(base[[df_names[i]]], 
+    base[[df_names[i]]] <- plyr::rbind.fill(base[[df_names[i]]], 
                              page[[df_names[i]]])
   }
   
@@ -222,6 +222,9 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
       cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
                  labels = paste0("Query #", i))
     }
+    
+    # sleep 0.5 second between queries
+    Sys.sleep(0.5)
     
     i <- i + 1
   }
