@@ -64,11 +64,10 @@
 #' @seealso \code{\link{fbAuthenticate}} 
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
-getAny <- function(id, token, fields = "default",
+getAny <- function(id, token, fields = "default", n = 100, 
                    action.attribution.windows, action.breakdowns, 
                    action.report.time, breakdowns, date.preset, level, 
-                   time.increment, time.range, 
-                   n = 100, verbose = FALSE) {
+                   time.increment, time.range, verbose = FALSE) {
   
   # check arguments
   if(missing(action.attribution.windows)) action.attribution.windows <- NULL
@@ -85,7 +84,7 @@ getAny <- function(id, token, fields = "default",
     stop("Missing id")
   } else if (missing(token)){
     stop("Missing token")
-  }
+  } 
   
   # check if region and action_carousel
   for (i in 1:length(fields)) {
