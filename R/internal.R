@@ -269,6 +269,7 @@ constructFbAdsData <- function(response){
     
     # make empty object to return and avoid error
     structure(list(data = list()), class = "fbAdsData")
+    
   } else if(length(json$data)) {
     
   }
@@ -417,8 +418,8 @@ digest.fbAdsData <- function(fbAdsData){
                 
               } else { # if no lst found
                 # create NA
-                dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
-                names(dat_na) <- names(dat)
+                dat_na <- rbind.data.frame(rep(NA, 1))
+                names(dat_na) <- "nan"
                 
                 # bind
                 row_df <- plyr::rbind.fill(row_df, dat_na)
@@ -428,14 +429,18 @@ digest.fbAdsData <- function(fbAdsData){
               
             }
             
+            # bind columns
             base_df <- cbind.data.frame(base_df, row_df)
             row_df <- NULL
+            
+            # remove unknowns
+            base_df$nan <- NULL
           }
         }
         
         
         # if no data in fbData
-      } else if (!length(fbData$data)) {
+      } else if (!length(fbAdsData$data)) {
         base_df <- data.frame()
       }
       
@@ -510,8 +515,8 @@ digest.list <- function(json){
             
           } else { # if no lst found
             # create NA
-            dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
-            names(dat_na) <- names(dat)
+            dat_na <- rbind.data.frame(rep(NA, 1))
+            names(dat_na) <- "nan"
             
             # bind
             row_df <- plyr::rbind.fill(row_df, dat_na)
@@ -523,6 +528,9 @@ digest.list <- function(json){
         
         base_df <- cbind.data.frame(base_df, row_df)
         row_df <- NULL
+        
+        # remove unknowns
+        base_df$nan <- NULL
       }
     }
     
