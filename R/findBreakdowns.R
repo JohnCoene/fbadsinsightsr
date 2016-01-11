@@ -5,18 +5,22 @@
 #' @examples 
 #' \dontrun{
 #' # get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' obj <- findAdsets(id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # take random adset.id
 #' set.seed(123)
-#' rand_id <- sample(obj$adset$id, 1)
+#' rand_id <- sample(adset$id, 1)
+#' 
+#' # get date.preset
+#' date <- findDatePreset()[grep("7", findDatePreset())][1]
 #' 
 #' # fetch Adset data broken down by age and gender
-#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", 
+#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", date.preset = date,
 #'                breakdowns = c("age", "gender"))
 #' }
 #' 
-#' @seealso \code{\link{getAny}}, \code{\link{findObjects}}, \code{\link{findDatePreset}}
+#' @seealso \code{\link{getAny}}, \code{\link{findAdsets}}, 
+#' \code{\link{findDatePreset}}
 #' 
 #' @export
 #' 

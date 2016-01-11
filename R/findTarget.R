@@ -13,16 +13,16 @@
 #' @examples 
 #' \dontrun{
 #' # get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' ads <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # pick random ad.id
-#' rand_id <- sample(obj$ad$id, 1)
+#' rand_id <- sample(ads$id, 1)
 #' 
 #' # fetch targeting description of random ad
 #' findTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{findObjects}}
+#' @seealso \code{\link{findAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 

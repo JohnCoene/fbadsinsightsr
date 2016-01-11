@@ -5,20 +5,22 @@
 #' @examples 
 #' \dontrun{
 #' # get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' camps <- findCamapaigns(account.id = "act_123456789012345", 
+#' token = "XXXXXXXXXXX")
 #' 
 #' # take random ad.id
 #' set.seed(123)
-#' rand_id <- sample(obj$ads$id, 1)
+#' rand_id <- sample(camps$id, 1)
 #' 
 #' # carousel-related action_breakdowns
 #' carousel <- findActionBreakdowns()[grep("carousel", findActionBreakdowns())]
 #' 
 #' # fetch Ad data broken down by actions related to carousel
-#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", action.breakdowns = carousel)
+#' data <- getAny(id = rand_id, token = "XXXXXXXXXXX", 
+#' action.breakdowns = carousel)
 #' }
 #' 
-#' @seealso \code{\link{getAny}}, \code{\link{findObjects}}
+#' @seealso \code{\link{getAny}}, \code{\link{findCampaigns}}
 #' 
 #' @export
 #' 

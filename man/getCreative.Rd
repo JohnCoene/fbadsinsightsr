@@ -7,22 +7,34 @@
 getCreative(id, token, n = 100, verbose = FALSE)
 }
 \arguments{
-\item{id}{The id of the ad you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
+\item{id}{The id of the ad you want to retrieve (Required), see 
+\href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
-\item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
+\item{token}{A valid token as returned by \code{\link{fbAuthenticate}} 
+or a short-term token from 
+\href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
-\item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
+\item{n}{Number of results to retrieve, defaults to \code{100}. 
+When you make an API request, you will usually not receive all of the 
+results of that request in a single response. This is because some 
+responses could contain thousands of objects so most responses are 
+paginated by default. \code{previous} fetches the previous page of 
+response (after the initial query) similarly \code{next} fetches the next
+ page and \code{NULL} does not paginate (only makes one query).}
 
-\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
+\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
+queries in the console.}
 }
 \value{
-Returns IDs and URLs of all images contained in object (single row if ad.id is passed as arguement)
+Returns IDs and URLs of all images contained in object 
+(single row if ad.id is passed as arguement)
 }
 \description{
 Fetches URL(s) name(s) and more about creatives used in an ad.
 }
 \details{
-Call \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.
+Calls 
+\href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.
 }
 \examples{
 \dontrun{
@@ -37,10 +49,10 @@ act <- findAccounts(id = "me", token = fbOAuth)
 img_acc <- getCreative(id = act[2,2], token = fbOAuth)
 
 # get campaigns, adsets and ads IDs from account
-obj <- findObjects(account.id = act[2,2], token = token = fbOAuth)
+ads <- findAds(account.id = act[2,2], token = token = fbOAuth)
 
 # get ad creatives
-crea_ad <- getCreative(id = sample(obj$ads$id, 1), token = fbOAuth)
+crea_ad <- getCreative(id = sample(ads$id, 1), token = fbOAuth)
 }
 
 }
@@ -48,6 +60,7 @@ crea_ad <- getCreative(id = sample(obj$ads$id, 1), token = fbOAuth)
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}}, \code{\link{findAccounts}}, \code{\link{findObjects}}
+\code{\link{fbAuthenticate}}, \code{\link{findAccounts}},
+ \code{\link{findAds}}
 }
 

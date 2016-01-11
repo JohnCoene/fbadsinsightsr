@@ -12,17 +12,19 @@ Returns all valid \code{action_breakdowns} which can be used in the get-family f
 \examples{
 \dontrun{
 # get information on account
-obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+camps <- findCamapaigns(account.id = "act_123456789012345", 
+token = "XXXXXXXXXXX")
 
 # take random ad.id
 set.seed(123)
-rand_id <- sample(obj$ads$id, 1)
+rand_id <- sample(camps$id, 1)
 
 # carousel-related action_breakdowns
 carousel <- findActionBreakdowns()[grep("carousel", findActionBreakdowns())]
 
 # fetch Ad data broken down by actions related to carousel
-data <- getAny(id = rand_id, token = "XXXXXXXXXXX", action.breakdowns = carousel)
+data <- getAny(id = rand_id, token = "XXXXXXXXXXX", 
+action.breakdowns = carousel)
 }
 
 }
@@ -30,6 +32,6 @@ data <- getAny(id = rand_id, token = "XXXXXXXXXXX", action.breakdowns = carousel
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{getAny}}, \code{\link{findObjects}}
+\code{\link{getAny}}, \code{\link{findCampaigns}}
 }
 

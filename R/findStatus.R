@@ -2,9 +2,15 @@
 #' 
 #' @description Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
 #' 
-#' @param id The id of the campaign, adset or ad you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
-#' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
-#' @param fields default (\code{"effective_status"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.
+#' @param id The id of the campaign, adset or ad you want to retrieve
+#'  (Required), see 
+#'  \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param token A valid token as returned by \code{\link{fbAuthenticate}}
+#'  or a short-term token from 
+#'  \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
+#' @param fields default (\code{"effective_status"}) 
+#' returns the most popular ones. Run \code{\link{findFields}} 
+#' to see all valid fields.
 #'
 #' @details 
 #' \itemize{
@@ -15,16 +21,16 @@
 #' @examples 
 #' \dontrun{
 #' get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' ads <- findAds(id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # take random ad.id
-#' rand_id <- sample(obj$ads$id, 1)
+#' rand_id <- sample(ads$id, 1)
 #' 
 #' # getStatus
-#' findStatus(id = rand_id, token = "XXXXXXXXXX")
+#' (status <- findStatus(id = rand_id, token = "XXXXXXXXXX"))
 #' }
 #' 
-#' @seealso \code{\link{findObjects}}
+#' @seealso \code{\link{findAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 

@@ -11,29 +11,65 @@ getAny(id, token, fields = "default", n = 100, action.attribution.windows,
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
-\item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
+\item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a 
+short-term token from 
+\href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
-\item{fields}{There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.}
+\item{fields}{There are in total 73 valid fields; default 
+(\code{NULL}) returns the most popular ones. Run \code{\link{findFields}}
+ to see all valid fields.}
 
-\item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
+\item{n}{Number of results to retrieve, defaults to \code{100}. 
+When you make an API request, you will usually not receive all of the 
+results of that request in a single response. 
+This is because some responses could contain thousands of objects so 
+most responses are paginated by default. \code{previous} fetches the 
+previous page of response (after the initial query) similarly 
+\code{next} fetches the next page and \code{NULL} does not paginate 
+(only makes one query).}
 
-\item{action.attribution.windows}{Determines what is the attribution window for the actions. For example, \code{c("28d_click")} means the API returns all actions that happened 28 days after someone clicked on the ad (Optional). See details below for valid values.}
+\item{action.attribution.windows}{Determines what is the attribution window for the actions.
+For example, \code{c("28d_click")} means the API returns all actions
+ that happened 28 days after someone clicked on the ad (Optional).
+  See details below for valid values.}
 
-\item{action.breakdowns}{How to break down action results. Supports more than one breakdowns (Optional). Run \code{\link{findActionBreakdowns}} to see all valid action breakdowns.}
+\item{action.breakdowns}{How to break down action results. Supports more than one breakdowns 
+(Optional). Run \code{\link{findActionBreakdowns}} to see all 
+valid action breakdowns.}
 
-\item{action.report.time}{Determines the report time of action stats. For example, if a person saw the ad on Jan 1st but converted on Jan 2nd, when you query the API with \code{action.report.time="impression"}, you will see a conversion on Jan 1st. When you query the API with \code{action.report.time="conversion"}, you will see a conversion on Jan 2nd (Optional).}
+\item{action.report.time}{Determines the report time of action stats. 
+For example, if a person saw the ad on Jan 1st but converted on Jan 2nd,
+ when you query the API with \code{action.report.time="impression"}, 
+ you will see a conversion on Jan 1st. When you query the API with 
+ \code{action.report.time="conversion"}, you will see a conversion 
+ on Jan 2nd (Optional).}
 
-\item{breakdowns}{How to break down the result. Does not support more than one breakdown, except \code{c("age", "gender")} and \code{"impression_device", "placement"}. The option \code{impression_device} cannot be used by itself (Optional). Run \code{\link{findBreakdowns}} to see all valid breakdowns.}
+\item{breakdowns}{How to break down the result. Does not support more than one breakdown,
+except \code{c("age", "gender")} and 
+\code{"impression_device", "placement"}. The option 
+\code{impression_device} cannot be used by itself (Optional). Run 
+\code{\link{findBreakdowns}} to see all valid breakdowns.}
 
-\item{date.preset}{Represents a relative time range (Optional). This field is ignored if \code{time.range} is specified. Run \code{\link{findDatePreset}} to see all valid presets.}
+\item{date.preset}{Represents a relative time range (Optional). This field is ignored if 
+\code{time.range} is specified. Run \code{\link{findDatePreset}} 
+to see all valid presets.}
 
-\item{level}{Represents the level of result (Optional). Must be one  of \code{ad}, \code{adset}, \code{campaign}, \code{account}.}
+\item{level}{Represents the level of result (Optional). Must be one  of \code{ad}, 
+\code{adset}, \code{campaign}, \code{account}.}
 
-\item{time.increment}{If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time.range} or \code{date.preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.}
+\item{time.increment}{If it is an integer, it is the number of days from 1 to 90. 
+After you pick a reporting period by using \code{time.range} or 
+\code{date.preset}, you may choose to have the results for the whole
+ period, or have results for smaller time slices. If "all_days" is used,
+  it means one result set for the whole period. If "monthly" is used, 
+  you will get one result set for each calendar month in the given period.
+   Or you can have one result set for each N-day period specified by this
+    param.}
 
 \item{time.range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
-\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
+\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
+queries in the console.}
 }
 \description{
 Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
@@ -63,23 +99,33 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           app.secret = "76xx79121xx0130x2x10a08x3e2x80xx", 
                           scope = "ads_management")
                           
-# get information on account
-info <- findInfo(account.id = "act_123456789012345", token = fbOAuth)
+# get ads on account
+ads <- findAds(account.id = "act_123456789012345", token = fbOAuth)
 
-# get date.preset
+# get adsets on account
+adsets <- findAdsets(account.id = "act_123456789012345", token = fbOAuth)
+
+# get ads on account
+camp <- findCampaigns(account.id = "act_123456789012345", token = fbOAuth)
+
+# get date.preset (this quarter)
 date <- findDatePreset()[grep("quarter", findDatePreset())]
 
 # fetch Ad data
-dat <- getAny(id = sample(info$ad$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(ads$id, 1), token = fbOAuth,
+ date.preset = date)
 
 # fetch Adset data
-dat <- getAny(id = sample(info$adsets$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(adsets$id, 1), token = fbOAuth,
+ date.preset = date)
 
 # fetch Campaign data
-dat <- getAny(id = sample(info$campaigns$id, 1), token = fbOAuth, date.preset = date)
+dat <- getAny(id = sample(campaigns$id, 1), token = fbOAuth,
+ date.preset = date)
 
 # fetch Account data
-dat <- getAny(id = "act_123456789012345", token = fbOAuth, date.preset = date)
+dat <- getAny(id = "act_123456789012345", token = fbOAuth, 
+date.preset = date)
 }
 
 }
@@ -87,6 +133,8 @@ dat <- getAny(id = "act_123456789012345", token = fbOAuth, date.preset = date)
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}}
+\code{\link{fbAuthenticate}}, \code{\link{findDatePreset}},
+\code{\link{findAds}}, \code{\link{findAdsets}}, 
+\code{\link{findCampaigns}}
 }
 

@@ -1,6 +1,10 @@
 # startUpMessage -------------------------------
-.onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Welcome to my package")
+.onAttach <- function(libname, pkgname = "fbAdsInsightsR") {
+  packageStartupMessage("Welcome to the fbAdsInsightsR package.", "\n\n",
+                            "Please contact a contributor",
+                            "if you encounter any issue.", "\n",
+                            "All documentation is openly available at",
+                            "bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src")
 }
 
 # scope check -------------------------------
@@ -169,7 +173,7 @@ bindPages.fbAdsData <- function(base, page){
                              page[[df_names[i]]])
   }
   
-  base$url <- page$url
+  if (length(page$url)) base$url <- page$url
   
   return(base)
 }
@@ -181,6 +185,12 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
   
   # get n
   i <- 1
+  
+  # verbose
+  if(verbose == TRUE && nrow(fbData$data) > 0){
+    cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
+        labels = paste0("Query #", i))
+  }
 
   # loop if url is present and
   while(nrow(fbData$data) < n && length(fbData$url)){
@@ -200,7 +210,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
     # verbose
     if(verbose == TRUE){
       cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
-                 labels = paste0("Query #", i))
+                 labels = paste0("Query #", i + 1))
     }
     
     # sleep 0.5 second between queries
@@ -256,57 +266,57 @@ constructFbAdsData <- function(response){
     
   } else if(length(json$data)) {
     
-  }
-  
-  # identify if insights present
-  json_vars <- subAdsDataNames(sub.ads.data = json)
-  
-  if (length(json_vars[grep("insights", json_vars)])){
+    # identify if insights present
+    json_vars <- subAdsDataNames(sub.ads.data = json)
     
-    # declare list to append in loop
-    insights_lst <- list()
-    
-    # extract insights from json and remove from original json
-    for(i in 1:length(json$data)){
+    if (length(json_vars[grep("insights", json_vars)])){
       
-      # extract insights
-      insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+      # declare list to append in loop
+      insights_lst <- list()
       
-      # remove from initial json
-      json$data[[i]]$insights <- NULL
-    }
-    
-    # name list data for toDF formula
-    ins_json <- list(data = insights_lst)
-    
-    # build class object depending on uri
-    if(length(json$paging$`next`)) {
-      # build class object
-      structure(list(data = json, insights = ins_json,
-                     url = json$paging$`next`),
-                class = "fbAdsData")
+      # extract insights from json and remove from original json
+      for(i in 1:length(json$data)){
+        
+        # extract insights
+        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+        
+        # remove from initial json
+        json$data[[i]]$insights <- NULL
+      }
+      
+      # name list data for toDF formula
+      ins_json <- list(data = insights_lst)
+      
+      # build class object depending on uri
+      if(length(json$paging$`next`)) {
+        # build class object
+        structure(list(data = json, insights = ins_json,
+                       url = json$paging$`next`),
+                  class = "fbAdsData")
+      } else {
+        
+        # build
+        structure(list(data = json, insights = ins_json),
+                  class = "fbAdsData")
+      }
+      
     } else {
       
-      # build
-      structure(list(data = json, insights = ins_json),
-                class = "fbAdsData")
+      # build class object depending on uri
+      if(length(json$paging$`next`)) {
+        
+        # build class object
+        structure(list(data = json, url = json$paging$`next`),
+                  class = "fbAdsData")
+        
+      } else {
+        
+        # build
+        structure(list(data = json), class = "fbAdsData")
+        
+      }
     }
-    
-  } else {
-    
-    # build class object depending on uri
-    if(length(json$paging$`next`)) {
-      # build class object
-      structure(list(data = json, url = json$paging$`next`),
-                class = "fbAdsData")
-    } else {
-      
-      # build
-      structure(list(data = json), class = "fbAdsData")
-    }
-    
   }
-
 }
 
 # json names -------------------------------
@@ -358,10 +368,11 @@ digest.fbAdsData <- function(fbAdsData){
         # identify nested lists
         vars <- names[grep(pat, names)]
         
+        # loop through vars to remove from fbAdsData[[k]]
+        fbData2 <- fbAdsData[[k]]
+        
         # if vars found extract
         if(length(vars)) {
-          # loop through vars to remove from fbAdsData[[k]]
-          fbData2 <- fbAdsData[[k]]
           
           # remove vars from fbData2
           for(i in 1:length(vars)){
@@ -370,12 +381,11 @@ digest.fbAdsData <- function(fbAdsData){
             }
           }
           
+        } else if (!length(vars)){
+          
           # fbData2 to data.frame
           base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, 
                                                         as.data.frame))
-          
-        } else if (!length(vars)){
-          base_df <- data.frame()
         }
         
         # declare row_df
@@ -456,7 +466,7 @@ digest.list <- function(json){
   if(length(json$data)){
     
     # extract names
-    names <- sub.ads.dataNames(json$data)
+    names <- subAdsDataNames(json$data)
     
     # pattern to look for
     pat <- paste0("^actions$|^unique_actions$|^cost_per_action_type$|",
@@ -546,7 +556,7 @@ converge <- function(x) UseMethod("converge")
 converge.fbAdsData <- function(fbData){
   
   # get tables
-  df_names <- names(base)[grep("^data$|^insights$", names(base))]
+  df_names <- names(fbData)[grep("^data$|^insights$", names(fbData))]
   
   # if data & insights present then
   if(length(df_names) > 1) {
@@ -558,4 +568,88 @@ converge.fbAdsData <- function(fbData){
   }
   
   return(single_frame)
+}
+
+# findObjects -----------------------------------
+findObjects <- function(id, token, fields = "default", ..., n = 100,
+                        verbose = FALSE, object){
+  
+  # check inputs
+  if(missing(id)){
+    stop("Missing id", call. = FALSE)
+  } else if (missing(token)){
+    stop("Missing token", call. = FALSE)
+  } else if (missing(object)){
+    stop("missing object", call. = FALSE)
+  }
+  
+  # check token verison
+  token <- checkToken(token)
+  
+  # create fields
+  if(fields[1] == "default") {
+    fields <- c("creative", "name")
+  } 
+  
+  if(class(fields) != "character") {
+    stop("Fields must be a character vector")
+  } else { 
+    # test if fields correct
+    testParam("fields", fields, "findAds")
+    
+    # createFields
+    fields <- createFields(fields)
+  }
+  
+  args <- unlist(list(...))
+  # create fields
+  if(length(args)) {
+    # test if fields correct
+    testParam("fields", args, "getAny")
+    
+    # createFields
+    args <- createFields(args)
+  } else {
+    args <- NULL
+  }
+  
+  if (length(args)){
+    # build url
+    url <- paste0("https://graph.facebook.com/v2.5/",
+                  id, "/",object,"?fields=",
+                  fields,
+                  "%2Cinsights{", args, "}",
+                  "&access_token=",
+                  token) 
+  } else {
+    # build url
+    url <- paste0("https://graph.facebook.com/v2.5/",
+                  id, "/",object,"?fields=",
+                  fields,
+                  "&access_token=",
+                  token)
+  }
+  
+  # call api
+  response <- httr::GET(url)
+  
+  # construct data
+  fb_data <- constructFbAdsData(response)
+  
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
+  } 
+  
+  # converge
+  fb_data <- converge(fb_data)
+  
+  return (fb_data)
 }

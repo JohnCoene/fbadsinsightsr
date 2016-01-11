@@ -10,7 +10,8 @@ findFields(fct)
 \item{fct}{Name of the function you need the fields for}
 }
 \description{
-Returns all valid \code{fields} which can be used in the get-family functions.
+Returns all valid \code{fields} which can be used in the get-family 
+functions.
 See details for more information.
 }
 \details{

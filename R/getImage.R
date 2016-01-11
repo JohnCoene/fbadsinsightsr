@@ -43,7 +43,7 @@ getImage <- function(account.id, token, n = 100, verbose = FALSE){
   # check token verison
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/",
+  uri <- paste0("https://graph.facebook.com/v2.5/",
                 account.id, "/adimages?fields=",
                 "id%2Cname%2Caccount_id%2Ccreated_time",
                 "%2Ccreatives%2Chash%2Cheight%2Cwidth",
@@ -54,34 +54,25 @@ getImage <- function(account.id, token, n = 100, verbose = FALSE){
                 token)
   
   # call api
-  response <- httr::GET(url)
+  response <- httr::GET(uri)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # construct data
+  fb_data <- constructFbAdsData(response)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to id or token. Error Message returned: ",
-               json$error$message))
-  } else if (length(json$data) == 0) {
-    warning(paste("No Image."))
-    
-    # make empt data.frame
-    dat <- data.frame()
-  } else {
-    
-    # parse
-    dat <- toDF(response)
-    
-    #paginate
-    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-    
-    # verbose
-    if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
-    } 
-    
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
   }
   
-  return(dat)
+  # converge
+  fb_data <- converge(fb_data)
+  
+  return(fb_data)
 }

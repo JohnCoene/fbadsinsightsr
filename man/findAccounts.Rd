@@ -27,7 +27,7 @@ Returns data.frame of account IDs and status. requires \code{ads_management} per
 act <- findAccounts(id = "me", token = "XXXXXXXXXXX")
 
 # get information on account
-obj <- findObjects(account.id = act[2,2], token = "XXXXXXXXXXX")
+data <- getAccount(account.id = act[2,2], token = "XXXXXXXXXXX")
 }
 
 }
@@ -35,6 +35,6 @@ obj <- findObjects(account.id = act[2,2], token = "XXXXXXXXXXX")
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{findObjects}}
+\code{\link{getAccount}}
 }
 
