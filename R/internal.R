@@ -343,7 +343,7 @@ subAdsDataNames <- function(sub.ads.data){
   return(names)
 }
 
-# generic
+# generic method to parse data
 digest <- function(x) UseMethod("digest")
 
 # digest fbAdsData
