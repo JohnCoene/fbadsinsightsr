@@ -1,14 +1,9 @@
-# scope_check
-# 
-# @description Checks if scopes matches available facebook permissions, href{https://developers.facebook.com/docs/facebook-login/permissions}{see documentation}
-# 
-# @param scope A \code{vector} of scopes (permissions), used in \code{\link{fb_authenticate}}
-# 
-# @seealso \code{\link{fb_authenticate}}
-# 
-# @author John coene \email{john.coene@@cmcm.com}  
-# 
-# @keywords internal
+# startUpMessage -------------------------------
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage("Welcome to my package")
+}
+
+# scope check -------------------------------
 scopeCheck <- function(scope) {
   
   # define valid scopes
@@ -38,7 +33,7 @@ scopeCheck <- function(scope) {
   }
 }
 
-# create_fields
+# create_fields -------------------------------
 createFields <- function(fields){
   
   # check input class
@@ -52,30 +47,17 @@ createFields <- function(fields){
   return(fields)
 }
 
-# to_libcurl
+# to_http -------------------------------
 toHTTP <- function(params = NULL){
   
-  if (length(params) == 0) {
+  if (!length(params)) {
     
     params <- ""
     
   } else {
     
-    # add %22 at either end of each lst element
-    params <- paste0("%22", params, "%22")
-    
-    for (i in 1:length(params)) {
-      if (i != length(params)) {
-        # add %2C BETWEEN lst element
-        params[i] <- paste0(params[i], "%2C%20")
-      } 
-    }
-    
-    # collapse
-    params <- paste(params, sep="", collapse = "")
-    
-    # add brackets
-    params <- paste0("[", params, "]")
+    params <- paste0("[",paste0("%22", params, "%22", collapse = "%2C%20"),
+                     "]", collapse = "")
     
   }
   
@@ -83,8 +65,7 @@ toHTTP <- function(params = NULL){
 
 }
 
-
-# testParam
+# testParam -------------------------------
 testParam <- function (params, param_vector, fct) {
   
   # set default
@@ -132,8 +113,7 @@ testParam <- function (params, param_vector, fct) {
 
 }
 
-# check_token
-#  
+# check_token -------------------------------
 checkToken <- function(token){
   
   # check token class
@@ -146,7 +126,7 @@ checkToken <- function(token){
   return(token)
 }
 
-# breakdowns
+# breakdowns -------------------------------
 buildBreakdowns <- function(breakdowns) {
   # breakdowns
   if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
@@ -168,14 +148,14 @@ buildBreakdowns <- function(breakdowns) {
     }
     
   } else if (length(breakdowns) >= 3) {
-    stop("Too many breakdowns specified. See @param")
+    stop("Too many breakdowns specified. See @param", call. = FALSE)
   }
   
   return(breakdowns)
   
 }
 
-# generic
+# generic ------------------------------
 bindPages <- function(base, page) UseMethod("bindPages")
 
 bindPages.fbAdsData <- function(base, page){
@@ -194,7 +174,7 @@ bindPages.fbAdsData <- function(base, page){
   return(base)
 }
 
-# generic
+# generic -------------------------------
 paginate <- function(fbData, verbose, n) UseMethod("paginate")
 
 paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
@@ -232,7 +212,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
   return(fbData)
 }
 
-# account status sort
+# account status sort -------------------------------
 accountStatus <- function(data) {
   
   # build status reference table for ;ater match
@@ -253,11 +233,12 @@ accountStatus <- function(data) {
   return(dat)
 }
 
-# constructor
+# constructor -------------------------------
 constructFbAdsData <- function(response){
   
   # check inputs
-  if(class(response) != "response") stop("input must be response")
+  if(class(response) != "response") stop("input must be response",
+                                         call. = FALSE)
   
   # parse to list
   json <- rjson::fromJSON(rawToChar(response$content))
@@ -328,7 +309,7 @@ constructFbAdsData <- function(response){
 
 }
 
-# json names
+# json names -------------------------------
 subAdsDataNames <- function(sub.ads.data){
   # find which nested list has largest number of variables
   n_vect <- vector()
@@ -347,10 +328,10 @@ subAdsDataNames <- function(sub.ads.data){
   return(names)
 }
 
-# generic method to parse data
+# generic method to parse data ==============================
 digest <- function(x) UseMethod("digest")
 
-# digest fbAdsData
+# digest fbAdsData -------------------------------
 digest.fbAdsData <- function(fbAdsData){
   
   # initialise k 
@@ -370,22 +351,32 @@ digest.fbAdsData <- function(fbAdsData){
         # extract names
         names <- subAdsDataNames(fbAdsData[[k]])
         
+        # pattern to look for
+        pat <- paste0("^actions$|^unique_actions$|^cost_per_action_type$|",
+                      "^cost_per_unique_action_type$|^website_ctr$")
+        
         # identify nested lists
-        vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
-                           names)]
+        vars <- names[grep(pat, names)]
         
-        # loop through vars to remove from fbAdsData[[k]]
-        fbData2 <- fbAdsData[[k]]
-        
-        # remove vars from fbData2
-        for(i in 1:length(vars)){
-          for(j in 1:length(fbData2$data)){
-            fbData2$data[[j]][which(names(fbData2$data[[j]]) == vars[i])] <- NULL
+        # if vars found extract
+        if(length(vars)) {
+          # loop through vars to remove from fbAdsData[[k]]
+          fbData2 <- fbAdsData[[k]]
+          
+          # remove vars from fbData2
+          for(i in 1:length(vars)){
+            for(j in 1:length(fbData2$data)){
+              fbData2$data[[j]][which(names(fbData2$data[[j]]) == vars[i])] <- NULL
+            }
           }
+          
+          # fbData2 to data.frame
+          base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, 
+                                                        as.data.frame))
+          
+        } else if (!length(vars)){
+          base_df <- data.frame()
         }
-        
-        # fbData2 to data.frame
-        base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, as.data.frame))
         
         # declare row_df
         row_df <- data.frame()
@@ -458,7 +449,7 @@ digest.fbAdsData <- function(fbAdsData){
   return (fbAdsData)
 }
 
-
+#digest list -------------------------------
 digest.list <- function(json){
   
   # check if data present in JSON
@@ -467,9 +458,12 @@ digest.list <- function(json){
     # extract names
     names <- sub.ads.dataNames(json$data)
     
+    # pattern to look for
+    pat <- paste0("^actions$|^unique_actions$|^cost_per_action_type$|",
+                  "^cost_per_unique_action_type$|^website_ctr$")
+    
     # identify nested lists
-    vars <- names[grep("^actions$|^unique_actions$|^cost_per_action_type$|^cost_per_unique_action_type$|^website_ctr$",
-                       names)]
+    vars <- names[grep(pat, names)]
     
     # loop through vars to remove from json
     json2 <- json
@@ -537,11 +531,31 @@ digest.list <- function(json){
       }
     }
     
-    
     # if no data in json
   } else if (!length(json$data)) {
     base_df <- data.frame()
   }
   
   return(base_df)
+}
+
+# converge generic --------------------
+converge <- function(x) UseMethod("converge")
+
+# define converge
+converge.fbAdsData <- function(fbData){
+  
+  # get tables
+  df_names <- names(base)[grep("^data$|^insights$", names(base))]
+  
+  # if data & insights present then
+  if(length(df_names) > 1) {
+    if(nrow(fbData$data) == nrow(fbData$insights)){
+      single_frame <- cbind.data.frame(fbData$data, fbData$insights)
+    }
+  } else {
+    single_frame <- fbData$data
+  }
+  
+  return(single_frame)
 }
