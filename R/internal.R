@@ -306,8 +306,8 @@ toDF <- function(response){
             
           } else { # if no lst found
             # create NA
-            dat_na <- rbind.data.frame(rep(NA, ncol(dat)))
-            names(dat_na) <- names(dat)
+            dat_na <- rbind.data.frame(rep(NA, 1))
+            names(dat_na) <- "nan"
             
             # bind
             row_df <- plyr::rbind.fill(row_df, dat_na)
@@ -319,6 +319,8 @@ toDF <- function(response){
         
         base_df <- cbind.data.frame(base_df, row_df)
         row_df <- NULL
+        
+        base_df$nan <- NULL
       }
     }
     
