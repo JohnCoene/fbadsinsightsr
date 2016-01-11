@@ -81,9 +81,9 @@ getAny <- function(id, token, fields = "default", n = 100,
   
   # check inputs
   if(missing(id)){
-    stop("Missing id")
+    stop("Missing id", call. = FALSE)
   } else if (missing(token)){
-    stop("Missing token")
+    stop("Missing token", call. = FALSE)
   } 
   
   # check if region and action_carousel
@@ -92,7 +92,8 @@ getAny <- function(id, token, fields = "default", n = 100,
       if(fields[i] == "action_carousel_card_id" ||
          fields[i] == "action_carousel_card_name"){
         stop(paste0("region cannot be used with action_carousel_card_id",
-                    "or action_carousel_card_name"))
+                    "or action_carousel_card_name"),
+             call. = FALSE)
       }
     }
   }
@@ -102,7 +103,8 @@ getAny <- function(id, token, fields = "default", n = 100,
     fields <- NULL
   } else {
     if(class(fields) != "character") {
-      stop("Fields must be a character vector")
+      stop("Fields must be a character vector", 
+           call. = FALSE)
     } else { 
       # test if fields correct
       testParam("fields", fields)
@@ -143,7 +145,8 @@ getAny <- function(id, token, fields = "default", n = 100,
     action.report.time <- paste0("&action_report_time=", action.report.time)
   } else if (length(action.report.time) > 1) {
     stop(paste0("action.report.time can only hold one value:", 
-                "impression OR conversion"))
+                "impression OR conversion"),
+         call. = FALSE)
   }
   
   # breakdowns
@@ -154,7 +157,8 @@ getAny <- function(id, token, fields = "default", n = 100,
   # make date.preset NULL if time.range specified
   if (length(date.preset) == 1 && length(time.range) >= 1) {
     date.preset <- NULL
-    warning("date.preset is ignored as time.range is specified")
+    warning("date.preset is ignored as time.range is specified",
+            call. = FALSE)
   }
   
   if (length(date.preset) == 1) {
@@ -164,7 +168,12 @@ getAny <- function(id, token, fields = "default", n = 100,
     
     date.preset <- paste0("&date_preset=", date.preset)
   } else if (length(date.preset) > 1) {
-    stop("date.preset can only hold one of the following values: today, yesterday, last_3_days, this_week, last_week, last_7_days, last_14_days, last_28_days, last_30_days, last_90_days, this_month, last_month, this_quarter, last_3_months, lifetime")
+    stop(paste0("date.preset can only hold one of the following values: today,", 
+                " yesterday, last_3_days, this_week, last_week, last_7_days,",
+                " last_14_days, last_28_days, last_30_days, last_90_days, ",
+                " this_month, last_month, this_quarter, last_3_months,",
+                " lifetime"),
+         call. = FALSE)
   }
   
   # level
@@ -175,20 +184,23 @@ getAny <- function(id, token, fields = "default", n = 100,
     
     level <- paste0("&level=", level)
   } else if (length(level) > 1) {
-    stop("level can only hold one of the following values: ad, adset, campaign, account")
+    stop(paste0("level can only hold one of the following values: ad, adset,",
+                " campaign, account"), call. = FALSE)
   }  
   
   #time increment
   if(length(time.increment) == 1) {
     
     if(is.null(time.range) && is.null(date.preset)) {
-      stop("time.increment must be used with either date.preset OR time.range")
+      stop("time.increment must be used with either date.preset OR time.range",
+           call. = FALSE)
     }
     
     # test if interger/numeric or character is passed
     if(class(time.increment) == "numeric" || class(time.increment) == "interger"){
       if(time.increment < 1 || time.increment > 90) {
-        stop("If integer is passed to time.increment (number of days) must be between 1 and 90.")
+        stop(paste0("If integer is passed to time.increment (number of days)",
+                    " must be between 1 and 90. See @param."), call. = FALSE)
       } else {
         time.increment <- paste0("&time_increment=", time.increment)
       }
@@ -200,7 +212,8 @@ getAny <- function(id, token, fields = "default", n = 100,
     }
     
   } else if (length(time.increment) > 1) {
-    stop("time.increment can only hold one of the following values: monthly OR all_days")
+    stop(paste0("time.increment can only hold one of the following values:",
+                " monthly OR all_days"), call. = FALSE)
   }
   
   # time range
@@ -210,29 +223,31 @@ getAny <- function(id, token, fields = "default", n = 100,
     
     # further checks
     if(names(time.range)[1] != "since"){
-      stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
+      stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')",
+           call. = FALSE)
     } else if (class(date_check) == "try-error" || is.na(date_check)){
-      stop("Wrong date format. Must be YYYY-MM-DD")
+      stop("Wrong date format. Must be YYYY-MM-DD", call. = FALSE)
     }
     
     time.range <- paste0("&since=", time.range[1], "&", "until=", time.range[2])
     
   } else if (length(time.range) > 2) {
-    stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')")
+    stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')",
+         call. = FALSE)
   }
   
   # check token verison
   token <- checkToken(token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.5/",
+  uri <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/insights?fields=",fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, "&access_token=", token)
   
   # call api
-  response <- httr::GET(url)
+  response <- httr::GET(uri)
   
   # construct data
   fb_data <- constructFbAdsData(response)
@@ -247,9 +262,11 @@ getAny <- function(id, token, fields = "default", n = 100,
   if (verbose == TRUE) {
     cat(paste(n, "results requested, API returned", nrow(fb_data$data),
               "rows", "\n"))
-  } 
-
+  }
   
+  # converge
+  fb_data <- converge(fb_data)
+
   return(fb_data)
   
 }
