@@ -4,9 +4,9 @@
 \alias{getAny}
 \title{getAny}
 \usage{
-getAny(id, token, fields = "default", action.attribution.windows,
+getAny(id, token, fields = "default", n = 100, action.attribution.windows,
   action.breakdowns, action.report.time, breakdowns, date.preset, level,
-  time.increment, time.range, n = 100, verbose = FALSE)
+  time.increment, time.range, verbose = FALSE)
 }
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -14,6 +14,8 @@ getAny(id, token, fields = "default", action.attribution.windows,
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
 \item{fields}{There are in total 73 valid fields; default (\code{NULL}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.}
+
+\item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{action.attribution.windows}{Determines what is the attribution window for the actions. For example, \code{c("28d_click")} means the API returns all actions that happened 28 days after someone clicked on the ad (Optional). See details below for valid values.}
 
@@ -30,8 +32,6 @@ getAny(id, token, fields = "default", action.attribution.windows,
 \item{time.increment}{If it is an integer, it is the number of days from 1 to 90. After you pick a reporting period by using \code{time.range} or \code{date.preset}, you may choose to have the results for the whole period, or have results for smaller time slices. If "all_days" is used, it means one result set for the whole period. If "monthly" is used, you will get one result set for each calendar month in the given period. Or you can have one result set for each N-day period specified by this param.}
 
 \item{time.range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
-
-\item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
 }
