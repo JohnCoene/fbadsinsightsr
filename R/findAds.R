@@ -82,9 +82,6 @@ findAds <- function (id, token, fields = "default", ..., n = 100,
   # call api
   response <- httr::GET(url)
   
-  # call api
-  response <- httr::GET(url)
-  
   # construct data
   fb_data <- constructFbAdsData(response)
   
@@ -99,7 +96,10 @@ findAds <- function (id, token, fields = "default", ..., n = 100,
     cat(paste(n, "results requested, API returned", nrow(fb_data$data),
               "rows", "\n"))
   } 
+  
+  # converge
+  fb_data <- converge(fb_data)
     
-  return (dat)
+  return (fb_data)
   
 }
