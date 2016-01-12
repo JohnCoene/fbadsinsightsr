@@ -1,4 +1,4 @@
-#' whatStatus
+#' checkStatus
 #' 
 #' @description Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
 #' 
@@ -20,14 +20,32 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' get information on account
-#' ads <- grabAds(id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' # set token
+#' TK <- "XXXXXXXXXXXXXXXX"
 #' 
-#' # take random ad.id
-#' rand_id <- sample(ads$id, 1)
+#' # get information on account
+#' ads <- grabAds(account.id = "act_123456789012345", token = TK)
 #' 
-#' # getStatus
-#' (status <- findStatus(id = rand_id, token = "XXXXXXXXXX"))
+#' # loop through ads to find active one (to then get data)
+#' i <- 1
+#' 
+#' while (status != "ACTIVE"){
+#' 
+#'    # check status
+#'    status <- whatStatus(ads$id[i], TK)[,effective_status]
+#' 
+#'    # iterate
+#'    i <- i + 1
+#' 
+#'    # stop if all ads gone through
+#'    if(i == nrow(ads)) stop("No ACTIVE ads found", call. = F)
+#' }
+#' 
+#' # exctract active ad
+#' active_ad <- ad[i,]
+#' 
+#' # get data
+#' ad_data <- getAd(active_ad)
 #' }
 #' 
 #' @seealso \code{\link{grabAds}}
@@ -35,7 +53,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-whatStatus <- function(id, token, fields = "effective_status") {
+checkStatus <- function(id, token, fields = "effective_status") {
   
   # check inputs
   if(missing(id)){
@@ -58,7 +76,7 @@ whatStatus <- function(id, token, fields = "effective_status") {
     stop("Fields must be a character vector")
   } else { 
     # test if fields correct
-    testParam("fields", fields, "findStatus")
+    testParam("fields", fields, "checkStatus")
     
     # createFields
     fields <- createFields(fields)

@@ -1,4 +1,4 @@
-#' whatTarget
+#' checkTarget
 #' 
 #' @description Retrieves the targeting description of a specific ad or adset.
 #' 
@@ -27,7 +27,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-whatTarget <- function(id, token, n = 100){
+checkTarget <- function(id, token, n = 100){
   
   # check inputs
   if(missing(id)){
