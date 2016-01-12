@@ -6,7 +6,7 @@
 \usage{
 getAny(id, token, fields = "default", n = 100, action.attribution.windows,
   action.breakdowns, action.report.time, breakdowns, date.preset, level,
-  time.increment, time.range, verbose = FALSE)
+  time.increment, time.range, summary = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
@@ -15,18 +15,15 @@ getAny(id, token, fields = "default", n = 100, action.attribution.windows,
 short-term token from 
 \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 
-\item{fields}{There are in total 73 valid fields; default 
-(\code{NULL}) returns the most popular ones. Run \code{\link{findFields}}
- to see all valid fields.}
+\item{fields}{There are in total 73 valid fields defaults to 
+(\code{default}) which returns the most popular ones. 
+Run \code{\link{findFields}} to see all valid fields.}
 
 \item{n}{Number of results to retrieve, defaults to \code{100}. 
 When you make an API request, you will usually not receive all of the 
 results of that request in a single response. 
 This is because some responses could contain thousands of objects so 
-most responses are paginated by default. \code{previous} fetches the 
-previous page of response (after the initial query) similarly 
-\code{next} fetches the next page and \code{NULL} does not paginate 
-(only makes one query).}
+most responses are paginated by default.}
 
 \item{action.attribution.windows}{Determines what is the attribution window for the actions.
 For example, \code{c("28d_click")} means the API returns all actions
@@ -34,7 +31,7 @@ For example, \code{c("28d_click")} means the API returns all actions
   See details below for valid values.}
 
 \item{action.breakdowns}{How to break down action results. Supports more than one breakdowns 
-(Optional). Run \code{\link{findActionBreakdowns}} to see all 
+(Optional). Run \code{\link{findParams}} to see all 
 valid action breakdowns.}
 
 \item{action.report.time}{Determines the report time of action stats. 
@@ -48,10 +45,10 @@ For example, if a person saw the ad on Jan 1st but converted on Jan 2nd,
 except \code{c("age", "gender")} and 
 \code{"impression_device", "placement"}. The option 
 \code{impression_device} cannot be used by itself (Optional). Run 
-\code{\link{findBreakdowns}} to see all valid breakdowns.}
+\code{\link{findParams}} to see all valid breakdowns.}
 
 \item{date.preset}{Represents a relative time range (Optional). This field is ignored if 
-\code{time.range} is specified. Run \code{\link{findDatePreset}} 
+\code{time.range} is specified. Run \code{\link{findParams}} 
 to see all valid presets.}
 
 \item{level}{Represents the level of result (Optional). Must be one  of \code{ad}, 
@@ -68,8 +65,18 @@ After you pick a reporting period by using \code{time.range} or
 
 \item{time.range}{time range must be \code{c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')}}
 
+\item{summary}{Default value: \code{FALSE}
+Determine whether to return a summary section with the same fields as 
+specified by fields will be included in the summary section. If 
+\code{TRUE} the data structure returned will be of type list 
+(see @return below)}
+
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 queries in the console.}
+}
+\value{
+Note that if summary is \code{TRUE} the function returns a 
+\code{list}
 }
 \description{
 Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
@@ -77,18 +84,8 @@ Get insights on advertising performances of an ad, an adset, a campaign or even 
 \details{
 This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 it is strongly encouraged to have a look a the latter link.
-only the following parameters are not available \code{default_summary}, \code{filtering}, 
-\code{summary}, \code{sort} and \code{time_ranges}.
-
-Valid \code{action.attribution.windows}:
-\itemize{
-\item 1d_view
-\item 7d_view
-\item 28d_view
-\item 1d_click
-\item 7d_click
-\item 28d_click
-}
+only the following parameters are not available \code{default_summary}, 
+\code{filtering}, \code{summary}, \code{sort} and \code{time_ranges}.
 
 \code{getAny} may replace any other GET function. Indeed all functions share the same parameters and fields, the data that is returned solely depend on the object id the functions is fed. See examples.
 }
@@ -100,32 +97,32 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           scope = "ads_management")
                           
 # get ads on account
-ads <- findAds(account.id = "act_123456789012345", token = fbOAuth)
+ads <- grabAds(account.id = "act_123456789012345", token = fbOAuth)
 
 # get adsets on account
-adsets <- findAdsets(account.id = "act_123456789012345", token = fbOAuth)
+adsets <- grabAdsets(account.id = "act_123456789012345", token = fbOAuth)
 
 # get ads on account
-camp <- findCampaigns(account.id = "act_123456789012345", token = fbOAuth)
+camp <- grabCampaigns(account.id = "act_123456789012345", token = fbOAuth)
 
 # get date.preset (this quarter)
-date <- findDatePreset()[grep("quarter", findDatePreset())]
+date <- findParams("date.preset")[grep("quarter", findParams("date.preset"))]
 
 # fetch Ad data
 dat <- getAny(id = sample(ads$id, 1), token = fbOAuth,
- date.preset = date)
+              date.preset = date)
 
 # fetch Adset data
 dat <- getAny(id = sample(adsets$id, 1), token = fbOAuth,
- date.preset = date)
+              date.preset = date)
 
 # fetch Campaign data
 dat <- getAny(id = sample(campaigns$id, 1), token = fbOAuth,
- date.preset = date)
+              date.preset = date)
 
 # fetch Account data
 dat <- getAny(id = "act_123456789012345", token = fbOAuth, 
-date.preset = date)
+              date.preset = date)
 }
 
 }
@@ -133,8 +130,8 @@ date.preset = date)
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}}, \code{\link{findDatePreset}},
-\code{\link{findAds}}, \code{\link{findAdsets}}, 
-\code{\link{findCampaigns}}
+\code{\link{fbAuthenticate}}, \code{\link{findParams}},
+\code{\link{grabAds}}, \code{\link{grabAdsets}}, 
+\code{\link{grabCampaigns}}
 }
 

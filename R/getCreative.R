@@ -34,13 +34,13 @@
 #'                           app.secret = "16xx79321xx0130x2x10a08x3e2x30xx", 
 #'                           scope = "ads_management")
 #' # get account ids
-#' act <- findAccounts(id = "me", token = fbOAuth)
+#' act <- grabAccounts(id = "me", token = fbOAuth)
 #' 
 #' # get all creatives in ad account
 #' img_acc <- getCreative(id = act[2,2], token = fbOAuth)
 #' 
 #' # get campaigns, adsets and ads IDs from account
-#' ads <- findAds(account.id = act[2,2], token = token = fbOAuth)
+#' ads <- grabAds(account.id = act[2,2], token = token = fbOAuth)
 #' 
 #' # get ad creatives
 #' crea_ad <- getCreative(id = sample(ads$id, 1), token = fbOAuth)
@@ -48,8 +48,8 @@
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
-#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findAccounts}},
-#'  \code{\link{findAds}}
+#' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}},
+#'  \code{\link{grabAds}}
 #' 
 #' @export
 getCreative <- function(id, token, n = 100, verbose = FALSE){
@@ -60,10 +60,24 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
   } else if (missing(token)){
     stop("Missing token")
   } 
-
+  
+  # create field
+  if(class(fields) != "character") {
+    stop("Fields must be a character vector", 
+         call. = TRUE)
+  } else { 
+    # make default
+    if(fields[1] == "default") fields <- c("id", "name", "image_url")
+    
+    # test if fields correct
+    testParam("fields", fields, "getImage")
+    
+    # createFields
+    fields <- createFields(fields)
+  }
+  
   # check token verison
   token <- checkToken(token)
-  
   
   uri <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/adcreatives?fields=",
@@ -75,8 +89,8 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
                 "%2Cobject_type",
                 "%2Cproduct_set_id%2Crun_status%2Ctemplate_url",
                 "%2Cthumbnail_url%2Ctitle%2Curl_tags",
-                "%2Capplink_treatment"
-                , "&access_token=",
+                "%2Capplink_treatment",
+                "&access_token=",
                 token)
   
   # call api

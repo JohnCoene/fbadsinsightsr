@@ -43,13 +43,13 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           app.secret = "16xx79321xx0130x2x10a08x3e2x30xx", 
                           scope = "ads_management")
 # get account ids
-act <- findAccounts(id = "me", token = fbOAuth)
+act <- grabAccounts(id = "me", token = fbOAuth)
 
 # get all creatives in ad account
 img_acc <- getCreative(id = act[2,2], token = fbOAuth)
 
 # get campaigns, adsets and ads IDs from account
-ads <- findAds(account.id = act[2,2], token = token = fbOAuth)
+ads <- grabAds(account.id = act[2,2], token = token = fbOAuth)
 
 # get ad creatives
 crea_ad <- getCreative(id = sample(ads$id, 1), token = fbOAuth)
@@ -60,7 +60,7 @@ crea_ad <- getCreative(id = sample(ads$id, 1), token = fbOAuth)
 John Coene <john.coene@cmcm.com>
 }
 \seealso{
-\code{\link{fbAuthenticate}}, \code{\link{findAccounts}},
- \code{\link{findAds}}
+\code{\link{fbAuthenticate}}, \code{\link{grabAccounts}},
+ \code{\link{grabAds}}
 }
 
