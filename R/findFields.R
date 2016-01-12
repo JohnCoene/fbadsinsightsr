@@ -19,7 +19,7 @@
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
-#' \item \code{\link{whatStatus}}
+#' \item \code{\link{checkStatus}}
 #' }
 #' 
 #' @examples 
@@ -82,30 +82,37 @@ findFields <- function(fct ="getAny") {
     
   } else if(fct == "grabCampaigns" || fct == "grabAdsets" || 
             fct == "grabAds"){
+    
     fields <- c("id", "name", 
                 "account_id", "adset", "adset_id", "adlabels",
                 "bid_amount", "bid_info", "bid_type", "configured_status",
                 "effective_status", "created_time", "update_time",
                 "creative", "campaign_id")
     
-  } else if (fct == "whatStatus"){
+  } else if (fct == "checkStatus"){
     
     #build fields
     fields <- c("effective_status", "configured_status", "created_time",
                 "name", "account_id")
   } else if (fct == "getImage") {
+    
     fields <- c("id", "name", "account_id", "created_time", "creatives",
                 "hash", "height", "width", "original_height", "original_width",
                 "permalink_url", "status", "updated_time", "url", "url128")
+    
   } else if (fct == "getCreative") {
+    
     fields <- c("id", "adlabels", "body", "call_to_action_type", "image_hash",
                 "image_url", "instagram_actor_id", "instagram_permalink_url",
                 "instagram_story_id", "link_url", "name", "object_id", 
                 "object_url", "object_story_id", "object_type", 
                 "product_set_id", "run_status", "template_url", 
                 "thumbnail_url", "title", "url_tags", "applink_treatment")
+    
   } else {
+    
     stop("wrong fct argument. See details.")
+    
   }
   
   # sort
