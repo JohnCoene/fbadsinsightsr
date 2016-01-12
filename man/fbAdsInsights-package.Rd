@@ -35,25 +35,46 @@ OAUTH <- fbAuthenticate("1234567890123456",
                         scope = "ads_management",
                         app.name = "myApp")
     
-# get ads on account
-ads <- findAds("act_123456789012345", OAUTH, fields = "default",
+# grab ads on account
+ads <- grabAds("act_123456789012345", OAUTH, fields = "default",
                "date_start")
 
 # filter ads by date
 ads <- ads[as.Date(ads$insights_date_start) >= as.Date("2016-01-01"),]
     
-# get adsets on account
-adsets <- findAdsets(id = "act_123456789012345", token = OAUTH)
+# grab adsets on account
+adsets <- grabAdsets(id = "act_123456789012345", token = OAUTH)
     
-# get ads on account using temporary token (see @param) - fetching ALL fields
-camp <- findCampaigns(id = "act_123456789012345", token = "XXXXXXXXXXXXXXX",
+# grab ads on account using temporary token (see @param) - fetching ALL fields
+camp <- grabCampaigns(id = "act_123456789012345", token = "XXXXXXXXXXXXXXX",
                       fields = findFields("findCampaigns"))
     
 # find valid date.preset (this quarter)
 date <- findParams("date.preset")[grep("quarter", findParams("date.preset"))]
+
+# set seed for reproducability
+set.seed(19880525)
+
+# loop through ads to find active one (to then get data)
+i <- 1
+
+while (status != "ACTIVE"){
+  
+  # check status
+  status <- whatStatus(ads$id[i], OAUTH)[,effective_status]
+  
+  # iterate
+  i <- i + 1
+  
+  # stop if all ads done
+  if(i == nrow(ads)) stop("No ACTIVE ads found", call. = F)
+}
+
+# exctract active ad
+active_ad <- ad[i,]
     
 # fetch Ad data
-dat <- getAny(id = sample(ads$id, 1), token = OAUTH,
+dat <- getAny(id = , token = OAUTH,
               date.preset = date, time.increment = 1)
 
 # find breakdown (region)

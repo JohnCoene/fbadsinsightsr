@@ -28,7 +28,7 @@ Applies to the following functions (\code{fct} argument, i.e.:
 \item \code{\link{grabCampaigns}}
 \item \code{\link{grabAdsets}}
 \item \code{\link{grabAds}}
-\item \code{\link{whatStatus}}
+\item \code{\link{checkStatus}}
 }
 }
 \examples{
