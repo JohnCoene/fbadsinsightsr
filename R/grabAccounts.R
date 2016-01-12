@@ -1,4 +1,4 @@
-#' findAccounts
+#' grabAccounts
 #' 
 #' @description Fetches all accounts under one business ID. All accounts to which the user has access to that is.
 #' 
@@ -23,7 +23,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAccounts <- function(id, token, n = 100, verbose = FALSE) {
+grabAccounts <- function(id, token, n = 100, verbose = FALSE) {
   
   # check inputs
   if(missing(id)){

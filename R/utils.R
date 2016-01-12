@@ -1,10 +1,10 @@
 # startUpMessage -------------------------------
 .onAttach <- function(libname, pkgname = "fbAdsInsightsR") {
   packageStartupMessage("Welcome to the fbAdsInsightsR package.", "\n\n",
-                            "Please contact a contributor",
-                            "if you encounter any issue.", "\n",
-                            "All documentation is openly available at",
-                            "bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src")
+                        "Please contact a contributor",
+                        " if you encounter an issue.", "\n",
+                        "All documentation is openly available at: ",
+                        "bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src")
 }
 
 # scope check -------------------------------
@@ -66,7 +66,7 @@ toHTTP <- function(params = NULL){
   }
   
   return (params)
-
+  
 }
 
 # testParam -------------------------------
@@ -78,22 +78,21 @@ testParam <- function (params, param_vector, fct) {
   }
   
   if (params == "action_attribution_windows") {
-    options <- c("1d_view", "7d_view", "28d_view", "1d_click", "7d_click", 
-                 "28d_click", "default")
+    options <- findParams("action.attribution.windows")
   } else if (params == "action_breakdowns") {
-    options <- findActionBreakdowns()
+    options <- findParams("action.breakdowns")
   } else if (params == "fields") {
     options <- findFields(fct)
   } else if (params == "action_report_time") {
     options <- c("impression", "conversion")
   } else if (params == "breakdowns") {
-    options <- findBreakdowns()
+    options <- findParams("breakdowns")
   } else if (params == "date_preset") {
-    options <- findDatePreset()
+    options <- findParams("date.preset")
   } else if (params == "level") {
     options <- c("ad", "adset", "campaign", "account") 
   } else if (params == "time_increment") {
-    options <- c("monthly", "all_days")
+    options <- findParams("time.increment")
   }
   
   for (i in 1:length(param_vector)) {
@@ -108,13 +107,12 @@ testParam <- function (params, param_vector, fct) {
       stop (paste0("Wrong ", params, " parameter specified '", 
                    param_vector_error, "'", 
                    " is not valid. See find-family functions",
-                   " findFields(), findActionBreakdowns(), findBreakdowns()",
-                   " findDatePreset().",
+                   " findFields() or findParams() respectively.",
                    " All valid values are: ", options_print),
             call. = FALSE)
     }
   }
-
+  
 }
 
 # check_token -------------------------------
@@ -148,7 +146,7 @@ buildBreakdowns <- function(breakdowns) {
     } else if (length(breakdowns) == 1) {
       breakdowns <- paste0("&breakdowns=", breakdowns)
     } else {
-      stop("Wrong breakdowns specified. Run findBreakdowns()", call. = FALSE)
+      stop("Wrong breakdowns specified. Run findParams('breakdowns')", call. = FALSE)
     }
     
   } else if (length(breakdowns) >= 3) {
@@ -170,7 +168,7 @@ bindPages.fbAdsData <- function(base, page){
   # append
   for(i in 1:length(df_names)){
     base[[df_names[i]]] <- plyr::rbind.fill(base[[df_names[i]]], 
-                             page[[df_names[i]]])
+                                            page[[df_names[i]]])
   }
   
   if (length(page$url)) base$url <- page$url
@@ -191,7 +189,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
     cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
         labels = paste0("Query #", i))
   }
-
+  
   # loop if url is present and
   while(nrow(fbData$data) < n && length(fbData$url)){
     
@@ -210,7 +208,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
     # verbose
     if(verbose == TRUE){
       cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
-                 labels = paste0("Query #", i + 1))
+          labels = paste0("Query #", i + 1))
     }
     
     # sleep 0.5 second between queries
@@ -300,6 +298,27 @@ constructFbAdsData <- function(response){
                   class = "fbAdsData")
       }
       
+    } else if (length(names(json)[grep("summary", names(json))])) {
+      
+      # name list data for toDF formula
+      sum_json <- list(data = list(json$summary))
+      
+      # json data
+      json$summary <- NULL
+      
+      # build class object depending on uri
+      if(length(json$paging$`next`)) {
+        # build class object
+        structure(list(data = json, summary = json,
+                       url = json$paging$`next`),
+                  class = "fbAdsData")
+      } else {
+        
+        # build
+        structure(list(data = json, summary = sum_json),
+                  class = "fbAdsData")
+      }
+      
     } else {
       
       # build class object depending on uri
@@ -321,6 +340,7 @@ constructFbAdsData <- function(response){
 
 # json names -------------------------------
 subAdsDataNames <- function(sub.ads.data){
+  
   # find which nested list has largest number of variables
   n_vect <- vector()
   
@@ -353,7 +373,8 @@ digest.fbAdsData <- function(fbAdsData){
     if (names(fbAdsData)[[k]] == "url"){
       url <- fbAdsData$url
     } else if (names(fbAdsData)[[k]] == "data" || 
-               names(fbAdsData)[[k]] == "insights"){
+               names(fbAdsData)[[k]] == "insights" ||
+               names(fbAdsData)[[k]] == "summary"){
       
       # check if data present in fbAdsData[[k]]
       if(length(fbAdsData[[k]]$data)){
@@ -380,13 +401,11 @@ digest.fbAdsData <- function(fbAdsData){
               fbData2$data[[j]][which(names(fbData2$data[[j]]) == vars[i])] <- NULL
             }
           }
+        } 
           
-        } else if (!length(vars)){
-          
-          # fbData2 to data.frame
-          base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, 
+        # fbData2 to data.frame
+        base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, 
                                                         as.data.frame))
-        }
         
         # declare row_df
         row_df <- data.frame()
@@ -555,19 +574,49 @@ converge <- function(x) UseMethod("converge")
 # define converge
 converge.fbAdsData <- function(fbData){
   
+  # remove url
+  fbData$url <- NULL
+  
   # get tables
-  df_names <- names(fbData)[grep("^data$|^insights$", names(fbData))]
-  
-  # if data & insights present then
-  if(length(df_names) > 1) {
-    if(nrow(fbData$data) == nrow(fbData$insights)){
-      single_frame <- cbind.data.frame(fbData$data, fbData$insights)
+  df_names <- names(fbData)[grep("^data$|^insights$|^summary$",
+                                 names(fbData))]
+  # merge (or not)
+  if(length(df_names) > 1){
+    
+    if(length(df_names[grep("summary", df_names)])) {
+      
+      # return list with data and summary
+      data <- as.list(fbData)
+      
+      # reset class to list
+      class(data) <- "list"
+      
+      # return data and insights
+    } else if (length(df_names[grep("^insights$", df_names)])) {
+      
+      # check rows to see if can be bound to data.frame
+      if(nrow(fbData[["data"]]) ==
+         nrow(fbData[["insights"]])){
+        
+        # add insights_ before var names of insights
+        names(fbData[["insights"]]) <- paste0("insights_",
+                                              names(fbData[["insights"]]))
+        
+        # bind
+        data <- cbind.data.frame(fbData[["data"]], fbData[["insights"]])
+        
+        # else return a list
+      } else {
+        data <- as.list(fbData)
+      }
+      
     }
+    
   } else {
-    single_frame <- fbData$data
+    data <- fbData$data
   }
-  
-  return(single_frame)
+
+  return(data)
 }
 
 # findObjects -----------------------------------
@@ -588,14 +637,14 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   # create fields
   if(fields[1] == "default") {
-    fields <- c("creative", "name")
+    fields <- c("name", "id")
   } 
   
   if(class(fields) != "character") {
-    stop("Fields must be a character vector")
+    stop("Fields must be a character vector", call. = FALSE)
   } else { 
     # test if fields correct
-    testParam("fields", fields, "findAds")
+    testParam("fields", fields, "grabAds")
     
     # createFields
     fields <- createFields(fields)

@@ -1,8 +1,8 @@
-#' findAdsets
+#' grabAdsets
 #' 
 #' @description Fetches the list of adsets under a given account or campaign.
 #' 
-#' @inheritParams findAds
+#' @inheritParams grabAds
 #' 
 #' @examples 
 #' \dontrun{
@@ -19,7 +19,7 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAdsets <- function (id, token, fields = "default", ..., n = 100,
+grabAdsets <- function (id, token, fields = "default", ..., n = 100,
                         verbose = FALSE) {
   
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 

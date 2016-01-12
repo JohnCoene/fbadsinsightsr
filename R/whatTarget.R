@@ -1,4 +1,4 @@
-#' findTarget
+#' whatTarget
 #' 
 #' @description Retrieves the targeting description of a specific ad or adset.
 #' 
@@ -13,7 +13,7 @@
 #' @examples 
 #' \dontrun{
 #' # get information on account
-#' ads <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' ads <- grabAds(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # pick random ad.id
 #' rand_id <- sample(ads$id, 1)
@@ -22,12 +22,12 @@
 #' findTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{findAds}}
+#' @seealso \code{\link{grabAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findTarget <- function(id, token, n = 100){
+whatTarget <- function(id, token, n = 100){
   
   # check inputs
   if(missing(id)){

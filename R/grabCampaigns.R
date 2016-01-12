@@ -1,8 +1,8 @@
-#' findCampaigns
+#' grabCampaigns
 #' 
 #' @description Fetches the list of campaigns under a given account.
 #' 
-#' @inheritParams findAds
+#' @inheritParams grabAds
 #' 
 #' @examples 
 #' \dontrun{
@@ -18,10 +18,15 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findCampaigns <- function(id, token, fields = "default", ..., 
+grabCampaigns <- function(id, token, fields = "default", ..., 
                           n = 100,
                           verbose = FALSE){
-
+  
+  # check that id is that of account
+  if(!length(id[grep("act_", id)]) || nchar(id) != 19){
+    stop("must be account.id (starting with act_) and followed by 15 digits")
+  }
+  
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 
                          n = n, verbose = verbose, object = "campaigns")
   

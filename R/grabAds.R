@@ -1,4 +1,4 @@
-#' findAds
+#' grabAds
 #' 
 #' @description Fetches the list of ads under a given account, campaign or adset.
 #' 
@@ -32,12 +32,12 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAds <- function (id, token, fields = "default", ..., n = 100,
+grabAds <- function (id, token, fields = "default", ..., n = 100,
                      verbose = FALSE) {
   
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 
                          n = n, verbose = verbose, object = "ads")
-    
+  
   return (fb_data)
   
 }

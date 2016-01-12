@@ -1,4 +1,4 @@
-#' findStatus
+#' whatStatus
 #' 
 #' @description Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
 #' 
@@ -21,7 +21,7 @@
 #' @examples 
 #' \dontrun{
 #' get information on account
-#' ads <- findAds(id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' ads <- grabAds(id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # take random ad.id
 #' rand_id <- sample(ads$id, 1)
@@ -30,12 +30,12 @@
 #' (status <- findStatus(id = rand_id, token = "XXXXXXXXXX"))
 #' }
 #' 
-#' @seealso \code{\link{findAds}}
+#' @seealso \code{\link{grabAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findStatus <- function(id, token, fields = "effective_status") {
+whatStatus <- function(id, token, fields = "effective_status") {
   
   # check inputs
   if(missing(id)){
