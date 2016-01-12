@@ -2,7 +2,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v1.1**
+Current version: **v2.0**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
@@ -24,17 +24,21 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **Find-family**
 
-* `findDatePreset`
-* `findActionBreakdowns`
 * `findFields`
-* `findBreakdowns`
-* `findObjects` (previously `findInfo`)
-* `findAccounts`
-* `findTarget`
-* `findStatus`
-* `findCampaigns`
-* `findAdsets`
-* `findAds`
+* `findParams` (Replaces multiple find-family functions from v1.1)
+* `findObjects` (.Deprecated)`
+
+**Grab-family**
+
+* `grabAccounts`
+* `grabCampaigns`
+* `grabAdsets`
+* `grabAds`
+
+**What-family**
+
+* `whatTarget`
+* `whatStatus`
 
 See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
 
@@ -63,6 +67,12 @@ Since access to the repository is restricted you will need your login and passwo
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v0.4)
 
 ## Versions and Patches ##
+
+## v2.0 ##
+
+Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions, `find`-family greatly simplified, and much more.
+
+See [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for all details.
 
 ### v1.1 ###
 
