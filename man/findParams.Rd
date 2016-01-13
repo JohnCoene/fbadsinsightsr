@@ -12,7 +12,7 @@ findParams(params = c("level", "breakdowns", "date.preset",
 \item{params}{parameter(s) to check}
 }
 \value{
-If one \code{params} is passe the function returns a 
+If one \code{params} is passed the function returns a 
 \code{vector} otherwise a \code{list} is returned.
 }
 \description{

@@ -18,7 +18,7 @@
 #' \item \code{action.attribution.windows}
 #' }
 #' 
-#' @return If one \code{params} is passe the function returns a 
+#' @return If one \code{params} is passed the function returns a 
 #' \code{vector} otherwise a \code{list} is returned.
 #' 
 #' @examples 
