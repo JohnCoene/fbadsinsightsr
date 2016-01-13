@@ -12,4 +12,6 @@ Imports:
     plyr,
     httr
 LazyData: TRUE
+URL: https://bitbucket.org/JohnCheetah/fbadsinsightsr
+BugReports: https://bitbucket.org/JohnCheetah/fbadsinsightsr/issues
 RoxygenNote: 5.0.1
