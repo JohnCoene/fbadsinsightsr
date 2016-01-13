@@ -18,9 +18,7 @@ or a short-term token from
 When you make an API request, you will usually not receive all of the 
 results of that request in a single response. This is because some 
 responses could contain thousands of objects so most responses are 
-paginated by default. \code{previous} fetches the previous page of 
-response (after the initial query) similarly \code{next} fetches the next
- page and \code{NULL} does not paginate (only makes one query).}
+paginated by default.}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 queries in the console.}

@@ -14,9 +14,7 @@
 #' When you make an API request, you will usually not receive all of the 
 #' results of that request in a single response. This is because some 
 #' responses could contain thousands of objects so most responses are 
-#' paginated by default. \code{previous} fetches the previous page of 
-#' response (after the initial query) similarly \code{next} fetches the next
-#'  page and \code{NULL} does not paginate (only makes one query).
+#' paginated by default.
 #' @param verbose
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console.
@@ -60,21 +58,6 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
   } else if (missing(token)){
     stop("Missing token")
   } 
-  
-  # create field
-  if(class(fields) != "character") {
-    stop("Fields must be a character vector", 
-         call. = TRUE)
-  } else { 
-    # make default
-    if(fields[1] == "default") fields <- c("id", "name", "image_url")
-    
-    # test if fields correct
-    testParam("fields", fields, "getImage")
-    
-    # createFields
-    fields <- createFields(fields)
-  }
   
   # check token verison
   token <- checkToken(token)
