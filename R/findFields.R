@@ -45,7 +45,7 @@ findFields <- function(fct ="getAny") {
   }
   
   if(fct == "getAny" || fct == "getAccount" || fct == "getCampaign" ||
-     fct == "getAdset" || fct == "getAds") {
+     fct == "getAdset" || fct == "getAd") {
     
     #list
     fields <- c("date_start", "date_stop", "account_id", "account_name", "ad_id",
