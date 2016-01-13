@@ -55,6 +55,7 @@ checkTarget <- function(id, token, n = 100){
                json$error$message))
   }
   
+  # check if data returned
   if (length(json$targetingsentencelines)) {
     
     # parse
