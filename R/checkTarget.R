@@ -60,6 +60,9 @@ checkTarget <- function(id, token, n = 100){
     # parse
     dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
     
+    # dat
+    names(dat) <- c("field", "value")
+    
   } else if (!length(json$targetingsentencelines)) {
     
     # create empty data.frame to return
