@@ -55,8 +55,19 @@ checkTarget <- function(id, token, n = 100){
                json$error$message))
   }
   
-  # parse
-  dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+  if (length(json$targetingsentencelines)) {
+    
+    # parse
+    dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+    
+  } else if (!length(json$targetingsentencelines)) {
+    
+    # create empty data.frame to return
+    dat <- data.frame
+    warning("No tareting specifications")
+    
+  }
   
   return(dat)
+  
 }
