@@ -54,7 +54,7 @@ getImage <- function(account.id, token, fields = "default", n = 100,
     if(fields[1] == "default") fields <- c("id", "name", "url")
     
     # test if fields correct
-    testParam("fields", fields, "getCreative")
+    testParam("fields", fields, "getImage")
     
     # createFields
     fields <- createFields(fields)
