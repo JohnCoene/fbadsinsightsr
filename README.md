@@ -114,7 +114,7 @@ Bug Fixes:
 ### v0.9 ###
 
 * Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
-* `paginate` function (`internal.R`) to clean up GET-family functions.
+* `paginate` function (`utils.R`) to clean up GET-family functions.
 * `verbose` arguement now also returns details on pagination.
 * Some clean up in both find and GET family functions.
 * Manual Updated.
