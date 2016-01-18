@@ -70,9 +70,9 @@ Since access to the repository is restricted you will need your login and passwo
 
 ## v2.0 ##
 
-Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions, `find`-family greatly simplified, and much more.
+Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions (`grab`, `check`, `find` and `get`), and much more.
 
-See [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for all details.
+See updated [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for details.
 
 ### v1.1 ###
 
