@@ -180,15 +180,6 @@ Bug fixes:
 
 * Hello World
 
-## Chip in ##
-
-* We're looking someone well-versed in both R and JSON, the data could definitely be parsed in a better way!
-* Feedback and contributions most welcome.\
-
-## Chat Room ##
-
-* A HipChat room is also available; ideal to keep up with developments, issues and&mdash;most importantly&mdash;other contributors.
-
 ## Contributors ##
 
 * Admin - John Coene <john.coene@cmcm.com>
