@@ -16,6 +16,7 @@
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getImage}}
 #' \item \code{\link{getCreative}}
+#' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
