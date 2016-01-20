@@ -649,7 +649,7 @@ converge.fbAdsData <- function(fbData){
 
 # findObjects -----------------------------------
 findObjects <- function(id, token, fields = "default", ..., n = 100,
-                        verbose = FALSE, object){
+                        verbose = FALSE, object, FUN){
   
   # check inputs
   if(missing(id)){
@@ -672,7 +672,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
     stop("Fields must be a character vector", call. = FALSE)
   } else { 
     # test if fields correct
-    testParam("fields", fields, "grabAds")
+    testParam("fields", fields, FUN)
     
     # createFields
     fields <- createFields(fields)
