@@ -261,7 +261,6 @@ constructFbAdsData <- function(response){
     stop(paste("likely due to id or token. Error Message returned by API: ",
                json$error$message), call. = FALSE)
   } else if (!length(json$data)) {
-    warning(paste("No data."), call. = FALSE)
     
     # make empty object to return and avoid error
     structure(list(data = list()), class = "fbAdsData")
