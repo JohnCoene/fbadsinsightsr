@@ -1,10 +1,16 @@
-#' findStatus
+#' checkStatus
 #' 
 #' @description Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
 #' 
-#' @param id The id of the campaign, adset or ad you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
-#' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
-#' @param fields default (\code{"effective_status"}) returns the most popular ones. Run \code{\link{findFields}} to see all valid fields.
+#' @param id The id of the campaign, adset or ad you want to retrieve
+#'  (Required), see 
+#'  \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param token A valid token as returned by \code{\link{fbAuthenticate}}
+#'  or a short-term token from 
+#'  \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
+#' @param fields default (\code{"effective_status"}) 
+#' returns the most popular ones. Run \code{\link{findFields}} 
+#' to see all valid fields.
 #'
 #' @details 
 #' \itemize{
@@ -14,22 +20,40 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' # set token
+#' TK <- "XXXXXXXXXXXXXXXX"
 #' 
-#' # take random ad.id
-#' rand_id <- sample(obj$ads$id, 1)
+#' # get information on account
+#' ads <- grabAds(account.id = "act_123456789012345", token = TK)
 #' 
-#' # getStatus
-#' findStatus(id = rand_id, token = "XXXXXXXXXX")
+#' # loop through ads to find active one (to then get data)
+#' i <- 1
+#' 
+#' while (status != "ACTIVE"){
+#' 
+#'    # check status
+#'    status <- whatStatus(ads$id[i], TK)[,effective_status]
+#' 
+#'    # iterate
+#'    i <- i + 1
+#' 
+#'    # stop if all ads gone through
+#'    if(i == nrow(ads)) stop("No ACTIVE ads found", call. = F)
 #' }
 #' 
-#' @seealso \code{\link{findObjects}}
+#' # exctract active ad
+#' active_ad <- ad[i,]
+#' 
+#' # get data
+#' ad_data <- getAd(active_ad)
+#' }
+#' 
+#' @seealso \code{\link{grabAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findStatus <- function(id, token, fields = "effective_status") {
+checkStatus <- function(id, token, fields = "effective_status") {
   
   # check inputs
   if(missing(id)){
@@ -52,7 +76,7 @@ findStatus <- function(id, token, fields = "effective_status") {
     stop("Fields must be a character vector")
   } else { 
     # test if fields correct
-    testParam("fields", fields, "findStatus")
+    testParam("fields", fields, "checkStatus")
     
     # createFields
     fields <- createFields(fields)

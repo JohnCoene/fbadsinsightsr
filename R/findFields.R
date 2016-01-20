@@ -1,21 +1,25 @@
 #' findFields
 #' 
-#' @description Returns all valid \code{fields} which can be used in the get-family functions.
-#' See details for more information.
+#' @description Returns all valid \code{fields} which can be used in 
+#' the GET-family functions.
+#' See details below for more information.
 #' 
 #' @param fct Name of the function you need the fields for
 #' 
-#' @details fields vary from \code{age} to \code{cpm}
-#' Applies to the following functions (\code{fct} argument)
+#' @details fields vary from \code{date} to \code{cpm}
+#' Applies to the following functions (\code{fct} argument, i.e.: 
+#' \code{fct = "whatStatus"})
 #' \itemize{
 #' \item \code{\link{getAny}}
 #' \item \code{\link{getAccount}}
 #' \item \code{\link{getAdset}}
 #' \item \code{\link{getAd}}
-#' \item \code{\link{findCampaigns}}
-#' \item \code{\link{findAdsets}}
-#' \item \code{\link{findAds}}
-#' \item \code{\link{findStatus}}
+#' \item \code{\link{getImage}}
+#' \item \code{\link{getCreative}}
+#' \item \code{\link{grabCampaigns}}
+#' \item \code{\link{grabAdsets}}
+#' \item \code{\link{grabAds}}
+#' \item \code{\link{checkStatus}}
 #' }
 #' 
 #' @examples 
@@ -25,7 +29,7 @@
 #' 
 #' # get account data on fields of interest
 #' data <- getAccount(account.id = "act_123456789012345", token = "XXXXXXXXXXXX", 
-#' fields = videos)
+#'                    fields = videos)
 #' }
 #' 
 #' @seealso \code{\link{getAccount}}
@@ -33,7 +37,7 @@
 #' @export
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
-findFields <- function(fct) {
+findFields <- function(fct ="getAny") {
   
   # assign value to fct if missing
   if(missing(fct)){
@@ -41,7 +45,7 @@ findFields <- function(fct) {
   }
   
   if(fct == "getAny" || fct == "getAccount" || fct == "getCampaign" ||
-     fct == "getAdset" || fct == "getAds") {
+     fct == "getAdset" || fct == "getAd") {
     
     #list
     fields <- c("date_start", "date_stop", "account_id", "account_name", "ad_id",
@@ -76,21 +80,39 @@ findFields <- function(fct) {
                 "estimated_ad_recall_rate_upper_bound", 
                 "cost_per_estimated_ad_recallers", "place_page_name")
     
-  } else if(fct == "findCampaigns" || fct == "findAdsets" || 
-            fct == "findAds"){
+  } else if(fct == "grabCampaigns" || fct == "grabAdsets" || 
+            fct == "grabAds"){
+    
     fields <- c("id", "name", 
                 "account_id", "adset", "adset_id", "adlabels",
                 "bid_amount", "bid_info", "bid_type", "configured_status",
                 "effective_status", "created_time", "update_time",
                 "creative", "campaign_id")
     
-  } else if (fct == "findStatus"){
+  } else if (fct == "checkStatus"){
     
     #build fields
     fields <- c("effective_status", "configured_status", "created_time",
                 "name", "account_id")
+  } else if (fct == "getImage") {
+    
+    fields <- c("id", "name", "account_id", "created_time", "creatives",
+                "hash", "height", "width", "original_height", "original_width",
+                "permalink_url", "status", "updated_time", "url", "url128")
+    
+  } else if (fct == "getCreative") {
+    
+    fields <- c("id", "adlabels", "body", "call_to_action_type", "image_hash",
+                "image_url", "instagram_actor_id", "instagram_permalink_url",
+                "instagram_story_id", "link_url", "name", "object_id", 
+                "object_url", "object_story_id", "object_type", 
+                "product_set_id", "run_status", "template_url", 
+                "thumbnail_url", "title", "url_tags", "applink_treatment")
+    
   } else {
+    
     stop("wrong fct argument. See details.")
+    
   }
   
   # sort

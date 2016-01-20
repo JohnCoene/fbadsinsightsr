@@ -3,6 +3,10 @@
 #' @description Fetches URL(s) name(s) and more about images used in an account.
 #' 
 #' @param account.id Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param fields 
+#' Defaults to \code{default} which returns the most popular ones. 
+#' Run \code{\link{findFields}} to see al valid fields.
+#'  to see all valid fields.
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param verbose Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.
@@ -18,7 +22,7 @@
 #'                           app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", 
 #'                           scope = "ads_management")
 #' # get account ids
-#' act <- findAccounts(id = "me", token = fbOAuth)
+#' act <- grabAccounts(id = "me", token = fbOAuth)
 #' 
 #' # get all images in ad account
 #' img_acc <- getImage(id = act[2,2], token = fbOAuth)
@@ -26,10 +30,11 @@
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
-#' @seealso \code{\link{fbAuthenticate}}, \code{\link{findAccounts}}
+#' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}}
 #'
 #' @export
-getImage <- function(account.id, token, n = 100, verbose = FALSE){
+getImage <- function(account.id, token, fields = "default", n = 100, 
+                     verbose = FALSE){
   
   # check inputs
   if(missing(account.id)){
@@ -40,48 +45,50 @@ getImage <- function(account.id, token, n = 100, verbose = FALSE){
     stop("Must be account id. starting with act_")
   }
   
+  # create field
+  if(class(fields) != "character") {
+    stop("Fields must be a character vector", 
+         call. = TRUE)
+  } else { 
+    # make default
+    if(fields[1] == "default") fields <- c("id", "name", "url")
+    
+    # test if fields correct
+    testParam("fields", fields, "getImage")
+    
+    # createFields
+    fields <- createFields(fields)
+  }
+  
   # check token verison
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/",
+  uri <- paste0("https://graph.facebook.com/v2.5/",
                 account.id, "/adimages?fields=",
-                "id%2Cname%2Caccount_id%2Ccreated_time",
-                "%2Ccreatives%2Chash%2Cheight%2Cwidth",
-                "%2Coriginal_height%2Coriginal_width",
-                "%2Cpermalink_url%2Cstatus%2Cupdated_time",
-                "%2Curl%2Curl128",
+                fields,
                 "&access_token=",
                 token)
   
   # call api
-  response <- httr::GET(url)
+  response <- httr::GET(uri)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # construct data
+  fb_data <- constructFbAdsData(response)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to id or token. Error Message returned: ",
-               json$error$message))
-  } else if (length(json$data) == 0) {
-    warning(paste("No Image."))
-    
-    # make empt data.frame
-    dat <- data.frame()
-  } else {
-    
-    # parse
-    dat <- toDF(response)
-    
-    #paginate
-    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-    
-    # verbose
-    if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
-    } 
-    
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
   }
   
-  return(dat)
+  # converge
+  fb_data <- converge(fb_data)
+  
+  return(fb_data)
 }

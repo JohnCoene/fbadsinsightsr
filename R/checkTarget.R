@@ -1,4 +1,4 @@
-#' findTarget
+#' checkTarget
 #' 
 #' @description Retrieves the targeting description of a specific ad or adset.
 #' 
@@ -13,21 +13,21 @@
 #' @examples 
 #' \dontrun{
 #' # get information on account
-#' obj <- findObjects(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
+#' ads <- grabAds(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
 #' 
 #' # pick random ad.id
-#' rand_id <- sample(obj$ad$id, 1)
+#' rand_id <- sample(ads$id, 1)
 #' 
 #' # fetch targeting description of random ad
 #' findTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{findObjects}}
+#' @seealso \code{\link{grabAds}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findTarget <- function(id, token, n = 100){
+checkTarget <- function(id, token, n = 100){
   
   # check inputs
   if(missing(id)){
@@ -55,8 +55,23 @@ findTarget <- function(id, token, n = 100){
                json$error$message))
   }
   
-  # parse
-  dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+  # check if data returned
+  if (length(json$targetingsentencelines)) {
+    
+    # parse
+    dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+    
+    # dat
+    names(dat) <- c("field", "value")
+    
+  } else if (!length(json$targetingsentencelines)) {
+    
+    # create empty data.frame to return
+    dat <- data.frame
+    warning("No tareting specifications")
+    
+  }
   
   return(dat)
+  
 }

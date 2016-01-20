@@ -4,27 +4,31 @@
 \alias{findFields}
 \title{findFields}
 \usage{
-findFields(fct)
+findFields(fct = "getAny")
 }
 \arguments{
 \item{fct}{Name of the function you need the fields for}
 }
 \description{
-Returns all valid \code{fields} which can be used in the get-family functions.
-See details for more information.
+Returns all valid \code{fields} which can be used in 
+the GET-family functions.
+See details below for more information.
 }
 \details{
-fields vary from \code{age} to \code{cpm}
-Applies to the following functions (\code{fct} argument)
+fields vary from \code{date} to \code{cpm}
+Applies to the following functions (\code{fct} argument, i.e.: 
+\code{fct = "whatStatus"})
 \itemize{
 \item \code{\link{getAny}}
 \item \code{\link{getAccount}}
 \item \code{\link{getAdset}}
 \item \code{\link{getAd}}
-\item \code{\link{findCampaigns}}
-\item \code{\link{findAdsets}}
-\item \code{\link{findAds}}
-\item \code{\link{findStatus}}
+\item \code{\link{getImage}}
+\item \code{\link{getCreative}}
+\item \code{\link{grabCampaigns}}
+\item \code{\link{grabAdsets}}
+\item \code{\link{grabAds}}
+\item \code{\link{checkStatus}}
 }
 }
 \examples{
@@ -34,7 +38,7 @@ videos <- findFields("getAccount")[grep("video", findFields("getAccount"))]
 
 # get account data on fields of interest
 data <- getAccount(account.id = "act_123456789012345", token = "XXXXXXXXXXXX", 
-fields = videos)
+                   fields = videos)
 }
 
 }

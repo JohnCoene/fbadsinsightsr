@@ -2,7 +2,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v1.1**
+Current version: **v2.0**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
 
@@ -24,17 +24,21 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **Find-family**
 
-* `findDatePreset`
-* `findActionBreakdowns`
 * `findFields`
-* `findBreakdowns`
-* `findObjects` (previously `findInfo`)
-* `findAccounts`
-* `findTarget`
-* `findStatus`
-* `findCampaigns`
-* `findAdsets`
-* `findAds`
+* `findParams` (Replaces multiple find-family functions from v1.1)
+* `findObjects` (.Deprecated)`
+
+**Grab-family**
+
+* `grabAccounts`
+* `grabCampaigns`
+* `grabAdsets`
+* `grabAds`
+
+**check-family**
+
+* `checkTarget`
+* `checkStatus`
 
 See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
 
@@ -63,6 +67,12 @@ Since access to the repository is restricted you will need your login and passwo
 * ~~Fetch IDs of adsets, campaigns and accounts~~ (v0.4)
 
 ## Versions and Patches ##
+
+## v2.0 ##
+
+Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions (`grab`, `check`, `find` and `get`), and much more.
+
+See updated [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for details.
 
 ### v1.1 ###
 
@@ -104,7 +114,7 @@ Bug Fixes:
 ### v0.9 ###
 
 * Simplifies data returned by GET-famlily functions if possible, though rarely the case. This is first attempt at dealing with the actions-related data which produce confusing dataframes.
-* `paginate` function (`internal.R`) to clean up GET-family functions.
+* `paginate` function (`utils.R`) to clean up GET-family functions.
 * `verbose` arguement now also returns details on pagination.
 * Some clean up in both find and GET family functions.
 * Manual Updated.
@@ -169,15 +179,6 @@ Bug fixes:
 ### v0.1 ###
 
 * Hello World
-
-## Chip in ##
-
-* We're looking someone well-versed in both R and JSON, the data could definitely be parsed in a better way!
-* Feedback and contributions most welcome.\
-
-## Chat Room ##
-
-* A HipChat room is also available; ideal to keep up with developments, issues and&mdash;most importantly&mdash;other contributors.
 
 ## Contributors ##
 

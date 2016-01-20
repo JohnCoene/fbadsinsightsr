@@ -1,4 +1,4 @@
-#' findAccounts
+#' grabAccounts
 #' 
 #' @description Fetches all accounts under one business ID. All accounts to which the user has access to that is.
 #' 
@@ -15,15 +15,15 @@
 #' act <- findAccounts(id = "me", token = "XXXXXXXXXXX")
 #' 
 #' # get information on account
-#' obj <- findObjects(account.id = act[2,2], token = "XXXXXXXXXXX")
+#' data <- getAccount(account.id = act[2,2], token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{findObjects}}
+#' @seealso \code{\link{getAccount}}
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-findAccounts <- function(id, token, n = 100, verbose = FALSE) {
+grabAccounts <- function(id, token, n = 100, verbose = FALSE) {
   
   # check inputs
   if(missing(id)){
@@ -35,42 +35,33 @@ findAccounts <- function(id, token, n = 100, verbose = FALSE) {
   # check token
   token <- checkToken(token)
   
-  url <- paste0("https://graph.facebook.com/v2.5/", 
+  uri <- paste0("https://graph.facebook.com/v2.5/", 
                 id, "/adaccounts?fields=name%2Cid%2C",
                 "account_status&access_token=", token)
   
   # call api
-  response <- httr::GET(url)
+  response <- httr::GET(uri)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # construct data
+  fb_data <- constructFbAdsData(response)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to id or token. Error Message returned: ",
-               json$error$message))
-  } else if (length(json$data) == 0) {
-    warning(paste("No data."))
-    
-    # make empt data.frame
-    dat <- data.frame()
-  } else {
-    
-    # parse
-    dat <- toDF(response)
-    
-    #paginate
-    dat <- paginate(data = dat, json = json, verbose = verbose, n = n)
-    
-    # verbose
-    if (verbose == TRUE) {
-      cat(paste(n, "results requested, API returned", nrow(dat), "rows", "\n"))
-    } 
-    
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
   }
   
-  # identify statuses
-  dat <- accountStatus(dat)
+  # converge
+  fb_data <- converge(fb_data)
   
-  return(dat)
+  # identify statuses
+  fb_data <- accountStatus(fb_data)
+  
+  return(fb_data)
 }
