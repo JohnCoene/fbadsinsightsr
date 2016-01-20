@@ -332,6 +332,8 @@ getAny <- function(id, token, fields = "default", n = 100,
   
   # converge
   fb_data <- converge(fb_data)
+  
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
 
   return(fb_data)
   

@@ -72,6 +72,8 @@ checkTarget <- function(id, token, n = 100){
     
   }
   
+  if (nrow(dat) == 0) warning(paste("No data."), call. = FALSE)
+  
   return(dat)
   
 }

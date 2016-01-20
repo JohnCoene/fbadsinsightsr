@@ -107,6 +107,8 @@ checkStatus <- function(id, token, fields = "effective_status") {
     row.names(dat) <- c(1:nrow(dat))
   }
   
+  if (nrow(dat) == 0) warning(paste("No data."), call. = FALSE)
+  
   return(dat)
   
 }

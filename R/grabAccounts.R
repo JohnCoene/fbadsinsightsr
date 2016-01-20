@@ -40,5 +40,7 @@ grabAccounts <- function(id, token, n = 100, fields = "default",
                          n = n, verbose = verbose, object = "adaccounts",
                          FUN = "grabAccounts")
   
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
+  
   return (fb_data)
 }

@@ -39,6 +39,8 @@ grabAds <- function (id, token, fields = "default", ..., n = 100,
                          n = n, verbose = verbose, object = "ads",
                          FUN = "grabAds")
   
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
+  
   return (fb_data)
   
 }

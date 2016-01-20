@@ -26,6 +26,8 @@ grabAdsets <- function (id, token, fields = "default", ..., n = 100,
                          n = n, verbose = verbose, object = "adsets",
                          FUN = "grabAdsets")
   
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
+  
   return(fb_data)
   
 }

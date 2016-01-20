@@ -97,6 +97,8 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
   # converge
   fb_data <- converge(fb_data)
   
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
+  
   return(fb_data)
 }
   

@@ -31,6 +31,8 @@ grabCampaigns <- function(id, token, fields = "default", ...,
                          n = n, verbose = verbose, object = "campaigns",
                          FUN = "grabCampaigns")
   
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
+  
   return(fb_data)
   
 }
