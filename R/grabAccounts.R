@@ -36,7 +36,7 @@ grabAccounts <- function(id, token, n = 100, verbose = FALSE) {
   token <- checkToken(token)
   
   uri <- paste0("https://graph.facebook.com/v2.5/", 
-                id, "/adaccounts?fields=name%2Cid%2C",
+                id, "/adaccounts?fields=name%2Cid%2Camount_spent%2C",
                 "account_status&access_token=", token)
   
   # call api
