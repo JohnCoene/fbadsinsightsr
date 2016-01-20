@@ -28,7 +28,8 @@ grabCampaigns <- function(id, token, fields = "default", ...,
   }
   
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 
-                         n = n, verbose = verbose, object = "campaigns")
+                         n = n, verbose = verbose, object = "campaigns",
+                         FUN = "grabCampaigns")
   
   return(fb_data)
   

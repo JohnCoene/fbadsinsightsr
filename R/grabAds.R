@@ -36,7 +36,8 @@ grabAds <- function (id, token, fields = "default", ..., n = 100,
                      verbose = FALSE) {
   
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 
-                         n = n, verbose = verbose, object = "ads")
+                         n = n, verbose = verbose, object = "ads",
+                         FUN = "grabAds")
   
   return (fb_data)
   
