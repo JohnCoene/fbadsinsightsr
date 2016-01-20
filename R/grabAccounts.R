@@ -1,6 +1,7 @@
 #' grabAccounts
 #' 
-#' @description Fetches all accounts under one business ID. All accounts to which the user has access to that is.
+#' @description Fetches all accounts under one business ID. 
+#' All accounts to which the user has access to that is.
 #' 
 #' @param id Your business.facebook.com ID or your user id.
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
@@ -23,7 +24,8 @@
 #' @author John Coene <john.coene@@cmcm.com>
 #' 
 #' @export
-grabAccounts <- function(id, token, n = 100, verbose = FALSE) {
+grabAccounts <- function(id, token, n = 100, verbose = FALSE,
+                         fields = "default") {
   
   # check inputs
   if(missing(id)){
@@ -32,36 +34,10 @@ grabAccounts <- function(id, token, n = 100, verbose = FALSE) {
     stop("Missing token")
   }
   
-  # check token
-  token <- checkToken(token)
   
-  uri <- paste0("https://graph.facebook.com/v2.5/", 
-                id, "/adaccounts?fields=name%2Cid%2Camount_spent%2C",
-                "account_status&access_token=", token)
+  fb_data <- findObjects(id = id, token = token, fields = fields, 
+                         n = n, verbose = verbose, object = "adaccounts",
+                         FUN = "grabAccounts")
   
-  # call api
-  response <- httr::GET(uri)
-  
-  # construct data
-  fb_data <- constructFbAdsData(response)
-  
-  # parse data
-  fb_data <- digest(fb_data)
-  
-  # paginate
-  fb_data <- paginate(fb_data, n = n, verbose = verbose)
-  
-  # verbose
-  if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
-              "rows", "\n"))
-  }
-  
-  # converge
-  fb_data <- converge(fb_data)
-  
-  # identify statuses
-  fb_data <- accountStatus(fb_data)
-  
-  return(fb_data)
+  return (fb_data)
 }
