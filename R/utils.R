@@ -171,7 +171,11 @@ bindPages.fbAdsData <- function(base, page){
                                             page[[df_names[i]]])
   }
   
-  if (length(page$url)) base$url <- page$url
+  if (length(page$url)) { 
+    base$url <- page$url 
+  } else if (!length(page$url)) {
+      base$url <- NULL
+    }
   
   return(base)
 }
