@@ -109,6 +109,27 @@ findFields <- function(fct ="getAny") {
                 "product_set_id", "run_status", "template_url", 
                 "thumbnail_url", "title", "url_tags", "applink_treatment")
     
+  } else if (fct == "grabAccounts") {
+    
+    fields <- c("id", "account_groups", "account_id", "account_status",
+                "age", "agency_client_declaration", "business_city",
+                "business_country_code", "business_name", "business_state",
+                "business_street", "business_street2", "business_zip",
+                "capabilities", "created_time", "currency", "disable_reason",
+                "end_advertiser", "end_advertiser_name",
+                "failed_delivery_checks", "funding_source",
+                "funding_source_details", "has_migrated_permissions",
+                "io_number", "is_notifications_enabled",
+                "is_personal", "is_prepay_account", "is_tax_id_required",
+                "line_numbers", "media_agency", "min_campaign_group_spend_cap",
+                "min_daily_budget", "name", "owner", 
+                "offsite_pixels_tos_accepted", "partner", "tax_id",
+                "tax_id_status", "tax_id_type", "timezone_id", "timezone_name",
+                "timezone_offset_hours_utc", "rf_spec", "tos_accepted",
+                "user_role", "vertical_name", "amount_spent", "spend_cap",
+                "balance", "business", "owner_business", "last_used_time",
+                "asset_score")
+    
   } else {
     
     stop("wrong fct argument. See details.")
