@@ -23,7 +23,7 @@ grabCampaigns <- function(id, token, fields = "default", ...,
                           verbose = FALSE){
   
   # check that id is that of account
-  if(!length(id[grep("act_", id)]) || nchar(id) != 19){
+  if(!length(id[grep("act_", id)]) || nchar(as.character(id)) != 19){
     stop("must be account.id (starting with act_) and followed by 15 digits")
   }
   
