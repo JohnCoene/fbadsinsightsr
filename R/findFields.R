@@ -16,6 +16,7 @@
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getImage}}
 #' \item \code{\link{getCreative}}
+#' \item \code{\link{grabCreatives}}
 #' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
@@ -101,7 +102,7 @@ findFields <- function(fct ="getAny") {
                 "hash", "height", "width", "original_height", "original_width",
                 "permalink_url", "status", "updated_time", "url", "url128")
     
-  } else if (fct == "getCreative") {
+  } else if (fct == "grabCreatives") {
     
     fields <- c("id", "adlabels", "body", "call_to_action_type", "image_hash",
                 "image_url", "instagram_actor_id", "instagram_permalink_url",
@@ -130,6 +131,11 @@ findFields <- function(fct ="getAny") {
                 "user_role", "vertical_name", "amount_spent", "spend_cap",
                 "balance", "business", "owner_business", "last_used_time",
                 "asset_score")
+    
+  } else if (fct == "getCreative") {
+    
+    fields <- c("picture", "caption", "message", "name", "id", "created_time",
+                "full_picture")
     
   } else {
     
