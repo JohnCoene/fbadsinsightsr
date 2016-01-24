@@ -286,8 +286,16 @@ constructFbAdsData <- function(response){
       # extract insights from json and remove from original json
       for(i in 1:length(json$data)){
         
-        # extract insights
-        insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+        if (is.null(json$data[[i]]$insights$data)){
+          
+          insights_lst[[i]] <- NA
+          
+        } else {
+          
+          # extract insights
+          insights_lst[[i]] <- json$data[[i]]$insights$data[[1]]
+          
+        }
         
         # remove from initial json
         json$data[[i]]$insights <- NULL
@@ -452,6 +460,7 @@ digest.fbAdsData <- function(fbAdsData){
           # rebuild fbAdsData[[k]]
           for(i in 1:length(vars)){
             for(j in 1:length(fbAdsData[[k]]$data)){
+              
               lst <- fbAdsData[[k]]$data[[j]][which(names(fbAdsData[[k]]$data[[j]]) == vars[i])]
               
               # check if variable has been found
