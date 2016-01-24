@@ -86,7 +86,7 @@ checkStatus <- function(id, token, fields = "effective_status") {
   url <- paste0("https://graph.facebook.com/v2.5/",
                 id, "?fields=",
                 fields,
-                "&access_token=", token)
+                "&limit=100&access_token=", token)
   
   # call api
   response <- httr::GET(url)

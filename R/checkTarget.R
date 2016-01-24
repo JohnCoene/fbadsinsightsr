@@ -41,7 +41,7 @@ checkTarget <- function(id, token, n = 100){
   
   # build url
   url <- paste0("https://graph.facebook.com/v2.5/",
-                id, "/targetingsentencelines?access_token=", token)
+                id, "/targetingsentencelines?limit=100&access_token=", token)
   
   # call api
   response <- httr::GET(url)

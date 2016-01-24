@@ -624,14 +624,14 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
                   id, "/",object,"?fields=",
                   fields,
                   "%2Cinsights{", args, "}",
-                  "&access_token=",
+                  "&limit=100&access_token=",
                   token) 
   } else {
     # build url
     url <- paste0("https://graph.facebook.com/v2.5/",
                   id, "/",object,"?fields=",
                   fields,
-                  "&access_token=",
+                  "&limit=100&access_token=",
                   token)
   }
   

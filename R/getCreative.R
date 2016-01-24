@@ -73,7 +73,7 @@ getCreative <- function(id, token, n = 100, verbose = FALSE){
                 "%2Cproduct_set_id%2Crun_status%2Ctemplate_url",
                 "%2Cthumbnail_url%2Ctitle%2Curl_tags",
                 "%2Capplink_treatment",
-                "&access_token=",
+                "&limit=100&access_token=",
                 token)
   
   # call api

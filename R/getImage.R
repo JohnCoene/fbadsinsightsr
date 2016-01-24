@@ -66,7 +66,7 @@ getImage <- function(account.id, token, fields = "default", n = 100,
   uri <- paste0("https://graph.facebook.com/v2.5/",
                 account.id, "/adimages?fields=",
                 fields,
-                "&access_token=",
+                "&limit=100&access_token=",
                 token)
   
   # call api

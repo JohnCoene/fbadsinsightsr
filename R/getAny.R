@@ -306,7 +306,7 @@ getAny <- function(id, token, fields = "default", n = 100,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, summary,
-                "&access_token=", token)
+                "&limit=100&access_token=", token)
   
   if(length(uri) > 1){
     stop("multiple ids supplied", call. = FALSE)
