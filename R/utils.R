@@ -416,7 +416,7 @@ digest.fbAdsData <- function(fbAdsData){
                       "^video_10_sec_watched_actions$|",
                       "^video_15_sec_watched_actions$|",
                       "^video_30_sec_watched_actions$|",
-                      "^action_type$")
+                      "^action_type$|^action$")
         
         # identify nested lists
         vars <- names[grep(pat, names)]
