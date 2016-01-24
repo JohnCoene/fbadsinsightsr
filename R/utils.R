@@ -407,7 +407,8 @@ digest.fbAdsData <- function(fbAdsData){
                       "^video_complete_watched_actions$|",
                       "^video_10_sec_watched_actions$|",
                       "^video_15_sec_watched_actions$|",
-                      "^video_30_sec_watched_actions")
+                      "^video_30_sec_watched_actions$|",
+                      "^action_type$")
         
         # identify nested lists
         vars <- names[grep(pat, names)]
@@ -425,10 +426,23 @@ digest.fbAdsData <- function(fbAdsData){
             }
           }
         } 
+        
+        # replace NULL with NA to have NA rows in data.frame
+        for (p in 1:length(fbData2$data)){
+          
+          if (is.null(fbData2$data[[p]])){
+            fbData2$data[[p]] <- NA
+          }
+        }
           
         # fbData2 to data.frame
         base_df <- do.call(plyr::"rbind.fill", lapply(fbData2$data, 
                                                         as.data.frame))
+        
+        # remove NA column
+        if(length(names(base_df)[grep("X", names(base_df))])){
+          base_df[,names(base_df)[grep("X", names(base_df))]] <- NULL
+        }
         
         # declare row_df
         row_df <- data.frame()
@@ -499,108 +513,6 @@ digest.fbAdsData <- function(fbAdsData){
   }
   
   return (fbAdsData)
-}
-
-#digest list -------------------------------
-digest.list <- function(json){
-  
-  # check if data present in JSON
-  if(length(json$data)){
-    
-    # extract names
-    names <- subAdsDataNames(json$data)
-    
-    # pattern to look for
-    pat <- paste0("^actions$|^unique_actions$|^cost_per_action_type$|",
-                  "^cost_per_unique_action_type$|^website_ctr$|",
-                  "^cost_per_10_sec_video_view$|",
-                  "^video_avg_sec_watched_actions$|",
-                  "^video_avg_pct_watched_actions$|",
-                  "^video_p25_watched_actions$|",
-                  "^video_p50_watched_actions$|",
-                  "^video_p75_watched_actions$|",
-                  "^video_p95_watched_actions$|",
-                  "^video_p100_watched_actions$|",
-                  "^video_complete_watched_actions$|",
-                  "^video_10_sec_watched_actions$|",
-                  "^video_15_sec_watched_actions$|",
-                  "^video_30_sec_watched_actions")
-    
-    # identify nested lists
-    vars <- names[grep(pat, names)]
-    
-    # loop through vars to remove from json
-    json2 <- json
-    
-    # remove vars from json2
-    for(i in 1:length(vars)){
-      for(j in 1:length(json2$data)){
-        json2$data[[j]][which(names(json2$data[[j]]) == vars[i])] <- NULL
-      }
-    }
-    
-    # json2 to data.frame
-    base_df <- do.call(plyr::"rbind.fill", lapply(json2$data, as.data.frame))
-    
-    # declare row_df
-    row_df <- data.frame()
-    
-    # check if vars observed
-    if(length(vars)){
-      # rebuild json
-      for(i in 1:length(vars)){
-        for(j in 1:length(json$data)){
-          lst <- json$data[[j]][which(names(json$data[[j]]) == vars[i])]
-          
-          # check if variable has been found
-          if(length(lst)) {
-            # sublist to dataframe
-            dat <- do.call(plyr::"rbind.fill",
-                           lapply(lst[[1]], as.data.frame))
-            
-            # transpose
-            # name rows
-            rownames(dat) <- dat[,1]
-            
-            # remove first column
-            dat[,1] <- NULL
-            
-            # transpose
-            dat <- as.data.frame(t(dat))
-            
-            # rename
-            names(dat) <- paste0(vars[i], "_", names(dat))
-            
-            # bind
-            row_df <- plyr::rbind.fill(row_df, dat)
-            
-          } else { # if no lst found
-            # create NA
-            dat_na <- rbind.data.frame(rep(NA, 1))
-            names(dat_na) <- "nan"
-            
-            # bind
-            row_df <- plyr::rbind.fill(row_df, dat_na)
-            dat_na <- NULL
-          }
-          
-          
-        }
-        
-        base_df <- cbind.data.frame(base_df, row_df)
-        row_df <- NULL
-        
-        # remove unknowns
-        base_df$nan <- NULL
-      }
-    }
-    
-    # if no data in json
-  } else if (!length(json$data)) {
-    base_df <- data.frame()
-  }
-  
-  return(base_df)
 }
 
 # converge generic --------------------
