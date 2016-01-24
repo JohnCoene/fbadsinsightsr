@@ -1,4 +1,4 @@
-#' getCreative
+#' grabCreatives
 #' 
 #' @description Fetches URL(s) name(s) and more about creatives used in an ad.
 #' 
@@ -21,6 +21,9 @@
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console.
 #' 
+#' @details Calls 
+#' \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.
+#' 
 #' @return Returns IDs and URLs of all images contained in object 
 #' (single row if ad.id is passed as arguement)
 #' 
@@ -36,8 +39,11 @@
 #' # get all creatives in ad account
 #' img_acc <- grabCreatives(id = act[2,2], token = fbOAuth)
 #' 
-#' # getCreative
-#' creative <- getCreative(id = sample(img_acc, 1), token = fbOAuth)
+#' # get campaigns, adsets and ads IDs from account
+#' ads <- grabAds(account.id = act[2,2], token = token = fbOAuth)
+#' 
+#' # get ad creatives
+#' crea_ad <- grabCreatives(id = sample(ads$id, 1), token = fbOAuth)
 #' }
 #' 
 #' @author John Coene <john.coene@@cmcm.com>
@@ -46,8 +52,8 @@
 #'  \code{\link{grabAds}}
 #' 
 #' @export
-getCreative <- function(id, token, n = 100, fields = "default",
-                        verbose = FALSE){
+grabCreatives <- function(id, token, n = 100, fields = "default", 
+                          verbose = FALSE){
   
   # check inputs
   if(missing(id)){
@@ -76,7 +82,8 @@ getCreative <- function(id, token, n = 100, fields = "default",
   }
   
   uri <- paste0("https://graph.facebook.com/v2.5/",
-                id, fields,
+                id, "/adcreatives?fields=",
+                fields,
                 "&limit=100&access_token=",
                 token)
   
@@ -105,4 +112,4 @@ getCreative <- function(id, token, n = 100, fields = "default",
   
   return(fb_data)
 }
-  
+
