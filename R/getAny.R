@@ -2,7 +2,8 @@
 #' 
 #' @description Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
 #' 
-#' @param id The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param id The id of the object you want to retrieve (Required),
+#'  see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields 
 #' There are in total 73 valid fields defaults to 
 #' (\code{default}) which returns the most popular ones. 
@@ -63,10 +64,14 @@
 #'  specified by fields will be included in the summary section. If 
 #'  \code{TRUE} the data structure returned will be of type list 
 #'  (see @return below)
-#'  
 #' @param verbose
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console.
+#' @param limit
+#'  Number of results requested at each API call, defaults to 100.
+#'  Sometimes useful to bring it down if many results (\code{n}) are required as the 
+#'  API might otherwise return \code{error_code: 1} or in other words an
+#'   "Unknown error".
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -125,7 +130,7 @@ getAny <- function(id, token, fields = "default", n = 100,
                    action.attribution.windows, action.breakdowns, 
                    action.report.time, breakdowns, date.preset, level, 
                    time.increment, time.range, summary = FALSE,
-                   verbose = FALSE) {
+                   verbose = FALSE, limit = 100) {
   
   # check arguments
   if(missing(action.attribution.windows)) action.attribution.windows <- NULL
@@ -306,7 +311,7 @@ getAny <- function(id, token, fields = "default", n = 100,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, summary,
-                "&limit=100&access_token=", token)
+                "&limit=", limit,"&access_token=", token)
   
   if(length(uri) > 1){
     stop("multiple ids supplied", call. = FALSE)

@@ -6,10 +6,12 @@
 \usage{
 getAny(id, token, fields = "default", n = 100, action.attribution.windows,
   action.breakdowns, action.report.time, breakdowns, date.preset, level,
-  time.increment, time.range, summary = FALSE, verbose = FALSE)
+  time.increment, time.range, summary = FALSE, verbose = FALSE,
+  limit = 100)
 }
 \arguments{
-\item{id}{The id of the object you want to retrieve (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
+\item{id}{The id of the object you want to retrieve (Required),
+see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a 
 short-term token from 
@@ -73,6 +75,11 @@ specified by fields will be included in the summary section. If
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 queries in the console.}
+
+\item{limit}{Number of results requested at each API call, defaults to 100.
+Sometimes useful to bring it down if many results (\code{n}) are required as the 
+API might otherwise return \code{error_code: 1} or in other words an
+ "Unknown error".}
 }
 \value{
 Note that if summary is \code{TRUE} the function returns a 
