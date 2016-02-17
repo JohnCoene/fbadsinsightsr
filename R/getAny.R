@@ -292,7 +292,7 @@ getAny <- function(id, token, fields = "default", n = 100,
       stop("Wrong date format. Must be YYYY-MM-DD", call. = FALSE)
     }
     
-    time.range <- paste0("time_range={'since':'", time.range[1], 
+    time.range <- paste0("&time_range={'since':'", time.range[1], 
                          "','until':'", time.range[2], "'}")
     
   } else if (length(time.range) > 2) {
