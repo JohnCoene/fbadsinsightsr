@@ -292,7 +292,10 @@ getAny <- function(id, token, fields = "default", n = 100,
       stop("Wrong date format. Must be YYYY-MM-DD", call. = FALSE)
     }
     
-    time.range <- paste0("&since=", time.range[1], "&", "until=", time.range[2])
+    time.range <- paste0('time_range={"since":"', time.range[1],
+                         '","until":"', time.range[2], '"}')
+    
+    time.range <- gsub("\"", "", time.range)
     
   } else if (length(time.range) > 2) {
     stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')",
@@ -306,12 +309,12 @@ getAny <- function(id, token, fields = "default", n = 100,
   token <- checkToken(token)
   
   # build url
-  uri <- paste0("https://graph.facebook.com/v2.5/",
-                id, "/insights?fields=",fields,
+  uri <- paste0('https://graph.facebook.com/v2.5/',
+                id, '/insights?fields=',fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,
                 time.increment, time.range, summary,
-                "&limit=", limit,"&access_token=", token)
+                '&limit=', limit,'&access_token=', token)
   
   if(length(uri) > 1){
     stop("multiple ids supplied", call. = FALSE)
