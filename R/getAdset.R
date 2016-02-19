@@ -99,7 +99,7 @@
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{findParams}},
 #'  \code{\link{grabAdsets}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 getAdset <- function(adset.id, token, fields = "default", n = 100, 
                   action.attribution.windows, action.breakdowns, 
                   action.report.time, breakdowns, date.preset, level, 

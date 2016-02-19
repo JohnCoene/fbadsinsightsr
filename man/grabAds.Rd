@@ -42,7 +42,7 @@ dat <- getAd(ad.id = sample(ads$id, 1), token = "XXXXXX")
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{getAd}}

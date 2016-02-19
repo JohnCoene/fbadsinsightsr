@@ -44,7 +44,7 @@ dat <- getAdset(adset.id = sample(adsets$id, 1), date.preset = "lifetime",
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{getAdset}}

@@ -105,7 +105,7 @@ data <- getAd(ad.id = rand_id, token = fbOAuth, date.preset = date)
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{findParams}}, 

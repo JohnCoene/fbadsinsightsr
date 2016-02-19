@@ -35,7 +35,7 @@ data <- getAccount(account.id = sample(act, 1), token = "XXXXXXXXXXX")
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{getAccount}}

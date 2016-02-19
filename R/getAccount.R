@@ -91,7 +91,7 @@
 #' 
 #' @seealso \code{\link{fbAuthenticate}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 getAccount <- function(account.id, token, fields = "default", n = 100, 
                      action.attribution.windows, action.breakdowns, 
                      action.report.time, breakdowns, date.preset, level, 

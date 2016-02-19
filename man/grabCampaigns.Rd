@@ -44,7 +44,7 @@ dat <- getCampaign(campaign.id = sample(camp$id, 1), date.preset = "last_week",
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{getCampaign}}

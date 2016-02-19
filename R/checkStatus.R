@@ -50,7 +50,7 @@
 #' 
 #' @seealso \code{\link{grabAds}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
 checkStatus <- function(id, token, fields = "effective_status") {

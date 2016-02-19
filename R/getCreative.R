@@ -40,7 +40,7 @@
 #' creative <- getCreative(id = sample(img_acc, 1), token = fbOAuth)
 #' }
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}},
 #'  \code{\link{grabAds}}

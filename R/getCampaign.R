@@ -99,7 +99,7 @@
 #' 
 #' @seealso \code{\link{fbAuthenticate}},  \code{link{findParams}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 getCampaign <- function(campaign.id, token, fields = "default", n = 100, 
                   action.attribution.windows, action.breakdowns, 
                   action.report.time, breakdowns, date.preset, level, 

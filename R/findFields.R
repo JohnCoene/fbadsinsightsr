@@ -38,7 +38,7 @@
 #' 
 #' @export
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 findFields <- function(fct ="getAny") {
   
   # assign value to fct if missing

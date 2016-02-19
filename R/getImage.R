@@ -28,7 +28,7 @@
 #' img_acc <- getImage(id = act[2,2], token = fbOAuth)
 #' }
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}}
 #'

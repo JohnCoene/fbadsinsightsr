@@ -22,7 +22,7 @@
 #' 
 #' @seealso \code{\link{getAccount}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
 grabAccounts <- function(id, token, n = 100, fields = "default",

@@ -107,7 +107,7 @@ date.preset = date, breakdowns = "region")
 
 }
 \author{
-John Coene <john.coene@cmcm.com>
+John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{findParams}},

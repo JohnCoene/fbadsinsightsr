@@ -15,7 +15,7 @@
 #'
 #' @seealso \code{\link{getCampaign}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
 grabCampaigns <- function(id, token, fields = "default", ..., 

@@ -24,7 +24,7 @@
 #' 
 #' @seealso \code{\link{grabAds}}
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
 checkTarget <- function(id, token, n = 100){
