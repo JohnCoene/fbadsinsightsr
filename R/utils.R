@@ -658,3 +658,397 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   return (fb_data)
 }
+
+
+
+
+# parse log
+parseLog <- function(json, account.id) {
+  
+  lst <- json$data
+  
+  extra <- list()
+  
+  for (i in 1:length(lst)) {
+    
+    if(length(lst[[i]]$extra_data)) {
+      extra[[i]] <- rjson::fromJSON(lst[[i]]$extra_data)
+      
+      lst[[i]]$extra_data <- NULL
+    } else {
+      
+      extra[[i]] <- NULL
+      
+    }
+    
+  }
+  
+  base_dat <- do.call(plyr::"rbind.fill", lapply(lst, as.data.frame))
+  
+  all <- data.frame()
+  
+  for(i in 1:length(extra)) {
+    
+    n <- names(extra[[i]])
+    
+    col <- data.frame()
+    
+    if(length(n)) {
+      
+      for (x in 1:length(n)) {
+        
+        l <- length(extra[[i]][[which(names(extra[[i]]) == n[x])]])
+        
+        if(l > 1) {
+          
+          l_names <- names(extra[[i]][[which(names(extra[[i]]) == n[x])]][[1]])
+          
+          if(l_names == c("content", "children") && !is.null(l_names)) {
+            
+            dat <- do.call(plyr::"rbind.fill", 
+                           lapply(extra[[i]][[which(names(extra[[i]]) == n[x])]],
+                                  function(x){
+                                    as.data.frame(x, stringsAsFactors = FALSE)
+                                  }))
+            
+            dat <- collapse(dat, n[x])
+            
+            if(ncol(col) > 1) {
+              col <- cbind.data.frame(col, dat)
+            } else {
+              col <- dat
+            }
+            
+          } else {
+            dat <- plyr::rbind.fill(lapply(extra[[i]][[which(names(extra[[i]]) == n[x])]],
+                                           function(f) {
+                                             as.data.frame(Filter(Negate(is.null), 
+                                                                  as.character(f)))
+                                           }))
+            
+            if(ncol(dat) > 1) {
+              # transpose
+              # name rows
+              rownames(dat) <- dat[,1]
+              
+              # remove first column
+              dat[,1] <- NULL
+              
+              # transpose
+              dat <- as.data.frame(t(dat))
+              
+              names(dat) <- paste0(n[x], "_", names(dat))
+              
+              if(ncol(col) > 1) {
+                col <- cbind.data.frame(col, dat)
+              } else {
+                col <- dat
+              }
+              
+            } else {
+              
+              ex <- extra[[i]][[which(names(extra[[i]]) == n[x])]]
+              
+              ex <- as.data.frame(unlist(ex)[which(unlist(ex) == dat[,1])])
+              
+              # transpose
+              # name row
+              
+              # transpose
+              ex <- as.data.frame(t(ex))
+              
+              
+              if(ncol(col) > 1) {
+                col <- cbind.data.frame(col, ex)
+              } else {
+                col <- ex
+              }
+            }
+          }
+          
+          
+          
+          
+          
+        } else {
+          
+          dat <- plyr::rbind.fill(lapply(extra[[i]][[which(names(extra[[i]]) == n[x])]],
+                                         function(f) {
+                                           as.data.frame(Filter(Negate(is.null),
+                                                                as.character(f)))
+                                         }))
+          
+          if(length(dat) > 0 && !is.null(dat)) {
+            
+            if(ncol(dat) == 1) {
+              names(dat) <- n[x]
+              
+            }
+            
+            if(ncol(col) >= 1) {
+              
+              col <- cbind.data.frame(col, dat)
+              
+            } else {
+              
+              col <- dat
+            }
+            
+          } else if(length(dat) == 0 || is.null(dat)) {
+            # create NA
+            col_na <- data.frame("0")
+            
+            names(col_na) <- n[x]
+            
+            if(ncol(col) >= 1) {
+              col <- cbind.data.frame(col, col_na)
+            } else {
+              col <- col_na
+            }
+          }
+        }
+      }
+      
+      
+      if(nrow(col) > 1) {
+        # duplicate base_dat
+        base <-  base_dat[rep(row.names(base_dat[i,]), nrow(col)),]
+      } else {
+        base <- base_dat[i,]
+      }
+      
+      
+    } else {
+      # create NA
+      dat_na <- rbind.data.frame(rep(NA, 1))
+      names(dat_na) <- "nan"
+      
+      # bind
+      col <- plyr::rbind.fill(col, dat_na)
+      dat_na <- NULL
+      
+      if(nrow(col) > 1) {
+        # duplicate base_dat
+        base <-  base_dat[rep(row.names(base_dat[i,]), nrow(col)),]
+      } else {
+        base <- base_dat[i,]
+      }
+    }
+    
+    
+    all <- plyr::rbind.fill(all, col, base)
+    
+  }
+  
+  all$nan <- NULL
+  
+  all <- unique(all)
+  
+  all$account_id <- account.id
+  
+  return(all)
+}
+
+
+
+collapse <- function(dat, par){
+  
+  if(length(dat[,1]) != length(unique(dat[,1]))){
+    
+    n <- unique(dat[,1])
+    
+    df <- data.frame()
+    
+    for(i in 1:length(n)){
+      
+      sub <- dat[grep(n[i], dat[,1]),]
+      
+      val <- paste0(sub[,2], collapse= ", ")
+      
+      val <- as.data.frame(val)
+      
+      names(val) <- n[i]
+      
+      if(nrow(df) == 0) {
+        df <- val
+      } else {
+        df <- cbind.data.frame(df, val)
+      }
+      
+    }
+    
+    dat <- df
+    
+    names(dat) <- paste0(par, "_", names(dat))
+    
+  } else {
+    
+    # transpose
+    # name rows
+    rownames(dat) <- dat[,1]
+    
+    # remove first column
+    dat[,1] <- NULL
+    
+    # transpose
+    dat <- as.data.frame(t(dat))
+    
+    # rename
+    names(dat) <- paste0(par, "_", names(dat))
+    
+  }
+  
+  return(dat)
+  
+}
+
+
+# parse log
+# parseLog2 <- function(json, account.id) {
+#   
+#   bindCol <- function(col, dat){
+#     if(ncol(col) >= 1) {
+#       col <- cbind.data.frame(col, dat)
+#     } else {
+#       col <- dat
+#     }
+#     
+#     return(col)
+#   }
+#   
+#   lst <- json$data
+#   
+#   extra <- list()
+#   
+#   for (i in 1:length(lst)) {
+#     
+#     if(length(lst[[i]]$extra_data)) {
+#       extra[[i]] <- rjson::fromJSON(lst[[i]]$extra_data)
+#       
+#       lst[[i]]$extra_data <- NULL
+#     } else {
+#       
+#       extra[[i]] <- NA
+#       
+#     }
+#     
+#   }
+#   
+#   base_dat <- do.call(plyr::"rbind.fill", lapply(lst, as.data.frame))
+#   
+#   all <- data.frame(stringsAsFactors = FALSE)
+#   
+#   for(i in 1:length(extra)) {
+#     
+#     extra_names <- names(extra[[i]])
+#     
+#     if(!is.null(extra_names)){
+#       
+#       col <- data.frame(stringsAsFactors = FALSE)
+#       
+#       for(j in 1:length(extra_names)){
+#         
+#         sub <- extra[[i]][[which(names(extra[[i]]) == extra_names[j])]]
+#         
+#         if(length(sub) == 1) {
+#           
+#           dat <- as.data.frame(sub)
+#           
+#           names(dat) <- extra_names[j]
+#           
+#           # bind
+#           col <- bindCol(col, dat)
+#           
+#         } else if(length(sub) == 0) {
+#           
+#           sub <- NA
+#           
+#           dat <- as.data.frame(sub)
+#           
+#           names(dat) <- extra_names[j]
+#           
+#           # bind
+#           col <- bindCol(col, dat)
+#           
+#         } else if (length(sub) > 1) {
+#           
+#           # test length
+#           lgt <- 0
+#           
+#           for(l in 1:length(sub)){
+#             if(length(sub[[l]]) > 1){
+#               lgt <- lgt + 1
+#             }
+#           }
+#           
+#           if(extra_names[j] == "additional_value"){
+#             
+#             # check NULLs
+#             sub <- lapply(sub, function(x){
+#               if(is.null(x)){
+#                 x <- NA
+#               } else {
+#                 x <- as.character(x)
+#               }
+#             })
+#             
+#             dat <- as.data.frame(sub)
+#             
+#             names(dat) <- paste0(extra_names[j], "_", names(dat))
+#             
+#           } else if(lgt == 0) {
+#             
+#             dat <- as.data.frame(sub)
+#             
+#             names(dat) <- paste0(extra_names[j], "_", names(dat))
+#             
+#             col <- bindCol(col, dat)
+#             
+#           } else if(lgt > 0) {
+#             
+#             # unlist
+#             dat <- do.call(plyr::"rbind.fill", lapply(sub, as.data.frame))
+#             
+#             # transpose
+#             # name rows
+#             rownames(dat) <- dat[,1]
+#             
+#             # remove first column
+#             dat[,1] <- NULL
+#             
+#             # transpose
+#             dat <- as.data.frame(t(dat))
+#             
+#             # rename
+#             names(dat) <- paste0(extra_names[j], "_", names(dat))
+#             
+#           }
+#           
+#           # bind
+#           col <- bindCol(col, dat)
+#           
+#         }
+#         
+#       }
+#       
+#     } else if (is.null(extra_names)) {
+#       
+#       dat <- rbind.data.frame(rep(NA, 1))
+#       names(dat) <- "nan"
+#       
+#       col <- bindCol(col, dat)
+#       
+#     }
+#     
+#     
+#     
+#     all <- plyr::rbind.fill(all, col)
+#     
+#   }
+#   
+#   all <- cbind.data.frame(base_dat, all)
+#   
+#   all$nan <- NULL
+#   
+#   return(all)
+# }
