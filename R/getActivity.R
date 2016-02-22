@@ -1,4 +1,4 @@
-#' getActivities
+#' getActivity
 #' 
 #' @description Get activities on an ad account.
 #' 
@@ -45,7 +45,7 @@
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}}
 #' 
 #' @export
-getActivities <- function(token, account.id, fields = "default", since = NULL, 
+getActivity <- function(token, account.id, fields = "default", since = NULL, 
                           until = NULL, n = 100, limit = 100){
   
   # check token
@@ -119,7 +119,7 @@ getActivities <- function(token, account.id, fields = "default", since = NULL,
         # sleep 0.5 second between queries
         Sys.sleep(0.5)
       }
-
+      
     }
     
   } else {
