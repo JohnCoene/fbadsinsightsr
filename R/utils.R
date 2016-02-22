@@ -726,18 +726,11 @@ parseLog <- function(json, account.id) {
                                                                   as.character(f)))
                                            }))
             
-            if(ncol(dat) > 1) {
-              # transpose
-              # name rows
-              rownames(dat) <- dat[,1]
+            if(dat[2,] == "" && dat[3,] == "") {
               
-              # remove first column
-              dat[,1] <- NULL
+              dat <- as.data.frame(dat[-c(2,3),])
               
-              # transpose
-              dat <- as.data.frame(t(dat))
-              
-              names(dat) <- paste0(n[x], "_", names(dat))
+              names(dat) <- n[x]
               
               if(ncol(col) > 1) {
                 col <- cbind.data.frame(col, dat)
@@ -747,28 +740,46 @@ parseLog <- function(json, account.id) {
               
             } else {
               
-              ex <- extra[[i]][[which(names(extra[[i]]) == n[x])]]
-              
-              ex <- as.data.frame(unlist(ex)[which(unlist(ex) == dat[,1])])
-              
-              # transpose
-              # name row
-              
-              # transpose
-              ex <- as.data.frame(t(ex))
-              
-              
-              if(ncol(col) > 1) {
-                col <- cbind.data.frame(col, ex)
+              if(ncol(dat) > 1) {
+                # transpose
+                # name rows
+                rownames(dat) <- dat[,1]
+                
+                # remove first column
+                dat[,1] <- NULL
+                
+                # transpose
+                dat <- as.data.frame(t(dat))
+                
+                names(dat) <- paste0(n[x], "_", names(dat))
+                
+                if(ncol(col) > 1) {
+                  col <- cbind.data.frame(col, dat)
+                } else {
+                  col <- dat
+                }
+                
               } else {
-                col <- ex
-              }
+                
+                ex <- extra[[i]][[which(names(extra[[i]]) == n[x])]]
+                
+                ex <- as.data.frame(unlist(ex)[which(unlist(ex) == dat[,1])])
+                
+                # transpose
+                # name row
+                
+                # transpose
+                ex <- as.data.frame(t(ex))
+                
+                
+                if(ncol(col) > 1) {
+                  col <- cbind.data.frame(col, ex)
+                } else {
+                  col <- ex
+                }
+              } 
             }
           }
-          
-          
-          
-          
           
         } else {
           
@@ -835,8 +846,9 @@ parseLog <- function(json, account.id) {
       }
     }
     
+    col <- cbind.data.frame(col, base)
     
-    all <- plyr::rbind.fill(all, col, base)
+    all <- plyr::rbind.fill(all, col)
     
   }
   

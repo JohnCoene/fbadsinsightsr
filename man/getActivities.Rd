@@ -25,7 +25,7 @@ results of that request in a single response.
 This is because some responses could contain thousands of objects so 
 most responses are paginated by default.}
 
-\item{limit}{Number of results requested at each API call, defaults to 100.
+\item{limit}{Number of results requested at each API call, defaults to \code{100}.
 Sometimes useful to bring it down if many results (\code{n}) are required as the 
 API might otherwise return \code{error_code: 1} or in other words an
  "Unknown error".}
