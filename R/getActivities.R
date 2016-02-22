@@ -21,6 +21,10 @@
 #'  Sometimes useful to bring it down if many results (\code{n}) are required as the 
 #'  API might otherwise return \code{error_code: 1} or in other words an
 #'   "Unknown error".
+#' @param fields 
+#' There are numerous valid fields defaults to 
+#' (\code{default}) which returns the most popular ones. See 
+#' \code{\link{findFields}} 
 #'   
 #' @examples 
 #' \dontrun{
@@ -41,8 +45,8 @@
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{grabAccounts}}
 #' 
 #' @export
-getActivities <- function(token, account.id, since = NULL, until = NULL,
-                          n = 100, limit = 100){
+getActivities <- function(token, account.id, fields = "default", since = NULL, 
+                          until = NULL, n = 100, limit = 100){
   
   # check token
   token <- checkToken(token)
@@ -68,13 +72,25 @@ getActivities <- function(token, account.id, since = NULL, until = NULL,
     until = paste0("&until=", until)
   }
   
+  # create fields
+  if(fields[1] == "default") {
+    fields <- findFields("getActivities")
+  } 
+  
+  if(class(fields) != "character") {
+    stop("Fields must be a character vector")
+  } else { 
+    # test if fields correct
+    testParam("fields", fields, "getActivities")
+    
+    # createFields
+    fields <- createFields(fields)
+  }
+  
   # build uri
   uri <- paste0("https://graph.facebook.com/v2.5/", account.id,
-                "/activities", "?fields=actor_id%2Cactor_name%2Capplication_id",
-                "%2Capplication_name%2Cdate_time_in_timezone%2C", 
-                "event_time%2Cevent_type%2Cobject_id%2Cobject_name%2C",
-                "translated_event_type%2Cextra_data&limit=", limit, since, until,
-                "&access_token=", token)
+                "/activities?fields=", fields,"&limit=", limit, 
+                since, until, "&access_token=", token)
   
   # fetch init
   response <- httr::GET(uri)

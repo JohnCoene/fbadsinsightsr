@@ -4,8 +4,8 @@
 \alias{getActivities}
 \title{getActivities}
 \usage{
-getActivities(token, account.id, since = NULL, until = NULL, n = 100,
-  limit = 100)
+getActivities(token, account.id, fields = "default", since = NULL,
+  until = NULL, n = 100, limit = 100)
 }
 \arguments{
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a 
@@ -14,6 +14,10 @@ short-term token from
 
 \item{account.id}{The id of the account you want to retrieve (Required),
 see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
+
+\item{fields}{There are numerous valid fields defaults to 
+(\code{default}) which returns the most popular ones. See 
+\code{\link{findFields}}}
 
 \item{since}{date \code{YYYY-MM-DD}}
 

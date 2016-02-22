@@ -16,6 +16,7 @@
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getImage}}
 #' \item \code{\link{getCreative}}
+#' \item \code{\link{getActivities}}
 #' \item \code{\link{grabCreatives}}
 #' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
@@ -136,6 +137,12 @@ findFields <- function(fct ="getAny") {
     
     fields <- c("picture", "caption", "message", "name", "id", "created_time",
                 "full_picture")
+    
+  } else if (fct == "getActivities") {
+    
+    fields <- c("actor_id", "actor_name", "application_id", "application_name", 
+                "date_time_in_timezone", "event_time", "object_id", 
+                "object_name", "translated_event_type", "extra_data")
     
   } else {
     
