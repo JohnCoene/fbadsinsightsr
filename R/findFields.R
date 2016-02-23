@@ -141,8 +141,9 @@ findFields <- function(fct ="getAny") {
   } else if (fct == "getActivities") {
     
     fields <- c("actor_id", "actor_name", "application_id", "application_name", 
-                "date_time_in_timezone", "event_time", "object_id", 
-                "object_name", "translated_event_type", "extra_data")
+                "date_time_in_timezone", "event_time", "event_type",
+                "object_id", "object_name", "translated_event_type", 
+                "extra_data")
     
   } else {
     
