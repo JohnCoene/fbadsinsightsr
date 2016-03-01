@@ -58,7 +58,7 @@ Since access to the repository is restricted you will need your login and passwo
 * ~~Enable fetching ad images.~~ (v1.1)
 * Enable fetching keywordstats: [https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats](https://developers.facebook.com/docs/marketing-api/reference/ad-keyword-stats)
 * ~~Deal with action-related variables which mess up data returned~~ (v1.1) ~~temporary fix~~ (v1.0).
-* Clean return of `findTarget` (minor).
+* Clean return of `checkTarget` (minor).
 * ~~Document to explain workflow that package suggests.~~ (see [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)))
 * ~~Allow collecting data on ads' tageting specs, etc.~~ (v0.8)
 * ~~Add optional feedback on GET-family functions.~~ (v0.8)

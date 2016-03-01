@@ -7,7 +7,7 @@
 getAdset(adset.id, token, fields = "default", n = 100,
   action.attribution.windows, action.breakdowns, action.report.time, breakdowns,
   date.preset, level, time.increment, time.range, summary = FALSE,
-  verbose = FALSE)
+  verbose = FALSE, limit = 100)
 }
 \arguments{
 \item{adset.id}{The id of the adset you want to retrieve (Required), see 
@@ -73,6 +73,11 @@ specified by fields will be included in the summary section.}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 queries in the console.}
+
+\item{limit}{Number of results requested at each API call, defaults to 100.
+Sometimes useful to bring it down if many results (\code{n}) are required as the 
+API might otherwise return \code{error_code: 1} or in other words an
+ "Unknown error".}
 }
 \description{
 Get insights on advertising performances of an adset. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/insights/}{documentation} for more information

@@ -69,6 +69,11 @@
 #' @param verbose
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console. 
+#' @param limit
+#'  Number of results requested at each API call, defaults to 100.
+#'  Sometimes useful to bring it down if many results (\code{n}) are required as the 
+#'  API might otherwise return \code{error_code: 1} or in other words an
+#'   "Unknown error".
 #' 
 #' @details This function refers to the following API call \url{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/},
 #' it is strongly encouraged to have a look a the latter link.
@@ -96,7 +101,7 @@ getAccount <- function(account.id, token, fields = "default", n = 100,
                      action.attribution.windows, action.breakdowns, 
                      action.report.time, breakdowns, date.preset, level, 
                      time.increment, time.range, summary = FALSE,
-                     verbose = FALSE) {
+                     verbose = FALSE, limit = 100) {
   
   # check arguments
   if(missing(action.attribution.windows)) action.attribution.windows <- NULL
@@ -115,7 +120,7 @@ getAccount <- function(account.id, token, fields = "default", n = 100,
                     breakdowns = breakdowns, date.preset = date.preset,
                     level = level, time.increment = time.increment, 
                     time.range = time.range, 
-                    n = n, summary = summary, verbose = verbose)
+                    n = n, summary = summary, verbose = verbose, limit = limit)
   
   return(fb_data)
   
