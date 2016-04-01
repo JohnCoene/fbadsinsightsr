@@ -138,12 +138,17 @@ findFields <- function(fct ="getAny") {
     fields <- c("picture", "caption", "message", "name", "id", "created_time",
                 "full_picture")
     
-  } else if (fct == "getActivities") {
+  } else if (fct == "getActivity") {
     
     fields <- c("actor_id", "actor_name", "application_id", "application_name", 
                 "date_time_in_timezone", "event_time", "event_type",
                 "object_id", "object_name", "translated_event_type", 
                 "extra_data")
+    
+  } else if (fct == "grabImages") {
+    
+    fields <- c("account_id", "created_time", "creatives", "hash", "height", 
+               "height", "id", "name", "original_height", "original_width")
     
   } else {
     

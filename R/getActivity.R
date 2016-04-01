@@ -37,7 +37,7 @@
 #' acc <- grabAccounts(id = "me", token = "XXXXXXXXXXX")
 #' 
 #' # get activity
-#' act <- getActivities(token = fbOAuth, account.id = sample(act, 1), n = 200)
+#' act <- getActivity(token = fbOAuth, account.id = sample(act, 1), n = 200)
 #' }
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
@@ -74,14 +74,14 @@ getActivity <- function(token, account.id, fields = "default", since = NULL,
   
   # create fields
   if(fields[1] == "default") {
-    fields <- findFields("getActivities")
+    fields <- findFields("getActivity")
   } 
   
   if(class(fields) != "character") {
     stop("Fields must be a character vector")
   } else { 
     # test if fields correct
-    testParam("fields", fields, "getActivities")
+    testParam("fields", fields, "getActivity")
     
     # createFields
     fields <- createFields(fields)
