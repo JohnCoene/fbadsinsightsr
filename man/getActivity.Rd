@@ -48,7 +48,7 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
 acc <- grabAccounts(id = "me", token = "XXXXXXXXXXX")
 
 # get activity
-act <- getActivities(token = fbOAuth, account.id = sample(act, 1), n = 200)
+act <- getActivity(token = fbOAuth, account.id = sample(act, 1), n = 200)
 }
 
 }
