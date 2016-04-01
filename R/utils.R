@@ -1,12 +1,3 @@
-# startUpMessage -------------------------------
-.onAttach <- function(libname, pkgname = "fbAdsInsightsR") {
-  packageStartupMessage("Welcome to the fbAdsInsightsR package.", "\n\n",
-                        "Please contact a contributor",
-                        " if you encounter an issue.", "\n",
-                        "All documentation is openly available at: ",
-                        "bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src")
-}
-
 # scope check -------------------------------
 scopeCheck <- function(scope) {
   
