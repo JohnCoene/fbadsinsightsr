@@ -1,9 +1,9 @@
-#' grabCreatives
+#' listCreatives
 #' 
 #' @description Fetches URL(s) name(s) and more about creatives used in an ad.
 #' 
 #' @param id
-#'  The id of the ad you want to retrieve (Required), see 
+#'  The id of the object you want to grab from (Required), see 
 #' \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param token
 #'  A valid token as returned by \code{\link{fbAuthenticate}} 
@@ -20,6 +20,8 @@
 #' @param verbose
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console.
+#' @param limit Number of results requested at each API call, defaults to 
+#' \code{100}.
 #' 
 #' @details Calls 
 #' \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/}{adcreatives}.
@@ -37,13 +39,13 @@
 #' act <- grabAccounts(id = "me", token = fbOAuth)
 #' 
 #' # get all creatives in ad account
-#' img_acc <- grabCreatives(id = act[2,2], token = fbOAuth)
+#' img_acc <- listCreatives(id = act[2,2], token = fbOAuth)
 #' 
 #' # get campaigns, adsets and ads IDs from account
 #' ads <- grabAds(account.id = act[2,2], token = token = fbOAuth)
 #' 
 #' # get ad creatives
-#' crea_ad <- grabCreatives(id = sample(ads$id, 1), token = fbOAuth)
+#' crea_ad <- listCreatives(id = sample(ads$id, 1), token = fbOAuth)
 #' }
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
@@ -52,8 +54,8 @@
 #'  \code{\link{grabAds}}
 #' 
 #' @export
-grabCreatives <- function(id, token, n = 100, fields = "default", 
-                          verbose = FALSE){
+listCreatives <- function(id, token, n = 100, fields = "default", 
+                          verbose = FALSE, limit = 100){
   
   # check inputs
   if(missing(id)){
@@ -74,7 +76,7 @@ grabCreatives <- function(id, token, n = 100, fields = "default",
            call. = FALSE)
     } else { 
       # test if fields correct
-      testParam("fields", fields, "grabCreatives")
+      testParam("fields", fields, "listCreatives")
       
       # createFields
       fields <- createFields(fields)
@@ -84,7 +86,7 @@ grabCreatives <- function(id, token, n = 100, fields = "default",
   uri <- paste0("https://graph.facebook.com/v2.5/",
                 id, "/adcreatives?fields=",
                 fields,
-                "&limit=100&access_token=",
+                "&limit=", limit, "&access_token=",
                 token)
   
   # call api
