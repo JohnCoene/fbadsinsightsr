@@ -2,7 +2,8 @@
 #' 
 #' @description Fetches URL(s) name(s) and more about images used in an account.
 #' 
-#' @param account.id Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
+#' @param account.id Your ad account id, starting by "act_" and followed by 15-16 
+#'  digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields 
 #' Defaults to \code{default} which returns the most popular ones. 
 #' Run \code{\link{findFields}} to see al valid fields.
