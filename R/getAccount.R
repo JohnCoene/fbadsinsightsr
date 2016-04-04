@@ -4,7 +4,8 @@
 #'  \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} 
 #'  for more information
 #' 
-#' @param account.id Your ad account id, starting by "act_" and followed by 15 digits (Required), 
+#' @param account.id Your ad account id, starting by "act_" and followed by 15-16 
+#'  digits (Required), 
 #' see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.
 #' @param fields 
