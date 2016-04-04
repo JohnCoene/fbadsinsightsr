@@ -286,7 +286,7 @@ getAny <- function(id, token, fields = "default", n = 100,
     
     # further checks
     if(names(time.range)[1] != "since"){
-      stop("time.range must be - c(since = 'YYYY-MM-DD', until='YYYY-MM-DD')",
+      stop("time.range must be - c(since = 'YYYY-MM-DD', until = 'YYYY-MM-DD')",
            call. = FALSE)
     } else if (class(date_check) == "try-error" || is.na(date_check)){
       stop("Wrong date format. Must be YYYY-MM-DD", call. = FALSE)
