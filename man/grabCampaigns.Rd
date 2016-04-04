@@ -5,11 +5,10 @@
 \title{grabCampaigns}
 \usage{
 grabCampaigns(id, token, fields = "default", ..., n = 100,
-  verbose = FALSE)
+  verbose = FALSE, limit = 100)
 }
 \arguments{
-\item{id}{Your ad account id, starting by "act_" and followed by 15 digits
-(Required), see 
+\item{id}{ID of object to grab from. 
 \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}}
@@ -25,21 +24,23 @@ Run \code{\link{findFields}} to see all valid fields.}
 When you make an API request, you will usually not receive all
  of the results of that request in a single response. 
  This is because some responses could contain thousands of objects
-  so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
+  so most responses are paginated by default. \code{previous} 
+  fetches the previous page of response (after the initial query) 
+  similarly \code{next} fetches the next page and \code{NULL} does not 
+  paginate (only makes one query).}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} 
 will print information on the query in the console.}
+
+\item{limit}{Number of results requested at each API call, defaults to 
+\code{100}.}
 }
 \description{
 Fetches the list of campaigns under a given account.
 }
 \examples{
 \dontrun{
-camp <- findCampaigns(account.id = "123456789", token = "XXXXXX")
-
-# use info for query
-dat <- getCampaign(campaign.id = sample(camp$id, 1), date.preset = "last_week",
- token = "XXXXX")
+camps <- grabCampaigns(id = "act_123456789012345", token = "XXXXXX")
 }
 
 }

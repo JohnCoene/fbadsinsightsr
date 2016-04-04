@@ -43,7 +43,7 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
 act <- grabAccounts(id = "me", token = fbOAuth)
 
 # get all creatives in ad account
-img_acc <- grabCreatives(id = act[2,2], token = fbOAuth)
+img_acc <- listCreatives(id = act[2,2], token = fbOAuth)
 
 # getCreative
 creative <- getCreative(id = sample(img_acc, 1), token = fbOAuth)

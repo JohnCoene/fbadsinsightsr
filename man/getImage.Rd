@@ -7,7 +7,8 @@
 getImage(account.id, token, fields = "default", n = 100, verbose = FALSE)
 }
 \arguments{
-\item{account.id}{Your ad account id, starting by "act_" and followed by 15 digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
+\item{account.id}{Your ad account id, starting by "act_" and followed by 15-16 
+digits (Required), see \href{https://www.facebook.com/business/help/1492627900875762}{how to find yours}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 

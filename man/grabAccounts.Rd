@@ -4,7 +4,8 @@
 \alias{grabAccounts}
 \title{grabAccounts}
 \usage{
-grabAccounts(id, token, n = 100, fields = "default", verbose = FALSE)
+grabAccounts(id, token, n = 100, fields = "default", verbose = FALSE,
+  limit = 100)
 }
 \arguments{
 \item{id}{Your business.facebook.com ID or your user id.}
@@ -16,6 +17,8 @@ grabAccounts(id, token, n = 100, fields = "default", verbose = FALSE)
 \item{fields}{Defaults to \code{default} which returns name and id of accounts. See \code{\link{findFields}} to find all available fields.}
 
 \item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the query in the console.}
+
+\item{limit}{Number of results requested at each API call, defaults to 100.}
 }
 \description{
 Fetches all accounts under one business ID. 
@@ -27,10 +30,7 @@ Returns data.frame of account IDs and status. requires \code{ads_management} per
 \examples{
 \dontrun{
 # get account ids
-act <- grabAccounts(id = "me", token = "XXXXXXXXXXX")
-
-# get information on account
-data <- getAccount(account.id = sample(act, 1), token = "XXXXXXXXXXX")
+accs <- grabAccounts(id = "act_123456789012345", token = "XXXXXX")
 }
 
 }
