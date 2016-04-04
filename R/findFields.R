@@ -17,12 +17,15 @@
 #' \item \code{\link{getImage}}
 #' \item \code{\link{getCreative}}
 #' \item \code{\link{getActivity}}
-#' \item \code{\link{grabCreatives}}
 #' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
 #' \item \code{\link{checkStatus}}
+#' \item \code{\link{listCreatives}}
+#' \item \code{\link{listVideos}}
+#' \item \code{\link{listImages}}
+#' \item \code{\link{listBroadTargeting}}
 #' }
 #' 
 #' @examples 
@@ -103,7 +106,7 @@ findFields <- function(fct ="getAny") {
                 "hash", "height", "width", "original_height", "original_width",
                 "permalink_url", "status", "updated_time", "url", "url128")
     
-  } else if (fct == "grabCreatives") {
+  } else if (fct == "listCreatives") {
     
     fields <- c("id", "adlabels", "body", "call_to_action_type", "image_hash",
                 "image_url", "instagram_actor_id", "instagram_permalink_url",
@@ -145,10 +148,21 @@ findFields <- function(fct ="getAny") {
                 "object_id", "object_name", "translated_event_type", 
                 "extra_data")
     
-  } else if (fct == "grabImages") {
+  } else if (fct == "listImages") {
     
     fields <- c("account_id", "created_time", "creatives", "hash", "height", 
                "height", "id", "name", "original_height", "original_width")
+    
+  } else if (fct == "listVideos") {
+    
+    fields <- c("backdated_time", "backdated_time_granularity", 
+                "content_category", "created_time", "description", "embed_html", 
+                "emeddable", "event", "format")
+    
+  } else if(fct == "listBroadTargeting") {
+    
+    fields <- c("category_description", "id", "name", "parent_category", "size", 
+                "source", "type", "type_name")
     
   } else {
     
