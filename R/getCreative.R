@@ -34,7 +34,7 @@
 #' act <- grabAccounts(id = "me", token = fbOAuth)
 #' 
 #' # get all creatives in ad account
-#' img_acc <- grabCreatives(id = act[2,2], token = fbOAuth)
+#' img_acc <- listCreatives(id = act[2,2], token = fbOAuth)
 #' 
 #' # getCreative
 #' creative <- getCreative(id = sample(img_acc, 1), token = fbOAuth)
@@ -68,7 +68,7 @@ getCreative <- function(id, token, n = 100, fields = "default",
            call. = FALSE)
     } else { 
       # test if fields correct
-      testParam("fields", fields, "grabCreatives")
+      testParam("fields", fields, "getCreative")
       
       # createFields
       fields <- createFields(fields)
