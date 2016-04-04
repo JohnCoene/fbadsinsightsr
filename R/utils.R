@@ -568,7 +568,7 @@ converge.fbAdsData <- function(fbData){
 
 # findObjects -----------------------------------
 findObjects <- function(id, token, fields = "default", ..., n = 100,
-                        verbose = FALSE, object, FUN){
+                        verbose = FALSE, object, FUN, limit){
   
   # check inputs
   if(missing(id)){
@@ -579,13 +579,19 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
     stop("missing object", call. = FALSE)
   }
   
+  if(class(limit)[1] == "character"){
+    stop("limit must be a numerical data type", call. = FALSE)
+  }
+  
   # check token verison
   token <- checkToken(token)
   
   # create fields
-  if(fields[1] == "default") {
+  if(fields[1] == "default" && FUN != "listVideos") {
     fields <- c("name", "id")
-  } 
+  } else if (fields[1] == "default" && FUN == "listVideos") {
+    fields <- c("backdated_time", "description", "embed_html")
+  }
   
   if(class(fields) != "character") {
     stop("Fields must be a character vector", call. = FALSE)
@@ -615,14 +621,14 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
                   id, "/",object,"?fields=",
                   fields,
                   "%2Cinsights{", args, "}",
-                  "&limit=100&access_token=",
+                  "&limit=", limit, "&access_token=",
                   token) 
   } else {
     # build url
     url <- paste0("https://graph.facebook.com/v2.5/",
                   id, "/",object,"?fields=",
                   fields,
-                  "&limit=100&access_token=",
+                  "&limit=", limit, "&access_token=",
                   token)
   }
   
