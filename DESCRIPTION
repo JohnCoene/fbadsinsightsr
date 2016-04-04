@@ -6,11 +6,12 @@ Date: 2015-12-14
 Authors@R: c(
     person("John", "Coene", , "john.coene@cmcm.com", role = c("aut", "cre")),
     person("Cheetah Mobile", role = "cph"))
-Description: Get data on performances of facebook ads through facebook Insights API.The package provides a range of GET-family functions to fetch data as well as find-family functions to help one navigate the API.
-License: MIT + file LICENSE
+Description: Get data on performances of facebook ads through facebook Insights
+    API.The package provides a range of GET-family functions to fetch data as
+    well as find-family functions to help one navigate the API.
 Depends:
     R (>= 3.0.0)
-Imports: 
+Imports:
     rjson,
     plyr,
     httr
@@ -18,3 +19,4 @@ LazyData: TRUE
 URL: https://bitbucket.org/JohnCheetah/fbadsinsightsr
 BugReports: https://bitbucket.org/JohnCheetah/fbadsinsightsr/issues
 RoxygenNote: 5.0.1
+Suggests: testthat
