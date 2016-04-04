@@ -6,11 +6,7 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' adsets <- findAdsets(account.id = "act_123456789123456", token = "XXXXXX")
-#' 
-#' # use info for query
-#' dat <- getAdset(adset.id = sample(adsets$id, 1), date.preset = "lifetime",
-#'  token = "XXXXX")
+#' adsets <- grabAdsets(id = "act_123456789012345", token = "XXXXXX")
 #' 
 #' }
 #'
@@ -20,11 +16,11 @@
 #' 
 #' @export
 grabAdsets <- function (id, token, fields = "default", ..., n = 100,
-                        verbose = FALSE) {
+                        verbose = FALSE, limit = 100) {
   
   fb_data <- findObjects(id = id, token = token, fields = fields, ..., 
                          n = n, verbose = verbose, object = "adsets",
-                         FUN = "grabAdsets")
+                         FUN = "grabAdsets", limit = limit)
   
   if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
   
