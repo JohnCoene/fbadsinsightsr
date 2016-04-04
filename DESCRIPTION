@@ -3,10 +3,13 @@ Type: Package
 Title: Get data on performances of facebook ads
 Version: 2.0
 Date: 2015-12-14
-Author: Cheetah Mobile
-Maintainer: John Coene <john.coene@cmcm.com>
+Authors@R: c(
+    person("John", "Coene", , "john.coene@cmcm.com", role = c("aut", "cre")),
+    person("Cheetah Mobile", role = "cph"))
 Description: Get data on performances of facebook ads through facebook Insights API.The package provides a range of GET-family functions to fetch data as well as find-family functions to help one navigate the API.
 License: GPL (>=3) + file LICENSE
+Depends:
+    R (>= 3.0.0)
 Imports: 
     rjson,
     plyr,
