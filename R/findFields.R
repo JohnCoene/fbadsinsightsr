@@ -14,8 +14,6 @@
 #' \item \code{\link{getAccount}}
 #' \item \code{\link{getAdset}}
 #' \item \code{\link{getAd}}
-#' \item \code{\link{getImage}}
-#' \item \code{\link{getCreative}}
 #' \item \code{\link{getActivity}}
 #' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
@@ -100,11 +98,6 @@ findFields <- function(fct ="getAny") {
     #build fields
     fields <- c("effective_status", "configured_status", "created_time",
                 "name", "account_id")
-  } else if (fct == "getImage") {
-    
-    fields <- c("id", "name", "account_id", "created_time", "creatives",
-                "hash", "height", "width", "original_height", "original_width",
-                "permalink_url", "status", "updated_time", "url", "url128")
     
   } else if (fct == "listCreatives") {
     
@@ -136,11 +129,6 @@ findFields <- function(fct ="getAny") {
                 "balance", "business", "owner_business", "last_used_time",
                 "asset_score")
     
-  } else if (fct == "getCreative") {
-    
-    fields <- c("picture", "caption", "message", "name", "id", "created_time",
-                "full_picture")
-    
   } else if (fct == "getActivity") {
     
     fields <- c("actor_id", "actor_name", "application_id", "application_name", 
@@ -150,8 +138,8 @@ findFields <- function(fct ="getAny") {
     
   } else if (fct == "listImages") {
     
-    fields <- c("account_id", "created_time", "creatives", "hash", "height", 
-               "height", "id", "name", "original_height", "original_width")
+    fields <- c("account_id", "created_time", "creatives", "hash", "height",
+                "id", "name", "original_height", "original_width")
     
   } else if (fct == "listVideos") {
     
