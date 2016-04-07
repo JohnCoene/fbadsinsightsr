@@ -47,11 +47,12 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `checkTarget`
 * `checkStatus`
 
-See [documentation]((https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)) and examples for more details.
-
 ## Documentation ##
 
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
+
+* [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/downloads/fbAdsInsightsRv2_0.pdf)
+* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
 
 ## Install ##
 
