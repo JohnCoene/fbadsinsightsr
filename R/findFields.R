@@ -15,11 +15,11 @@
 #' \item \code{\link{getAdset}}
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getActivity}}
-#' \item \code{\link{grabAccounts}}
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
 #' \item \code{\link{checkStatus}}
+#' \item \code{\link{listAccounts}}
 #' \item \code{\link{listCreatives}}
 #' \item \code{\link{listVideos}}
 #' \item \code{\link{listImages}}
@@ -99,7 +99,7 @@ findFields <- function(fct ="getAny") {
     fields <- c("effective_status", "configured_status", "created_time",
                 "name", "account_id")
     
-  } else if (fct == "listCreatives") {
+  } else if (fct == "listCreatives" || fct == "grabCreatives") {
     
     fields <- c("id", "adlabels", "body", "call_to_action_type", "image_hash",
                 "image_url", "instagram_actor_id", "instagram_permalink_url",
@@ -108,7 +108,7 @@ findFields <- function(fct ="getAny") {
                 "product_set_id", "run_status", "template_url", 
                 "thumbnail_url", "title", "url_tags", "applink_treatment")
     
-  } else if (fct == "grabAccounts") {
+  } else if (fct == "listAccounts" || fct == "grabAccounts") {
     
     fields <- c("id", "account_groups", "account_id", "account_status",
                 "age", "agency_client_declaration", "business_city",

@@ -24,11 +24,11 @@ Applies to the following functions (\code{fct} argument, i.e.:
 \item \code{\link{getAdset}}
 \item \code{\link{getAd}}
 \item \code{\link{getActivity}}
-\item \code{\link{grabAccounts}}
 \item \code{\link{grabCampaigns}}
 \item \code{\link{grabAdsets}}
 \item \code{\link{grabAds}}
 \item \code{\link{checkStatus}}
+\item \code{\link{listAccounts}}
 \item \code{\link{listCreatives}}
 \item \code{\link{listVideos}}
 \item \code{\link{listImages}}
