@@ -26,6 +26,8 @@
 grabAccounts <- function(id, token, n = 100, fields = "default",
                          verbose = FALSE, limit = 100) {
   
+  .Deprecated("listAccounts")
+  
   # check inputs
   if(missing(id)){
     stop("Missing account.id")
@@ -33,10 +35,9 @@ grabAccounts <- function(id, token, n = 100, fields = "default",
     stop("Missing token")
   }
   
-  
   fb_data <- findObjects(id = id, token = token, fields = fields, 
                          n = n, verbose = verbose, object = "adaccounts",
-                         FUN = "grabAccounts", limit = limit)
+                         FUN = "listAccounts", limit = limit)
   
   if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
   
