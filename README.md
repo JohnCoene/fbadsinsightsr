@@ -23,6 +23,8 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **List-family**
 
+* `listBusinesses`
+* `listAccounts`
 * `listVideos`
 * `listImages`
 * `listCreatives`
@@ -35,7 +37,6 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **Grab-family**
 
-* `grabAccounts`
 * `grabCampaigns`
 * `grabAdsets`
 * `grabAds`
