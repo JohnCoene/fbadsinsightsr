@@ -48,7 +48,7 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           app.secret = "16xx79321xx0130x2x10a08x3e2x30xx", 
                           scope = "ads_management")
 # get account ids
-act <- grabAccounts(id = "me", token = fbOAuth)
+act <- listAccounts(id = "me", token = fbOAuth)
 
 # get all creatives in ad account
 img_acc <- listCreatives(id = act[2,2], token = fbOAuth)
@@ -65,7 +65,7 @@ crea_ad <- listCreatives(id = sample(ads$id, 1), token = fbOAuth)
 John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
-\code{\link{fbAuthenticate}}, \code{\link{grabAccounts}},
+\code{\link{fbAuthenticate}}, \code{\link{listAccounts}},
  \code{\link{grabAds}}
 }
 

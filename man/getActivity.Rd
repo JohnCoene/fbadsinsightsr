@@ -45,7 +45,7 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           scope = "ads_management")
 
 # get account ids
-acc <- grabAccounts(id = "me", token = "XXXXXXXXXXX")
+acc <- listAccounts(id = "me", token = "XXXXXXXXXXX")
 
 # get activity
 act <- getActivity(token = fbOAuth, account.id = sample(act, 1), n = 200)
@@ -56,6 +56,6 @@ act <- getActivity(token = fbOAuth, account.id = sample(act, 1), n = 200)
 John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
-\code{\link{fbAuthenticate}}, \code{\link{grabAccounts}}
+\code{\link{fbAuthenticate}}, \code{\link{listAccounts}}
 }
 
