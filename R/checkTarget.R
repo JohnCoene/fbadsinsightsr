@@ -62,7 +62,7 @@ checkTarget <- function(id, token, n = 100){
     dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
     
     # dat
-    names(dat) <- c("field", "value")
+    dat <- processCheck(dat)
     
   } else if (!length(json$targetingsentencelines)) {
     

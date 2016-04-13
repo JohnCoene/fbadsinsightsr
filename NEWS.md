@@ -3,6 +3,7 @@
 * New `list` family (images, videos, creatives, broad targeting categories)
 * `grabCreatives` and `grabAccounts` deprecated
 * `getImage` and `getCreative` removed (was not working)
+* Return from `checkTarget` cleaned-up
 
 ## v2.0 ##
 

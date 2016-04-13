@@ -910,3 +910,13 @@ collapse <- function(dat, par){
   return(dat)
   
 }
+
+processCheck <- function(dat){
+  d <- t(dat)
+  d <- as.data.frame(d)
+  x <- as.data.frame(d[2,])
+  names(x) <- dat[,1]
+  names(x) <- gsub(":$", "", names(x))
+  rownames(x) <- 1:nrow(x)
+  return(x)
+}
