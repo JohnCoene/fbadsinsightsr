@@ -918,7 +918,7 @@ processCheck <- function(dat){
   names(x) <- dat[,1]
   names(x) <- tolower(names(x))
   names(x) <- gsub(":$", "", names(x))
-  names(x) <- gsub("-", ".", names(x))
+  names(x) <- gsub("-", "_", names(x))
   names(x) <- gsub("[[:space:]]", ".", names(x))
   rownames(x) <- 1:nrow(x)
   return(x)
