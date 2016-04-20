@@ -33,14 +33,13 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 * `findFields`
 * `findParams` (Replaces multiple find-family functions from v1.1)
-* `findObjects` (.Deprecated)`
 
 **Grab-family**
 
 * `grabCampaigns`
 * `grabAdsets`
 * `grabAds`
-* `grabCreatives` (deprecated)
+* `grabCreatives` (.deprecated)
 
 **check-family**
 
