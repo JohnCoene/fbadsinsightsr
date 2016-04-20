@@ -2,7 +2,7 @@
 % Please edit documentation in R/getAccount.R
 \name{getAccount}
 \alias{getAccount}
-\title{getAccount}
+\title{Get data on an account}
 \usage{
 getAccount(account.id, token, fields = "default", n = 100,
   action.attribution.windows, action.breakdowns, action.report.time, breakdowns,

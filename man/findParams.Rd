@@ -2,7 +2,7 @@
 % Please edit documentation in R/findParams.R
 \name{findParams}
 \alias{findParams}
-\title{findParams}
+\title{Find valid parameters}
 \usage{
 findParams(params = c("level", "breakdowns", "date.preset",
   "action.breakdowns", "action.report.time", "action.attribution.windows",
@@ -30,6 +30,7 @@ Function applies to parameters of the following GET-family functions
 \item \code{ation.breakdowns}
 \item \code{action.report.time}
 \item \code{action.attribution.windows}
+\item \code{subtype}
 }
 }
 \examples{

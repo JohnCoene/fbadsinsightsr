@@ -1,4 +1,4 @@
-#' grabCampaigns
+#' Grab list of campaigns
 #' 
 #' @description Fetches the list of campaigns under a given account.
 #' 

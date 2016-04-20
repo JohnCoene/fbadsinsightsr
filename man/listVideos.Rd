@@ -2,7 +2,7 @@
 % Please edit documentation in R/listVideos.R
 \name{listVideos}
 \alias{listVideos}
-\title{listVideos}
+\title{List videos}
 \usage{
 listVideos(id, token, fields = "default", n = 100, verbose = FALSE,
   limit = 100)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/findFields.R
 \name{findFields}
 \alias{findFields}
-\title{findFields}
+\title{Find valid fields}
 \usage{
 findFields(fct = "getAny")
 }

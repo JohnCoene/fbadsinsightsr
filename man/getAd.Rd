@@ -2,7 +2,7 @@
 % Please edit documentation in R/getAd.R
 \name{getAd}
 \alias{getAd}
-\title{getAd}
+\title{Get data on an ad}
 \usage{
 getAd(ad.id, token, fields = "default", n = 100, action.attribution.windows,
   action.breakdowns, action.report.time, breakdowns, date.preset, level,

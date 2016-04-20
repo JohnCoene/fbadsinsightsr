@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkTarget.R
 \name{checkTarget}
 \alias{checkTarget}
-\title{checkTarget}
+\title{Check object target}
 \usage{
 checkTarget(id, token, n = 100)
 }

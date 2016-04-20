@@ -2,7 +2,7 @@
 % Please edit documentation in R/getAny.R
 \name{getAny}
 \alias{getAny}
-\title{getAny}
+\title{Get data on any object}
 \usage{
 getAny(id, token, fields = "default", n = 100, action.attribution.windows,
   action.breakdowns, action.report.time, breakdowns, date.preset, level,

@@ -1,4 +1,4 @@
-#' fbAuthenticate
+#' Authenticate
 #' 
 #' @description 
 #' Authenticate through Facebook Graph API with your facebook application which you can create at \href{https://developers.facebook.com/apps}{https://developers.facebook.com/apps}

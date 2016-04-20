@@ -1,4 +1,4 @@
-#' listCreatives
+#' List creatives
 #' 
 #' @description Fetches URL(s) name(s) and more about creatives used in an ad.
 #' 

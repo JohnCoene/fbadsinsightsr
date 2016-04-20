@@ -1,4 +1,4 @@
-#' listBusinesses
+#' List businesses
 #' 
 #' @description Fetches all businesses under the authenticated user. 
 #' Requires access to Business Managers' API.

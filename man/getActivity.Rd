@@ -2,7 +2,7 @@
 % Please edit documentation in R/getActivity.R
 \name{getActivity}
 \alias{getActivity}
-\title{getActivity}
+\title{Get activity log}
 \usage{
 getActivity(token, account.id, fields = "default", since = NULL,
   until = NULL, n = 100, limit = 100)

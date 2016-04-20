@@ -1,4 +1,4 @@
-#' getAdset
+#' Get data on an adset
 #' 
 #' @description Get insights on advertising performances of an adset. See \href{https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/insights/}{documentation} for more information
 #' 

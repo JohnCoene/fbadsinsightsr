@@ -2,7 +2,7 @@
 % Please edit documentation in R/listAccounts.R
 \name{listAccounts}
 \alias{listAccounts}
-\title{listAccounts}
+\title{List accounts}
 \usage{
 listAccounts(id, token, n = 100, fields = "default", verbose = FALSE,
   limit = 100)

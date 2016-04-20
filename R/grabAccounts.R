@@ -1,4 +1,4 @@
-#' grabAccounts
+#' Grab list of accounts
 #' 
 #' @description Fetches all accounts under one business ID. 
 #' All accounts to which the user has access to that is.

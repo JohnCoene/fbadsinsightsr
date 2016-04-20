@@ -2,7 +2,7 @@
 % Please edit documentation in R/grabAds.R
 \name{grabAds}
 \alias{grabAds}
-\title{grabAds}
+\title{Grab list of ads}
 \usage{
 grabAds(id, token, fields = "default", ..., n = 100, verbose = FALSE,
   limit = 100)

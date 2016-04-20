@@ -2,7 +2,7 @@
 % Please edit documentation in R/fbAuthenticate.R
 \name{fbAuthenticate}
 \alias{fbAuthenticate}
-\title{fbAuthenticate}
+\title{Authenticate}
 \usage{
 fbAuthenticate(app.id, app.secret, scope = "ads_read",
   app.name = "optional")

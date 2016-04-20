@@ -1,4 +1,4 @@
-#' listImages
+#' List images
 #' 
 #' @description Fetches the list of images under a given account.
 #' 

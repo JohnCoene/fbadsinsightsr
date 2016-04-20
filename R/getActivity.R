@@ -1,4 +1,4 @@
-#' getActivity
+#' Get activity log
 #' 
 #' @description Get activities on an ad account.
 #' 

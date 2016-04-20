@@ -2,7 +2,7 @@
 % Please edit documentation in R/listBroadTargeting.R
 \name{listBroadTargeting}
 \alias{listBroadTargeting}
-\title{listBroadTargeting}
+\title{List broad targeting categories}
 \usage{
 listBroadTargeting(id, token, fields = "default", n = 100,
   verbose = FALSE, limit = 100)

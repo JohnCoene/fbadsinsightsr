@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkStatus.R
 \name{checkStatus}
 \alias{checkStatus}
-\title{checkStatus}
+\title{Check object status}
 \usage{
 checkStatus(id, token, fields = "effective_status")
 }

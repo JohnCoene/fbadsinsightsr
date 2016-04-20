@@ -1,4 +1,4 @@
-#' getAd
+#' Get data on an ad
 #' 
 #' @description Get insights on advertising performances of an ad. See \href{https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights/}{documentation} for more information
 #' 

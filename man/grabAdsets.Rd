@@ -2,7 +2,7 @@
 % Please edit documentation in R/grabAdsets.R
 \name{grabAdsets}
 \alias{grabAdsets}
-\title{grabAdsets}
+\title{Grab list of adsets}
 \usage{
 grabAdsets(id, token, fields = "default", ..., n = 100, verbose = FALSE,
   limit = 100)

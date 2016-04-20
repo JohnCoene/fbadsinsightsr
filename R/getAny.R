@@ -1,4 +1,4 @@
-#' getAny
+#' Get data on any object
 #' 
 #' @description Get insights on advertising performances of an ad, an adset, a campaign or even an account. This function may relace any other GET function in this package.
 #' 

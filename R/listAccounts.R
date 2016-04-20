@@ -1,4 +1,4 @@
-#' listAccounts
+#' List accounts
 #' 
 #' @description Fetches all accounts under one business or user ID.
 #' 

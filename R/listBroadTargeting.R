@@ -1,4 +1,4 @@
-#' listBroadTargeting
+#' List broad targeting categories
 #' 
 #' @description Fetches the list of broad targeting categories under 
 #' a given account.

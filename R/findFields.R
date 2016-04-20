@@ -1,4 +1,4 @@
-#' findFields
+#' Find valid fields
 #' 
 #' @description Returns all valid \code{fields} which can be used in 
 #' the GET-family functions.

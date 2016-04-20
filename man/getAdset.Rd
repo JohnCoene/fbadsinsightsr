@@ -2,7 +2,7 @@
 % Please edit documentation in R/getAdset.R
 \name{getAdset}
 \alias{getAdset}
-\title{getAdset}
+\title{Get data on an adset}
 \usage{
 getAdset(adset.id, token, fields = "default", n = 100,
   action.attribution.windows, action.breakdowns, action.report.time, breakdowns,

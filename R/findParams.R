@@ -1,4 +1,4 @@
-#' findParams
+#' Find valid parameters
 #' 
 #' @description Helper function to check valid values for parameters of 
 #' GET-family functions (i.e.: \code{\link{getAny}}).
@@ -16,6 +16,7 @@
 #' \item \code{ation.breakdowns}
 #' \item \code{action.report.time}
 #' \item \code{action.attribution.windows}
+#' \item \code{subtype}
 #' }
 #' 
 #' @return If one \code{params} is passed the function returns a 
@@ -92,6 +93,12 @@ findParams <- function(params = c("level", "breakdowns", "date.preset",
     } else if (param == "time.increment"){
       
       param <- c("monthly", "all_days")
+      
+    } else if (param == "subtype") {
+      
+      param <- c("CUSTOM", "WEBSITE", "APP", "CLAIM", "PARTNER", "MANAGED", 
+                 "VIDEO", "LOOKALIKE", "ENGAGEMENT", "DATA_SET", 
+                 "BAG_OF_ACCOUNTS")
       
     } else {
       

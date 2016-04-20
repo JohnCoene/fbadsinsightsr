@@ -1,4 +1,4 @@
-#' grabAdsets
+#' Grab list of adsets
 #' 
 #' @description Fetches the list of adsets under a given account or campaign.
 #' 

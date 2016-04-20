@@ -2,7 +2,7 @@
 % Please edit documentation in R/grabCampaigns.R
 \name{grabCampaigns}
 \alias{grabCampaigns}
-\title{grabCampaigns}
+\title{Grab list of campaigns}
 \usage{
 grabCampaigns(id, token, fields = "default", ..., n = 100,
   verbose = FALSE, limit = 100)

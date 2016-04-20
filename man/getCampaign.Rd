@@ -2,7 +2,7 @@
 % Please edit documentation in R/getCampaign.R
 \name{getCampaign}
 \alias{getCampaign}
-\title{getCampaign}
+\title{Get data on a campaign}
 \usage{
 getCampaign(campaign.id, token, fields = "default", n = 100,
   action.attribution.windows, action.breakdowns, action.report.time, breakdowns,

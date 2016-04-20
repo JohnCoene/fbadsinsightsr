@@ -2,7 +2,7 @@
 % Please edit documentation in R/grabAccounts.R
 \name{grabAccounts}
 \alias{grabAccounts}
-\title{grabAccounts}
+\title{Grab list of accounts}
 \usage{
 grabAccounts(id, token, n = 100, fields = "default", verbose = FALSE,
   limit = 100)

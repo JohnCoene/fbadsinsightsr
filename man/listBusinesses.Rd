@@ -2,7 +2,7 @@
 % Please edit documentation in R/listBusinesses.R
 \name{listBusinesses}
 \alias{listBusinesses}
-\title{listBusinesses}
+\title{List businesses}
 \usage{
 listBusinesses(token, id = "me", n = 100, verbose = FALSE, limit = 100)
 }

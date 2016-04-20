@@ -2,7 +2,7 @@
 % Please edit documentation in R/listImages.R
 \name{listImages}
 \alias{listImages}
-\title{listImages}
+\title{List images}
 \usage{
 listImages(id, token, fields = "default", n = 100, verbose = FALSE,
   limit = 100)

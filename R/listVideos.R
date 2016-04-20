@@ -1,4 +1,4 @@
-#' listVideos
+#' List videos
 #' 
 #' @description Fetches the list of videos under a given account.
 #' 

@@ -1,4 +1,4 @@
-#' checkStatus
+#' Check object status
 #' 
 #' @description Returns effective as well as configured status and created time, name, account id of object requested (campaign, adset or ad).
 #' 

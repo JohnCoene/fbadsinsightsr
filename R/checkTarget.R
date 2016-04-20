@@ -1,4 +1,4 @@
-#' checkTarget
+#' Check object target
 #' 
 #' @description Retrieves the targeting description of a specific ad or adset.
 #' 

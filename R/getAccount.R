@@ -1,4 +1,4 @@
-#' getAccount
+#' Get data on an account
 #' 
 #' @description Get insights on advertising performances of ad account. See
 #'  \href{https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/}{documentation} 

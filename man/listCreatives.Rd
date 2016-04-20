@@ -2,7 +2,7 @@
 % Please edit documentation in R/listCreatives.R
 \name{listCreatives}
 \alias{listCreatives}
-\title{listCreatives}
+\title{List creatives}
 \usage{
 listCreatives(id, token, n = 100, fields = "default", verbose = FALSE,
   limit = 100)
