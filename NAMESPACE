@@ -2,7 +2,9 @@
 
 export(checkStatus)
 export(checkTarget)
+export(createAudience)
 export(fbAuthenticate)
+export(fillAudience)
 export(findFields)
 export(findParams)
 export(getAccount)

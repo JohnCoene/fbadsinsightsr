@@ -84,6 +84,8 @@ testParam <- function (params, param_vector, fct) {
     options <- c("ad", "adset", "campaign", "account") 
   } else if (params == "time_increment") {
     options <- findParams("time.increment")
+  } else if(params == "subtype"){
+    options <- findParams("subtype")
   }
   
   for (i in 1:length(param_vector)) {
