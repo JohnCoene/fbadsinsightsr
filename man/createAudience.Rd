@@ -27,13 +27,9 @@ Create an empty audience
 \details{
 To create a custom audience you'll first need to create a 
 blank audience. Then, you'll want to add people to the blank audience you j
-ust created by updating the users edge of the audience using 
-\code{\link{fillAudience}}.
+ust created by updating the users edge of the audience using.
 }
 \author{
 John Coene \email{john.coene@cmcm.com}
-}
-\seealso{
-\code{\link{fillAudience}}
 }
 
