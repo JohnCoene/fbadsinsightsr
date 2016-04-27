@@ -15,6 +15,7 @@
 #' \item \code{\link{getAdset}}
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getActivity}}
+#' \item \code{\link{getCreative}}
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
@@ -151,6 +152,15 @@ findFields <- function(fct ="getAny") {
     
     fields <- c("category_description", "id", "name", "parent_category", "size", 
                 "source", "type", "type_name")
+    
+  } else if (fct == "getCreative") {
+    
+    fields <- c("message", "caption", "name", "created_time", "description", 
+                "is_popular", "is_instagram_eligible", "is_hidden", 
+                "is_expired", "is_app_share", "instagram_eligibility", 
+                "promotion_status", "status_type", "is_spherical", 
+                "subscribed", "timeline_visibility", "type", "updated_time", 
+                "full_picture", "icon", "is_published", "id")
     
   } else {
     

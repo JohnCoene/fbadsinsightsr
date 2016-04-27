@@ -24,6 +24,7 @@ Applies to the following functions (\code{fct} argument, i.e.:
 \item \code{\link{getAdset}}
 \item \code{\link{getAd}}
 \item \code{\link{getActivity}}
+\item \code{\link{getCreative}}
 \item \code{\link{grabCampaigns}}
 \item \code{\link{grabAdsets}}
 \item \code{\link{grabAds}}
