@@ -14,10 +14,7 @@
 #' 
 #' @details To create a custom audience you'll first need to create a 
 #' blank audience. Then, you'll want to add people to the blank audience you j
-#' ust created by updating the users edge of the audience using 
-#' \code{\link{fillAudience}}.
-#' 
-#' @seealso \code{\link{fillAudience}}
+#' ust created by updating the users edge of the audience using.
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
@@ -49,6 +46,8 @@ createAudience <- function(token, account.id, description, name,
     subtype = subtype,
     access_token = token
   ))
+  
+  content <- httr::content(resp)
   
   return(uri)
   
