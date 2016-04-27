@@ -145,7 +145,8 @@ getAny <- function(id, token, fields = "default", n = 100,
   # check inputs
   if(missing(id)){
     stop("Missing id", call. = FALSE)
-  } else if (missing(token)){
+  }
+  if (missing(token)){
     stop("Missing token", call. = FALSE)
   } 
   
