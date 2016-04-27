@@ -4,27 +4,44 @@
 #' 
 #' @section Functions:
 #' 
+#' OAuth
 #' \itemize{
 #' \item \code{\link{fbAuthenticate}}
+#' }
+#' Get-family
+#' \itemize{
 #' \item \code{\link{getAccount}}
 #' \item \code{\link{getCampaign}}
 #' \item \code{\link{getAdset}}
 #' \item \code{\link{getAd}}
 #' \item \code{\link{getAny}}
 #' \item \code{\link{getActivity}}
+#' \item \code{\link{getCreative}}
+#' }
+#' List-family
+#' \itemize{
 #' \item \code{\link{listBusinesses}}
 #' \item \code{\link{listAccounts}}
 #' \item \code{\link{listVideos}}
 #' \item \code{\link{listImages}}
 #' \item \code{\link{listCreatives}}
-#' \item \code{\link{findFields}}
-#' \item \code{\link{findParams}}
+#' }
+#' Grab-family
+#' \itemize{
 #' \item \code{\link{grabCampaigns}}
 #' \item \code{\link{grabAdsets}}
 #' \item \code{\link{grabAds}}
-#' \item \code{\link{grabCreatives}} (.deprecated, use listCreatives)
+#' \item \code{\link{grabCreatives}} (.deprecated, use \code{\link{listCreatives}})
+#' }
+#' Check-family
+#' \itemize{
 #' \item \code{\link{checkTarget}}
 #' \item \code{\link{checkStatus}}
+#' }
+#' Helpers
+#' \itemize{
+#' \item \code{\link{findFields}}
+#' \item \code{\link{findParams}}
 #' }
 #' 
 #' @examples 
