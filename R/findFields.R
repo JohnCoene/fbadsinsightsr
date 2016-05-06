@@ -60,7 +60,7 @@ findFields <- function(fct ="getAny") {
                 "total_actions", "total_unique_actions", "action_values", 
                 "total_action_value", "impressions", "social_impressions",
                 "social_clicks", "unique_impressions", 
-                "unique_social_impressions",
+                "unique_social_impressions", "clicks",
                 "unique_clicks", "unique_social_clicks", "spend", "frequency", 
                 "social_spend", "deeplink_clicks", "app_store_clicks", 
                 "website_clicks", "cost_per_inline_post_engagement", 
