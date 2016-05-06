@@ -2,8 +2,6 @@
 
 export(checkStatus)
 export(checkTarget)
-export(createAudience)
-export(createAudienceUser)
 export(fbAuthenticate)
 export(findFields)
 export(findParams)
