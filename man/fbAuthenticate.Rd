@@ -4,7 +4,7 @@
 \alias{fbAuthenticate}
 \title{Authenticate}
 \usage{
-fbAuthenticate(app.id, app.secret, scope = "ads_read",
+fbAuthenticate(app.id, app.secret, scope = "ads_management",
   app.name = "optional")
 }
 \arguments{
@@ -12,7 +12,7 @@ fbAuthenticate(app.id, app.secret, scope = "ads_read",
 
 \item{app.secret}{App secret of facebook app. \href{https://developers.facebook.com/apps}{See facebook apps}}
 
-\item{scope}{General permissions, either "ads_management" or "ads_read", defaults to the latter, \href{https://developers.facebook.com/docs/facebook-login/permissions}{see permissions}.}
+\item{scope}{General permissions, either \code{ads_management} or \code{ads_read}, defaults to the former, \href{https://developers.facebook.com/docs/facebook-login/permissions}{see permissions}.}
 
 \item{app.name}{Name of your app, optional.}
 }
