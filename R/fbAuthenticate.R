@@ -5,7 +5,7 @@
 #' 
 #' @param app.id ID of your facebook app. \href{https://developers.facebook.com/apps}{See facebook apps}
 #' @param app.secret App secret of facebook app. \href{https://developers.facebook.com/apps}{See facebook apps}
-#' @param scope General permissions, either "ads_management" or "ads_read", defaults to the latter, \href{https://developers.facebook.com/docs/facebook-login/permissions}{see permissions}.
+#' @param scope General permissions, either \code{ads_management} or \code{ads_read}, defaults to the former, \href{https://developers.facebook.com/docs/facebook-login/permissions}{see permissions}.
 #' @param app.name Name of your app, optional.
 #' 
 #' @details 
@@ -49,7 +49,7 @@
 #' 
 #' @author John coene \email{john.coene@@cmcm.com}
 #' @export
-fbAuthenticate <- function (app.id, app.secret, scope = "ads_read",
+fbAuthenticate <- function (app.id, app.secret, scope = "ads_management",
                              app.name = "optional") {
   
   # check inputs
