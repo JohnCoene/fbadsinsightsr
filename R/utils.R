@@ -17,6 +17,10 @@ scopeCheck <- function(scope) {
               "publish_actions", "rsvp_event", "pages_show_list", 
               "pages_manage_cta", "ads_read", "ads_management")
   
+  if(missing(scope)){
+    return(scopes)
+  }
+  
   for (i in 1:length(scope)) {
     test <- scopes[which(scopes == scope[i])]
     if (length(test) == 0) {
@@ -619,7 +623,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   if (length(args)){
     # build url
-    url <- paste0("https://graph.facebook.com/v2.5/",
+    url <- paste0("https://graph.facebook.com/v2.6/",
                   id, "/",object,"?fields=",
                   fields,
                   "%2Cinsights{", args, "}",
@@ -627,7 +631,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
                   token) 
   } else {
     # build url
-    url <- paste0("https://graph.facebook.com/v2.5/",
+    url <- paste0("https://graph.facebook.com/v2.6/",
                   id, "/",object,"?fields=",
                   fields,
                   "&limit=", limit, "&access_token=",
