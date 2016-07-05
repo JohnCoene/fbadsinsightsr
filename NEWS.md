@@ -9,7 +9,9 @@
 
 Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions (`grab`, `check`, `find` and `get`), and much more.
 
-See updated [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for details.
+See updated [documentation](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) for details. 
+
+* `fbAutenticate` FUN fixed
 
 ### v1.1 ###
 
