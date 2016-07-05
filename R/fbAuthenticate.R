@@ -61,38 +61,14 @@ fbAuthenticate <- function (app.id, app.secret, scope = "ads_read",
   scopeCheck(scope)
   
   # create endpoint
-  facebook <- httr::oauth_endpoint(authorize = "https://www.facebook.com/dialog/oauth",
-                             access = "https://graph.facebook.com/oauth/access_token")	
-  
-  # create app
   myapp <- httr::oauth_app(app.name, app.id, app.secret)
   
-  # check httr version
-  if (packageVersion('httr') <= "0.2"){
-    facebook_token <- httr::oauth2.0_token(facebook, myapp,
-                                     scope=scope, type = "application/x-www-form-urlencoded")
-    fb_oauth <- httr::sign_oauth2.0(facebook_token$access_token) 
-    if (httr::GET("https://graph.facebook.com/me", config=fb_oauth)$status==200){
-      message("Authentication successful.")
-    }
-  } else if (packageVersion('httr') > "0.2" & packageVersion('httr') <= "0.6.1"){
-    fb_oauth <- httr::oauth2.0_token(facebook, myapp,
-                               scope=scope, type = "application/x-www-form-urlencoded", cache=FALSE)	
-    if (length(names(fb_oauth$credentials)[grep("error", names(fb_oauth$credentials))])){
-      message("Authentication Failed.")
-    }	else {
-      message("Authentication successful.")
-    }
-  } else if (packageVersion('httr') > "0.6.1"){
-    Sys.setenv("HTTR_SERVER_PORT" = "1410/")
-    fb_oauth <- httr::oauth2.0_token(facebook, myapp,
-                               scope=scope, type = "application/x-www-form-urlencoded", cache=FALSE)		
-    if (length(names(fb_oauth$credentials)[grep("error", names(fb_oauth$credentials))])){
-      message("Authentication Failed.")
-    }	else {
-      message("Authentication successful.")
-    }
-  }
+  # 3. Get OAuth credentials
+  facebook_token <- httr::oauth2.0_token(
+    httr::oauth_endpoints("facebook"),
+    myapp,
+    type = "application/x-www-form-urlencoded"
+  )
   
-  return(fb_oauth)
+  return(facebook_token)
 }

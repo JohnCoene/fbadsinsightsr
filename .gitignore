@@ -4,3 +4,4 @@
 .Rbuildignore
 fbAdsInsightsR.Rproj
 token.RData
+.httr-oauth
