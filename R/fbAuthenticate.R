@@ -66,7 +66,7 @@ fbAuthenticate <- function (app.id, app.secret, scope = "ads_management",
   # 3. Get OAuth credentials
   facebook_token <- httr::oauth2.0_token(
     httr::oauth_endpoints("facebook"),
-    myapp,
+    myapp, scope = scope,
     type = "application/x-www-form-urlencoded"
   )
   
