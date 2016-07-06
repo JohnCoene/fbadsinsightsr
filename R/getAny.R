@@ -308,7 +308,7 @@ getAny <- function(id, token, fields = "default", n = 100,
   token <- checkToken(token)
   
   # build url
-  uri <- paste0('https://graph.facebook.com/v2.5/',
+  uri <- paste0('https://graph.facebook.com/v2.6/',
                 id, '/insights?fields=',fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,

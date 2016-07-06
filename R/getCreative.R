@@ -40,7 +40,7 @@ getCreative <- function(object.story.id, token,
   token <- checkToken(token)
   
   # build url
-  uri <- paste0('https://graph.facebook.com/v2.5/',
+  uri <- paste0('https://graph.facebook.com/v2.6/',
                 object.story.id, '?fields=', createFields(fields),
                 '&access_token=', token)
   

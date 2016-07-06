@@ -1,10 +1,12 @@
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
 
+*Updated to Facebook Graph API v2.6*
+
 # fbAdsInsightsR #
 
-Current version: **v2.0**
+Current version: **v2.1**
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.5).
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6).
 
 ## Functions ##
 

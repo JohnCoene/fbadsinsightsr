@@ -83,7 +83,7 @@ listCreatives <- function(id, token, n = 100, fields = "default",
     }
   }
   
-  uri <- paste0("https://graph.facebook.com/v2.5/",
+  uri <- paste0("https://graph.facebook.com/v2.6/",
                 id, "/adcreatives?fields=",
                 fields,
                 "&limit=", limit, "&access_token=",

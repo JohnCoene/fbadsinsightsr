@@ -83,7 +83,7 @@ checkStatus <- function(id, token, fields = "effective_status") {
   }
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.5/",
+  url <- paste0("https://graph.facebook.com/v2.6/",
                 id, "?fields=",
                 fields,
                 "&limit=100&access_token=", token)

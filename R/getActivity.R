@@ -88,7 +88,7 @@ getActivity <- function(token, account.id, fields = "default", since = NULL,
   }
   
   # build uri
-  uri <- paste0("https://graph.facebook.com/v2.5/", account.id,
+  uri <- paste0("https://graph.facebook.com/v2.6/", account.id,
                 "/activities?fields=", fields,"&limit=", limit, 
                 since, until, "&access_token=", token)
   

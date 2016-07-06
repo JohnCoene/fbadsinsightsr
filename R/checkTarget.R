@@ -8,7 +8,7 @@
 #' 
 #' @return Returns a \code{data.frame} containing targeting sentences as columns.
 #' 
-#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.5} 
+#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6} 
 #' 
 #' @examples 
 #' \dontrun{
@@ -40,7 +40,7 @@ checkTarget <- function(id, token, n = 100){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.5/",
+  url <- paste0("https://graph.facebook.com/v2.6/",
                 id, "/targetingsentencelines?limit=100&access_token=", token)
   
   # call api
