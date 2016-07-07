@@ -27,7 +27,7 @@
 #' \item \code{\link{listBroadTargeting}}
 #' \item \code{\link{getLabCampaigns}}
 #' \item \code{\link{getLabAdsets}}
-#' \item \code{\link{getLadAds}}
+#' \item \code{\link{getLabAds}}
 #' }
 #' 
 #' @examples 

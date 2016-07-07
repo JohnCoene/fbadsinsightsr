@@ -36,7 +36,7 @@ Applies to the following functions (\code{fct} argument, i.e.:
 \item \code{\link{listBroadTargeting}}
 \item \code{\link{getLabCampaigns}}
 \item \code{\link{getLabAdsets}}
-\item \code{\link{getLadAds}}
+\item \code{\link{getLabAds}}
 }
 }
 \examples{
