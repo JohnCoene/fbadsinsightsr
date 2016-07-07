@@ -34,6 +34,9 @@ Applies to the following functions (\code{fct} argument, i.e.:
 \item \code{\link{listVideos}}
 \item \code{\link{listImages}}
 \item \code{\link{listBroadTargeting}}
+\item \code{\link{getLabCampaigns}}
+\item \code{\link{getLabAdsets}}
+\item \code{\link{getLadAds}}
 }
 }
 \examples{

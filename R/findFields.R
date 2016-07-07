@@ -25,6 +25,9 @@
 #' \item \code{\link{listVideos}}
 #' \item \code{\link{listImages}}
 #' \item \code{\link{listBroadTargeting}}
+#' \item \code{\link{getLabCampaigns}}
+#' \item \code{\link{getLabAdsets}}
+#' \item \code{\link{getLadAds}}
 #' }
 #' 
 #' @examples 
@@ -161,6 +164,13 @@ findFields <- function(fct ="getAny") {
                 "promotion_status", "status_type", "is_spherical", 
                 "subscribed", "timeline_visibility", "type", "updated_time", 
                 "full_picture", "icon", "is_published", "id")
+    
+  } else if(fct == "getLabCampaigns" || fct == "getLabAdsets" || 
+            fct == "getLabAds") {
+    
+    fields <- c("account_id", "adlabels", "buying_type", "configured_status", 
+                "created_time", "effective_status", "id", "name", "objective",
+                "can_use_spend_cap")
     
   } else {
     
