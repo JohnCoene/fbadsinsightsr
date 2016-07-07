@@ -32,13 +32,13 @@
 #' while (status != "ACTIVE"){
 #' 
 #'    # check status
-#'    status <- whatStatus(ads$id[i], TK)[,effective_status]
+#'    status <- checkStatus(ads$id[i], TK)[,effective_status]
 #' 
 #'    # iterate
 #'    i <- i + 1
 #' 
 #'    # stop if all ads gone through
-#'    if(i == nrow(ads)) stop("No ACTIVE ads found", call. = F)
+#'    if(i == nrow(ads)) stop("No ACTIVE ads found", call. = FALSE)
 #' }
 #' 
 #' # exctract active ad
