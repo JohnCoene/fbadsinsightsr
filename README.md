@@ -4,7 +4,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v2.1**
+Current version: **v3.0**
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6).
 
@@ -22,6 +22,10 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `getAd`
 * `getAny`
 * `getActivity`
+* `getLabels` (v3.0)
+* `getLabCampaigns` (v3.0)
+* `getLabAdsets` (v3.0)
+* `getLabAds` (v3.0)
 
 **List-family**
 
@@ -30,11 +34,13 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `listVideos`
 * `listImages`
 * `listCreatives`
+* `listApps` (v3.0)
+* `listAdApps` (v3.0)
 
 **Find-family**
 
 * `findFields`
-* `findParams` (Replaces multiple find-family functions from v1.1)
+* `findParams`
 
 **Grab-family**
 
@@ -45,8 +51,14 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 **check-family**
 
-* `checkTarget`
+* `checkTarget` (.deprecated)
 * `checkStatus`
+* `checkTargetSentence` (v3.0)
+* `checkTargetTree` (v3.0)
+
+**create-family**
+
+* `createLabels` (v3.0)
 
 ## Documentation ##
 

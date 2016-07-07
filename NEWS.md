@@ -5,6 +5,32 @@
 * `getImage` and `getCreative` removed (was not working)
 * Return from `checkTarget` cleaned-up
 
+## v3.0 ##
+
+Version Three brings many changes. The package now calls the updated v2.6 of the API.
+
+Changes:
+
+1. `checkTarget` has been deprecated in favour of:
+    1. `checkTargetSentence` AND 
+    2. `checkTargetTree` which have been added, both retrieve targeting specifications but return the data in different formats and can be called on different objects (accounts, campaigns, adsets, ads) See documentation for more details.
+2. `grabAccounts` and `grabImages` have been deprecated in favour of `listAccounts` and `listImages`
+3. New function `listApps` returns apps under account
+4. New function `listAdApps` returns list of advertiseable applications
+5. `findFields` now also applies to `getLabCampaigns`, `getLabAdsets` and `getLabAds`
+6. `findParams` now also applies to `limit.type` from new FUN `checkTargetTree`
+7. New label-related functions:
+    1. `getLabels` returns labels under account
+    2. `getLabCampaigns` fetch campaigns by labels
+    3. `getLabAdsets` fetch adsets by labels
+    4. `getLabAds` fetch ads by labels
+    5. `createLabels` create labels
+
+Bug fixes:
+
+1. OAuth function now properly passes scope, multiple scopes can be passed.
+2. `limit` parameter and check-family functions now works correctly. 
+
 ## v2.0 ##
 
 Package overhauled; now internally functions on new S3 class for robustness, much optimisation and clean up of `utils.R`, package now split into 4 families of functions (`grab`, `check`, `find` and `get`), and much more.
