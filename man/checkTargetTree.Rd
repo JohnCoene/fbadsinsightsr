@@ -4,7 +4,8 @@
 \alias{checkTargetTree}
 \title{Check object target tree}
 \usage{
-checkTargetTree(id, token, limit.type = NULL, limit = 100, n = 100)
+checkTargetTree(id, token, limit.type = NULL, limit = 100, n = 100,
+  verbose = FALSE)
 }
 \arguments{
 \item{id}{ID of object to retrieve.}
@@ -19,6 +20,9 @@ API might otherwise return \code{error_code: 1} or in other words an
  "Unknown error".}
 
 \item{n}{Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).}
+
+\item{verbose}{Defaults to \code{FALSE} if \code{TRUE} will print information on the 
+queries in the console.}
 }
 \description{
 Retrieves the targeting description of a specific object.

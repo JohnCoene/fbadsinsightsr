@@ -11,6 +11,9 @@
 #'  Sometimes useful to bring it down if many results (\code{n}) are required as the 
 #'  API might otherwise return \code{error_code: 1} or in other words an
 #'   "Unknown error".
+#' @param verbose
+#'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
+#'  queries in the console.
 #' 
 #' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6} 
 #' 
@@ -28,7 +31,8 @@
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
-checkTargetTree <- function(id, token, limit.type = NULL, limit = 100, n = 100){
+checkTargetTree <- function(id, token, limit.type = NULL, limit = 100, n = 100, 
+                            verbose = FALSE){
   
   # check inputs
   if(missing(id)){
@@ -40,40 +44,36 @@ checkTargetTree <- function(id, token, limit.type = NULL, limit = 100, n = 100){
   # check token
   token <- checkToken(token = token)
   
-  testParam("limit.type", limit.type)
+  if(!is.null(limit.type)) testParam("limit.type", limit.type)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  uri <- paste0("https://graph.facebook.com/v2.6/",
                 id, "/targetingbrowse?limit=", limit, 
                 "&access_token=", token)
   
   # call api
-  response <- httr::GET(url)
+  response <- httr::GET(uri)
   
-  # parse to list
-  json <- rjson::fromJSON(rawToChar(response$content))
+  # construct data
+  fb_data <- constructFbAdsData(response)
   
-  # check if query successful 
-  if(length(json$error$message)){
-    stop(paste("this is likely due to account.id or token. Error Message returned: ",
-               json$error$message))
+  # parse data
+  fb_data <- digest(fb_data)
+  
+  # paginate
+  fb_data <- paginate(fb_data, n = n, verbose = verbose)
+  
+  # verbose
+  if (verbose == TRUE) {
+    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
+              "rows", "\n"))
   }
   
-  # check if data returned
-  if (length(json$data)) {
-    
-    # parse
-    dat <- do.call(plyr::"rbind.fill", lapply(json$data, as.data.frame))
-    
-  } else if (!length(json$data)) {
-    
-    # create empty data.frame to return
-    dat <- data.frame()
-    
-  }
+  # converge
+  fb_data <- converge(fb_data)
   
-  if (nrow(dat) == 0) warning(paste("No data."), call. = FALSE)
+  if (nrow(fb_data) == 0) warning(paste("No data."), call. = FALSE)
   
-  return(dat)
+  return(fb_data)
   
 }
