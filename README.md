@@ -49,7 +49,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `grabAds`
 * `grabCreatives` (.deprecated)
 
-**check-family**
+**Check-family**
 
 * `checkTarget` (.deprecated)
 * `checkStatus`
