@@ -56,9 +56,9 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `checkTargetSentence` (v3.0)
 * `checkTargetTree` (v3.0)
 
-**create-family**
+**Create-family**
 
-* `CreateLabels` (v3.0)
+* `createLabels` (v3.0)
 
 ## Documentation ##
 
