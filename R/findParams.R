@@ -17,6 +17,7 @@
 #' \item \code{action.report.time}
 #' \item \code{action.attribution.windows}
 #' \item \code{subtype}
+#' \item \code{limit.type}
 #' }
 #' 
 #' @return If one \code{params} is passed the function returns a 
@@ -37,7 +38,7 @@
 #' 
 #' }
 #' 
-#' @seealso \code{\link{getAny}}
+#' @seealso \code{\link{getAny}}, \code{\link{checkTargetTree}}
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
@@ -99,6 +100,40 @@ findParams <- function(params = c("level", "breakdowns", "date.preset",
       param <- c("CUSTOM", "WEBSITE", "APP", "CLAIM", "PARTNER", "MANAGED", 
                  "VIDEO", "LOOKALIKE", "ENGAGEMENT", "DATA_SET", 
                  "BAG_OF_ACCOUNTS")
+      
+    } else if(param == "limit.type") {
+      
+      param <- c("adgroup_id", "genders", "age_min", "age_max", "country_groups",
+                 "countries", "country", "cities", "radius", "regions", "zips",
+                 "interests", "keywords", "education_schools", "education_majors",
+                 "work_positions", "work_employers", "relationship_statuses", 
+                 "interested_in", "locales", "user_adclusters", 
+                 "excluded_user_adclusters", "conjunctive_user_adclusters", 
+                 "custom_audiences", "excluded_custom_audiences", 
+                 "college_years", "education_statuses", "connections", 
+                 "excluded_connections", "friends_of_connections", 
+                 "user_event", "page_types", "publisher_platforms", 
+                 "effective_publisher_platforms", "facebook_positions", 
+                 "effective_facebook_positions", "device_platforms", 
+                 "effective_device_platforms", "dynamic_audience_ids", 
+                 "excluded_dynamic_audience_ids", "rtb_flag", "user_device", 
+                 "excluded_user_device", "user_os", "wireless_carrier", 
+                 "site_category", "geo_locations", "excluded_geo_locations",
+                 "timezones", "place_page_set_id", "family_statuses", 
+                 "industries", "life_events", "political_views", "politics",
+                 "behaviors", "income", "net_worth", "home_type", 
+                 "home_ownership", "home_value", "ethnic_affinity", 
+                 "generation", "household_composition", "moms", "office_type", 
+                 "targeting_optimization", "engagement_specs", 
+                 "excluded_engagement_specs", "product_audience_specs",
+                 "excluded_product_audience_specs", "exclusions", 
+                 "flexible_spec", "exclude_reached_since", 
+                 "exclude_previous_days", "app_install_state", 
+                 "excluded_publisher_categories", 
+                 "excluded_publisher_list_ids", "fb_deal_id", 
+                 "audience_network_positions", 
+                 "effective_audience_network_positions", 
+                 "interest_defaults_source", "excluded_mobile_device_model")
       
     } else {
       

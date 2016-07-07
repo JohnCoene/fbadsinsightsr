@@ -31,6 +31,7 @@ Function applies to parameters of the following GET-family functions
 \item \code{action.report.time}
 \item \code{action.attribution.windows}
 \item \code{subtype}
+\item \code{limit.type}
 }
 }
 \examples{
@@ -53,6 +54,6 @@ dat <- getAny(id = "act_123456789012345", token = "XXXXXXXXXXXXX",
 John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
-\code{\link{getAny}}
+\code{\link{getAny}}, \code{\link{checkTargetTree}}
 }
 
