@@ -88,8 +88,8 @@ testParam <- function (params, param_vector, fct) {
     options <- c("ad", "adset", "campaign", "account") 
   } else if (params == "time_increment") {
     options <- findParams("time.increment")
-  } else if(params == "subtype"){
-    options <- findParams("subtype")
+  } else {
+    options <- findParams(params)
   }
   
   for (i in 1:length(param_vector)) {
@@ -413,7 +413,7 @@ digest.fbAdsData <- function(fbAdsData){
                       "^video_10_sec_watched_actions$|",
                       "^video_15_sec_watched_actions$|",
                       "^video_30_sec_watched_actions$|",
-                      "^action_type$|^action$")
+                      "^action_type$|^action$|^adlabels$")
         
         # identify nested lists
         vars <- names[grep(pat, names)]
@@ -593,15 +593,19 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   token <- checkToken(token)
   
   # create fields
-  if(fields[1] == "default" && FUN != "listVideos") {
-    fields <- c("name", "id")
-  } else if (fields[1] == "default" && FUN == "listVideos") {
-    fields <- c("backdated_time", "description", "embed_html")
+  if(!is.null(fields)){
+    if(fields[1] == "default" && FUN != "listVideos") {
+      fields <- c("name", "id")
+    } else if (fields[1] == "default" && FUN == "listVideos") {
+      fields <- c("backdated_time", "description", "embed_html")
+    }
   }
   
-  if(class(fields) != "character") {
-    stop("Fields must be a character vector", call. = FALSE)
-  } else { 
+   if(!is.null(fields)) { 
+     
+     if(class(fields) != "character") {
+       stop("Fields must be a character vector", call. = FALSE)
+     }
     # test if fields correct
     testParam("fields", fields, FUN)
     
