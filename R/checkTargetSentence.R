@@ -1,6 +1,7 @@
 #' Check object target
 #' 
-#' @description Retrieves the targeting description of a specific ad or adset.
+#' @description Retrieves the targeting description (in sentence lines) 
+#' of a specific ad or adset. See \code{\link{checkTargetTree}}
 #' 
 #' @param id ID of object to retrieve.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
@@ -10,7 +11,7 @@
 #'  Sometimes useful to bring it down if many results (\code{n}) are required as the 
 #'  API might otherwise return \code{error_code: 1} or in other words an
 #'   "Unknown error".
-#'   
+#' 
 #' @return Returns a \code{data.frame} containing targeting sentences as columns.
 #' 
 #' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6} 
@@ -24,17 +25,15 @@
 #' rand_id <- sample(ads$id, 1)
 #' 
 #' # fetch targeting description of random ad
-#' checkTarget(id = rand_id, n = 100, token = "XXXXXXXXXXX")
+#' checkTargetSentence(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 #' }
 #' 
-#' @seealso \code{\link{grabAds}}
+#' @seealso \code{\link{checkTargetTree}}
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
-checkTarget <- function(id, token, limit = 100, n = 100){
-  
-  .Deprecated("checkTargetSentence")
+checkTargetSentence <- function(id, token, n = 100, limit = 100){
   
   # check inputs
   if(missing(id)){
@@ -67,8 +66,7 @@ checkTarget <- function(id, token, limit = 100, n = 100){
   if (length(json$targetingsentencelines)) {
     
     # parse
-    dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, 
-                                              as.data.frame))
+    dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
     
     # dat
     dat <- processCheck(dat)
@@ -77,7 +75,6 @@ checkTarget <- function(id, token, limit = 100, n = 100){
     
     # create empty data.frame to return
     dat <- data.frame()
-    warning("No tareting specifications")
     
   }
   
