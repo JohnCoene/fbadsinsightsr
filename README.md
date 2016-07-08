@@ -124,4 +124,4 @@ Access to the package is restricted, email John Coene & GaoCong if you want to g
 * DongYuNan <dongyunan@cmcm.com> (Tester)
 * GaoCong <gaocong1@cmcm.com> (User)
 
-<i>by Cheetah Mobile &#169;</i>
+<i>by [Cheetah Mobile](https://bitbucket.org/JohnCheetah/fbadsinsightsr/src/f484ed41de4fde1f7dc1e6097530a8fc65604880/LICENSE?at=master) &#169;</i>
