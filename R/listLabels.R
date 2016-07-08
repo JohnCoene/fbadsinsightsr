@@ -1,4 +1,4 @@
-#' Get labels
+#' List labels
 #' 
 #' @description Retrieves ad labels under given account.
 #' 
@@ -11,7 +11,7 @@
 #' accounts <- listAccounts("me", token = "XXXXXXXXXXX")
 #' 
 #' # get labels of random account
-#' labs <- getLabels(account.id = sample(accounts$id, 1), token = "XXXXXXXXXXX")
+#' labs <- listLabels(account.id = sample(accounts$id, 1), token = "XXXXXXXXXXX")
 #' }
 #' 
 #' @seealso \code{\link{getLabCampaigns}}
@@ -19,7 +19,7 @@
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
-getLabels <- function(account.id, token){
+listLabels <- function(account.id, token){
   
   # check inputs
   if(missing(account.id)){
