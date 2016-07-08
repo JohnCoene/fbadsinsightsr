@@ -31,9 +31,12 @@ accounts <- listAccounts("me", TK)
 ids <- createLabels(accs$id[1], labels = "my label", token = TK)
 
 adset_ids <- grabAdsets(accs$id[1], TK) # retrieve adsets
+
+# collapse ids
+ids <- paste0("'", paste0(ids, collapse = "', '"), "'")
                   
 # create settings to update - ad label                   
-my_settings <- list(adlabels = paste0("[{id:'", ids,"'}]")) 
+my_settings <- list(adlabels = paste0("[{id:", ids,"}]")) 
 
 updateAdset(adset_ids[1], my_settings, TK)
 }
