@@ -22,7 +22,6 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `getAd`
 * `getAny`
 * `getActivity`
-* `getLabels` (v3.0)
 * `getLabCampaigns` (v3.0)
 * `getLabAdsets` (v3.0)
 * `getLabAds` (v3.0)
@@ -37,6 +36,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `listCreatives`
 * `listApps` (v3.0)
 * `listAdApps` (v3.0)
+* `ListLabels` (v3.0)
 
 **Find-family**
 
@@ -84,9 +84,7 @@ Since access to the repository is restricted you will need your login and passwo
 
 ```R
 # run authentication with your app details
-TK <- fbAuthenticate(app.id = "1234567890123456", 
-                     app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", 
-                     scope = "ads_management")
+TK <- fbAuthenticate(app.id = "1234567890123456", app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", scope = c("ads_management", "ads_read"))
                            
 # list facebook advertising accounts you have access to
 accounts <- listAccounts(id = "me", token = TK)
@@ -99,18 +97,14 @@ set.seed(19880525)
 ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK)
 
 # get daily performance data for last month with a summary
-my_preset <- findParams("date.preset")[grep("last_month", 
-                                            findParams("date.preset"))]
-ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, n = 1000, 
-                 date.preset = my_preset, time.increment = 1)
+my_preset <- findParams("date.preset")[grep("last_month", findParams("date.preset"))]
+ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, n = 1000, date.preset = my_preset, time.increment = 1)
                 
 # get ad performance data by country 
-ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK,
-                 breakdowns = "country")
+ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, breakdowns = "country")
                   
 # get ad performance data by age and gender 
-ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK,
-                 breakdowns = c("age", "gender"))
+ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, breakdowns = c("age", "gender"))
                 
 # list creatives
 creatives <- listCreatives(sample(accounts$id, 1), TK)
@@ -123,15 +117,13 @@ adsets <- grabAdsets(sample(accounts$id, 1), TK)
 targeting <- checkTargetTree(sample(accounts$id, 1), TK)
 
 # get labels
-labels <- getLabels(accounts$id[1], TK)
+labels <- listLabels(accounts$id[1], TK)
 
 # get ads that match ANY label
-ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ANY", 
-                       token = TK)
+ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ANY", token = TK)
 
 # get campaigns that match ALL labels                        
-ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", 
-                       token = TK)
+ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = TK)
                       
 (apps <- listApps(accounts$id[1], TK)) # list apps
 (ad_apps <- listAdApps(accounts$id[1], TK)) # list advertiseable apps
@@ -143,6 +135,6 @@ See NEWS.md for changes.
 
 ## Access & Contributors ##
 
-* Author & maintainer - John Coene <john.coene@cmcm.com>
-* Tester - DongYuNan <dongyunan@conew.com>
-* User - GaoCong <gaocong1@cmcm.com>
+* John Coene <john.coene@cmcm.com> (Author & maintainer)
+* DongYuNan <dongyunan@cmcm.com> (Tester)
+* GaoCong <gaocong1@cmcm.com> (User)

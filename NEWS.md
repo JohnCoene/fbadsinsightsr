@@ -20,7 +20,7 @@ Changes:
 5. `findFields` now also applies to `getLabCampaigns`, `getLabAdsets` and `getLabAds`
 6. `findParams` now also applies to `limit.type` from new FUN `checkTargetTree`
 7. New label-related functions:
-    1. `getLabels` returns labels under account
+    1. `listLabels` returns labels under account
     2. `getLabCampaigns` fetch campaigns by labels
     3. `getLabAdsets` fetch adsets by labels
     4. `getLabAds` fetch ads by labels
