@@ -1,16 +1,12 @@
-![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
+![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Cheetah_Mobile_Logo.png/250px-Cheetah_Mobile_Logo.png)
 
 # fbAdsInsightsR #
 
 Current version: **v3.0** (*see git tags for older versions*)
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6).
-
- > Updated to Facebook Graph API v2.6
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). **Updated to Facebook Graph API v2.6!**.
 
 ## Functions ##
-
-![R](http://opensourcemac.com/wp-content/uploads/2011/02/rstudio.png) 
 
 - OAuth
     * `fbAuthenticate`
@@ -56,8 +52,6 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 ## Documentation ##
 
-![doc](http://icons.veryicon.com/64/System/iOS7%20Minimal/Basic%20Document.png)
-
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
 
 * [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads/fbAdsInsightsRv3_0.pdf)
@@ -65,15 +59,11 @@ Constantly being updated and improved. Currently the manual and examples are ava
 
 ## Install ##
 
-![install](http://simpleicon.com/wp-content/uploads/cloud-download-64x64.png)
-
 Since access to the repository is restricted you will need your login and password to install the package.
 
 `devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
 ## Examples ##
-
-![dl](https://www.codester.com/static/uploads/categories/43/icon.png)
 
 ```R
 # run authentication with your app details
