@@ -24,6 +24,11 @@ Get-family
 \item \code{\link{getAny}}
 \item \code{\link{getActivity}}
 \item \code{\link{getCreative}}
+\item \code{\link{getLabCampaigns}}
+\item \code{\link{getLabCreatives}}
+\item \code{\link{getLabAdsets}}
+\item \code{\link{getLabAds}}
+\item \code{\link{getLabels}}
 }
 List-family
 \itemize{
@@ -32,6 +37,8 @@ List-family
 \item \code{\link{listVideos}}
 \item \code{\link{listImages}}
 \item \code{\link{listCreatives}}
+\item \code{\link{listApps}}
+\item \code{\link{listAdApps}}
 }
 Grab-family
 \itemize{
@@ -42,8 +49,20 @@ Grab-family
 }
 Check-family
 \itemize{
-\item \code{\link{checkTarget}}
+\item \code{\link{checkTarget}} (.deprecated, use \code{\link{checkTargetSentence}})
 \item \code{\link{checkStatus}}
+\item \code{\link{checkTargetTree}}
+\item \code{\link{checkTargetSentence}}
+}
+Update-family
+\itemize{
+\item \code{\link{updateCampaign}}
+\item \code{\link{updateAdset}}
+\item \code{\link{updateAd}}
+}
+Create-family
+\itemize{
+\item \code{\link{createLabels}}
 }
 Helpers
 \itemize{
