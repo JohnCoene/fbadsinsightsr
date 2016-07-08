@@ -39,11 +39,11 @@ accounts <- listAccounts("me", TK, n = 999999)
 set.seed(19880525) # set seed for sample() reproducability
 
 # get labels of random account
-labs <- getLabels(account.id = sample(accounts$id, 1), token = TK)
+labs <- listLabels(account.id = sample(accounts$id, 1), token = TK)
 
 # get ads by labels - 2 selected at random
-ads <- getLabAds(sample(accounts$id, 1), labels = sample(labs$id, 2), 
-                 token = TK)
+ads <- listLabAds(sample(accounts$id, 1), labels = sample(labs$id, 2), 
+                  token = TK)
 }
 
 }
@@ -51,6 +51,6 @@ ads <- getLabAds(sample(accounts$id, 1), labels = sample(labs$id, 2),
 John Coene \email{john.coene@cmcm.com}
 }
 \seealso{
-\code{\link{getLabels}}
+\code{\link{listLabels}}
 }
 

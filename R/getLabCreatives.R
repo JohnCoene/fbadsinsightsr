@@ -16,14 +16,14 @@
 #' set.seed(19880525) # set seed for sample() reproducability
 #' 
 #' # get labels of random account
-#' labs <- getLabels(account.id = sample(accounts$id, 1), token = TK)
+#' labs <- listLabels(account.id = sample(accounts$id, 1), token = TK)
 #' 
 #' # get campaigns by labels
 #' creatives <- getLabCreatives(sample(accounts$id, 1), labels = labs$id, 
 #'                              token = TK)
 #' }
 #' 
-#' @seealso \code{\link{getLabels}}
+#' @seealso \code{\link{listLabels}}
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 

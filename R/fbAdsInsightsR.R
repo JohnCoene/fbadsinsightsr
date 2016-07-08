@@ -21,7 +21,6 @@
 #' \item \code{\link{getLabCreatives}}
 #' \item \code{\link{getLabAdsets}}
 #' \item \code{\link{getLabAds}}
-#' \item \code{\link{getLabels}}
 #' }
 #' List-family
 #' \itemize{
@@ -32,6 +31,7 @@
 #' \item \code{\link{listCreatives}}
 #' \item \code{\link{listApps}}
 #' \item \code{\link{listAdApps}}
+#' \item \code{\link{listLabels}}
 #' }
 #' Grab-family
 #' \itemize{
@@ -105,7 +105,7 @@
 #' targeting <- checkTargetTree(sample(accounts$id, 1), TK)
 #' 
 #' # get labels
-#' labels <- getLabels(accounts$id[1], TK)
+#' labels <- listLabels(accounts$id[1], TK)
 #' 
 #' # get ads that match ANY label
 #' ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ANY", 

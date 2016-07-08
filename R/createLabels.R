@@ -21,7 +21,7 @@
 #'                     token = TK)
 #' }
 #' 
-#' @seealso \code{\link{getLabels}}
+#' @seealso \code{\link{listLabels}}
 #' 
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
