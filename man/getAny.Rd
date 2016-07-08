@@ -104,32 +104,28 @@ fbOAuth <- fbAuthenticate(app.id = "1234567890123456",
                           scope = "ads_management")
                           
 # get ads on account
-ads <- grabAds(account.id = "act_123456789012345", token = fbOAuth)
+ads <- grabAds(id = "act_1014262775316748", token = TK)
 
 # get adsets on account
-adsets <- grabAdsets(account.id = "act_123456789012345", token = fbOAuth)
+adsets <- grabAdsets(id = "act_1014262775316748", token = TK)
 
 # get ads on account
-camp <- grabCampaigns(account.id = "act_123456789012345", token = fbOAuth)
+camp <- grabCampaigns(id = "act_1014262775316748", token = TK)
 
 # get date.preset (this quarter)
 date <- findParams("date.preset")[grep("quarter", findParams("date.preset"))]
 
 # fetch Ad data
-dat <- getAny(id = sample(ads$id, 1), token = fbOAuth,
-              date.preset = date)
+dat <- getAny(id = sample(ads$id, 1), token = TK, date.preset = date)
 
 # fetch Adset data
-dat <- getAny(id = sample(adsets$id, 1), token = fbOAuth,
-              date.preset = date)
+dat <- getAny(id = sample(adsets$id, 1), token = TK, date.preset = date)
 
 # fetch Campaign data
-dat <- getAny(id = sample(campaigns$id, 1), token = fbOAuth,
-              date.preset = date)
+dat <- getAny(id = sample(campaigns$id, 1), token = TK, date.preset = date)
 
 # fetch Account data
-dat <- getAny(id = "act_123456789012345", token = fbOAuth, 
-              date.preset = date)
+dat <- getAny(id = "act_1014262775316748", token = TK, date.preset = date)
 }
 
 }

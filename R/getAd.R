@@ -85,7 +85,7 @@
 #'                           scope = "ads_management")
 #'                           
 #' # get information on account
-#' ads <- grabAds(account.id = "act_123456789012345", token = fbOAuth)
+#' ads <- grabAds(id = "act_123456789012345", token = fbOAuth)
 #' 
 #' # take random ad.id
 #' set.seed(123)
