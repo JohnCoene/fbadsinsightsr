@@ -4,8 +4,8 @@
 \alias{getLabCampaigns}
 \title{Get campaigns by labels}
 \usage{
-getLabCampaigns(account.id, labels, fields = c("id", "name"), token,
-  n = 100, verbose = FALSE)
+getLabCampaigns(account.id, labels, fields = c("id", "name"),
+  operator = "ANY", token, n = 100, verbose = FALSE)
 }
 \arguments{
 \item{account.id}{ID of the account to retrieve labels from.}
@@ -14,6 +14,8 @@ getLabCampaigns(account.id, labels, fields = c("id", "name"), token,
 
 \item{fields}{Fields (variables) to retrieve, see \code{\link{findFields}} 
 for valid values, defaults to \code{id} and \code{name}.}
+
+\item{operator}{Matching operator either \code{ALL} or \code{ANY}, defaults to \code{ANY}}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 

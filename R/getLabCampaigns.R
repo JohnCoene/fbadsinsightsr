@@ -6,6 +6,7 @@
 #' @param labels IDs of labels to retrieve.
 #' @param fields Fields (variables) to retrieve, see \code{\link{findFields}} 
 #' for valid values, defaults to \code{id} and \code{name}.
+#' @param operator Matching operator either \code{ALL} or \code{ANY}, defaults to \code{ANY}
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param n Number of results to return
 #' @param verbose
@@ -37,7 +38,7 @@
 #' 
 #' @export
 getLabCampaigns <- function(account.id, labels, fields = c("id", "name"), 
-                            token, n = 100, verbose = FALSE){
+                            operator = "ANY", token, n = 100, verbose = FALSE){
   
   # check inputs
   if(missing(account.id)){
@@ -47,6 +48,8 @@ getLabCampaigns <- function(account.id, labels, fields = c("id", "name"),
   } else if (missing(labels)){
     stop("Missing labels")
   }
+  
+  if(toupper(operator) %in% c("ANY", "ALL") == FALSE) stop("Wrong operator")
   
   if(length(fields)){
     testParam("fields", fields, fct = "getLabCampaigns")
@@ -63,7 +66,8 @@ getLabCampaigns <- function(account.id, labels, fields = c("id", "name"),
   # build url
   uri <- paste0("https://graph.facebook.com/v2.6/",
                 account.id, "/campaignsbylabels?fields=", fields, 
-                "&ad_label_ids=", labels , "&access_token=", token)
+                "&ad_label_ids=", labels , "&operator=", operator, 
+                "&access_token=", token)
   
   # call api
   response <- httr::GET(uri)

@@ -29,7 +29,7 @@
 #' 
 #' @export
 getLabAds <- function(account.id, labels, fields = c("id", "name"), 
-                         token, n = 100, verbose = FALSE){
+                      operator = "ANY", token, n = 100, verbose = FALSE){
   
   # check inputs
   if(missing(account.id)){
@@ -39,6 +39,8 @@ getLabAds <- function(account.id, labels, fields = c("id", "name"),
   } else if (missing(labels)){
     stop("Missing labels")
   }
+  
+  if(toupper(operator) %in% c("ANY", "ALL") == FALSE) stop("Wrong operator")
   
   if(length(fields)){
     testParam("fields", fields, fct = "getLabCampaigns")
@@ -55,7 +57,8 @@ getLabAds <- function(account.id, labels, fields = c("id", "name"),
   # build url
   uri <- paste0("https://graph.facebook.com/v2.6/",
                 account.id, "/adsbylabels?fields=", fields, 
-                "&ad_label_ids=", labels , "&access_token=", token)
+                "&ad_label_ids=", labels , "&operator=", operator, 
+                "&access_token=", token)
   
   # call api
   response <- httr::GET(uri)
