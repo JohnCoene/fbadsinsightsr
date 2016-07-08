@@ -1,6 +1,6 @@
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
 
-*Updated to Facebook Graph API v2.6*
+![fb logo](https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Facebook_logo_36x36.svg/36px-Facebook_logo_36x36.svg.png) *Updated to Facebook Graph API v2.6*
 
 # fbAdsInsightsR #
 
@@ -26,6 +26,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `getLabCampaigns` (v3.0)
 * `getLabAdsets` (v3.0)
 * `getLabAds` (v3.0)
+* `getLabCreatives` (v3.0)
 
 **List-family**
 
@@ -47,14 +48,20 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 * `grabCampaigns`
 * `grabAdsets`
 * `grabAds`
-* `grabCreatives` (.deprecated)
+* `grabCreatives` (.deprecated for `listCreatives`)
 
 **Check-family**
 
-* `checkTarget` (.deprecated)
+* `checkTarget` (.deprecated for `checkTargetSentence`)
 * `checkStatus`
 * `checkTargetSentence` (v3.0)
 * `checkTargetTree` (v3.0)
+
+**Update-family**
+
+* `updateCampaign` (v3.0)
+* `updateAdset` (v3.0)
+* `updateAd` (v3.0)
 
 **Create-family**
 
