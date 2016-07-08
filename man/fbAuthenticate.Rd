@@ -20,6 +20,9 @@ fbAuthenticate(app.id, app.secret, scope = "ads_management",
 Authenticate through Facebook Graph API with your facebook application which you can create at \href{https://developers.facebook.com/apps}{https://developers.facebook.com/apps}
 }
 \details{
+\strong{httpuv}: Consider loading the httpuv package to avoid issues, 
+\code{install.packages("httpuv");library(httpuv)}
+
 There are two different ways of making authenticated requests. One is to obtain
 a temporary access token from \url{https://developers.facebook.com/tools/explorer}, 
 the other is to use a long-term token provided by this very function. 

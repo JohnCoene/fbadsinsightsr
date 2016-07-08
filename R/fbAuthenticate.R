@@ -9,6 +9,9 @@
 #' @param app.name Name of your app, optional.
 #' 
 #' @details 
+#' \strong{httpuv}: Consider loading the httpuv package to avoid issues, 
+#' \code{install.packages("httpuv");library(httpuv)}
+#' 
 #' There are two different ways of making authenticated requests. One is to obtain
 #' a temporary access token from \url{https://developers.facebook.com/tools/explorer}, 
 #' the other is to use a long-term token provided by this very function. 
