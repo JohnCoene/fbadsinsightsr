@@ -69,11 +69,9 @@ Since access to the repository is restricted you will need your login and passwo
 # run authentication with your app details
 TK <- fbAuthenticate(app.id = "1234567890123456", app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", scope = c("ads_management", "ads_read"))
                            
-# list facebook advertising accounts you have access to
-accounts <- listAccounts(id = "me", token = TK)
+accounts <- listAccounts(id = "me", token = TK) # list facebook advertising accounts you have access to
 
-# grab list of ads under random account
-ads <- grabAds(sample(accounts$id, 1), TK)
+ads <- grabAds(sample(accounts$id, 1), TK) # grab list of ads under random account
 
 # get data on random ad
 set.seed(19880525)
@@ -89,18 +87,15 @@ ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, breakdowns = "country")
 # get ad performance data by age and gender 
 ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, breakdowns = c("age", "gender"))
                 
-# list creatives
-creatives <- listCreatives(sample(accounts$id, 1), TK)
+creatives <- listCreatives(sample(accounts$id, 1), TK) # list creatives
 
 # check targeting of adset
 adsets <- grabAdsets(sample(accounts$id, 1), TK)
 (target <- checkTargetSentence(sample(adsets$id, 1), TK))
 
-# check targeting from account
-targeting <- checkTargetTree(sample(accounts$id, 1), TK)
+targeting <- checkTargetTree(sample(accounts$id, 1), TK) # check targeting from account
 
-# get labels
-labels <- listLabels(accounts$id[1], TK)
+labels <- listLabels(accounts$id[1], TK) # get labels
 
 # get ads that match ANY label
 ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ANY", token = TK)
@@ -126,4 +121,4 @@ Access to the package is restricted, email John Coene & GaoCong if you want to g
 
 ---------------------------------------
 
-by [Cheetah Mobile](https://bitbucket.org/JohnCheetah/fbadsinsightsr/src/f484ed41de4fde1f7dc1e6097530a8fc65604880/LICENSE?at=master) - 2016
+by Cheetah Mobile - 2016
