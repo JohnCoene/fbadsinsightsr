@@ -72,7 +72,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
 
 * [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads/fbAdsInsightsRv3_0.pdf)
-* ~~[Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)~~ - Currently being updated
+* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) *updated to v3.0!*
 
 ## Install ##
 
