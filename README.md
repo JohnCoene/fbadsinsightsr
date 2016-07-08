@@ -118,6 +118,10 @@ See NEWS.md for changes.
 
 ## Access & Contributors ##
 
+Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
+
 * John Coene <john.coene@cmcm.com> (Author & maintainer)
 * DongYuNan <dongyunan@cmcm.com> (Tester)
 * GaoCong <gaocong1@cmcm.com> (User)
+
+*by Cheetah Mobile &copy;*
