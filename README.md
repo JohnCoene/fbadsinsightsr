@@ -1,73 +1,62 @@
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/f/f9/Cheetah_Mobile_Logo.png)
 
- > Updated to Facebook Graph API v2.6
-
 # fbAdsInsightsR #
 
 Current version: **v3.0** (*see git tags for older versions*)
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6).
 
+ > Updated to Facebook Graph API v2.6
+
 ## Functions ##
 
-**OAuth**
+![R](http://opensourcemac.com/wp-content/uploads/2011/02/rstudio.png) 
 
-* `fbAuthenticate`
-
-**GET-family**
-
-* `getAccount`
-* `getCampaign`
-* `getAdset`
-* `getAd`
-* `getAny`
-* `getActivity`
-* `getLabCampaigns` (v3.0)
-* `getLabAdsets` (v3.0)
-* `getLabAds` (v3.0)
-* `getLabCreatives` (v3.0)
-
-**List-family**
-
-* `listBusinesses`
-* `listAccounts`
-* `listVideos`
-* `listImages`
-* `listCreatives`
-* `listApps` (v3.0)
-* `listAdApps` (v3.0)
-* `ListLabels` (v3.0)
-
-**Find-family**
-
-* `findFields`
-* `findParams`
-
-**Grab-family**
-
-* `grabCampaigns`
-* `grabAdsets`
-* `grabAds`
-* `grabCreatives` (.deprecated for `listCreatives`)
-
-**Check-family**
-
-* `checkTarget` (.deprecated for `checkTargetSentence`)
-* `checkStatus`
-* `checkTargetSentence` (v3.0)
-* `checkTargetTree` (v3.0)
-
-**Update-family**
-
-* `updateCampaign` (v3.0)
-* `updateAdset` (v3.0)
-* `updateAd` (v3.0)
-
-**Create-family**
-
-* `createLabels` (v3.0)
+- OAuth
+    * `fbAuthenticate`
+- GET-family
+    * `getAccount`
+    * `getCampaign`
+    * `getAdset`
+    * `getAd`
+    * `getAny`
+    * `getActivity`
+    * `getLabCampaigns` (v3.0)
+    * `getLabAdsets` (v3.0)
+    * `getLabAds` (v3.0)
+    * `getLabCreatives` (v3.0)
+- List-family
+    * `listBusinesses`
+    * `listAccounts`
+    * `listVideos`
+    * `listImages`
+    * `listCreatives`
+    * `listApps` (v3.0)
+    * `listAdApps` (v3.0)
+    * `ListLabels` (v3.0)
+- Find-family
+    * `findFields`
+    * `findParams`
+- Grab-family
+    * `grabCampaigns`
+    * `grabAdsets`
+    * `grabAds`
+    * `grabCreatives` (.deprecated for `listCreatives`)
+- Check-family
+    * `checkTarget` (.deprecated for `checkTargetSentence`)
+    * `checkStatus`
+    * `checkTargetSentence` (v3.0)
+    * `checkTargetTree` (v3.0)
+- Update-family
+    * `updateCampaign` (v3.0)
+    * `updateAdset` (v3.0)
+    * `updateAd` (v3.0)
+- Create-family
+    * `createLabels` (v3.0)
 
 ## Documentation ##
+
+![doc](http://icons.veryicon.com/64/System/iOS7%20Minimal/Basic%20Document.png)
 
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
 
@@ -76,11 +65,15 @@ Constantly being updated and improved. Currently the manual and examples are ava
 
 ## Install ##
 
+![install](http://simpleicon.com/wp-content/uploads/cloud-download-64x64.png)
+
 Since access to the repository is restricted you will need your login and password to install the package.
 
 `devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password")`
 
 ## Examples ##
+
+![dl](https://www.codester.com/static/uploads/categories/43/icon.png)
 
 ```R
 # run authentication with your app details
