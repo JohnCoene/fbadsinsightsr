@@ -43,6 +43,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
     * `checkStatus`
     * `checkTargetSentence` (v3.0)
     * `checkTargetTree` (v3.0)
+    * `checkUsers` (dev)
 - Update-family
     * `updateCampaign` (v3.0)
     * `updateAdset` (v3.0)

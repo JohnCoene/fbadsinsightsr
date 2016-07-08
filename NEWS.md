@@ -1,6 +1,6 @@
 ## Dev ##
 
-* Currently on v3.0 - no changes
+- New function `checkUsers` 
 
 ## v3.0 ##
 
