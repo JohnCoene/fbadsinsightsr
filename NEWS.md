@@ -24,7 +24,13 @@ Changes:
     2. `getLabCampaigns` fetch campaigns by labels
     3. `getLabAdsets` fetch adsets by labels
     4. `getLabAds` fetch ads by labels
-    5. `createLabels` create labels
+    5. `getLabCreatives` fetch creatives by labels
+    6. `createLabels` create labels
+8. New update-family functions:
+    1. `updateCampaign`
+    2. `updateAdset`
+    3. `updateAd`
+9. Number of fields for get-family extended from 74 to 90.
 
 Bug fixes:
 
