@@ -7,13 +7,13 @@
 
 ## v3.0 ##
 
-Version Three brings many changes. The package now calls the updated v2.6 of the API.
+Version Three brings many changes. The package now calls the updated **v2.6** of the API.
 
 Changes:
 
 1. `checkTarget` has been deprecated in favour of:
     1. `checkTargetSentence` AND 
-    2. `checkTargetTree` which have been added, both retrieve targeting specifications but return the data in different formats and can be called on different objects (accounts, campaigns, adsets, ads) See documentation for more details.
+    2. `checkTargetTree` which have been added, both retrieve targeting specifications but return the data in different formats and can be called on different objects (accounts, campaigns, adsets, ads). See documentation for more details.
 2. `grabAccounts` and `grabImages` have been deprecated in favour of `listAccounts` and `listImages`
 3. New function `listApps` returns apps under account
 4. New function `listAdApps` returns list of advertiseable applications
