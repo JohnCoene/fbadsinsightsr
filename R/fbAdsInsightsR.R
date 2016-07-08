@@ -47,40 +47,57 @@
 #' @examples 
 #' \dontrun{
 #' # run authentication with your app details
-#' fbOAuth <- fbAuthenticate(app.id = "1234567890123456", 
-#'                           app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", 
-#'                           scope = "ads_management")
+#' TK <- fbAuthenticate(app.id = "1234567890123456", 
+#'                      app.secret = "16xx79321xx0130x2x10a08x3e2x80xx", 
+#'                      scope = "ads_management")
 #'                           
 #' # list facebook advertising accounts you have access to
-#' accounts <- listAccounts(id = "me", token = fbOAuth)
+#' accounts <- listAccounts(id = "me", token = TK)
 #' 
 #' # grab list of ads under random account
-#' ads <- grabAds(sample(accounts$id, 1), fbOAuth)
+#' ads <- grabAds(sample(accounts$id, 1), TK)
 #' 
 #' # get data on random ad
 #' set.seed(19880525)
-#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = fbOAuth)
+#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK)
 #' 
 #' # get daily performance data for last month with a summary
 #' my_preset <- findParams("date.preset")[grep("last_month", 
 #'                                             findParams("date.preset"))]
-#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = fbOAuth, n = 1000, 
+#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK, n = 1000, 
 #'                  date.preset = my_preset, time.increment = 1)
 #'                  
 #' # get ad performance data by country 
-#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = fbOAuth,
+#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK,
 #'                  breakdowns = "country")
 #'                  
 #' # get ad performance data by age and gender 
-#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = fbOAuth,
+#' ad_data <- getAd(ad.id = sample(ads$id, 1), token = TK,
 #'                  breakdowns = c("age", "gender"))
 #'                  
 #' # list creatives
-#' creatives <- listCreatives(sample(accounts$id, 1), fbOAuth)
+#' creatives <- listCreatives(sample(accounts$id, 1), TK)
 #' 
 #' # check targeting of adset
-#' adsets <- grabAdsets(sample(accounts$id, 1), fbOAuth)
-#' (target <- checkTarget(sample(adsets$id, 1), fbOAuth))
+#' adsets <- grabAdsets(sample(accounts$id, 1), TK)
+#' (target <- checkTargetSentence(sample(adsets$id, 1), TK))
+#' 
+#' # check targeting from account
+#' targeting <- checkTargetTree(sample(accounts$id, 1), TK)
+#' 
+#' # get labels
+#' labels <- getLabels(accounts$id[1], TK)
+#' 
+#' # get ads that match ANY label
+#' ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ANY", 
+#'                        token = TK)
+#' 
+#' # get campaigns that match ALL labels                        
+#' ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", 
+#'                        token = TK)
+#'                        
+#' (apps <- listApps(accounts$id[1], TK)) # list apps
+#' (apps <- listAdApps(accounts$id[1], TK)) # list advertiseable apps
 #' }
 #' 
 #' @docType package
