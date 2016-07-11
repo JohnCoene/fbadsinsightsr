@@ -413,7 +413,8 @@ digest.fbAdsData <- function(fbAdsData){
                       "^video_10_sec_watched_actions$|",
                       "^video_15_sec_watched_actions$|",
                       "^video_30_sec_watched_actions$|",
-                      "^action_type$|^action$|^adlabels$")
+                      "^action_type$|^action$|^adlabels$|",
+                      "^relevance_score$")
         
         # identify nested lists
         vars <- names[grep(pat, names)]
@@ -466,21 +467,38 @@ digest.fbAdsData <- function(fbAdsData){
                 dat <- do.call(plyr::"rbind.fill",
                                lapply(lst[[1]], as.data.frame))
                 
-                # transpose
-                # name rows
-                rownames(dat) <- dat[,1]
-                
-                # remove first column
-                dat[,1] <- NULL
-                
-                # transpose
-                dat <- as.data.frame(t(dat))
-                
-                # rename
-                names(dat) <- paste0(vars[i], "_", names(dat))
-                
-                # bind
-                row_df <- plyr::rbind.fill(row_df, dat)
+                if(ncol(dat) > 1){
+                  # transpose
+                  # name rows
+                  rownames(dat) <- dat[,1]
+                  
+                  # remove first column
+                  dat[,1] <- NULL
+                  
+                  # transpose
+                  dat <- as.data.frame(t(dat))
+                  
+                  # rename
+                  names(dat) <- paste0(vars[i], "_", names(dat))
+                  
+                  # bind
+                  row_df <- plyr::rbind.fill(row_df, dat)
+                } else {
+                  # transpose
+                  # name rows
+                  rownames(dat) <- names(lst[[1]])
+                  
+                  # transpose
+                  dat <- as.data.frame(t(dat))
+                  
+                  # rename
+                  names(dat) <- paste0(vars[i], "_", names(dat))
+                  
+                  rownames(dat) <- c(1:nrow(dat))
+                  
+                  # bind
+                  row_df <- plyr::rbind.fill(row_df, dat)
+                }
                 
               } else { # if no lst found
                 # create NA
