@@ -4,11 +4,11 @@
 \alias{listAccounts}
 \title{List accounts}
 \usage{
-listAccounts(id, token, n = 100, fields = "default", verbose = FALSE,
-  limit = 100)
+listAccounts(id = "me", token, n = 100, fields = "default",
+  verbose = FALSE, limit = 100)
 }
 \arguments{
-\item{id}{Your business or your user ID.}
+\item{id}{Your business or your user ID, defaults to \code{me}.}
 
 \item{token}{A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.}
 

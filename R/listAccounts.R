@@ -2,7 +2,7 @@
 #' 
 #' @description Fetches all accounts under one business or user ID.
 #' 
-#' @param id Your business or your user ID.
+#' @param id Your business or your user ID, defaults to \code{me}.
 #' @param token A valid token as returned by \code{\link{fbAuthenticate}} or a short-term token from \href{https://developers.facebook.com/tools/explorer}{facebook Graph API Explorer}.
 #' @param n Number of results to retrieve, defaults to \code{100}. When you make an API request, you will usually not receive all of the results of that request in a single response. This is because some responses could contain thousands of objects so most responses are paginated by default. \code{previous} fetches the previous page of response (after the initial query) similarly \code{next} fetches the next page and \code{NULL} does not paginate (only makes one query).
 #' @param fields Defaults to \code{default} which returns name and id of accounts. See \code{\link{findFields}} to find all available fields.
@@ -22,7 +22,7 @@
 #' @author John Coene \email{john.coene@@cmcm.com}
 #' 
 #' @export
-listAccounts <- function(id, token, n = 100, fields = "default",
+listAccounts <- function(id = "me", token, n = 100, fields = "default",
                          verbose = FALSE, limit = 100) {
   
   # check inputs
