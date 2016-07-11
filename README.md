@@ -110,7 +110,17 @@ ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = 
 
 ## Versions and Patches ##
 
-See NEWS.md for changes.
+### Versions
+
+See Git tags: *2.0* and *v3.0*
+
+### Dev - bitbucket version
+
+- New function `checkUsers` 
+- `listAccounts` id parameter defaults to `me`
+- fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
+
+See NEWS.md for entire historic.
 
 ## Access & Contributors ##
 
