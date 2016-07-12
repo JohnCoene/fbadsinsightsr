@@ -108,13 +108,13 @@ ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = 
 (ad_apps <- listAdApps(accounts$id[1], TK)) # list advertiseable apps
 ```
 
-## Versions and Patches ##
+## Developments ##
 
 ### Versions
 
 See Git tags: *2.0* and *v3.0*
 
-### Dev - bitbucket version
+### Dev
 
 - New function `checkUsers` 
 - `listAccounts` id parameter defaults to `me`
@@ -127,7 +127,7 @@ See NEWS.md for entire historic.
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
 
 * John Coene <john.coene@cmcm.com> (Author & maintainer)
-* DongYuNan <dongyunan@cmcm.com> (Tester)
+* DongYuNan <dongyunan@cmcm.com> (User & Tester)
 * GaoCong <gaocong1@cmcm.com> (User)
 
 ---------------------------------------
