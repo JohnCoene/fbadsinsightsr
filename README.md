@@ -21,6 +21,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
     * `getLabAdsets` (v3.0)
     * `getLabAds` (v3.0)
     * `getLabCreatives` (v3.0)
+    * `getEstreach` (dev)
 - List-family
     * `listBusinesses`
     * `listAccounts`
@@ -116,7 +117,7 @@ See Git tags: *2.0* and *v3.0*
 
 ### Dev
 
-- New function `checkUsers` 
+- New functions: `checkUsers`, `getEstReach` 
 - `listAccounts` id parameter defaults to `me`
 - fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
 
