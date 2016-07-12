@@ -1,6 +1,8 @@
 ## Dev ##
 
 - New function `checkUsers` 
+- `listAccounts` id parameter defaults to `me`
+- fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
 
 ## v3.0 ##
 
