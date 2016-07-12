@@ -4,7 +4,8 @@
 
 Current version: **v3.0** (*see git tags for older versions*)
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). **Updated to Facebook Graph API v2.6!**.
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). 
+**Now updated to Facebook Graph API v2.6!**
 
 ## Functions ##
 
@@ -17,10 +18,10 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
     * `getAd`
     * `getAny`
     * `getActivity`
-    * `getLabCampaigns` (v3.0)
-    * `getLabAdsets` (v3.0)
-    * `getLabAds` (v3.0)
-    * `getLabCreatives` (v3.0)
+    * `getLabCampaigns` 
+    * `getLabAdsets`
+    * `getLabAds`
+    * `getLabCreatives`
     * `getEstreach` (dev)
 - List-family
     * `listBusinesses`
@@ -28,9 +29,9 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
     * `listVideos`
     * `listImages`
     * `listCreatives`
-    * `listApps` (v3.0)
-    * `listAdApps` (v3.0)
-    * `ListLabels` (v3.0)
+    * `listApps`
+    * `listAdApps` 
+    * `ListLabels` 
 - Find-family
     * `findFields`
     * `findParams`
@@ -42,15 +43,15 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 - Check-family
     * `checkTarget` (.deprecated for `checkTargetSentence`)
     * `checkStatus`
-    * `checkTargetSentence` (v3.0)
-    * `checkTargetTree` (v3.0)
+    * `checkTargetSentence` 
+    * `checkTargetTree`
     * `checkUsers` (dev)
 - Update-family
-    * `updateCampaign` (v3.0)
-    * `updateAdset` (v3.0)
-    * `updateAd` (v3.0)
+    * `updateCampaign`
+    * `updateAdset` 
+    * `updateAd`
 - Create-family
-    * `createLabels` (v3.0)
+    * `createLabels` 
 
 ## Documentation ##
 
