@@ -32,6 +32,7 @@ Function applies to parameters of the following GET-family functions
 \item \code{action.attribution.windows}
 \item \code{subtype}
 \item \code{limit.type}
+\item \code{optimize_for}
 }
 }
 \examples{

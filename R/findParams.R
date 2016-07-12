@@ -18,6 +18,7 @@
 #' \item \code{action.attribution.windows}
 #' \item \code{subtype}
 #' \item \code{limit.type}
+#' \item \code{optimize_for}
 #' }
 #' 
 #' @return If one \code{params} is passed the function returns a 
@@ -134,6 +135,15 @@ findParams <- function(params = c("level", "breakdowns", "date.preset",
                  "audience_network_positions", 
                  "effective_audience_network_positions", 
                  "interest_defaults_source", "excluded_mobile_device_model")
+      
+    } else if(param == "optimize_for") {
+      
+      param <- c("NONE", "APP_INSTALLS", "BRAND_AWARENESS", "CLICKS", 
+                 "ENGAGED_USERS", "EXTERNAL", "EVENT_RESPONSES", "IMPRESSIONS", 
+                 "LEAD_GENERATION", "LINK_CLICKS", "OFFER_CLAIMS", 
+                 "OFFSITE_CONVERSIONS", "PAGE_ENGAGEMENT", "PAGE_LIKES", 
+                 "POST_ENGAGEMENT", "REACH", "SOCIAL_IMPRESSIONS", 
+                 "VIDEO_VIEWS")
       
     } else {
       
