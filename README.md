@@ -129,7 +129,7 @@ See NEWS.md for entire historic.
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
 
 * John Coene <john.coene@cmcm.com> (Author & maintainer)
-* DongYuNan <dongyunan@cmcm.com> (User & Tester)
+* DongYuNan <dongyunan@cmcm.com> (User & tester)
 * GaoCong <gaocong1@cmcm.com> (User)
 
 ---------------------------------------
