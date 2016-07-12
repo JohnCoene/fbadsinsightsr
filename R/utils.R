@@ -187,8 +187,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
   
   # verbose
   if(verbose == TRUE && nrow(fbData$data) > 0){
-    cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
-        labels = paste0("Query #", i))
+    message("Query #", i, ": ", nrow(fbData$data), " results")
   }
   
   # loop if url is present and
@@ -208,8 +207,7 @@ paginate.fbAdsData <- function(fbData, verbose = FALSE, n = 100) {
     
     # verbose
     if(verbose == TRUE){
-      cat(paste0(nrow(fbData$data), " results"), fill = TRUE, 
-          labels = paste0("Query #", i + 1))
+      message("Query #", i + 1, ": ", nrow(fbData$data), " results")
     }
     
     # sleep 0.5 second between queries
@@ -674,8 +672,8 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   # verbose
   if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
-              "rows", "\n"))
+    message(paste(n, "results requested, API returned", nrow(fb_data$data), 
+                  "rows"))
   } 
   
   # converge

@@ -329,8 +329,8 @@ getAny <- function(id, token, fields = "default", n = 100,
   
   # verbose
   if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
-              "rows", "\n"))
+    message(paste(n, "results requested, API returned", nrow(fb_data$data), 
+                  "rows"))
   }
   
   # converge

@@ -83,8 +83,8 @@ getLabCampaigns <- function(account.id, labels, fields = c("id", "name"),
   
   # verbose
   if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
-              "rows", "\n"))
+    message(paste(n, "results requested, API returned", nrow(fb_data$data), 
+                  "rows"))
   }
   
   # converge

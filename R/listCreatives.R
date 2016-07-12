@@ -103,8 +103,8 @@ listCreatives <- function(id, token, n = 100, fields = "default",
   
   # verbose
   if (verbose == TRUE) {
-    cat(paste(n, "results requested, API returned", nrow(fb_data$data),
-              "rows", "\n"))
+    message(paste(n, "results requested, API returned", nrow(fb_data$data), 
+                  "rows"))
   }
   
   # converge
