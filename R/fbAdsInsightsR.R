@@ -119,6 +119,8 @@
 #' (apps <- listAdApps(accounts$id[1], TK)) # list advertiseable apps
 #' }
 #' 
+#' @keywords internal
+#' 
 #' @docType package
 #' @name fbAdsInsightsR
 NULL
