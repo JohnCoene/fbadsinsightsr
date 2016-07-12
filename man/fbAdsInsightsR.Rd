@@ -28,6 +28,7 @@ Get-family
 \item \code{\link{getLabCreatives}}
 \item \code{\link{getLabAdsets}}
 \item \code{\link{getLabAds}}
+\item \code{\link{getEstReach}}
 }
 List-family
 \itemize{
@@ -53,6 +54,7 @@ Check-family
 \item \code{\link{checkStatus}}
 \item \code{\link{checkTargetTree}}
 \item \code{\link{checkTargetSentence}}
+\item \code{\link{checkUsers}}
 }
 Update-family
 \itemize{
