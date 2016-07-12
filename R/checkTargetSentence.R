@@ -66,7 +66,8 @@ checkTargetSentence <- function(id, token, n = 100, limit = 100){
   if (length(json$targetingsentencelines)) {
     
     # parse
-    dat <- do.call(plyr::"rbind.fill", lapply(json$targetingsentencelines, as.data.frame))
+    dat <- do.call(plyr::"rbind.fill", 
+                   lapply(json$targetingsentencelines, as.data.frame))
     
     # dat
     dat <- processCheck(dat)
