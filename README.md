@@ -132,6 +132,6 @@ Access to the package is restricted, email John Coene & GaoCong if you want to g
 * DongYuNan <dongyunan@cmcm.com> (User & tester)
 * GaoCong <gaocong1@cmcm.com> (User)
 
----------------------------------------
+-----------------------------------------------------------------------
 
 by Cheetah Mobile - 2016
