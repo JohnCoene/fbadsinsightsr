@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)
+[![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)[![Coverage Status](https://img.shields.io/codecov/c/github//master.svg)](https://codecov.io/github/?branch=master)[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/?branch=master)
 
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Cheetah_Mobile_Logo.png/250px-Cheetah_Mobile_Logo.png)
 
