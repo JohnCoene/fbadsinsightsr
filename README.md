@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)
+
 ![Developped by Cheetah Mobile](https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Cheetah_Mobile_Logo.png/250px-Cheetah_Mobile_Logo.png)
 
 # fbAdsInsightsR #
