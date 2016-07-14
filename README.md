@@ -4,7 +4,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v3.0** (*see git tags for older versions*)
+Current version: **v4.0** (*see git tags for older versions*)
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). 
 **Now updated to Facebook Graph API v2.6!**
@@ -60,7 +60,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
 
 * [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads/fbAdsInsightsRv3_0.pdf)
-* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) **updated to v3.0!**
+* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src)
 
 ## Install ##
 
@@ -114,17 +114,22 @@ ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = 
 
 ## Developments ##
 
-### Versions
+### Versions ###
 
-See Git tags: *2.0* and *v3.0*
+See Git tags: *2.0*, *v3.0* and *v4.0* (Rcpp branch)
 
-### Dev
+### Dev ###
 
 - New functions: `checkUsers`, `getEstReach` 
 - `listAccounts` id parameter defaults to `me`
 - fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
 
 See NEWS.md for entire historic.
+
+### Branches ###
+
+- **master** - Last release or dev version
+- **Rcpp** - Uses C++ to speed up certain processes
 
 ## Access & Contributors ##
 
@@ -134,6 +139,6 @@ Access to the package is restricted, email John Coene & GaoCong if you want to g
 * DongYuNan <dongyunan@cmcm.com> (User & tester)
 * GaoCong <gaocong1@cmcm.com> (User)
 
------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 by Cheetah Mobile - 2016

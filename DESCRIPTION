@@ -1,7 +1,7 @@
 Package: fbAdsInsightsR
 Type: Package
 Title: Get data on performances of facebook ads
-Version: 3.0
+Version: 4.0
 Date: 2015-12-14
 Authors@R: c(
     person("John", "Coene", , "john.coene@cmcm.com", role = c("aut", "cre")),
@@ -14,7 +14,8 @@ Depends:
 Imports:
     rjson,
     plyr,
-    httr
+    httr,
+    Rcpp
 LazyData: TRUE
 URL: https://bitbucket.org/JohnCheetah/fbadsinsightsr
 BugReports: https://bitbucket.org/JohnCheetah/fbadsinsightsr/issues
@@ -22,3 +23,4 @@ RoxygenNote: 5.0.1
 Suggests: testthat,
     covr
 License: MIT + file LICENSE
+LinkingTo: Rcpp

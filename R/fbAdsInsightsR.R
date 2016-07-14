@@ -123,6 +123,9 @@
 #' 
 #' @keywords internal
 #' 
+#' @useDynLib fbAdsInsightsR
+#' @importFrom Rcpp sourceCpp
+#' 
 #' @docType package
 #' @name fbAdsInsightsR
 NULL
