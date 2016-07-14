@@ -2,7 +2,7 @@
 scopeCheck <- function(scope) {
   
   # define valid scopes
-  scopes <- c("public_profile", "user_friends", "email", "user_about_me", 
+  valids <- c("public_profile", "user_friends", "email", "user_about_me", 
               "user_actions.books", "user_actions.fitness", 
               "user_actions.music", "user_actions.news", "user_actions.video", 
               "user_actions:{app_namespace}", "user_birthday", 
@@ -18,51 +18,26 @@ scopeCheck <- function(scope) {
               "pages_manage_cta", "ads_read", "ads_management")
   
   if(missing(scope)){
-    return(scopes)
-  }
-  
-  for (i in 1:length(scope)) {
-    test <- scopes[which(scopes == scope[i])]
-    if (length(test) == 0) {
-      scope_error <- scope[i]
-      stop (paste0("Wrong scope: ", scope_error,
-                   " is not a correct permission. See ?fb_authenticate details"),
-            call. = FALSE)
-    }
+    scope = "ads_read"
+    warning("No scope passed, defaulting to ads_read", .call = FALSE)
+  } else {
+    scopeCheckC(scope, valids)
   }
 }
 
 # create_fields -------------------------------
-createFields <- function(fields){
-  
-  # check input class
-  if (class(fields) != "character") {
-    stop("fields must be character value or vector", call. = FALSE)
-  }
-  
-  # collapse
-  fields <- paste0(fields,  collapse = "%2C")
-  
-  return(fields)
-}
-
-# to_http -------------------------------
-toHTTP <- function(params = NULL){
-  
-  if (!length(params)) {
-    
-    params <- ""
-    
-  } else {
-    
-    params <- paste0("[",paste0("%22", params, "%22", collapse = "%2C%20"),
-                     "]", collapse = "")
-    
-  }
-  
-  return (params)
-  
-}
+# createFields <- function(fields){
+#   
+#   # check input class
+#   if (class(fields) != "character") {
+#     stop("fields must be character value or vector", call. = FALSE)
+#   }
+#   
+#   # collapse
+#   fields <- paste0(fields,  collapse = "%2C")
+#   
+#   return(fields)
+# }
 
 # testParam -------------------------------
 testParam <- function (params, param_vector, fct) {
@@ -574,6 +549,38 @@ converge.fbAdsData <- function(fbData){
         # bind
         data <- cbind.data.frame(fbData[["data"]], fbData[["insights"]])
         
+        if(length(grep("^insights_clicks$", names(data))) &&
+           length(grep("insights_actions_mobile_app_install", names(data)))){
+          
+          data$insights_cvr <- cvr(data[, grep("^insights_clicks$", 
+                                               names(data))], 
+                                   data[, grep("actions_mobile_app_install", 
+                                      names(data))])
+        }
+        if(length(grep("^insights_spend$", names(data))) &&
+           length(grep("insights_actions_mobile_app_install", names(data)))){
+          data$insights_cpi <- cpi(data[, grep("^insights_actions_mobile_app_install$", 
+                                               names(data))], 
+                                   data[, grep("^insights_spend$", 
+                                      names(data))])
+        }
+        if(length(grep("^insights_actions_like$", names(data))) &&
+           length(grep("^insights_spend$", names(data)))){
+          
+          data$insights_cpl <- cpl(as.numeric(data[, grep("^insights_actions_like$", 
+                                                          names(data))]), 
+                                   as.numeric(data[, grep("^insights_spend$", 
+                                                          names(data))]))
+        }
+        if(length(grep("^insights_total_actions$", names(data))) &&
+           length(grep("^insights_spend$", names(data)))){
+          
+          data$insights_cpa <- cpa(as.numeric(data[, grep("^insights_total_actions$", 
+                                               names(data))]), 
+                                   as.numeric(data[, grep("^insights_spend$", 
+                                               names(data))]))
+        }
+        
         # else return a list
       } else {
         data <- as.list(fbData)
@@ -583,6 +590,33 @@ converge.fbAdsData <- function(fbData){
     
   } else {
     data <- fbData$data
+    
+    if(length(grep("^clicks$", names(data))) &&
+       length(grep("actions_mobile_app_install", names(data)))){
+      
+      data$cvr <- cvr(as.numeric(data[, grep("^clicks$", names(data))]),
+                      as.numeric(data[, grep("^actions_mobile_app_install$", 
+                                  names(data))]))
+    }
+    if(length(grep("^spend$", names(data))) &&
+       length(grep("^actions_mobile_app_install$", names(data)))){
+      data$cpi <- cpi(as.numeric(data[, grep("^actions_mobile_app_install$", 
+                                  names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
+    if(length(grep("^actions_post_like$", names(data))) &&
+       length(grep("actions_mobile_app_install", names(data)))){
+      
+      data$cpl <- cpl(as.numeric(data[, grep("^actions_post_like$", 
+                                             names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
+    if(length(grep("^total_actions$", names(data))) &&
+       length(grep("^spend$", names(data)))){
+      
+      data$cpa <- cpa(as.numeric(data[, grep("^total_actions$", names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
   }
 
   return(data)
