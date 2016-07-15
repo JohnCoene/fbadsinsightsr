@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// toHTTP
+String toHTTP(CharacterVector params);
+RcppExport SEXP fbAdsInsightsR_toHTTP(SEXP paramsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
+    __result = Rcpp::wrap(toHTTP(params));
+    return __result;
+END_RCPP
+}
 // cvr
 NumericVector cvr(NumericVector clicks, NumericVector installs);
 RcppExport SEXP fbAdsInsightsR_cvr(SEXP clicksSEXP, SEXP installsSEXP) {
@@ -75,14 +86,26 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// toHTTP
-String toHTTP(CharacterVector params);
-RcppExport SEXP fbAdsInsightsR_toHTTP(SEXP paramsSEXP) {
+// buildBreakdowns
+String buildBreakdowns(CharacterVector breakdowns, Function f);
+RcppExport SEXP fbAdsInsightsR_buildBreakdowns(SEXP breakdownsSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type params(paramsSEXP);
-    __result = Rcpp::wrap(toHTTP(params));
+    Rcpp::traits::input_parameter< CharacterVector >::type breakdowns(breakdownsSEXP);
+    Rcpp::traits::input_parameter< Function >::type f(fSEXP);
+    __result = Rcpp::wrap(buildBreakdowns(breakdowns, f));
+    return __result;
+END_RCPP
+}
+// parseP
+CharacterVector parseP(CharacterVector param);
+RcppExport SEXP fbAdsInsightsR_parseP(SEXP paramSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type param(paramSEXP);
+    __result = Rcpp::wrap(parseP(param));
     return __result;
 END_RCPP
 }
