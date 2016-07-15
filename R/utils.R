@@ -25,20 +25,6 @@ scopeCheck <- function(scope) {
   }
 }
 
-# create_fields -------------------------------
-# createFields <- function(fields){
-#   
-#   # check input class
-#   if (class(fields) != "character") {
-#     stop("fields must be character value or vector", call. = FALSE)
-#   }
-#   
-#   # collapse
-#   fields <- paste0(fields,  collapse = "%2C")
-#   
-#   return(fields)
-# }
-
 # testParam -------------------------------
 testParam <- function (params, param_vector, fct) {
   
@@ -47,22 +33,14 @@ testParam <- function (params, param_vector, fct) {
     fct <- "getAny"
   }
   
-  if (params == "action_attribution_windows") {
-    options <- findParams("action.attribution.windows")
-  } else if (params == "action_breakdowns") {
-    options <- findParams("action.breakdowns")
-  } else if (params == "fields") {
+  params <- parseP(params)
+  
+  if (params == "fields") {
     options <- findFields(fct)
-  } else if (params == "action_report_time") {
+  } else if (params == "action.report.time") {
     options <- c("impression", "conversion")
-  } else if (params == "breakdowns") {
-    options <- findParams("breakdowns")
-  } else if (params == "date_preset") {
-    options <- findParams("date.preset")
   } else if (params == "level") {
     options <- c("ad", "adset", "campaign", "account") 
-  } else if (params == "time_increment") {
-    options <- findParams("time.increment")
   } else {
     options <- findParams(params)
   }
@@ -98,35 +76,6 @@ checkToken <- function(token){
   }
   
   return(token)
-}
-
-# breakdowns -------------------------------
-buildBreakdowns <- function(breakdowns) {
-  # breakdowns
-  if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
-    
-    # test
-    testParam("breakdowns", breakdowns)
-    
-    if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
-      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
-    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", 
-                                                          "placement")) {
-      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
-    } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
-      stop("impression_device cannot be used on its own", call. = FALSE)
-    } else if (length(breakdowns) == 1) {
-      breakdowns <- paste0("&breakdowns=", breakdowns)
-    } else {
-      stop("Wrong breakdowns specified. Run findParams('breakdowns')", call. = FALSE)
-    }
-    
-  } else if (length(breakdowns) >= 3) {
-    stop("Too many breakdowns specified. See @param", call. = FALSE)
-  }
-  
-  return(breakdowns)
-  
 }
 
 # generic ------------------------------
