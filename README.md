@@ -4,7 +4,7 @@
 
 # fbAdsInsightsR #
 
-Current version: **v4.0** (*see git tags for older versions*)
+Current version: **v3.1** (*see git tags for older versions*)
 
 fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). 
 **Now updated to Facebook Graph API v2.6!**
@@ -116,7 +116,7 @@ ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = 
 
 ### Versions ###
 
-See Git tags: *2.0*, *v3.0* and *v4.0* (Rcpp branch)
+See Git tags: *2.0*, *v3.0* and *v3.1* (Rcpp branch)
 
 ### Dev ###
 
@@ -129,7 +129,7 @@ See NEWS.md for entire historic.
 ### Branches ###
 
 - **master** - Last release or dev version
-- **Rcpp** - Uses C++ to speed up certain processes
+- **Rcpp** - Uses C++ to speed up certain functions
 
 ## Access & Contributors ##
 

@@ -1,7 +1,7 @@
 Package: fbAdsInsightsR
 Type: Package
 Title: Get data on performances of facebook ads
-Version: 4.0
+Version: 3.1
 Date: 2015-12-14
 Authors@R: c(
     person("John", "Coene", , "john.coene@cmcm.com", role = c("aut", "cre")),
