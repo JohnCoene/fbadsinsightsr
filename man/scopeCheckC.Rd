@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{scopeCheckC}
 \alias{scopeCheckC}
-\title{TestScope}
+\title{scopeCheck}
 \usage{
 scopeCheckC(scope, valid)
 }
@@ -12,6 +12,6 @@ scopeCheckC(scope, valid)
 \item{valid}{Valid scopes to test against}
 }
 \description{
-TestScope
+scopeCheck
 }
 
