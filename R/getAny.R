@@ -210,7 +210,9 @@ getAny <- function(id, token, fields = "default", n = 100,
   }
   
   # breakdowns
-  breakdowns <- buildBreakdowns(breakdowns = breakdowns)
+  if(length(breakdowns)){
+    breakdowns <- buildBreakdowns(breakdowns = breakdowns, f = testParam)
+  }
   
   # date.preset
   
