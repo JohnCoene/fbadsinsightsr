@@ -29,21 +29,11 @@ scopeCheck <- function(scope) {
 testParam <- function (params, param_vector, fct) {
   
   # set default
-  if(missing(fct)){
-    fct <- "getAny"
-  }
+  if(missing(fct)){fct <- "getAny"}
   
   params <- parseP(params)
   
-  if (params == "fields") {
-    options <- findFields(fct)
-  } else if (params == "action.report.time") {
-    options <- c("impression", "conversion")
-  } else if (params == "level") {
-    options <- c("ad", "adset", "campaign", "account") 
-  } else {
-    options <- findParams(params)
-  }
+  options <- optIt(params, findParams, findFields, fct = fct)
   
   for (i in 1:length(param_vector)) {
     test <- options[which(options == param_vector[i])]

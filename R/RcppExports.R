@@ -63,3 +63,12 @@ parseP <- function(param) {
     .Call('fbAdsInsightsR_parseP', PACKAGE = 'fbAdsInsightsR', param)
 }
 
+#' get options
+#' @param params parameters to test
+#' @param fp \code{\link{findParams}}
+#' @param ff \code{\link{findFields}}
+#' @param fct Function passed from parent FUN
+optIt <- function(params, fp, ff, fct = "getAny") {
+    .Call('fbAdsInsightsR_optIt', PACKAGE = 'fbAdsInsightsR', params, fp, ff, fct)
+}
+

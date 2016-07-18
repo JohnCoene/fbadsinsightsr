@@ -109,3 +109,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// optIt
+CharacterVector optIt(String params, Function fp, Function ff, String fct);
+RcppExport SEXP fbAdsInsightsR_optIt(SEXP paramsSEXP, SEXP fpSEXP, SEXP ffSEXP, SEXP fctSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< String >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< Function >::type fp(fpSEXP);
+    Rcpp::traits::input_parameter< Function >::type ff(ffSEXP);
+    Rcpp::traits::input_parameter< String >::type fct(fctSEXP);
+    __result = Rcpp::wrap(optIt(params, fp, ff, fct));
+    return __result;
+END_RCPP
+}

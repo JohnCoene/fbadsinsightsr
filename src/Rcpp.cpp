@@ -218,3 +218,28 @@ CharacterVector parseP(CharacterVector param){
   
   return newP;
 }
+
+//' get options
+//' @param params parameters to test
+//' @param fp \code{\link{findParams}}
+//' @param ff \code{\link{findFields}}
+//' @param fct Function passed from parent FUN
+//[[Rcpp::export]]
+CharacterVector optIt(String params, Function fp, Function ff, 
+                      String fct = "getAny"){
+  
+  CharacterVector options;
+  String fields = "fields", art = "action.report.time", lv = "level";
+  
+  if (params == fields) {
+    options = ff(fct);
+  } else if (params == art){
+    options = CharacterVector::create("impression", "conversion");
+  } else if (params == lv){
+    options = CharacterVector::create("ad", "adset", "campaign", "account");
+  } else {
+    options = fp(params);
+  }
+  
+  return options;
+}
