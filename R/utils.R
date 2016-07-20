@@ -59,12 +59,11 @@ testParam <- function (params, param_vector, fct) {
 checkToken <- function(token){
   
   # check token class
-  if (class(token)[1]=="Token2.0"){
+  if (class(token)[1] == "Token2.0"){
     token <- token$credentials$access_token
-  }	else if (class(token)[1]=="character"){
-    token <- token
+  }	else if (class(token)[1] != "character"){
+    stop("Wrong token supplied, must be character vector or httr Token2.0")
   }
-  
   return(token)
 }
 
