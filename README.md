@@ -129,7 +129,7 @@ ad_labels <- getLabAds(accounts$id[1], labels = labs, operator = "ALL", token = 
 
 ### Versions
 
-See Git tags: *2.0* and *v3.0*
+See Git tags: *2.0* and *v3.0*, *v3.1* is on Rcpp branch
 
 ### Dev
 
