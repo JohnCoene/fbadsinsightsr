@@ -19,12 +19,11 @@ test_that("listAccounts", {
 
 test_that("listAdApps", {
   apps <- listAdApps(id, TK)
-  expect_equal(ncol(apps), 5)
+  expect_equal(ncol(apps), 4)
 })
 
 test_that("listApps", {
-  apps <- listApps(id, TK)
-  expect_equal(ncol(apps), 5)
+  expect_warning(listApps(id, TK))
 })
 
 test_that("listBroadTargeting", {
@@ -36,7 +35,7 @@ test_that("listCreatives", {
   crea <- listCreatives(id, TK)
   expect_equal(ncol(crea), 2)
   crea <- listCreatives(id, TK, fields = findFields("listCreatives"))
-  expect_equal(ncol(crea), 12)
+  expect_equal(ncol(crea), 10)
 })
 
 test_that("listVideos", {
