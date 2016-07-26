@@ -133,6 +133,11 @@ See NEWS.md for entire changelog.
 - **master** - Last release or dev version
 - **Rcpp** - Uses C++ to speed up certain functions
 
+## R CMD check
+
+R CMD check results
+0 errors | 0 warnings | 0 notes
+
 ## Access & Contributors ##
 
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
