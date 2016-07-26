@@ -1,5 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)[![Coverage Status](https://img.shields.io/codecov/c/github//master.svg)](https://codecov.io/github/?branch=master)[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/?branch=master)
-
+[comment]: <> ([![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)[![Coverage Status](https://img.shields.io/codecov/c/github//master.svg)](https://codecov.io/github/?branch=master)[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/?branch=master))
 ![Developped by Cheetah Mobile](http://www.mobyaffiliates.com/wp-content/uploads/2015/10/12.png)
 
 # fbAdsInsightsR #
