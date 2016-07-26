@@ -144,6 +144,11 @@ See Git tags: *2.0* and *v3.0*, *v3.1* is on Rcpp branch
 
 See NEWS.md for entire historic.
 
+## R CMD check
+
+R CMD check results
+`0 errors | 0 warnings | 0 notes`
+
 ## Access & Contributors ##
 
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
