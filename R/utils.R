@@ -654,9 +654,6 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   return (fb_data)
 }
 
-
-
-
 # parse log
 parseLog <- function(json, account.id) {
   
@@ -917,7 +914,7 @@ processCheck <- function(dat){
   names(x) <- tolower(names(x))
   names(x) <- gsub(":$", "", names(x))
   names(x) <- gsub("-", "", names(x))
-  names(x) <- gsub("[[:space:]]", "_", names(x))
+  names(x) <- gsub("[[:space:]]", ".", names(x))
   rownames(x) <- 1:nrow(x)
   return(x)
 }
