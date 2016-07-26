@@ -12,7 +12,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 v2.6 of the API, v3.0 of package, is valid until October 2016 after which you WILL run into issues with many calls, see [official changelog](https://developers.facebook.com/docs/marketing-api/changelog).
 
-> Check v3.1 on branch Rcpp (updated to API v2.7)
+Encouraged to check v3.1 (dev) on branch [Rcpp](https://bitbucket.org/JohnCheetah/fbadsinsightsr/src/?at=Rcpp) which includes many upgrades and is updated to v2.7 of the API.
 
 ## Functions ##
 
