@@ -56,6 +56,10 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
     * `updateAd`
 - Create-family
     * `createLabels` 
+    
+## Issues & Feature Requests
+
+Please report bugs and request features on the [issue page](https://bitbucket.org/JohnCheetah/fbadsinsightsr/issues).
 
 ## Documentation ##
 
