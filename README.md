@@ -10,7 +10,7 @@ fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads 
 
 #### Expiry
 
-v2.6 of the API, v3.0 of package, is valid until October 2016 after which you WILL run into issues with many calls, see [official changelog](https://developers.facebook.com/docs/marketing-api/changelog).
+v2.6 of the API, which corresponds to v3.0 of the package, is valid until *October 2016* after which you WILL run into issues with many calls, see [official changelog](https://developers.facebook.com/docs/marketing-api/changelog).
 
 Encouraged to check v3.1 (dev) on branch [Rcpp](https://bitbucket.org/JohnCheetah/fbadsinsightsr/src/?at=Rcpp) which includes many upgrades and is updated to v2.7 of the API.
 
@@ -66,10 +66,11 @@ Please report bugs and request features on the [issue page](https://bitbucket.or
 
 ## Documentation ##
 
-Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src).
+Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) Alternatively refer to the list below.
 
-* [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads/fbAdsInsightsRv3_0.pdf)
+* [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads)
 * [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) **updated to v3.0!**
+* [Inner-workings](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads) - technical details (for devs).
 
 ## Install ##
 
@@ -148,7 +149,6 @@ See NEWS.md for entire historic.
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
 
 * John Coene <john.coene@cmcm.com> (Author)
-* DongYuNan <dongyunan@cmcm.com> (User & tester)
 * GaoCong <gaocong1@cmcm.com> (User & maintainer)
 
 -----------------------------------------------------------------------
