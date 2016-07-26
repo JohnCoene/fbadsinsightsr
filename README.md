@@ -3,12 +3,13 @@
 
 # fbAdsInsightsR #
 
-Current version: **v3.1** (*see git tags for older versions*)
+Current version: **v3.1** (*see "Developments" section below*)
 
-fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.6). 
-**Now updated to Facebook Graph API v2.6!**
+fbAdsInsightsR is an R package that allows fetching data from the [facebook Ads Insights API](https://developers.facebook.com/docs/marketing-api/insights/v2.7). 
+**Now updated to Facebook Graph API v2.7!**
 
 ## Functions ##
+
 
 - OAuth
     * `fbAuthenticate`
