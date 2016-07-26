@@ -35,7 +35,7 @@ test_that("listCreatives", {
   crea <- listCreatives(id, TK)
   expect_equal(ncol(crea), 2)
   crea <- listCreatives(id, TK, fields = findFields("listCreatives"))
-  expect_equal(ncol(crea), 10)
+  expect_equal(ncol(crea), 9)
 })
 
 test_that("listVideos", {
