@@ -26,7 +26,7 @@ Retrieves the targeting description (in sentence lines)
 of a specific ad or adset. See \code{\link{checkTargetTree}}
 }
 \details{
-Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6}
+Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7}
 }
 \examples{
 \dontrun{

@@ -15,7 +15,7 @@
 #'  Defaults to \code{FALSE} if \code{TRUE} will print information on the 
 #'  queries in the console.
 #' 
-#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6} 
+#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7} 
 #' 
 #' @examples 
 #' \dontrun{
@@ -47,7 +47,7 @@ checkTargetTree <- function(id, token, limit.type = NULL, limit = 100, n = 100,
   if(!is.null(limit.type)) testParam("limit.type", limit.type)
   
   # build url
-  uri <- paste0("https://graph.facebook.com/v2.6/",
+  uri <- paste0("https://graph.facebook.com/v2.7/",
                 id, "/targetingbrowse?limit=", limit, 
                 "&access_token=", token)
   

@@ -49,7 +49,7 @@ updateCampaign <- function(id, settings, token){
   settings <- append(settings, token)
   names(settings)[length(settings)] <- "access_token"
   
-  resp <- httr::POST(url = paste0("https://graph.facebook.com/v2.6/", id), 
+  resp <- httr::POST(url = paste0("https://graph.facebook.com/v2.7/", id), 
                      body = settings, encode = "json")
   
   httr::stop_for_status(resp)

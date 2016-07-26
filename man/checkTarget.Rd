@@ -25,7 +25,7 @@ Returns a \code{data.frame} containing targeting sentences as columns.
 Retrieves the targeting description of a specific ad or adset.
 }
 \details{
-Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6}
+Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7}
 }
 \examples{
 \dontrun{

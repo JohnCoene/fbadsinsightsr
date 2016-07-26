@@ -1,4 +1,6 @@
-## Dev ##
+## Dev + Rcpp ##
+
+#### Updated to *v2.7*
 
 - New function `checkUsers`, returns users and access permissions 
 - `listAccounts` id parameter defaults to `me`

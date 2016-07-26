@@ -41,7 +41,7 @@ createLabels <- function(account.id, labels, token){
   token <- checkToken(token = token)
   
   res <- lapply(labels, function(x){
-    httr::POST(url = paste0("https://graph.facebook.com/v2.6/", 
+    httr::POST(url = paste0("https://graph.facebook.com/v2.7/", 
                             account.id, "/adlabels"), 
                body = list(name = x, access_token = token))
   })

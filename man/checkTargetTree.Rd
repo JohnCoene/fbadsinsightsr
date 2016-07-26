@@ -28,7 +28,7 @@ queries in the console.}
 Retrieves the targeting description of a specific object.
 }
 \details{
-Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6}
+Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7}
 }
 \examples{
 \dontrun{

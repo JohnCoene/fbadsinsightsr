@@ -32,7 +32,7 @@ listLabels <- function(account.id, token){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  url <- paste0("https://graph.facebook.com/v2.7/",
                 account.id, "/adlabels", 
                 "?access_token=", token)
   
