@@ -8,6 +8,7 @@
 - New function `getEstReach`, returns estimated reach
 - Get-family functions now compute various ratios CVR, CPI, CPL, and CPA.
 - `breakdown` parameter `placement_rhc` has been removed in API v2.7
+- `getActivity` variable names returned corrected 
 
 ## v3.0 ##
 
