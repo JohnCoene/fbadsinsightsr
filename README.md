@@ -123,8 +123,10 @@ See Git tags: *2.0*, *v3.0* and *v3.1* (Rcpp branch)
 - New functions: `checkUsers`, `getEstReach` 
 - `listAccounts` id parameter defaults to `me`
 - fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
+- Get-family functions now compute various ratios CVR, CPI, CPL, and CPA.
+- `breakdown` parameter `placement_rhc` has been removed in API v2.7
 
-See NEWS.md for entire historic.
+See NEWS.md for entire changelog.
 
 ### Branches ###
 
