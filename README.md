@@ -144,6 +144,11 @@ See Git tags: *2.0* and *v3.0*, *v3.1* is on Rcpp branch
 
 See NEWS.md for entire historic.
 
+# Branches
+
+- **master** Last release (see tags) & dev version
+- **Rcpp* Uses C++ to speed up certain functions as well as v2.7 of API
+
 ## R CMD check
 
 R CMD check results
