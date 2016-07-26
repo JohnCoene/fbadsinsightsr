@@ -1,4 +1,4 @@
-## Dev + Rcpp ##
+## Rcpp dev ##
 
 #### Updated to *v2.7*
 
