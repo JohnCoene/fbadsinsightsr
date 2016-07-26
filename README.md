@@ -64,7 +64,7 @@ Please report bugs and request features on the [issue page](https://bitbucket.or
 Constantly being updated and improved. Currently the manual and examples are available in own repository (access NOT restricted) [here](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) Alternatively refer to the list below.
 
 * [Manual](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads)
-* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) (updated to v3.0)
+* [Vignette](https://bitbucket.org/JohnCheetah/fbadsinsightsrdocs/src) (v3.0 - update to *v3.1* WIP)
 * [Inner-workings](https://bitbucket.org/JohnCheetah/fbadsinsightsr/downloads) - technical details (for devs).
 
 ## Install ##
