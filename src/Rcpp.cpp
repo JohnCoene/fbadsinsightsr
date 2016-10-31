@@ -142,9 +142,6 @@ createFields(c("ctr", "clicks", "impressions"))
 // [[Rcpp::export]]
 void scopeCheckC(CharacterVector scope, CharacterVector valid) {
   
-  if (!scope.inherits("character") & !scope.inherits("factor")) 
-    stop("scope must be a character string or factor");
-  
   int n = scope.size();
   
   for(int i = 0; i < n; ++i){
