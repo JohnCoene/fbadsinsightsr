@@ -46,7 +46,7 @@ checkTargetSentence <- function(id, token, n = 100, limit = 100){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.7/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/targetingsentencelines?limit=", limit, 
                 "&access_token=", token)
   

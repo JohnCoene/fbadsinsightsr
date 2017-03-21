@@ -615,7 +615,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   if (length(args)){
     # build url
-    url <- paste0("https://graph.facebook.com/v2.7/",
+    url <- paste0("https://graph.facebook.com/v2.8/",
                   id, "/",object,"?fields=",
                   fields,
                   "%2Cinsights{", args, "}",
@@ -623,7 +623,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
                   token) 
   } else {
     # build url
-    url <- paste0("https://graph.facebook.com/v2.7/",
+    url <- paste0("https://graph.facebook.com/v2.8/",
                   id, "/",object,"?fields=",
                   fields,
                   "&limit=", limit, "&access_token=",

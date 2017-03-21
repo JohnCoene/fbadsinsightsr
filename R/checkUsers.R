@@ -29,7 +29,7 @@ checkUsers <- function(id, token){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.7/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/users?", 
                 "access_token=", token)
   
