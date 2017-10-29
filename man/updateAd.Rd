@@ -43,6 +43,5 @@ updateAd(ad_ids[1], my_settings, TK)
 
 }
 \author{
-John Coene \email{john.coene@cmcm.com}
+John Coene \email{jcoenep@gmail.com}
 }
-

@@ -14,4 +14,3 @@ cpl(likes, spend)
 \description{
 Compute CPL
 }
-

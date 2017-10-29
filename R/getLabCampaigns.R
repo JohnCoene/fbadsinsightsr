@@ -34,7 +34,7 @@
 #' 
 #' @seealso \code{\link{listLabels}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 getLabCampaigns <- function(account.id, labels, fields = c("id", "name"), 

@@ -1,5 +1,5 @@
 [comment]: <> ([![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/johncheetah/fbadsinsightsr)[![Coverage Status](https://img.shields.io/codecov/c/github//master.svg)](https://codecov.io/github/?branch=master)[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/?branch=master))
-![Developped by Cheetah Mobile](http://www.mobyaffiliates.com/wp-content/uploads/2015/10/12.png)
+![Developped by Cheetah Mobile](http://cdn.wccftech.com/wp-content/uploads/2016/08/facebook-ads.png)
 
 # fbAdsInsightsR #
 
@@ -147,9 +147,7 @@ R CMD check results
 
 Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
 
-* John Coene <john.coene@cmcm.com> (Author & maintainer)
-* DongYuNan <dongyunan@cmcm.com> (User & tester)
-* GaoCong <gaocong1@cmcm.com> (User)
+* John Coene <jcoenep@gmail.com> (Author & maintainer)
 
 ---------------------------------------------------------------------------
 

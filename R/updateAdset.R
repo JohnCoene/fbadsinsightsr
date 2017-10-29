@@ -30,7 +30,7 @@
 #' updateAdset(adset_ids[1], my_settings, TK)
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 updateAdset <- function(id, settings, token){

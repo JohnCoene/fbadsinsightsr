@@ -28,7 +28,7 @@
 #' 
 #' @seealso \code{\link{checkTargetSentence}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 checkTargetTree <- function(id, token, limit.type = NULL, limit = 100, n = 100, 

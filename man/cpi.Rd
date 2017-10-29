@@ -14,4 +14,3 @@ cpi(installs, spend)
 \description{
 Compute CPI
 }
-

@@ -50,7 +50,7 @@
 #' ---
 #' }
 #' 
-#' @author John coene \email{john.coene@@cmcm.com}
+#' @author John coene \email{jcoenep@@gmail.com}
 #' @export
 fbAuthenticate <- function (app.id, app.secret, scope = "ads_management",
                              app.name = "optional") {

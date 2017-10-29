@@ -18,4 +18,3 @@ optIt(params, fp, ff, fct = "getAny")
 \description{
 get options
 }
-

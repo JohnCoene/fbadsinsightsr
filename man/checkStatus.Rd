@@ -59,10 +59,9 @@ ad_data <- getAd(active_ad)
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{grabAds}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

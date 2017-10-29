@@ -121,7 +121,7 @@
 #' \code{\link{grabAds}}, \code{\link{grabAdsets}}, 
 #' \code{\link{grabCampaigns}} 
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{jcoenep@@gmail.com}
 getAny <- function(id, token, fields = "default", n = 100, 
                    action.attribution.windows, action.breakdowns, 
                    action.report.time, breakdowns, date.preset, level, 

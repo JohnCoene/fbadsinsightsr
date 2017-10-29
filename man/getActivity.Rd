@@ -52,10 +52,9 @@ act <- getActivity(token = fbOAuth, account.id = sample(act, 1), n = 200)
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{listAccounts}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

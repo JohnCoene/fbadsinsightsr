@@ -45,10 +45,9 @@ adsets <- grabAdsets(id = "act_123456789012345", token = "XXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{getAdset}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

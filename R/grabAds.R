@@ -30,7 +30,7 @@
 #'
 #' @seealso \code{\link{getAd}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 grabAds <- function (id, token, fields = "default", ..., n = 100,

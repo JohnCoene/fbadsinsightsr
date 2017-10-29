@@ -36,6 +36,5 @@ Fetches the list of applications under a given account.
 
 }
 \author{
-John Coene \email{john.coene@cmcm.com}
+John Coene \email{jcoenep@gmail.com}
 }
-

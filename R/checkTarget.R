@@ -29,7 +29,7 @@
 #' 
 #' @seealso \code{\link{grabAds}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 checkTarget <- function(id, token, limit = 100, n = 100){

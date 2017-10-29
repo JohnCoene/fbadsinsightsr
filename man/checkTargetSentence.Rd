@@ -41,10 +41,9 @@ checkTargetSentence(id = rand_id, n = 100, token = "XXXXXXXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{checkTargetTree}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

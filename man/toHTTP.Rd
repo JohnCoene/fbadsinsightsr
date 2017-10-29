@@ -12,4 +12,3 @@ toHTTP(params)
 \description{
 Build http
 }
-

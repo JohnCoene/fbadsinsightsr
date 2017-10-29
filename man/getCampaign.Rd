@@ -113,10 +113,9 @@ data <- getCampaign(campaign.id = rand_id, token = fbOAuth,
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{fbAuthenticate}},  \code{link{findParams}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

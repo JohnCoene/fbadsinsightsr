@@ -28,7 +28,7 @@
 #' 
 #' @seealso \code{\link{listLabels}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 getEstReach <- function(id, token, optimize_for = "APP_INSTALLS"){

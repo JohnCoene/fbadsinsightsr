@@ -106,10 +106,9 @@ data <- getAccount(account.id = "act_123456789012345", token = fbOAuth,
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{fbAuthenticate}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

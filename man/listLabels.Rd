@@ -24,10 +24,9 @@ labs <- listLabels(account.id = sample(accounts$id, 1), token = "XXXXXXXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{getLabCampaigns}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

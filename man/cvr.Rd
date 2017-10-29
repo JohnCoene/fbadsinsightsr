@@ -14,4 +14,3 @@ cvr(clicks, installs)
 \description{
 Compute CVR
 }
-

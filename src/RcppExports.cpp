@@ -123,3 +123,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"fbAdsInsightsR_toHTTP", (DL_FUNC) &fbAdsInsightsR_toHTTP, 1},
+    {"fbAdsInsightsR_cvr", (DL_FUNC) &fbAdsInsightsR_cvr, 2},
+    {"fbAdsInsightsR_cpi", (DL_FUNC) &fbAdsInsightsR_cpi, 2},
+    {"fbAdsInsightsR_cpl", (DL_FUNC) &fbAdsInsightsR_cpl, 2},
+    {"fbAdsInsightsR_cpa", (DL_FUNC) &fbAdsInsightsR_cpa, 2},
+    {"fbAdsInsightsR_createFields", (DL_FUNC) &fbAdsInsightsR_createFields, 1},
+    {"fbAdsInsightsR_scopeCheckC", (DL_FUNC) &fbAdsInsightsR_scopeCheckC, 2},
+    {"fbAdsInsightsR_buildBreakdowns", (DL_FUNC) &fbAdsInsightsR_buildBreakdowns, 2},
+    {"fbAdsInsightsR_parseP", (DL_FUNC) &fbAdsInsightsR_parseP, 1},
+    {"fbAdsInsightsR_optIt", (DL_FUNC) &fbAdsInsightsR_optIt, 4},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_fbAdsInsightsR(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}

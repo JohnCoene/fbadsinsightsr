@@ -129,12 +129,11 @@ dat <- getAny(id = "act_1014262775316748", token = TK, date.preset = date)
 }
 
 }
-\author{
-John Coene <john.coene@cmcm.com>
-}
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{findParams}},
 \code{\link{grabAds}}, \code{\link{grabAdsets}}, 
 \code{\link{grabCampaigns}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

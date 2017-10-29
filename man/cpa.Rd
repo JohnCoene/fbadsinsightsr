@@ -14,4 +14,3 @@ cpa(actions, spend)
 \description{
 Compute CPL
 }
-

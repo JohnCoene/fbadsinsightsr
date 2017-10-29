@@ -14,4 +14,3 @@ scopeCheckC(scope, valid)
 \description{
 scopeCheck
 }
-

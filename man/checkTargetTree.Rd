@@ -40,10 +40,9 @@ checkTargetTree(id = sample(ads$id, 1), token = "XXXXXXXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{checkTargetSentence}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

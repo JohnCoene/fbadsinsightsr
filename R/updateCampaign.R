@@ -28,7 +28,7 @@
 #' updateCampaign(ad_ids[1], my_settings, TK)
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 updateCampaign <- function(id, settings, token){

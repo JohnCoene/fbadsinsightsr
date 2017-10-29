@@ -27,7 +27,7 @@
 #' (ad_apps <- listAdApps(id = "act_123456789012345", token = "XXXXXX"))
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 listAdApps <- function (id, token, n = 100, verbose = FALSE, limit = 100) {

@@ -47,10 +47,9 @@ creatives <- getLabCreatives(sample(accounts$id, 1), labels = labs$id,
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{listLabels}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

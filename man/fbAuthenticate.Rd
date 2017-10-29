@@ -64,6 +64,5 @@ print(fbOAuth)
 
 }
 \author{
-John coene \email{john.coene@cmcm.com}
+John coene \email{jcoenep@gmail.com}
 }
-

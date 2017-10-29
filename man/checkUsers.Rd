@@ -21,10 +21,9 @@ ads <- grabAds(account.id = "act_123456789012345", token = "XXXXXXXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{checkTargetTree}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

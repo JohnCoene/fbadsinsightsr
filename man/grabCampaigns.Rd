@@ -44,10 +44,9 @@ camps <- grabCampaigns(id = "act_123456789012345", token = "XXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{getCampaign}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}
