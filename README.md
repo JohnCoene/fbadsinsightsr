@@ -70,9 +70,7 @@ Constantly being updated and improved. Currently the manual and examples are ava
 
 ## Install ##
 
-Since access to the repository is restricted you will need your login and password to install the package.
-
-`devtools::install_bitbucket("JohnCheetah/fbadsinsightsr", auth_user = "your_login", password = "your_password", ref = "Rcpp")`
+`devtools::install_github("JohnCoene/fbadsinsightsr")`
 
 ## Examples ##
 
