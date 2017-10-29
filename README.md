@@ -133,11 +133,6 @@ See Git tags: *2.0*, *v3.0* and *v3.1* (Rcpp branch)
 
 See NEWS.md for entire changelog.
 
-### Branches ###
-
-- **master** - Last release or dev version
-- **Rcpp** - Uses C++ to speed up certain functions as well as v2.7 of API
-
 ## R CMD check
 
 R CMD check results
