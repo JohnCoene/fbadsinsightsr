@@ -26,7 +26,7 @@ test_that("findParams", {
   expect_error(findFields("error"))
   expect_is(findParams(), "list")
   expect_equal(length(findParams("level")), 4)
-  expect_equal(length(findParams("breakdowns")), 12)
+  expect_equal(length(findParams("breakdowns")), 11)
   expect_equal(length(findParams("date.preset")), 15)
   expect_equal(length(findParams("time.increment")), 2)
   expect_equal(length(findParams("action.breakdowns")), 7)

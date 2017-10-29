@@ -50,7 +50,7 @@
 #' 
 #' @seealso \code{\link{grabAds}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 checkStatus <- function(id, token, fields = "effective_status") {
@@ -83,7 +83,7 @@ checkStatus <- function(id, token, fields = "effective_status") {
   }
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 id, "?fields=",
                 fields,
                 "&limit=100&access_token=", token)

@@ -51,10 +51,9 @@ dat <- getAny(id = "act_123456789012345", token = "XXXXXXXXXXXXX",
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{getAny}}, \code{\link{checkTargetTree}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

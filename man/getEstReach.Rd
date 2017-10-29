@@ -36,10 +36,9 @@ reach <- getEstReach(samples(ads$id, 1), TK)
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{listLabels}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

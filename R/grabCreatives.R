@@ -48,7 +48,7 @@
 #' crea_ad <- listCreatives(id = sample(ads$id, 1), token = fbOAuth)
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{listAccounts}},
 #'  \code{\link{grabAds}}
@@ -85,7 +85,7 @@ grabCreatives <- function(id, token, n = 100, fields = "default",
     }
   }
   
-  uri <- paste0("https://graph.facebook.com/v2.6/",
+  uri <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/adcreatives?fields=",
                 fields,
                 "&limit=", limit, "&access_token=",

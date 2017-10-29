@@ -33,10 +33,9 @@ ids <- createLabels(accs$id[1], labels = c("first label", "second label"),
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{listLabels}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

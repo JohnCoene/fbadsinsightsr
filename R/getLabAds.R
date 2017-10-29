@@ -25,7 +25,7 @@
 #' 
 #' @seealso \code{\link{listLabels}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 getLabAds <- function(account.id, labels, fields = c("id", "name"), 
@@ -55,7 +55,7 @@ getLabAds <- function(account.id, labels, fields = c("id", "name"),
   labels <- paste0("[%22", paste0(labels, collapse = "%22%2C%20%22"), "%22]")
   
   # build url
-  uri <- paste0("https://graph.facebook.com/v2.6/",
+  uri <- paste0("https://graph.facebook.com/v2.8/",
                 account.id, "/adsbylabels?fields=", fields, 
                 "&ad_label_ids=", labels , "&operator=", operator, 
                 "&access_token=", token)

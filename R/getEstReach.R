@@ -28,7 +28,7 @@
 #' 
 #' @seealso \code{\link{listLabels}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 getEstReach <- function(id, token, optimize_for = "APP_INSTALLS"){
@@ -43,7 +43,7 @@ getEstReach <- function(id, token, optimize_for = "APP_INSTALLS"){
   testParam("optimize_for", optimize_for)
   
   # build url
-  uri <- paste0("https://graph.facebook.com/v2.6/",
+  uri <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/reachestimate?optimize_for=", optimize_for, 
                 "&access_token=", token)
   

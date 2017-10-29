@@ -103,7 +103,7 @@
 #' @seealso \code{\link{fbAuthenticate}}, \code{\link{findParams}}, 
 #' \code{\link{grabAds}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 getAd <- function(ad.id, token, fields = "default", n = 100, 
                   action.attribution.windows, action.breakdowns, 
                   action.report.time, breakdowns, date.preset, level, 

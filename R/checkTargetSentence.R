@@ -14,7 +14,7 @@
 #' 
 #' @return Returns a \code{data.frame} containing targeting sentences as columns.
 #' 
-#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6} 
+#' @details Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7} 
 #' 
 #' @examples 
 #' \dontrun{
@@ -30,7 +30,7 @@
 #' 
 #' @seealso \code{\link{checkTargetTree}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 checkTargetSentence <- function(id, token, n = 100, limit = 100){
@@ -46,7 +46,7 @@ checkTargetSentence <- function(id, token, n = 100, limit = 100){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/targetingsentencelines?limit=", limit, 
                 "&access_token=", token)
   

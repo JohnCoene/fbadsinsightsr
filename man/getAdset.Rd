@@ -111,11 +111,10 @@ date.preset = date, breakdowns = "region")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{findParams}},
  \code{\link{grabAdsets}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

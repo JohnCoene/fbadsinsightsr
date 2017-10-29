@@ -121,7 +121,7 @@
 #' \code{\link{grabAds}}, \code{\link{grabAdsets}}, 
 #' \code{\link{grabCampaigns}} 
 #' 
-#' @author John Coene <john.coene@@cmcm.com>
+#' @author John Coene \email{jcoenep@@gmail.com}
 getAny <- function(id, token, fields = "default", n = 100, 
                    action.attribution.windows, action.breakdowns, 
                    action.report.time, breakdowns, date.preset, level, 
@@ -210,7 +210,9 @@ getAny <- function(id, token, fields = "default", n = 100,
   }
   
   # breakdowns
-  breakdowns <- buildBreakdowns(breakdowns = breakdowns)
+  if(length(breakdowns)){
+    breakdowns <- buildBreakdowns(breakdowns = breakdowns, f = testParam)
+  }
   
   # date.preset
   
@@ -304,7 +306,7 @@ getAny <- function(id, token, fields = "default", n = 100,
   token <- checkToken(token)
   
   # build url
-  uri <- paste0('https://graph.facebook.com/v2.6/',
+  uri <- paste0('https://graph.facebook.com/v2.8/',
                 id, '/insights?fields=',fields,
                 action.attribution.windows, action.breakdowns,
                 action.report.time, breakdowns, date.preset, level,

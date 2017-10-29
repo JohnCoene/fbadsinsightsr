@@ -41,7 +41,7 @@
 #' 
 #' @seealso \code{\link{getAny}}, \code{\link{checkTargetTree}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 findParams <- function(params = c("level", "breakdowns", "date.preset",
@@ -73,8 +73,8 @@ findParams <- function(params = c("level", "breakdowns", "date.preset",
       param <- c("age", "country", "gender", "frequency_value",
                  "hourly_stats_aggregated_by_advertiser_time_zone", 
                  "hourly_stats_aggregated_by_audience_time_zone",
-                 "impression_device", "place_page_id", "placement",
-                 "placement_merge_rhc", "product_id", "region")
+                 "impression_device", "place_page_id", "placement", 
+                 "product_id", "region")
       
     } else if (param == "date.preset"){
       

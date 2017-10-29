@@ -13,7 +13,7 @@
 #' 
 #' @seealso \code{\link{checkTargetTree}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 checkUsers <- function(id, token){
@@ -29,7 +29,7 @@ checkUsers <- function(id, token){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 id, "/users?", 
                 "access_token=", token)
   

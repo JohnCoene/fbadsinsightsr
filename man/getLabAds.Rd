@@ -47,10 +47,9 @@ ads <- listLabAds(sample(accounts$id, 1), labels = sample(labs$id, 2),
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{listLabels}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

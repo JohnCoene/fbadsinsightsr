@@ -1,9 +1,14 @@
-## Dev ##
+## Rcpp dev ##
+
+#### Updated to *v2.7*
 
 - New function `checkUsers`, returns users and access permissions 
 - `listAccounts` id parameter defaults to `me`
 - fixed return of `getAny` FUN where it sometimes would not return results when few fields were requested, also fixed sometimes returning *weirdly* named variables.
 - New function `getEstReach`, returns estimated reach
+- Get-family functions now compute various ratios CVR, CPI, CPL, and CPA.
+- `breakdown` parameter `placement_rhc` has been removed in API v2.7
+- `getActivity` variable names returned corrected 
 
 ## v3.0 ##
 

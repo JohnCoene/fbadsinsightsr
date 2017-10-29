@@ -28,7 +28,7 @@
 #' updateAd(ad_ids[1], my_settings, TK)
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 updateAd <- function(id, settings, token){
@@ -49,7 +49,7 @@ updateAd <- function(id, settings, token){
   settings <- append(settings, token)
   names(settings)[length(settings)] <- "access_token"
   
-  resp <- httr::POST(url = paste0("https://graph.facebook.com/v2.6/", id), 
+  resp <- httr::POST(url = paste0("https://graph.facebook.com/v2.8/", id), 
                      body = settings, encode = "json")
   
   httr::stop_for_status(resp)

@@ -17,7 +17,7 @@
 #' accs <- listBusinesses(token = "XXXXXX")
 #' }
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 listBusinesses <- function(token, id = "me", n = 100, verbose = FALSE, 

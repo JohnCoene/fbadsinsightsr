@@ -16,7 +16,7 @@
 #' 
 #' @seealso \code{\link{getLabCampaigns}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 listLabels <- function(account.id, token){
@@ -32,7 +32,7 @@ listLabels <- function(account.id, token){
   token <- checkToken(token = token)
   
   # build url
-  url <- paste0("https://graph.facebook.com/v2.6/",
+  url <- paste0("https://graph.facebook.com/v2.8/",
                 account.id, "/adlabels", 
                 "?access_token=", token)
   

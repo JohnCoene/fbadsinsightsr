@@ -28,7 +28,7 @@ queries in the console.}
 Retrieves the targeting description of a specific object.
 }
 \details{
-Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.6}
+Corresponds to this API call; \url{https://developers.facebook.com/docs/marketing-api/targeting-description/v2.7}
 }
 \examples{
 \dontrun{
@@ -40,10 +40,9 @@ checkTargetTree(id = sample(ads$id, 1), token = "XXXXXXXXXXX")
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{checkTargetSentence}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

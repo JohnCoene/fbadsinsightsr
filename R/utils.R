@@ -2,7 +2,7 @@
 scopeCheck <- function(scope) {
   
   # define valid scopes
-  scopes <- c("public_profile", "user_friends", "email", "user_about_me", 
+  valids <- c("public_profile", "user_friends", "email", "user_about_me", 
               "user_actions.books", "user_actions.fitness", 
               "user_actions.music", "user_actions.news", "user_actions.video", 
               "user_actions:{app_namespace}", "user_birthday", 
@@ -18,79 +18,22 @@ scopeCheck <- function(scope) {
               "pages_manage_cta", "ads_read", "ads_management")
   
   if(missing(scope)){
-    return(scopes)
-  }
-  
-  for (i in 1:length(scope)) {
-    test <- scopes[which(scopes == scope[i])]
-    if (length(test) == 0) {
-      scope_error <- scope[i]
-      stop (paste0("Wrong scope: ", scope_error,
-                   " is not a correct permission. See ?fb_authenticate details"),
-            call. = FALSE)
-    }
-  }
-}
-
-# create_fields -------------------------------
-createFields <- function(fields){
-  
-  # check input class
-  if (class(fields) != "character") {
-    stop("fields must be character value or vector", call. = FALSE)
-  }
-  
-  # collapse
-  fields <- paste0(fields,  collapse = "%2C")
-  
-  return(fields)
-}
-
-# to_http -------------------------------
-toHTTP <- function(params = NULL){
-  
-  if (!length(params)) {
-    
-    params <- ""
-    
+    scope = "ads_read"
+    warning("No scope passed, defaulting to ads_read", .call = FALSE)
   } else {
-    
-    params <- paste0("[",paste0("%22", params, "%22", collapse = "%2C%20"),
-                     "]", collapse = "")
-    
+    scopeCheckC(scope, valids)
   }
-  
-  return (params)
-  
 }
 
 # testParam -------------------------------
 testParam <- function (params, param_vector, fct) {
   
   # set default
-  if(missing(fct)){
-    fct <- "getAny"
-  }
+  if(missing(fct)){fct <- "getAny"}
   
-  if (params == "action_attribution_windows") {
-    options <- findParams("action.attribution.windows")
-  } else if (params == "action_breakdowns") {
-    options <- findParams("action.breakdowns")
-  } else if (params == "fields") {
-    options <- findFields(fct)
-  } else if (params == "action_report_time") {
-    options <- c("impression", "conversion")
-  } else if (params == "breakdowns") {
-    options <- findParams("breakdowns")
-  } else if (params == "date_preset") {
-    options <- findParams("date.preset")
-  } else if (params == "level") {
-    options <- c("ad", "adset", "campaign", "account") 
-  } else if (params == "time_increment") {
-    options <- findParams("time.increment")
-  } else {
-    options <- findParams(params)
-  }
+  params <- parseP(params)
+  
+  options <- optIt(params, findParams, findFields, fct = fct)
   
   for (i in 1:length(param_vector)) {
     test <- options[which(options == param_vector[i])]
@@ -116,42 +59,12 @@ testParam <- function (params, param_vector, fct) {
 checkToken <- function(token){
   
   # check token class
-  if (class(token)[1]=="Token2.0"){
+  if (class(token)[1] == "Token2.0"){
     token <- token$credentials$access_token
-  }	else if (class(token)[1]=="character"){
-    token <- token
+  }	else if (class(token)[1] != "character"){
+    stop("Wrong token supplied, must be character vector or httr Token2.0")
   }
-  
   return(token)
-}
-
-# breakdowns -------------------------------
-buildBreakdowns <- function(breakdowns) {
-  # breakdowns
-  if (length(breakdowns) >= 1 & length(breakdowns) <= 2) {
-    
-    # test
-    testParam("breakdowns", breakdowns)
-    
-    if(length(breakdowns) == 2 && breakdowns == c("age", "gender")) {
-      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
-    } else if (length(breakdowns) == 2 && breakdowns == c("impression_device", 
-                                                          "placement")) {
-      breakdowns <- paste0("&breakdowns=", toHTTP(breakdowns))
-    } else if (length(breakdowns) == 1 && breakdowns == "impression_device") {
-      stop("impression_device cannot be used on its own", call. = FALSE)
-    } else if (length(breakdowns) == 1) {
-      breakdowns <- paste0("&breakdowns=", breakdowns)
-    } else {
-      stop("Wrong breakdowns specified. Run findParams('breakdowns')", call. = FALSE)
-    }
-    
-  } else if (length(breakdowns) >= 3) {
-    stop("Too many breakdowns specified. See @param", call. = FALSE)
-  }
-  
-  return(breakdowns)
-  
 }
 
 # generic ------------------------------
@@ -574,6 +487,38 @@ converge.fbAdsData <- function(fbData){
         # bind
         data <- cbind.data.frame(fbData[["data"]], fbData[["insights"]])
         
+        if(length(grep("^insights_clicks$", names(data))) &&
+           length(grep("insights_actions_mobile_app_install", names(data)))){
+          
+          data$insights_cvr <- cvr(data[, grep("^insights_clicks$", 
+                                               names(data))], 
+                                   data[, grep("actions_mobile_app_install", 
+                                      names(data))])
+        }
+        if(length(grep("^insights_spend$", names(data))) &&
+           length(grep("insights_actions_mobile_app_install", names(data)))){
+          data$insights_cpi <- cpi(data[, grep("^insights_actions_mobile_app_install$", 
+                                               names(data))], 
+                                   data[, grep("^insights_spend$", 
+                                      names(data))])
+        }
+        if(length(grep("^insights_actions_like$", names(data))) &&
+           length(grep("^insights_spend$", names(data)))){
+          
+          data$insights_cpl <- cpl(as.numeric(data[, grep("^insights_actions_like$", 
+                                                          names(data))]), 
+                                   as.numeric(data[, grep("^insights_spend$", 
+                                                          names(data))]))
+        }
+        if(length(grep("^insights_total_actions$", names(data))) &&
+           length(grep("^insights_spend$", names(data)))){
+          
+          data$insights_cpa <- cpa(as.numeric(data[, grep("^insights_total_actions$", 
+                                               names(data))]), 
+                                   as.numeric(data[, grep("^insights_spend$", 
+                                               names(data))]))
+        }
+        
         # else return a list
       } else {
         data <- as.list(fbData)
@@ -583,6 +528,33 @@ converge.fbAdsData <- function(fbData){
     
   } else {
     data <- fbData$data
+    
+    if(length(grep("^clicks$", names(data))) &&
+       length(grep("actions_mobile_app_install", names(data)))){
+      
+      data$cvr <- cvr(as.numeric(data[, grep("^clicks$", names(data))]),
+                      as.numeric(data[, grep("^actions_mobile_app_install$", 
+                                  names(data))]))
+    }
+    if(length(grep("^spend$", names(data))) &&
+       length(grep("^actions_mobile_app_install$", names(data)))){
+      data$cpi <- cpi(as.numeric(data[, grep("^actions_mobile_app_install$", 
+                                  names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
+    if(length(grep("^actions_post_like$", names(data))) &&
+       length(grep("actions_mobile_app_install", names(data)))){
+      
+      data$cpl <- cpl(as.numeric(data[, grep("^actions_post_like$", 
+                                             names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
+    if(length(grep("^total_actions$", names(data))) &&
+       length(grep("^spend$", names(data)))){
+      
+      data$cpa <- cpa(as.numeric(data[, grep("^total_actions$", names(data))]),
+                      as.numeric(data[, grep("^spend$", names(data))]))
+    }
   }
 
   return(data)
@@ -643,7 +615,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   if (length(args)){
     # build url
-    url <- paste0("https://graph.facebook.com/v2.6/",
+    url <- paste0("https://graph.facebook.com/v2.8/",
                   id, "/",object,"?fields=",
                   fields,
                   "%2Cinsights{", args, "}",
@@ -651,7 +623,7 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
                   token) 
   } else {
     # build url
-    url <- paste0("https://graph.facebook.com/v2.6/",
+    url <- paste0("https://graph.facebook.com/v2.8/",
                   id, "/",object,"?fields=",
                   fields,
                   "&limit=", limit, "&access_token=",
@@ -681,9 +653,6 @@ findObjects <- function(id, token, fields = "default", ..., n = 100,
   
   return (fb_data)
 }
-
-
-
 
 # parse log
 parseLog <- function(json, account.id) {

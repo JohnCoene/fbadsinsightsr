@@ -12,7 +12,7 @@
 #'
 #' @seealso \code{\link{getAdset}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 grabAdsets <- function (id, token, fields = "default", ..., n = 100,

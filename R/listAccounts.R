@@ -19,7 +19,7 @@
 #' 
 #' @seealso \code{\link{getAccount}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 listAccounts <- function(id = "me", token, n = 100, fields = "default",

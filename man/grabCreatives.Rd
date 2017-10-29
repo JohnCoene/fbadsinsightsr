@@ -61,11 +61,10 @@ crea_ad <- listCreatives(id = sample(ads$id, 1), token = fbOAuth)
 }
 
 }
-\author{
-John Coene \email{john.coene@cmcm.com}
-}
 \seealso{
 \code{\link{fbAuthenticate}}, \code{\link{listAccounts}},
  \code{\link{grabAds}}
 }
-
+\author{
+John Coene \email{jcoenep@gmail.com}
+}

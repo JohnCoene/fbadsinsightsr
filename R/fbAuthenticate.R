@@ -50,15 +50,10 @@
 #' ---
 #' }
 #' 
-#' @author John coene \email{john.coene@@cmcm.com}
+#' @author John coene \email{jcoenep@@gmail.com}
 #' @export
 fbAuthenticate <- function (app.id, app.secret, scope = "ads_management",
                              app.name = "optional") {
-  
-  # check inputs
-  if (class(app.secret) != "character" & class(app.secret) != "factor") {
-    stop("Invalid app.secret: must be of class character or factor")
-  }
   
   # check scope
   scopeCheck(scope)

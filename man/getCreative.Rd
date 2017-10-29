@@ -34,4 +34,3 @@ ls <- listCreatives(id = "act_1231313", token = fbOAuth)
 \author{
 John Coene \email{jcoenep@gmail.com}
 }
-

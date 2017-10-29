@@ -23,7 +23,7 @@
 #' 
 #' @seealso \code{\link{listLabels}}
 #' 
-#' @author John Coene \email{john.coene@@cmcm.com}
+#' @author John Coene \email{jcoenep@@gmail.com}
 #' 
 #' @export
 createLabels <- function(account.id, labels, token){
@@ -41,7 +41,7 @@ createLabels <- function(account.id, labels, token){
   token <- checkToken(token = token)
   
   res <- lapply(labels, function(x){
-    httr::POST(url = paste0("https://graph.facebook.com/v2.6/", 
+    httr::POST(url = paste0("https://graph.facebook.com/v2.8/", 
                             account.id, "/adlabels"), 
                body = list(name = x, access_token = token))
   })

@@ -41,6 +41,5 @@ tgt <- listBroadTargeting(id = "act_123456789012345", token = "XXXXXX")
 
 }
 \author{
-John Coene \email{john.coene@cmcm.com}
+John Coene \email{jcoenep@gmail.com}
 }
-
