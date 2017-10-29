@@ -1,4 +1,4 @@
-![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johncheetah/fbadsinsightsr?branch=master&svg=true)![Coverage Status](https://img.shields.io/codecov/c/github//master.svg)![Coverage Status](https://img.shields.io/coveralls/.svg)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/fbadsinsightsr?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/fbadsinsightsr)[![Travis-CI Build Status](https://travis-ci.org/JohnCoene/fbadsinsightsr.svg?branch=master)](https://travis-ci.org/JohnCoene/fbadsinsightsr)[![Coverage Status](https://img.shields.io/codecov/c/github/JohnCoene/fbadsinsightsr/master.svg)](https://codecov.io/github/JohnCoene/fbadsinsightsr?branch=master)
 
 ![Developped by Cheetah Mobile](http://cdn.wccftech.com/wp-content/uploads/2016/08/facebook-ads.png)
 
