@@ -139,6 +139,4 @@ R CMD check results
 
 ## Access & Contributors ##
 
-Access to the package is restricted, email John Coene & GaoCong if you want to grant access to more users.
-
 * John Coene <jcoenep@gmail.com> (Author & maintainer)
